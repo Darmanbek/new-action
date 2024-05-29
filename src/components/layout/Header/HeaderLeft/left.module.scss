@@ -1,0 +1,21 @@
+@import "/src/assets/styles/variables.scss";
+
+.left
+{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-basis: 240px;
+
+	.burger
+	{
+		color: $primary-color;
+		background-color: $primary-bg-color2;
+		font-size: 1.2rem;
+
+		.icon
+		{
+			font-size: 1.2rem;
+		}
+	}
+}

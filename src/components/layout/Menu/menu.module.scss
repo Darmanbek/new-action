@@ -1,0 +1,57 @@
+.menu-sider
+{
+	position: fixed !important;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	
+}
+
+.menu-sider,
+.menu-drawer
+{
+	background-color: #fff;
+	transition: all 0.2s;
+	
+	.menu-nav
+	{
+		min-height: 100%;
+		display: flex;
+		flex-direction: column;
+		overflow: hidden;
+
+		.logo
+		{
+			padding-left: 20px;
+			padding-right: 20px;
+			min-height: 80px;
+		}
+
+		.menu
+		{
+			height: calc(100vh - 81px);
+			padding-left: 12px;
+			padding-right: 12px;	
+			margin-top: 0px;
+			overflow-y: auto;
+			overflow-x: hidden;
+			padding-bottom: 30px;
+			&::-webkit-scrollbar {
+				width: 5px;
+				background-color: #fff;
+			}
+			&::-webkit-scrollbar-thumb {
+				background-color: #adb3bd;
+				border-radius: 6px;
+			}
+			&::-webkit-scrollbar-thumb {
+				background-color: #adb3bd;
+				border-radius: 6px;
+			}
+			&.active {
+				padding: 0 4px;
+			}
+		}
+	}
+
+}
