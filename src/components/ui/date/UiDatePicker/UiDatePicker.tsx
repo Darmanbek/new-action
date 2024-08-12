@@ -1,15 +1,15 @@
-import { ConfigProvider, DatePicker, DatePickerProps } from "antd";
+import React from 'react';
+import { ConfigProvider, DatePicker, DatePickerProps } from 'antd';
 import locale from 'antd/locale/ru_RU';
-import dayjs from "dayjs";
-import { FC } from "react";
+import dayjs from 'dayjs';
 
-const UiDatePicker: FC<DatePickerProps> = (props) => {
-	dayjs.locale("ru_ru");
-	return (
-		<ConfigProvider locale={locale}>
-			<DatePicker style={{width: "100%"}} {...props} />
-		</ConfigProvider>
-	);
+export const UiDatePicker = (
+  props: React.PropsWithChildren<DatePickerProps>
+) => {
+  dayjs.locale('ru_ru');
+  return (
+    <ConfigProvider locale={locale}>
+      <DatePicker style={{ width: '100%' }} {...props} />
+    </ConfigProvider>
+  );
 };
-
-export { UiDatePicker };

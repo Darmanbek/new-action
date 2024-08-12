@@ -1,20 +1,43 @@
-import { ConfigProvider, Table, TableProps } from "antd";
-import { FC } from "react";
-import uniqid from "uniqid";
+import React from 'react';
+import { ConfigProvider, Table, TableProps } from 'antd';
+import { useResponsive } from 'src/hooks';
+import uniqid from 'uniqid';
 
-const UiTable: FC<TableProps> = (props) => {
-	return (
-		<ConfigProvider
-			theme={{ components: { Table: { headerBg: "#fff" } } }}
-		>
-			<Table
-				rowKey={() => uniqid()}
-				scroll={{ x: "auto" }}
-				pagination={{ position: ["bottomCenter"] }}
-				{...props}
-			/>
-		</ConfigProvider>
-	);
+export const UiTable = (props: React.PropsWithChildren<TableProps>) => {
+  const { isMobile } = useResponsive(768);
+  const { style, scroll, pagination, ...rest } = props;
+
+  return (
+    <ConfigProvider
+      theme={{
+        components: {
+          Table: {
+            headerBg: '#fff',
+            footerBg: '#fff',
+            rowExpandedBg: '#fff',
+            fontSize: isMobile ? 14 : 16,
+            rowHoverBg: '#f5f7fa',
+          },
+          Dropdown: {
+            fontSize: isMobile ? 14 : 16,
+          },
+        },
+      }}
+    >
+      <Table
+        rowKey={() => uniqid()}
+        style={{
+          boxShadow: '0px 2px 14px 2px rgba(229, 229, 229, .33)',
+          ...style,
+        }}
+        scroll={{ x: 'auto', ...scroll }}
+        pagination={
+          pagination !== false
+            ? { position: ['bottomCenter'], ...pagination }
+            : pagination
+        }
+        {...rest}
+      />
+    </ConfigProvider>
+  );
 };
-
-export { UiTable };

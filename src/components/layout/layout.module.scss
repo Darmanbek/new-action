@@ -1,17 +1,23 @@
-.layout
-{
-	width: 100%;
-	min-height: 100vh;
-  height: 100%;
+@import 'src/styles/variables';
+@import 'src/styles/mixin';
+
+.layout {
   background-color: #fff;
   display: flex;
-	flex-direction: column;
-	flex-grow: 1;
+  flex-direction: row;
+  flex-grow: 1;
 
-	.layout-has-menu
-	{
-		display: flex;
-		flex-direction: column;
-		flex-grow: 1;
-	}
+  .layout-has-menu {
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    flex-basis: auto;
+    min-width: 0;
+    background-color: $primary-bg-color;
+    flex-grow: 1;
+  }
+
+  @include md {
+    flex-direction: column;
+  }
 }

@@ -1,16 +1,16 @@
-import { FC } from "react";
-import { Tag } from "antd";
-import { BiCheckDouble, BiX } from "react-icons/bi";
+import React from 'react';
+import { Tag } from 'antd';
+import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
 
 interface IApproveCheck {
-	isValue: boolean;
+  isValue: boolean;
 }
 
-const ApproveCheck: FC<IApproveCheck> = ({ isValue }) => (
-	<Tag
-		icon={isValue ? <BiCheckDouble /> : <BiX />}
-		color={isValue ? "green" : "red"}
-	/>
+export const ApproveCheck = ({
+  isValue,
+}: React.PropsWithChildren<IApproveCheck>) => (
+  <Tag
+    icon={isValue ? <CheckOutlined /> : <CloseOutlined />}
+    color={isValue ? 'green' : 'red'}
+  />
 );
-
-export { ApproveCheck };

@@ -1,0 +1,79 @@
+@import './mixin.scss';
+
+.ant-menu {
+  border-inline-end: none !important;
+}
+
+.ant-select-selection-search-input {
+  font-size: 16px;
+
+  @include md {
+    font-size: 14px;
+  }
+}
+
+.ant-table-row {
+  cursor: pointer;
+}
+
+.ant-form-item-label label {
+  font-size: 16px !important;
+
+  @include md {
+    font-size: 14px !important;
+  }
+}
+
+.ant-dropdown-menu {
+  scrollbar-width: thin;
+}
+
+.ant-table-title {
+  border-bottom: 1px solid #eee;
+}
+
+.ant-pagination {
+  background-color: #fff;
+  padding: 12px 10px;
+  border-radius: 0 0 10px 10px;
+  margin: 0 !important;
+
+  @include md {
+    border-radius: 0 0 8px 8px;
+  }
+}
+
+.ant-table-content {
+  scrollbar-width: thin;
+
+  &::-webkit-scrollbar {
+    height: 6px !important;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #fff !important;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #c1c1c1 !important;
+    border-radius: 20px !important;
+  }
+}
+
+.ant-drawer-body {
+  overflow-x: hidden !important;
+}
+
+.ant-form-item {
+  margin-bottom: 12px !important;
+}
+
+.ant-drawer-header {
+  min-height: 80px;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+}
+
+.ant-picker-calendar-header {
+  padding: 12px !important;
+}

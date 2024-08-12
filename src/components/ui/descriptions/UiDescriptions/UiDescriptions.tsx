@@ -1,20 +1,20 @@
-import { ConfigProvider, Descriptions, DescriptionsProps } from "antd";
-import { FC } from "react";
+import React from 'react';
+import { ConfigProvider, Descriptions, DescriptionsProps } from 'antd';
 
-const UiDescriptions: FC<DescriptionsProps> = (props) => {
-	return (
-		<ConfigProvider
-			theme={{
-				components: {
-					Descriptions: {
-						labelBg: "#fff"
-					}
-				}
-			}}
-		>
-			<Descriptions {...props}/>
-		</ConfigProvider>
-	);
+export const UiDescriptions = (
+  props: React.PropsWithChildren<DescriptionsProps>
+) => {
+  return (
+    <ConfigProvider
+      theme={{
+        components: {
+          Descriptions: {
+            labelBg: '#fff',
+          },
+        },
+      }}
+    >
+      <Descriptions {...props} />
+    </ConfigProvider>
+  );
 };
-
-export { UiDescriptions };

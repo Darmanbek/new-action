@@ -1,19 +1,28 @@
-import { FC, ReactNode } from "react";
-import { ConfigProvider } from "antd";
-import locale from "antd/locale/ru_RU";
+import { ReactNode, FC } from 'react';
+import { ConfigProvider, theme } from 'antd';
+import locale from 'antd/locale/ru_RU';
+import { useResponsive } from 'src/hooks';
 
-const AntdProvider: FC<{ children: ReactNode }> = ({ children }) => (
-	<ConfigProvider
-		locale={locale}
-		theme={{
-			token: {
-				colorPrimary: "#009746",
-				fontFamily: "Roboto, sans-serif",
-			},
-		}}
-	>
-		{children}
-	</ConfigProvider>
-);
+export const AntdProvider: FC<{ children: ReactNode }> = ({ children }) => {
+  const { isMobile } = useResponsive(768);
 
-export { AntdProvider };
+  const {
+    token: { borderRadius },
+  } = theme.useToken();
+
+  return (
+    <ConfigProvider
+      locale={locale}
+      componentSize={isMobile ? 'middle' : 'large'}
+      theme={{
+        token: {
+          colorPrimary: '#980000',
+          fontFamily: 'sans-serif',
+          borderRadius: isMobile ? borderRadius : 10,
+        },
+      }}
+    >
+      {children}
+    </ConfigProvider>
+  );
+};

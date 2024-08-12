@@ -1,1 +1,1 @@
-export * from "./UiTable/UiTable";
+export * from './UiTable/UiTable';

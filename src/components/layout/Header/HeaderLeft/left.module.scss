@@ -1,21 +1,19 @@
-@import "/src/assets/styles/variables.scss";
+@import '/src/styles/variables.scss';
+@import '/src/styles/mixin.scss';
 
-.left
-{
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	flex-basis: 240px;
+.left {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-basis: 240px;
 
-	.burger
-	{
-		color: $primary-color;
-		background-color: $primary-bg-color2;
-		font-size: 1.2rem;
+  .burger {
+    color: $primary-color;
+    background-color: $primary-bg-color-components;
 
-		.icon
-		{
-			font-size: 1.2rem;
-		}
-	}
+    &:hover {
+      background-color: $primary-color !important;
+      color: #fff !important;
+    }
+  }
 }

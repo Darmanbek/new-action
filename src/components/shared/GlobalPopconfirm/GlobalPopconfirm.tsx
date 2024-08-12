@@ -1,9 +1,7 @@
-import { Popconfirm } from "antd";
-import { PopconfirmProps } from "antd/lib";
-import { FC } from "react";
+import React from 'react';
+import { Popconfirm } from 'antd';
+import { PopconfirmProps } from 'antd/lib';
 
-const GlobalPopconfirm: FC<PopconfirmProps> = (props) => (
-	<Popconfirm cancelText="Нет" okText="Да" placement="leftTop" {...props} />
-);
-
-export { GlobalPopconfirm };
+export const GlobalPopconfirm = (
+  props: React.PropsWithChildren<PopconfirmProps>
+) => <Popconfirm cancelText="Нет" okText="Да" placement="leftTop" {...props} />;

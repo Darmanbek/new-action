@@ -1,1 +1,1 @@
-export * from "./UiButton/UiButton";
+export * from './UiButton/UiButton';

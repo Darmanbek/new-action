@@ -1,29 +1,26 @@
-import { create } from "zustand";
-import { persist } from "zustand/middleware";
-
-interface IToken {
-	token: string | null;
-}
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
+import { TTokenAuth } from 'src/services/auth/auth.types';
 
 interface IAuthPersistStore {
-	token: IToken["token"];
-	signIn: (tokens: { token: string }) => void;
-	signOut: () => void;
+  role: TTokenAuth['role'] | null;
+  role_id: TTokenAuth['role_id'] | null;
+  token: TTokenAuth['token'] | null;
+  signIn: (tokens: TTokenAuth) => void;
+  signOut: () => void;
 }
 
-const useAuthPersistStore = create(
-	persist<IAuthPersistStore>(
-		(set) => ({
-			token: null,
-			role: null,
-			user_id: null,
-			signIn: ({ token }) => set({ token }),
-			signOut: () => set({ token: null, }),
-		}),
-		{
-			name: "token",
-		}
-	)
+export const useAuthPersistStore = create(
+  persist<IAuthPersistStore>(
+    (set) => ({
+      role: null,
+      role_id: null,
+      token: null,
+      signIn: (tokens) => set(tokens),
+      signOut: () => set({ role: null, role_id: null, token: null }),
+    }),
+    {
+      name: 'token',
+    }
+  )
 );
-
-export { useAuthPersistStore };

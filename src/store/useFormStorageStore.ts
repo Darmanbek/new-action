@@ -1,22 +1,20 @@
-import { create } from "zustand";
-import { devtools } from "zustand/middleware";
+import { create } from 'zustand';
+import { devtools } from 'zustand/middleware';
 
 interface IFormStorageStore {
-	paramsForm: any;
-	isDrawer: boolean;
-	toggleDrawer: () => void;
-	setParamsForm: (params: any) => void;
-	setParamsItem: (params: any) => void;
+  paramsForm: any;
+  isDrawer: boolean;
+  toggleDrawer: () => void;
+  setParamsForm: (params: any) => void;
+  setParamsItem: (params: any) => void;
 }
 
-const useFormStorageStore = create(
-	devtools<IFormStorageStore>((set) => ({
-		paramsForm: null,
-		isDrawer: false,
-		toggleDrawer: () => set((state) => ({ isDrawer: !state.isDrawer })),
-		setParamsForm: (params) => set({ paramsForm: params, isDrawer: true }),
-		setParamsItem: (params) => set({ paramsForm: params }),
-	}))
+export const useFormStorageStore = create(
+  devtools<IFormStorageStore>((set) => ({
+    paramsForm: null,
+    isDrawer: false,
+    toggleDrawer: () => set((state) => ({ isDrawer: !state.isDrawer })),
+    setParamsForm: (params) => set({ paramsForm: params, isDrawer: true }),
+    setParamsItem: (params) => set({ paramsForm: params }),
+  }))
 );
-
-export { useFormStorageStore };

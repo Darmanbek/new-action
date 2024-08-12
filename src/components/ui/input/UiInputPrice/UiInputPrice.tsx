@@ -1,15 +1,11 @@
-import { FC } from "react";
-import { InputNumber, InputNumberProps } from "antd";
-import { formatNum } from "src/utils";
+import React from 'react';
+import { InputNumber, InputNumberProps } from 'antd';
+import { formatNum } from 'src/utils';
 
-const UiInputPrice: FC<InputNumberProps> = (props) => {
-	return (
-		<InputNumber 
-			formatter={formatNum}
-			style={{width: "100%"}}
-			{...props}
-		/>
-	);
+export const UiInputPrice = (
+  props: React.PropsWithChildren<InputNumberProps>
+) => {
+  return (
+    <InputNumber formatter={formatNum} style={{ width: '100%' }} {...props} />
+  );
 };
-
-export { UiInputPrice };

@@ -1,30 +1,22 @@
-import { FC } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet } from 'react-router-dom';
+import { Header } from './Header/Header';
+import { Menu } from './Menu/Menu';
+import { Main } from './Main/Main';
+import { RequireAuth } from 'src/hooks';
+import styles from './layout.module.scss';
 
-import { Header } from "./Header/Header";
-import { Menu } from "./Menu/Menu";
-import { Main } from "./Main/Main";
-
-import { RequireAuth } from "src/hooks";
-
-import styles from "./layout.module.scss";
-
-const Layout: FC = () => {
-	return (
-		<section className={styles.layout}>
-			<Header />
-			<div className={styles["layout-has-menu"]}>
-				<Menu />
-				<Main>
-					<Outlet />
-				</Main>
-			</div>
-		</section>
-	);
+export const Layout = () => {
+  return (
+    <RequireAuth>
+      <section className={styles.layout}>
+        <Menu />
+        <div className={styles['layout-has-menu']}>
+          <Header />
+          <Main>
+            <Outlet />
+          </Main>
+        </div>
+      </section>
+    </RequireAuth>
+  );
 };
-
-export default () => (
-	<RequireAuth>
-		<Layout />
-	</RequireAuth>
-);

@@ -1,2 +1,2 @@
-export * from "./antd/AntdProvider";
-export * from "./react-query/ReactQueryProvider"
+export * from './antd/AntdProvider';
+export * from './react-query/ReactQueryProvider';

@@ -1,57 +1,65 @@
-.menu-sider
-{
-	position: fixed !important;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	
-}
+@import 'src/styles/variables';
+@import 'src/styles/mixin';
 
 .menu-sider,
-.menu-drawer
-{
-	background-color: #fff;
-	transition: all 0.2s;
-	
-	.menu-nav
-	{
-		min-height: 100%;
-		display: flex;
-		flex-direction: column;
-		overflow: hidden;
+.menu-drawer {
+  position: relative;
+  background-color: #fff;
+  box-shadow: $primary-box-shadow;
+  transition: all 0.2s;
 
-		.logo
-		{
-			padding-left: 20px;
-			padding-right: 20px;
-			min-height: 80px;
-		}
+  .logo {
+    min-height: 80px;
+    max-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid rgba(5, 5, 5, 0.06);
 
-		.menu
-		{
-			height: calc(100vh - 81px);
-			padding-left: 12px;
-			padding-right: 12px;	
-			margin-top: 0px;
-			overflow-y: auto;
-			overflow-x: hidden;
-			padding-bottom: 30px;
-			&::-webkit-scrollbar {
-				width: 5px;
-				background-color: #fff;
-			}
-			&::-webkit-scrollbar-thumb {
-				background-color: #adb3bd;
-				border-radius: 6px;
-			}
-			&::-webkit-scrollbar-thumb {
-				background-color: #adb3bd;
-				border-radius: 6px;
-			}
-			&.active {
-				padding: 0 4px;
-			}
-		}
-	}
+    &.collapse {
+      padding: 0;
+    }
 
+    img {
+      max-height: 80px;
+    }
+  }
+
+  .menu-nav {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    .menu {
+      height: calc(100vh - 81px);
+      padding-left: 12px;
+      padding-right: 12px;
+      margin-top: 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding-bottom: 30px;
+      scrollbar-width: thin;
+      scrollbar-color: #adb3bd #fff;
+
+      &::-webkit-scrollbar {
+        width: 5px;
+        background-color: #fff;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: #adb3bd;
+        border-radius: 6px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: #adb3bd;
+        border-radius: 6px;
+      }
+
+      &.active {
+        padding: 0 4px;
+      }
+    }
+  }
 }
