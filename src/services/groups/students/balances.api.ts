@@ -1,7 +1,7 @@
 import { App } from 'antd';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { axiosCreateGroupStudentsBalances } from './balances.services';
-import { TResponseError } from '../../../index.types';
+import { TResponseError } from 'src/services/index.types';
 
 const useCreateGroupStudentsBalancesMutation = () => {
   const { message } = App.useApp();

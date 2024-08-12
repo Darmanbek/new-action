@@ -1,4 +1,5 @@
 import { Tooltip } from 'antd';
+import { ColumnsType } from 'antd/es/table';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import { HeadTable } from 'src/components/shared';
@@ -34,7 +35,7 @@ export const TableGroupStudents = () => {
         />
       )}
       dataSource={group?.data?.students}
-      columns={columns}
+      columns={columns as ColumnsType}
       loading={isLoading || isFetching}
     />
   );

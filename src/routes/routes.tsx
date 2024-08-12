@@ -14,7 +14,7 @@ import {
   Holiday,
   FinanceProfits,
   FinanceDebtors,
-  Chat,
+  // Chat,
 } from 'src/components/pages';
 import { useAuthPersistStore } from 'src/store';
 
@@ -42,7 +42,7 @@ export const useRoutes = () => {
     { path: '/finance', element: <Home /> },
     { path: '/finance/profits/:group_id', element: <FinanceProfits /> },
     { path: '/finance/debtors/:group_id', element: <FinanceDebtors /> },
-    { path: '/chat', element: <Chat /> },
+    // { path: '/chat', element: <Chat /> },
     { path: '/profile', element: <Profile /> },
     { path: '*', element: <NotFound /> },
   ];
@@ -68,7 +68,7 @@ export const useRoutes = () => {
     { path: '/finance', element: <Home /> },
     { path: '/finance/profits/:group_id', element: <FinanceProfits /> },
     { path: '/finance/debtors/:group_id', element: <FinanceDebtors /> },
-    { path: '/chat', element: <Chat /> },
+    // { path: '/chat', element: <Chat /> },
     { path: '/profile', element: <Profile /> },
     { path: '*', element: <NotFound /> },
   ];
@@ -94,7 +94,7 @@ export const useRoutes = () => {
     { path: '/finance', element: <Home /> },
     { path: '/finance/profits/:group_id', element: <FinanceProfits /> },
     { path: '/finance/debtors/:group_id', element: <FinanceDebtors /> },
-    { path: '/chat', element: <Chat /> },
+    // { path: '/chat', element: <Chat /> },
     { path: '/profile', element: <Profile /> },
     { path: '*', element: <NotFound /> },
   ];

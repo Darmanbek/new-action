@@ -1,4 +1,5 @@
 import { Tooltip } from 'antd';
+import { ColumnsType } from 'antd/es/table';
 import { HeadTable } from 'src/components/shared';
 import { UiButton, UiTable } from 'src/components/ui';
 import { useGetAdminsQuery } from 'src/services/index.api';
@@ -29,7 +30,7 @@ export const TableAdmin = () => {
         />
       )}
       dataSource={admins?.data}
-      columns={columns}
+      columns={columns as ColumnsType}
       loading={isLoading || isFetching}
     />
   );

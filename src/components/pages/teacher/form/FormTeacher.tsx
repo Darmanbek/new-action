@@ -44,7 +44,7 @@ export const FormTeacher = () => {
     }
     formData.append('first_name', values.first_name);
     formData.append('last_name', values.last_name);
-    formData.append('is_male', values.is_male);
+    // formData.append('is_male', values.is_male);
     formData.append('password', values.password);
     formData.append('birthday', values.birthday);
     if (paramsForm) {
@@ -54,6 +54,7 @@ export const FormTeacher = () => {
         id: paramsForm.id,
         group_count: 0,
         groups: [],
+        company: paramsForm?.company,
       });
     } else {
       createTeacher(formData);

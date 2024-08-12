@@ -77,7 +77,7 @@ export type TGetParamItem = {
 
 export type TGetParamsChange = {
   limit?: number;
-  page: number;
+  page?: number;
   search?: string;
 };
 

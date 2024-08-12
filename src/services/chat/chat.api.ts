@@ -10,7 +10,7 @@ import { TResponseError, TGetParamsChange } from '../index.types';
 const useGetStudentsChatQuery = (params: TGetParamsChange) => {
   const { message } = App.useApp();
   const query = useQuery({
-    queryFn: () => () => axiosGetStudentsChat(params),
+    queryFn: () => axiosGetStudentsChat(params),
     queryKey: ['message', ...Object.values(params)],
     onError: (error: TResponseError) => {
       message.error(error.response.data.message);

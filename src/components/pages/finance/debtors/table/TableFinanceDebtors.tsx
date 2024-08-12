@@ -1,3 +1,4 @@
+import { ColumnsType } from 'antd/es/table';
 import { useState } from 'react';
 import { Tooltip } from 'antd';
 import { HeadTable, SearchListInput } from 'src/components/shared';
@@ -43,7 +44,7 @@ export const TableFinanceDebtors = () => {
         />
       )}
       dataSource={debtors?.data}
-      columns={columns}
+      columns={columns as ColumnsType}
       loading={isLoading || isFetching}
       pagination={{
         total: debtors?.meta?.total,

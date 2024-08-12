@@ -1,3 +1,4 @@
+import { ColumnsType } from 'antd/es/table';
 import { useState } from 'react';
 import { Tooltip } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
@@ -42,7 +43,7 @@ export const TableGroups = () => {
         />
       )}
       dataSource={groups?.data}
-      columns={columns}
+      columns={columns as ColumnsType}
       loading={isLoading || isFetching}
       pagination={{
         total: groups?.meta?.total,

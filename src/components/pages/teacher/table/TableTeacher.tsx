@@ -1,3 +1,4 @@
+import { ColumnsType } from 'antd/es/table';
 import { useState } from 'react';
 import { Tooltip } from 'antd';
 import { HeadTable, SearchListInput } from 'src/components/shared';
@@ -41,7 +42,7 @@ export const TableTeacher = () => {
         />
       )}
       dataSource={teachers?.data}
-      columns={columns}
+      columns={columns as ColumnsType}
       loading={isLoading || isFetching}
       pagination={{
         total: teachers?.meta?.total,

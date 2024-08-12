@@ -1,4 +1,5 @@
 import { Tooltip } from 'antd';
+import { ColumnsType } from 'antd/es/table';
 import { useNavigate, useParams } from 'react-router-dom';
 import { PlusOutlined, ArrowLeftOutlined } from '@ant-design/icons';
 import { HeadTable } from 'src/components/shared';
@@ -47,7 +48,7 @@ export const TableGroupStudentsBalances = () => {
         payments?.data?.students.find((el) => el.id === student_id)
           ?.payment_history
       }
-      columns={columns}
+      columns={columns as ColumnsType}
       loading={isLoading || isFetching}
     />
   );

@@ -1,5 +1,6 @@
 import { Tooltip } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { ColumnsType } from 'antd/es/table';
 import { useNavigate } from 'react-router-dom';
 import { HeadTable } from 'src/components/shared';
 import { UiButton, UiTable } from 'src/components/ui';
@@ -39,8 +40,8 @@ export const TableProfile = () => {
           ]}
         />
       )}
-      dataSource={[user?.data]}
-      columns={columns}
+      dataSource={[user?.data] as any}
+      columns={columns as ColumnsType}
       loading={isLoading}
       pagination={false}
     />
