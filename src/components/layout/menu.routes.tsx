@@ -39,7 +39,7 @@ export const useMenuRoutes = () => {
         },
       ],
     },
-    { key: '/chat', icon: <CarryOutOutlined />, label: 'Чат' },
+    // { key: '/chat', icon: <CarryOutOutlined />, label: 'Чат' },
   ];
 
   type TrolesMenuMap = {
