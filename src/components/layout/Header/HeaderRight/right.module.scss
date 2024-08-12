@@ -1,71 +1,90 @@
 @import '/src/styles/variables.scss';
 @import '/src/styles/mixin';
 
-.content {
-  max-width: 100%;
-  width: 300px;
-  padding: 4px 4px 0;
+.content
+{
+	max-width: 100%;
+	width: 300px;
+	padding: 4px 4px 0;
 
-  .title {
-    display: flex;
-    align-items: baseline;
-    gap: 5px;
+	.title
+	{
+		display: flex;
+		align-items: baseline;
+		gap: 5px;
 
-    h4 {
-      font-size: 1rem;
-      color: rgb(18, 25, 38);
-      font-weight: 700;
-    }
+		h4
+		{
+			font-size: 1rem;
+			color: rgb(18, 25, 38);
+			font-weight: 700;
+		}
 
-    span {
-      font-size: 1rem;
-      color: rgb(18, 25, 38);
-      font-family: 'Roboto', sans-serif;
-      font-weight: 400;
-    }
-  }
+		span
+		{
+			font-size: 1rem;
+			color: rgb(18, 25, 38);
+			font-family: 'Roboto', sans-serif;
+			font-weight: 400;
+		}
+	}
 
-  .role {
-    font-size: 0.75rem;
-    font-weight: 400;
-    color: #697586;
-    line-height: 1.57;
-    text-transform: capitalize;
-  }
+	.role
+	{
+		font-size: 0.75rem;
+		font-weight: 400;
+		color: #697586;
+		line-height: 1.57;
+		text-transform: capitalize;
+	}
 
-  .logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+	.logo
+	{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
 }
 
-.right {
-  .fullscreen,
-  .settings {
-    color: $primary-color;
-    background-color: $primary-bg-color-components;
-    font-size: 1.2rem;
+.right
+{
+	.fullscreen,
+	.settings
+	{
+		color: $primary-color;
+		background-color: $primary-bg-color-components;
+		font-size: 1.2rem;
 
-    &:hover {
-      background-color: $primary-color !important;
-      color: #fff !important;
-    }
-  }
+		&:hover
+		{
+			background-color: $primary-color !important;
+			color: #fff !important;
+		}
+	}
 
-  .settings {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+	.settings
+	{
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		height: auto;
 
-    .avatar {
-      background-color: none !important;
+		.avatar
+		{
+			transition: all 0.2s;
+			background-color: transparent;
+			margin-top: 3px;
+			margin-bottom: 3px;
+			margin-left: 3px;
 
-      img {
-        &:hover {
-          background-color: #fff;
-        }
-      }
-    }
-  }
+		}
+
+		&:hover
+		{
+			.avatar
+			{
+				background-color: #fff;
+			}
+		}
+	}
 }

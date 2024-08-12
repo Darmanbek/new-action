@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { images } from 'src/assets/images/index';
+import { Logo2 } from 'src/assets/images/index';
 import { UiDrawer, UiMenu } from 'src/components/ui';
 import { useMenuStore } from 'src/store';
 import { useMenuRoutes } from '../menu.routes';
@@ -29,7 +29,7 @@ export const MenuDrawer = () => {
       closable={false}
       title={
         <div className={styles.logo}>
-          <img src={images.logo.Logo2} alt="Logo" />
+          <img src={Logo2} alt="Logo" />
         </div>
       }
     >

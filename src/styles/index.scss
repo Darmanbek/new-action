@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
 *,
 *::after,
 *::before {
@@ -25,7 +27,7 @@ button {
   display: inline-block;
   border: none;
   background: transparent;
-  font-family: sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 ul,
@@ -39,7 +41,7 @@ body {
   height: 100%;
 }
 body {
-  font-family: sans-serif;
+  font-family: "Roboto", sans-serif;
   min-height: 100vh;
-  background-color: #fff;
+  //background-color: #fff;
 }

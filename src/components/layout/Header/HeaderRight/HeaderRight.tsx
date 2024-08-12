@@ -1,17 +1,17 @@
 import { useEffect } from 'react';
 import { Divider, Popover, Space, Spin, Tag, Tooltip, Avatar } from 'antd';
 import {
-  FullscreenOutlined,
   SettingOutlined,
   LogoutOutlined,
 } from '@ant-design/icons';
+import { BsArrowsFullscreen } from 'react-icons/bs';
 import { useLocation, useNavigate } from 'react-router-dom';
 import screenfull from 'screenfull';
-import { UiButton, UiMenu } from 'src/components/ui';
+import { UiButton, UiMenu, UiSettingsButton } from 'src/components/ui';
 import { useAuthPersistStore, useMenuStore } from 'src/store';
 import { useGetMeQuery, useSignOutMutation } from 'src/services/index.api';
 import { getDayTime } from 'src/utils';
-import { images } from 'src/assets/images/index';
+import { images } from 'src/assets/images';
 import styles from './right.module.scss';
 
 export const HeaderRight = () => {
@@ -94,7 +94,7 @@ export const HeaderRight = () => {
             className={styles.fullscreen}
             onClick={() => screenfull.toggle()}
             aria-label="fullscreen"
-            icon={<FullscreenOutlined />}
+            icon={<BsArrowsFullscreen />}
           />
         </Tooltip>
         <Popover
@@ -105,19 +105,18 @@ export const HeaderRight = () => {
           content={content}
           onOpenChange={setProfileOpen}
         >
-          <UiButton
+          <UiSettingsButton
             type="text"
+            size="large"
             aria-label="settings"
             className={styles.settings}
-            borderRadius={20}
           >
             <Avatar
               className={styles.avatar}
               src={<img src={images.logo.Logo1} alt="Logo" />}
               alt="avatar"
             />
-            <SettingOutlined />
-          </UiButton>
+          </UiSettingsButton>
         </Popover>
       </Space>
     </div>

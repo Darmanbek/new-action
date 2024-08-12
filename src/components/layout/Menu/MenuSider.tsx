@@ -1,6 +1,6 @@
 import Sider from 'antd/es/layout/Sider';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { images } from 'src/assets/images';
+import { Logo1, Logo2 } from 'src/assets/images';
 import { UiMenu } from 'src/components/ui';
 import { useResponsive } from 'src/hooks';
 import { useMenuStore } from 'src/store';
@@ -16,7 +16,7 @@ export const MenuSider = () => {
   const routes = useMenuRoutes();
   const onSelectMenu = (key: string) => navigate(key);
 
-  const Menulogo = collapsed ? images.logo.Logo1 : images.logo.Logo2;
+  const MenuLogo = collapsed ? <img src={Logo1} alt="Menu Logo" /> : <img src={Logo2} alt="Menu Logo" />;
 
   if (isMobile) return;
 
@@ -29,7 +29,7 @@ export const MenuSider = () => {
     >
       <nav className={styles['menu-nav']}>
         <div className={clsx(styles.logo, collapsed && styles.collapse)}>
-          <img src={Menulogo} alt="Menu Logo" />
+          {MenuLogo}
         </div>
         <UiMenu
           theme="light"

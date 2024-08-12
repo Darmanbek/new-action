@@ -17,7 +17,7 @@ export const AntdProvider: FC<{ children: ReactNode }> = ({ children }) => {
       theme={{
         token: {
           colorPrimary: '#980000',
-          fontFamily: 'sans-serif',
+          fontFamily: 'Roboto, sans-serif',
           borderRadius: isMobile ? borderRadius : 10,
         },
       }}
