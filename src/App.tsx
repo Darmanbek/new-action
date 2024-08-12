@@ -1,22 +1,28 @@
-import { App as AntdApp } from 'antd';
-import { Route, Routes } from 'react-router-dom';
-import { Layout } from 'src/components/layout';
-import { Auth } from 'src/components/pages';
-import { useRoutes } from './routes/routes';
+import { App as AntdApp } from "antd";
+import { FC } from "react";
+import { Route, Routes } from "react-router-dom";
+import { Layout } from "src/components/layout";
+import { Auth } from "src/components/screens";
+import { useRoutes } from "./routes";
 
-export default function App() {
-  const routes = useRoutes();
+// eslint-disable-next-line react-refresh/only-export-components
+const App: FC = () => {
+	const routes = useRoutes();
+	return (
+		<Routes>
+			<Route path="/" element={<Layout />}>
+				{routes.map((route, index) => (
+					<Route key={index} {...route} />
+				))}
+			</Route>
+			<Route path={"/login"} element={<Auth />} />
+		</Routes>
+	);
+};
 
-  return (
-    <AntdApp>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          {routes.map(({ path, element }) => (
-            <Route key={path} path={path} element={element} />
-          ))}
-        </Route>
-        <Route path="/login" element={<Auth />} />
-      </Routes>
-    </AntdApp>
-  );
-}
+// eslint-disable-next-line react-refresh/only-export-components
+export default () => (
+	<AntdApp>
+		<App />
+	</AntdApp>
+)

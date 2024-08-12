@@ -1,9 +1,13 @@
-import React from 'react';
-import { InputNumber, InputNumberProps } from 'antd';
-import { formatPercent } from 'src/utils';
+import { FC } from "react";
+import { ConfigProvider, InputNumber, InputNumberProps } from "antd";
+import { formatPercent } from "src/utils";
 
-export const UiInputPercent = (
-  props: React.PropsWithChildren<InputNumberProps>
-) => {
-  return <InputNumber formatter={formatPercent} {...props} />;
+const UiInputPercent: FC<InputNumberProps> = (props) => {
+	return (
+		<ConfigProvider>
+			<InputNumber formatter={formatPercent} {...props} />
+		</ConfigProvider>
+	);
 };
+
+export { UiInputPercent };

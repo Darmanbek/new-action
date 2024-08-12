@@ -1,70 +1,80 @@
-@import 'src/styles/variables';
-@import 'src/styles/mixin';
+@import "src/assets/styles/variables";
+@import "src/assets/styles/mixin";
 
 .menu-sider,
-.menu-drawer {
-  position: relative;
-  background-color: #fff;
-  box-shadow: $primary-box-shadow;
-  transition: all 0.2s;
+.menu-drawer
+{
+	position: relative;
+	background-color: #fff;
+	box-shadow: $primary-box-shadow;
+	transition: all 0.2s;
 
-  .logo {
-    min-height: 80px;
-    max-height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-bottom: 1px solid rgba(5, 5, 5, 0.06);
+	.logo
+	{
+		min-height: 80px;
+		max-height: 80px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-bottom: 1px solid rgba(5, 5, 5, 0.06);
 
-    &.collapse {
-      padding: 0;
-    }
+		&.collapse
+		{
+			padding: 0;
+		}
 
-    img {
-      max-height: 80px;
-    }
-  }
+		img
+		{
+			max-height: 80px;
+		}
+	}
 
-  .menu-nav {
-    min-height: 100%;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
+	.menu-nav
+	{
+		min-height: 100%;
+		display: flex;
+		flex-direction: column;
+		overflow: hidden;
 
-    .menu {
-      height: calc(100vh - 80px);
-      padding-left: 12px;
-      padding-right: 12px;
-      margin-top: 0;
-      overflow: hidden;
-      padding-bottom: 30px;
-      scrollbar-width: thin;
-      scrollbar-color: #adb3bd #fff;
+		.menu
+		{
+			height: calc(100vh - 80px);
+			padding-left: 12px;
+			padding-right: 12px;
+			margin-top: 0;
+			overflow: hidden;
+			padding-bottom: 30px;
+			scrollbar-width: thin;
+			scrollbar-color: #adb3bd #fff;
 
-      &::-webkit-scrollbar {
-        width: 5px;
-        background-color: #fff;
-      }
+			&::-webkit-scrollbar
+			{
+				width: 5px;
+				background-color: #fff;
+			}
 
-      &::-webkit-scrollbar-thumb {
-        background-color: #adb3bd;
-        border-radius: 6px;
-      }
+			&::-webkit-scrollbar-thumb
+			{
+				background-color: #adb3bd;
+				border-radius: 6px;
+			}
 
-      &::-webkit-scrollbar-thumb {
-        background-color: #adb3bd;
-        border-radius: 6px;
-      }
+			&::-webkit-scrollbar-thumb
+			{
+				background-color: #adb3bd;
+				border-radius: 6px;
+			}
 
-      &.active {
-        padding: 0 4px;
-      }
+			&.active
+			{
+				padding: 0 4px;
+			}
 
-      &:hover
-      {
-        overflow-y: auto;
-        overflow-x: hidden;
-      }
-    }
-  }
+			&:hover
+			{
+				overflow-y: auto;
+				overflow-x: hidden;
+			}
+		}
+	}
 }

@@ -1,76 +1,89 @@
-@import 'src/styles/variables.scss';
+@import "src/assets/styles/variables.scss";
 
-.phone {
-  width: 100%;
-  transition: all 0.2s;
-  outline: none;
-  border: 1px solid #d9d9d9;
-  background-color: #ffffff;
-  color: rgba(0, 0, 0, 0.88);
+.phone
+{
+	width: 100%;
+	transition: all 0.2s;
+	outline: none;
+	border: 1px solid #d9d9d9;
+	background-color: #ffffff;
+	color: rgba(0, 0, 0, 0.88);
 
-  &::placeholder {
-    color: rgba(0, 0, 0, 0.25);
-    user-select: none;
-    opacity: 1;
-  }
+	&::placeholder
+	{
+		color: rgba(0, 0, 0, 0.25);
+		user-select: none;
+		opacity: 1;
+	}
 
-  &:placeholder-shown {
-    text-overflow: ellipsis;
-  }
+	&:placeholder-shown
+	{
+		text-overflow: ellipsis;
+	}
 
-  &:hover:not(.disabled) {
-    border-color: rgb(100, 0, 0);
-  }
+	&:hover:not(.disabled)
+	{
+		border-color: #a61f1b;
+	}
 
-  &:focus,
-  &:focus-within {
-    border-color: $primary-color;
-    box-shadow: 0 0 0 2px rgba(7, 91, 31, 0.25);
-  }
+	&:focus,
+	&:focus-within
+	{
+		border-color: $primary-color;
+		box-shadow: 0 0 0 2px rgba(97, 22, 5, 0.24);
+	}
 
-  &:active {
-    box-shadow: 0 0 0 2px rgba(7, 91, 31, 0.25);
-  }
+	&:active
+	{
+		box-shadow: 0 0 0 2px rgba(97, 22, 5, 0.24);
+	}
 
-  &.error {
-    background-color: #ffffff;
-    border-color: #ff4d4f;
+	&.error
+	{
+		background-color: #ffffff;
+		border-color: #ff4d4f;
 
-    &:focus,
-    &:focus-within {
-      border-color: #ff4d4f;
-      box-shadow: 0 0 0 2px rgba(255, 38, 5, 0.06);
-    }
+		&:focus,
+		&:focus-within
+		{
+			border-color: #ff4d4f;
+			box-shadow: 0 0 0 2px rgba(255, 38, 5, 0.06);
+		}
 
-    &:hover {
-      border-color: #ffa39e;
-      background-color: #ffffff;
-    }
-  }
+		&:hover
+		{
+			border-color: #ffa39e;
+			background-color: #ffffff;
+		}
+	}
 
-  &.disabled {
-    cursor: not-allowed;
-    background-color: rgba(0, 0, 0, 0.04);
-    color: rgba(0, 0, 0, 0.25);
-  }
+	&.disabled
+	{
+		cursor: not-allowed;
+		background-color: rgba(0, 0, 0, 0.04);
+		color: rgba(0, 0, 0, 0.25);
+	}
 
-  &.small {
-    font-size: 14px;
-    padding: 0 7px;
-    border-radius: 4px;
-  }
+	&.small
+	{
+		font-size: 14px;
+		padding: 0 7px;
+		border-radius: 4px;
+	}
 
-  &.middle {
-    font-size: 14px;
-    padding: 4px 11px;
-    border-radius: 6px;
-    line-height: 1.5714285714285714;
-  }
+	&.middle
+	{
+		font-size: 14px;
+		padding: 4px 11px;
+		border-radius: 6px;
+		line-height: 1.5714285714285714;
+	}
 
-  &.large {
-    font-size: 16px;
-    padding: 7px 11px;
-    border-radius: 12px;
-    line-height: 1.5;
-  }
+	&.large
+	{
+		font-size: 16px;
+		padding: 7px 11px;
+		border-radius: 12px;
+		line-height: 1.5;
+	}
 }

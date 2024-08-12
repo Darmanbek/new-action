@@ -1,0 +1,29 @@
+import dayjs from "dayjs";
+
+export const phoneFormatter = (phone?: string | null) => {
+	return phone
+		? phone.replace(/(\d{3})(\d{2})(\d{3})(\d{2})(\d{2})/, "+$1 $2 $3 $4 $5")
+		: "-";
+};
+
+export const phoneReverseFormatter = (phone?: string | null) => {
+	return phone ? phone.replace(/ /g, "").substring(1) : "-";
+};
+
+export const priceFormatter = (price?: number) => {
+	if (price === undefined) return 0;
+	return Intl.NumberFormat("en-EN", {}).format(price);
+};
+
+export const formatEmpty = <T>(value?: T) => value || "-";
+
+export const formatNum = <T>(value: T) =>
+	`${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+
+export const formatPercent = <T>(value: T) => `${value}%`;
+
+export const dateFormatter = (date: string, format?: string) =>
+	dayjs(date).format(format || "YYYY-MM-DD");
+
+export const lowerCase = (text: string) => text.toLowerCase();
+export const formMessage = (text: string) => `Пожалуйста, заполните поле ${lowerCase(text)}!`;
