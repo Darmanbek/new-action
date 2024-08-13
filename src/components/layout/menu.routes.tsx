@@ -9,7 +9,9 @@ import { BsBuildings } from "react-icons/bs";
 import { HiOutlineViewGridAdd } from "react-icons/hi";
 import { LuCalendarCheck, LuPieChart } from "react-icons/lu";
 import { MdOutlineMailOutline } from "react-icons/md";
+import { PiChatsLight } from "react-icons/pi";
 import { getRoleFromToken } from "src/config/token.config";
+import { TRoleTypes } from "src/services/shared/index.types";
 
 export const useMenuRoutes = () => {
 	const role = getRoleFromToken();
@@ -36,29 +38,20 @@ export const useMenuRoutes = () => {
 				},
 			],
 		},
-		// { key: '/chat', icon: <CarryOutOutlined />, label: 'Чат' },
+		{ key: "/chat", icon: <PiChatsLight />, label: "Чат" },
 	];
 
-	type TrolesMenuMap = {
+	type TRolesMenuMap = {
 		[role: string]: string[];
 	};
 
-	const rolesMenuMap: TrolesMenuMap = {
-		super_admin: [
-			"/admins",
-			"/teachers",
-			"/groups",
-			"/companies",
-			"/acceptance",
-			"/holiday",
-			"/finance",
-			"/chat",
-		],
+	const rolesMenuMap: TRolesMenuMap = {
+		super_admin: ["/admins", "/teachers", "/groups", "/companies", "/acceptance", "/holiday", "/finance", "/chat",],
 		admin: ["/teachers", "/holiday", "/groups", "/finance", "/chat"],
 		director: ["/admins", "/groups", "/teachers", "/finance", "/chat"],
 	};
 
-	const getMenuItemsForRole = (role: string): MenuProps["items"] => {
+	const getMenuItemsForRole = (role: TRoleTypes): MenuProps["items"] => {
 		return menuItems.filter((item) => rolesMenuMap[role].includes(item.key));
 	};
 

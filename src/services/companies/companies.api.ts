@@ -1,82 +1,79 @@
-import { App } from 'antd';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { App } from "antd";
+import { errorResponse } from "src/utils";
+import { TResponseError } from "src/services/index.types";
 import {
-  axiosGetCompanies,
-  axiosCreateCompanies,
-  axiosEditCompanies,
-  axiosDeleteCompanies,
-} from './companies.services';
-import { TResponseError } from '../index.types';
+	axiosCreateCompanies,
+	axiosDeleteCompanies,
+	axiosEditCompanies,
+	axiosGetCompanies,
+} from "./companies.services";
 
 const useGetCompaniesQuery = () => {
-  const { message } = App.useApp();
-  const query = useQuery({
-    queryFn: axiosGetCompanies,
-    queryKey: ['companies'],
-    onError: (error: TResponseError) => {
-      message.error(error.response.data.message);
-    },
-  });
-  return query;
+	const { message } = App.useApp();
+	return useQuery({
+		queryFn: axiosGetCompanies,
+		queryKey: ["companies"],
+		onError: (error: TResponseError) => {
+			message.error(errorResponse(error));
+		},
+	});
 };
 
 const useCreateCompaniesMutation = () => {
-  const { message } = App.useApp();
-  const queryClient = useQueryClient();
-  const mutation = useMutation({
-    mutationFn: axiosCreateCompanies,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['companies'],
-      });
-      message.success('Успешно');
-    },
-    onError: (error: TResponseError) => {
-      message.error(error.response.data.message);
-    },
-  });
-  return mutation;
+	const { message } = App.useApp();
+	const queryClient = useQueryClient();
+	return useMutation({
+		mutationFn: axiosCreateCompanies,
+		onSuccess: () => {
+			queryClient.invalidateQueries({
+				queryKey: ["companies"],
+			});
+			message.success("Успешно");
+		},
+		onError: (error: TResponseError) => {
+			message.error(errorResponse(error));
+		},
+	});
 };
 
 const useEditCompaniesMutation = () => {
-  const { message } = App.useApp();
-  const queryClient = useQueryClient();
-  const mutation = useMutation({
-    mutationFn: axiosEditCompanies,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['companies'],
-      });
-      message.success('Успешно');
-    },
-    onError: (error: TResponseError) => {
-      message.error(error.response.data.message);
-    },
-  });
-  return mutation;
+	const { message } = App.useApp();
+	const queryClient = useQueryClient();
+	return useMutation({
+		mutationFn: axiosEditCompanies,
+		onSuccess: () => {
+			queryClient.invalidateQueries({
+				queryKey: ["companies"],
+			});
+			message.success("Успешно");
+		},
+		onError: (error: TResponseError) => {
+			message.error(errorResponse(error));
+		},
+	});
 };
 
 const useDeleteCompaniesMutation = () => {
-  const { message } = App.useApp();
-  const queryClient = useQueryClient();
-  const mutation = useMutation({
-    mutationFn: axiosDeleteCompanies,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['companies'],
-      });
-      message.success('Успешно');
-    },
-    onError: (error: TResponseError) => {
-      message.error(error.response.data.message);
-    },
-  });
-  return mutation;
+	const { message } = App.useApp();
+	const queryClient = useQueryClient();
+	return useMutation({
+		mutationFn: axiosDeleteCompanies,
+		onSuccess: () => {
+			queryClient.invalidateQueries({
+				queryKey: ["companies"],
+			});
+			message.success("Успешно");
+		},
+		onError: (error: TResponseError) => {
+			message.error(errorResponse(error));
+		},
+	});
 };
 
 export {
-  useGetCompaniesQuery,
-  useCreateCompaniesMutation,
-  useEditCompaniesMutation,
-  useDeleteCompaniesMutation,
+	useGetCompaniesQuery,
+	useCreateCompaniesMutation,
+	useEditCompaniesMutation,
+	useDeleteCompaniesMutation,
 };

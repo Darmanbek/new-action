@@ -1,50 +1,50 @@
-import { api } from 'src/api';
-import { TTeacher, TTeacherChange } from './teachers.types';
+import { api } from "src/api";
+import { TTeacher, TTeacherChange } from "./teachers.types";
 import {
-  TResponse,
-  TResponseSingleData,
-  TGetParamsChange,
-} from '../index.types';
+	TResponse,
+	TResponseSingleData,
+	TGetParams,
+} from "src/services/index.types";
 
 const axiosGetTeachers = async (
-  params: TGetParamsChange
+	params: TGetParams
 ): Promise<TResponse<TTeacher>> => {
-  const response = await api.get(`/admin/teachers`, { params });
-  return response.data;
+	const response = await api.get(`/admin/teachers`, { params });
+	return response.data;
 };
 
 const axiosGetTeachersById = async (
-  id?: string | number
+	id?: string | number
 ): Promise<TResponseSingleData<TTeacher>> => {
-  const response = await api.get(`/admin/teachers/${id}`);
-  return response.data;
+	const response = await api.get(`/admin/teachers/${id}`);
+	return response.data;
 };
 
 const axiosCreateTeachers = async (
-  value: TTeacherChange | FormData
+	value: TTeacherChange | FormData
 ): Promise<TResponseSingleData<TTeacher>> => {
-  const response = await api.post(`/admin/teachers`, value);
-  return response.data;
+	const response = await api.post(`/admin/teachers`, value);
+	return response.data;
 };
 
 const axiosEditTeachers = async (
-  value: TTeacher
+	value: TTeacher
 ): Promise<TResponseSingleData<TTeacher>> => {
-  const response = await api.put(`/admin/teachers/${value.id}`, value);
-  return response.data;
+	const response = await api.put(`/admin/teachers/${value.id}`, value);
+	return response.data;
 };
 
 const axiosDeleteTeachers = async (
-  id?: number | string
+	id?: number | string
 ): Promise<TResponseSingleData<void>> => {
-  const response = await api.delete(`/admin/teachers/${id}`);
-  return response.data;
+	const response = await api.delete(`/admin/teachers/${id}`);
+	return response.data;
 };
 
 export {
-  axiosGetTeachers,
-  axiosGetTeachersById,
-  axiosCreateTeachers,
-  axiosEditTeachers,
-  axiosDeleteTeachers,
+	axiosGetTeachers,
+	axiosGetTeachersById,
+	axiosCreateTeachers,
+	axiosEditTeachers,
+	axiosDeleteTeachers,
 };

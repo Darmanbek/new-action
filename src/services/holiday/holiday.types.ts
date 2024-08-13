@@ -1,7 +1,7 @@
 export type THoliday = {
-  date: string;
+	date: string;
 };
 
 export type THolidayChange = {
-  date: string;
+	date: string;
 };

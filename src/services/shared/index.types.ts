@@ -5,7 +5,7 @@ export type TGetParamItem = {
 	name: string;
 };
 
-export type TGetParamsChange = {
+export type TGetParams = {
 	limit?: number;
 	page?: number;
 	search?: string;

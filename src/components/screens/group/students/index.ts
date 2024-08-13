@@ -1,2 +1,2 @@
-export * from './balances/GroupStudentsBalances';
-export * from './students/GroupStudents';
+export * from "./balances/GroupStudentsBalances";
+export * from "./students/GroupStudents";

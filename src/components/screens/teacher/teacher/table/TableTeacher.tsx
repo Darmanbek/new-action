@@ -5,7 +5,7 @@ import { UiButton, UiTable } from "src/components/ui";
 import { useGetTeachersQuery } from "src/services/index.api";
 import { TTeacher } from "src/services/index.types";
 import { useFormStorageStore, useSearchListStore } from "src/store";
-import { useColumnsTeacher } from "./useColumnsTeacher";
+import { useColumnsTeacher } from "src/components/screens/teacher/teacher/table/useColumnsTeacher";
 import { PlusOutlined } from "@ant-design/icons";
 
 export const TableTeacher = () => {

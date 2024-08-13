@@ -1,24 +1,24 @@
-import { App } from 'antd';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { axiosCreateGroupStudentsBalances } from './balances.services';
-import { TResponseError } from 'src/services/index.types';
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { App } from "antd";
+import { TResponseError } from "src/services/index.types";
+import { errorResponse } from "src/utils";
+import { axiosCreateGroupStudentsBalances } from "./balances.services";
 
 const useCreateGroupStudentsBalancesMutation = () => {
-  const { message } = App.useApp();
-  const queryClient = useQueryClient();
-  const mutation = useMutation({
-    mutationFn: axiosCreateGroupStudentsBalances,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['groups'],
-      });
-      message.success('Успешно');
-    },
-    onError: (error: TResponseError) => {
-      message.error(error.response.data.message);
-    },
-  });
-  return mutation;
+	const { message } = App.useApp();
+	const queryClient = useQueryClient();
+	return useMutation({
+		mutationFn: axiosCreateGroupStudentsBalances,
+		onSuccess: () => {
+			queryClient.invalidateQueries({
+				queryKey: ["groups"],
+			});
+			message.success("Успешно");
+		},
+		onError: (error: TResponseError) => {
+			message.error(errorResponse(error));
+		},
+	});
 };
 
 export { useCreateGroupStudentsBalancesMutation };

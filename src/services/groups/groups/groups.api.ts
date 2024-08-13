@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { App } from "antd";
-import { TGetParamsChange, TResponseError } from "src/services/index.types";
+import { TGetParams, TResponseError } from "src/services/index.types";
 import { errorResponse } from "src/utils";
 import {
 	axiosCreateGroups,
@@ -10,7 +10,7 @@ import {
 	axiosGetGroupsById,
 } from "./groups.services";
 
-const useGetGroupsQuery = (params: TGetParamsChange) => {
+const useGetGroupsQuery = (params: TGetParams) => {
 	const { message } = App.useApp();
 	return useQuery({
 		queryFn: () => axiosGetGroups(params),

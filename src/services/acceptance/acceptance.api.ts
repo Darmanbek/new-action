@@ -1,82 +1,79 @@
-import { App } from 'antd';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { App } from "antd";
+import { errorResponse } from "src/utils";
+import { TGetParams, TResponseError } from "../index.types";
 import {
-  axiosGetAcceptances,
-  axiosCreateAcceptances,
-  axiosEditAcceptances,
-  axiosDeleteAcceptances,
-} from './acceptance.services';
-import { TResponseError, TGetParamsChange } from '../index.types';
+	axiosCreateAcceptances,
+	axiosDeleteAcceptances,
+	axiosEditAcceptances,
+	axiosGetAcceptances,
+} from "./acceptance.services";
 
-const useGetAcceptancesQuery = (params: TGetParamsChange) => {
-  const { message } = App.useApp();
-  const query = useQuery({
-    queryFn: () => axiosGetAcceptances(params),
-    queryKey: ['acceptances', ...Object.values(params)],
-    onError: (error: TResponseError) => {
-      message.error(error.response.data.message);
-    },
-  });
-  return query;
+const useGetAcceptancesQuery = (params: TGetParams) => {
+	const { message } = App.useApp();
+	return useQuery({
+		queryFn: () => axiosGetAcceptances(params),
+		queryKey: ["acceptances", ...Object.values(params)],
+		onError: (error: TResponseError) => {
+			message.error(errorResponse(error));
+		},
+	});
 };
 
 const useCreateAcceptancesMutation = () => {
-  const { message } = App.useApp();
-  const queryClient = useQueryClient();
-  const mutation = useMutation({
-    mutationFn: axiosCreateAcceptances,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['acceptances'],
-      });
-      message.success('Успешно');
-    },
-    onError: (error: TResponseError) => {
-      message.error(error.response.data.message);
-    },
-  });
-  return mutation;
+	const { message } = App.useApp();
+	const queryClient = useQueryClient();
+	return useMutation({
+		mutationFn: axiosCreateAcceptances,
+		onSuccess: () => {
+			queryClient.invalidateQueries({
+				queryKey: ["acceptances"],
+			});
+			message.success("Успешно");
+		},
+		onError: (error: TResponseError) => {
+			message.error(errorResponse(error));
+		},
+	});
 };
 
 const useEditAcceptancesMutation = () => {
-  const { message } = App.useApp();
-  const queryClient = useQueryClient();
-  const mutation = useMutation({
-    mutationFn: axiosEditAcceptances,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['acceptances'],
-      });
-      message.success('Успешно');
-    },
-    onError: (error: TResponseError) => {
-      message.error(error.response.data.message);
-    },
-  });
-  return mutation;
+	const { message } = App.useApp();
+	const queryClient = useQueryClient();
+	return useMutation({
+		mutationFn: axiosEditAcceptances,
+		onSuccess: () => {
+			queryClient.invalidateQueries({
+				queryKey: ["acceptances"],
+			});
+			message.success("Успешно");
+		},
+		onError: (error: TResponseError) => {
+			message.error(errorResponse(error));
+		},
+	});
 };
 
 const useDeleteAcceptancesMutation = () => {
-  const { message } = App.useApp();
-  const queryClient = useQueryClient();
-  const mutation = useMutation({
-    mutationFn: axiosDeleteAcceptances,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['acceptances'],
-      });
-      message.success('Успешно');
-    },
-    onError: (error: TResponseError) => {
-      message.error(error.response.data.message);
-    },
-  });
-  return mutation;
+	const { message } = App.useApp();
+	const queryClient = useQueryClient();
+	return useMutation({
+		mutationFn: axiosDeleteAcceptances,
+		onSuccess: () => {
+			queryClient.invalidateQueries({
+				queryKey: ["acceptances"],
+			});
+			message.success("Успешно");
+		},
+		onError: (error: TResponseError) => {
+			message.error(errorResponse(error));
+		},
+	});
 };
 
 export {
-  useGetAcceptancesQuery,
-  useCreateAcceptancesMutation,
-  useEditAcceptancesMutation,
-  useDeleteAcceptancesMutation,
+	useGetAcceptancesQuery,
+	useCreateAcceptancesMutation,
+	useEditAcceptancesMutation,
+	useDeleteAcceptancesMutation,
 };

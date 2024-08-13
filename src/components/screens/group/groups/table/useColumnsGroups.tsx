@@ -26,7 +26,7 @@ export const useColumnsGroups = () => {
 		},
 		{
 			ellipsis: true,
-			title: "Название группы",
+			title: "Название",
 			dataIndex: "name",
 			key: "name",
 		},
@@ -54,7 +54,7 @@ export const useColumnsGroups = () => {
 		},
 		{
 			ellipsis: true,
-			title: "Стартовая дата",
+			title: "Старт",
 			dataIndex: "start_date",
 			key: "start_date",
 			render: formatEmpty,

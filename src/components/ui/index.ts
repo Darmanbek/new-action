@@ -8,6 +8,6 @@ export * from './date';
 export * from './select';
 // export * from './upload';
 // export * from './date';
-// export * from './card';
+export * from './card';
 // export * from './checkbox';
 // export * from './modal';
