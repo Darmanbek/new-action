@@ -1,8 +1,6 @@
-import { useState, useEffect } from "react";
-import { Form, Input, Radio, Upload, Button, Avatar, Flex, Row, Col } from "antd";
-import type { RadioChangeEvent } from "antd";
-import { UploadOutlined } from "@ant-design/icons";
-import { BsGenderFemale, BsGenderMale } from "react-icons/bs";
+import { useEffect } from "react";
+import { Form, Input, Radio, Upload, Avatar, Flex, Row, Col } from "antd";
+import { BsGenderFemale, BsGenderMale, BsPersonBoundingBox } from "react-icons/bs";
 import { GlobalDrawer } from "src/components/shared";
 import { UiInputMask, UiDatePicker } from "src/components/ui";
 import {
@@ -11,16 +9,16 @@ import {
 } from "src/services/index.api";
 import { TTeacherChange } from "src/services/index.types";
 import { useFormStorageStore } from "src/store";
-import { datePlaceholder, formMessage, inputPlaceholder, phoneReverseFormatter } from "src/utils";
+import { dateFormatter, datePlaceholder, formMessage, inputPlaceholder, phoneReverseFormatter } from "src/utils";
 
 export const FormTeacher = () => {
 	const [form] = Form.useForm<TTeacherChange>();
-	const [isMale, setIsMale] = useState<number | null>(null);
+	const avatar = Form.useWatch("avatar", form);
 	const paramsForm = useFormStorageStore((state) => state.paramsForm);
 	const {
-		mutate: createTeacher,
-		isLoading: createLoading,
-		isError: createError,
+		mutate: addTeacher,
+		isLoading: addLoading,
+		isError: addError,
 	} = useCreateTeachersMutation();
 	const {
 		mutate: editTeacher,
@@ -45,9 +43,11 @@ export const FormTeacher = () => {
 		}
 		formData.append("first_name", values.first_name);
 		formData.append("last_name", values.last_name);
-		// formData.append('is_male', values.is_male);
+		formData.append("is_male", Number(values.is_male).toString());
 		formData.append("password", values.password);
-		formData.append("birthday", values.birthday);
+		if (values.birthday) {
+			formData.append("birthday", dateFormatter(values.birthday));
+		}
 		if (paramsForm) {
 			editTeacher({
 				...values,
@@ -58,7 +58,7 @@ export const FormTeacher = () => {
 				company: paramsForm?.company,
 			});
 		} else {
-			createTeacher(formData);
+			addTeacher(formData);
 		}
 	};
 
@@ -67,6 +67,7 @@ export const FormTeacher = () => {
 			form.setFieldsValue({
 				...paramsForm,
 				phone: `+${paramsForm.phone}`,
+				is_male: paramsForm.teacher_data?.is_male,
 			});
 		}
 	}, [paramsForm, form]);
@@ -74,8 +75,8 @@ export const FormTeacher = () => {
 	return (
 		<GlobalDrawer
 			form={form}
-			isLoading={createLoading || editLoading}
-			isError={createError || editError}
+			isLoading={addLoading || editLoading}
+			isError={addError || editError}
 		>
 			<Form
 				name="Teacher Form"
@@ -85,10 +86,10 @@ export const FormTeacher = () => {
 				layout="vertical"
 				initialValues={{
 					phone: "",
-					is_male: isMale,
 				}}
 				requiredMark={false}
 			>
+
 				<Form.Item<TTeacherChange>
 					name="first_name"
 					label="Имя"
@@ -141,60 +142,75 @@ export const FormTeacher = () => {
 					</Form.Item>
 				)}
 
-				<Form.Item<TTeacherChange>
-					name="is_male"
-					label="Пол"
-				>
-					<Radio.Group
-						value={isMale}
-						onChange={(e: RadioChangeEvent) => setIsMale(e.target.value)}
-						optionType={"button"}
-						buttonStyle={"solid"}
-					>
-						<Row gutter={8}>
-							<Col span={12}>
-								<Radio value={0}>
-									<Flex gap={8} align={"center"}>
-										<Avatar
-											style={{ background: "transparent", color: "inherit" }}
-											icon={<BsGenderMale />}
-											size={"default"}
-										/>
-										<span>Мужчина</span>
-									</Flex>
-								</Radio>
-							</Col>
-							<Col span={12}>
-								<Radio value={1}>
-									<Flex gap={8} align={"center"}>
-										<Avatar
-											style={{ background: "transparent", color: "inherit" }}
-											icon={<BsGenderFemale />}
-											size={"default"}
-										/>
-										<span>Женщина</span>
-									</Flex>
-								</Radio>
-							</Col>
-						</Row>
-					</Radio.Group>
-				</Form.Item>
+				<Row gutter={8}>
+					<Col span={12}>
+						<Form.Item<TTeacherChange>
+							name="avatar"
+							label="Фото"
+							valuePropName="fileList"
+							getValueFromEvent={normFile}
+						>
+							<Upload
+								beforeUpload={() => false}
+								maxCount={1}
+								listType="picture-card"
+								accept=".png, .jpg, .jpeg"
+								style={{
+									display: "flex",
+									justifyContent: "center"
+								}}
+							>
+								{/*<Button icon={<UploadOutlined />}>Нажмите, чтобы загрузить</Button>*/}
+								{avatar && Array.isArray(avatar) && avatar.length ? null : (
+									<button style={{ border: 0, background: "none", cursor: "pointer" }} type="button">
+										<BsPersonBoundingBox style={{ fontSize: 32 }} />
+										<div style={{ marginTop: 8 }}>Загрузить</div>
+									</button>
+								)}
+							</Upload>
+						</Form.Item>
 
-				<Form.Item<TTeacherChange>
-					name="avatar"
-					label="Фото"
-					valuePropName="fileList"
-					getValueFromEvent={normFile}
-				>
-					<Upload
-						beforeUpload={() => false}
-						maxCount={1}
-						listType="picture"
-						accept=".png, .jpg, .jpeg"
-					>
-						<Button icon={<UploadOutlined />}>Нажмите, чтобы загрузить</Button>
-					</Upload>
-				</Form.Item>
+
+					</Col>
+					<Col span={12}>
+						<Form.Item<TTeacherChange>
+							name="is_male"
+							label="Пол"
+						>
+							<Radio.Group
+								optionType={"button"}
+								buttonStyle={"solid"}
+							>
+								<Row gutter={8} style={{ rowGap: 8 }}>
+									<Col span={24}>
+										<Radio value={false}>
+											<Flex gap={8} align={"center"}>
+												<Avatar
+													style={{ background: "transparent", color: "inherit" }}
+													icon={<BsGenderMale />}
+													size={"default"}
+												/>
+												<span>Мужчина</span>
+											</Flex>
+										</Radio>
+									</Col>
+									<Col span={24}>
+										<Radio value={true}>
+											<Flex gap={8} align={"center"}>
+												<Avatar
+													style={{ background: "transparent", color: "inherit" }}
+													icon={<BsGenderFemale />}
+													size={"default"}
+												/>
+												<span>Женщина</span>
+											</Flex>
+										</Radio>
+									</Col>
+								</Row>
+							</Radio.Group>
+						</Form.Item>
+					</Col>
+				</Row>
 
 				<Form.Item<TTeacherChange>
 					name="password"
@@ -202,11 +218,11 @@ export const FormTeacher = () => {
 					rules={[
 						{
 							required: !paramsForm,
-							message: "Пожалуйста, введите Пароль!",
+							message: formMessage("Пароль"),
 						},
 					]}
 				>
-					<Input.Password placeholder="Введите пароль" type="password" />
+					<Input.Password placeholder={inputPlaceholder} />
 				</Form.Item>
 			</Form>
 		</GlobalDrawer>

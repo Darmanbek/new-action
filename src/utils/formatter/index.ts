@@ -1,4 +1,5 @@
 import dayjs from "dayjs";
+import { monthGrammar } from "src/utils/selector";
 
 export const phoneFormatter = (phone?: string | null) => {
 	return phone
@@ -12,7 +13,7 @@ export const phoneReverseFormatter = (phone?: string | null) => {
 
 export const priceFormatter = (price?: number) => {
 	if (price === undefined) return 0;
-	return Intl.NumberFormat("en-EN", {}).format(price);
+	return Intl.NumberFormat("ru-RU", {}).format(price);
 };
 
 export const formatEmpty = <T>(value?: T) => value || "-";
@@ -21,6 +22,7 @@ export const formatNum = <T>(value: T) =>
 	`${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 
 export const formatPercent = <T>(value: T) => `${value}%`;
+export const formatMonth = <T>(value: T) => !Number.isNaN(value) ? `${value} ${monthGrammar(value)}` : "";
 
 export const dateFormatter = (date: string, format?: string) =>
 	dayjs(date).format(format || "YYYY-MM-DD");

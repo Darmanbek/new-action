@@ -8,7 +8,7 @@ import { TGroup, TGroupChange } from './groups.types';
 
 const axiosGetGroups = async (
   params: TGetParamsChange
-): Promise<TResponse<Omit<TGroup, 'students' | 'lessons'>>> => {
+): Promise<TResponse<TGroup>> => {
   const response = await api.get(`/admin/groups`, { params });
   return response.data;
 };

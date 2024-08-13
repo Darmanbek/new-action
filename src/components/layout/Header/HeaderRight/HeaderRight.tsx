@@ -83,7 +83,7 @@ export const HeaderRight = () => {
 			signOut();
 			setProfileOpen(false);
 		}
-	}, [isSuccess]);
+	}, [isSuccess, setProfileOpen, signOut]);
 
 	return (
 		<div className={styles.right}>
