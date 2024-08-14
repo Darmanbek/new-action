@@ -18,8 +18,8 @@ export const UiSelect = (
 			theme={{
 				components: {
 					Select: {
-						optionSelectedColor: "#009746",
-						controlItemBgActive: "#E3F2FD",
+						optionSelectedColor: "#DE070F",
+						controlItemBgActive: "#ffe8e8",
 						optionFontSize: isMobile ? 14 : 16,
 						fontSize: isMobile ? 14 : 16,
 						fontSizeSM: isMobile ? 14 : 16,

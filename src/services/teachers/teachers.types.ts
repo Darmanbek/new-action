@@ -1,6 +1,6 @@
 import type { RcFile } from "antd/es/upload";
 import type { UploadFile } from "antd";
-import { TGroup, TCompany } from "src/services/index.types";
+import { TGroup } from "src/services/index.types";
 
 export type TTeacher = {
 	id: string;
@@ -9,10 +9,15 @@ export type TTeacher = {
 	assistant: boolean;
 	phone: string;
 	teacher_data?: TTeacherInfo;
-	company: Pick<TCompany, "id" | "name">;
+	company: TTeacherCompany[];
 	group_count: number;
 	groups: TGroup[];
 };
+
+export type TTeacherCompany = {
+	company_id: string;
+	name: string;
+}
 
 export type TTeacherInfo = {
 	birthday: string;

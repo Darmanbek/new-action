@@ -1,14 +1,14 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { App } from "antd";
-import { TResponseError } from "src/services/index.types";
+import { useMessage } from "src/hooks";
 import { errorResponse } from "src/utils";
-import { axiosCreateGroupStudentsBalances } from "./balances.services";
+import { TResponseError } from "src/services/index.types";
+import { axiosCreateBalances } from "./balances.services";
 
-const useCreateGroupStudentsBalancesMutation = () => {
-	const { message } = App.useApp();
+const useCreateBalancesMutation = () => {
+	const { message } = useMessage();
 	const queryClient = useQueryClient();
 	return useMutation({
-		mutationFn: axiosCreateGroupStudentsBalances,
+		mutationFn: axiosCreateBalances,
 		onSuccess: () => {
 			queryClient.invalidateQueries({
 				queryKey: ["groups"],
@@ -21,4 +21,4 @@ const useCreateGroupStudentsBalancesMutation = () => {
 	});
 };
 
-export { useCreateGroupStudentsBalancesMutation };
+export { useCreateBalancesMutation };

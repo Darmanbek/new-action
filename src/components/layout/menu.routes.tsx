@@ -7,7 +7,7 @@ import {
 } from "@ant-design/icons";
 import { BsBuildings } from "react-icons/bs";
 import { HiOutlineViewGridAdd } from "react-icons/hi";
-import { LuCalendarCheck, LuPieChart } from "react-icons/lu";
+import { LuPieChart } from "react-icons/lu";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { PiChatsLight } from "react-icons/pi";
 import { getRoleFromToken } from "src/config/token.config";
@@ -22,7 +22,7 @@ export const useMenuRoutes = () => {
 		{ key: "/groups", icon: <HiOutlineViewGridAdd />, label: "Группы" },
 		{ key: "/companies", icon: <BsBuildings />, label: "Филиалы" },
 		{ key: "/acceptance", icon: <MdOutlineMailOutline />, label: "Заявки" },
-		{ key: "/holiday", icon: <LuCalendarCheck />, label: "Каникулы" },
+		// { key: "/holiday", icon: <LuCalendarCheck />, label: "Каникулы" },
 		{
 			key: "/finance", icon: <LuPieChart />, label: "Финансы",
 			children: [
@@ -46,9 +46,30 @@ export const useMenuRoutes = () => {
 	};
 
 	const rolesMenuMap: TRolesMenuMap = {
-		super_admin: ["/admins", "/teachers", "/groups", "/companies", "/acceptance", "/holiday", "/finance", "/chat",],
-		admin: ["/teachers", "/holiday", "/groups", "/finance", "/chat"],
-		director: ["/admins", "/groups", "/teachers", "/finance", "/chat"],
+		super_admin: [
+			"/admins",
+			"/teachers",
+			"/groups",
+			"/companies",
+			"/acceptance",
+			"/holiday",
+			"/finance",
+			"/chat",
+		],
+		admin: [
+			"/teachers",
+			"/groups",
+			"/acceptance",
+			"/finance",
+			"/chat"
+		],
+		director: [
+			"/admins",
+			"/groups",
+			"/teachers",
+			"/finance",
+			// "/chat"
+		],
 	};
 
 	const getMenuItemsForRole = (role: TRoleTypes): MenuProps["items"] => {

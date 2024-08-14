@@ -8,7 +8,7 @@ import {
 	axiosEditGroups,
 	axiosGetGroups,
 	axiosGetGroupsById,
-} from "./groups.services";
+} from "src/services/groups/groups.services";
 
 const useGetGroupsQuery = (params: TGetParams) => {
 	const { message } = App.useApp();

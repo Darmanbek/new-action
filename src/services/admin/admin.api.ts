@@ -2,7 +2,12 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { App } from "antd";
 import { errorResponse } from "src/utils";
 import { TResponseError } from "src/services/index.types";
-import { axiosCreateAdmins, axiosDeleteAdmins, axiosEditAdmins, axiosGetAdmins, } from "./admin.services";
+import {
+	axiosCreateAdmins,
+	axiosDeleteAdmins,
+	axiosEditAdmins,
+	axiosGetAdmins,
+} from "./admin.services";
 
 const useGetAdminsQuery = () => {
 	const { message } = App.useApp();

@@ -1,6 +1,6 @@
 import { api } from "src/api";
 import { TResponse, TGetParams } from "src/services/index.types";
-import { TFinanceDebtors } from "./debtors.types";
+import { TFinanceDebtors } from "src/services/debtors/debtors.types";
 
 const axiosGetDebtors = async (
 	params: TGetParams

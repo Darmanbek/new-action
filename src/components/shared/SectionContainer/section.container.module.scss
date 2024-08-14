@@ -1,0 +1,10 @@
+@import "/src/assets/styles/variables";
+
+.section
+{
+	padding: 20px;
+	width: 100%;
+	border-radius: $primary-border-radius;
+	background-color: #fff;
+	box-shadow: $primary-box-shadow;
+}

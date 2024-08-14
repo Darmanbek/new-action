@@ -1,5 +1,5 @@
 import { api } from "src/api";
-import { TResponse, TResponseSingleData, TGetParams } from "../index.types";
+import { TResponse, TResponseSingleData, TGetParams } from "src/services/index.types";
 import { TAcceptance } from "./acceptance.types";
 
 const axiosGetAcceptances = async (

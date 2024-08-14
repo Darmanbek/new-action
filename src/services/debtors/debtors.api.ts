@@ -1,28 +1,28 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { App } from "antd";
 import { errorResponse } from "src/utils";
-import { TResponseError } from "../index.types";
-import { axiosEditHoliday, axiosGetHoliday } from "./holiday.services";
+import { TGetParams, TResponseError } from "src/services/index.types";
+import { axiosEditDebtors, axiosGetDebtors } from "src/services/debtors/debtors.services";
 
-const useGetHolidayQuery = () => {
+const useGetDebtorsQuery = (params: TGetParams) => {
 	const { message } = App.useApp();
 	return useQuery({
-		queryFn: axiosGetHoliday,
-		queryKey: ["holiday"],
+		queryFn: () => axiosGetDebtors(params),
+		queryKey: ["debtors", ...Object.values(params)],
 		onError: (error: TResponseError) => {
 			message.error(errorResponse(error));
 		},
 	});
 };
 
-const useEditHolidayMutation = () => {
+const useEditDebtorsMutation = () => {
 	const { message } = App.useApp();
 	const queryClient = useQueryClient();
 	return useMutation({
-		mutationFn: axiosEditHoliday,
+		mutationFn: axiosEditDebtors,
 		onSuccess: () => {
 			queryClient.invalidateQueries({
-				queryKey: ["holiday"],
+				queryKey: ["teachers"],
 			});
 			message.success("Успешно");
 		},
@@ -32,4 +32,4 @@ const useEditHolidayMutation = () => {
 	});
 };
 
-export { useGetHolidayQuery, useEditHolidayMutation };
+export { useGetDebtorsQuery, useEditDebtorsMutation };

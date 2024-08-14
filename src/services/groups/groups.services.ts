@@ -4,7 +4,7 @@ import {
 	TResponseSingleData,
 	TGetParams,
 } from "src/services/index.types";
-import { TGroup, TGroupChange } from "./groups.types";
+import { TGroup, TGroupChange } from "src/services/groups/groups.types";
 
 const axiosGetGroups = async (
 	params: TGetParams

@@ -1,13 +1,13 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { App } from "antd";
 import { errorResponse } from "src/utils";
-import { TGetParams, TResponseError } from "../index.types";
+import { TGetParams, TResponseError } from "src/services/index.types";
 import {
 	axiosCreateAcceptances,
 	axiosDeleteAcceptances,
 	axiosEditAcceptances,
 	axiosGetAcceptances,
-} from "./acceptance.services";
+} from "src/services/acceptance/acceptance.services";
 
 const useGetAcceptancesQuery = (params: TGetParams) => {
 	const { message } = App.useApp();

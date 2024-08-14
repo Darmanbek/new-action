@@ -1,10 +1,13 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { App } from "antd";
 import { useMessage } from "src/hooks";
 import { useAuthPersistStore } from "src/store";
 import { errorResponse } from "src/utils";
-import { TResponseError } from "../index.types";
-import { fetchGetUser, fetchSignIn, fetchSignOut } from "./auth.services";
+import { TResponseError } from "src/services/index.types";
+import {
+	fetchGetUser,
+	fetchSignIn,
+	fetchSignOut
+} from "./auth.services";
 
 const useSignInMutation = () => {
 	const { message } = useMessage();
@@ -24,7 +27,7 @@ const useSignInMutation = () => {
 };
 
 const useGetMeQuery = () => {
-	const { message } = App.useApp();
+	const { message } = useMessage();
 	const signOut = useAuthPersistStore((state) => state.signOut);
 	return useQuery({
 		queryFn: fetchGetUser,
@@ -37,7 +40,7 @@ const useGetMeQuery = () => {
 };
 
 const useSignOutMutation = () => {
-	const { message } = App.useApp();
+	const { message } = useMessage();
 	return useMutation({
 		mutationFn: fetchSignOut,
 		onSuccess: () => {

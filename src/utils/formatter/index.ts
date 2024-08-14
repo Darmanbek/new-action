@@ -16,7 +16,7 @@ export const priceFormatter = (price?: number) => {
 	return Intl.NumberFormat("ru-RU", {}).format(price);
 };
 
-export const formatEmpty = <T>(value?: T) => value || "-";
+export const formatEmpty = <T>(value?: T) => value ?? "-";
 
 export const formatNum = <T>(value: T) =>
 	`${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, " ");

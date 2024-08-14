@@ -1,5 +1,5 @@
-import { TableGroupStudents } from './table/TableGroupStudents';
+import { TableGroupStudents } from "./table/TableGroupStudents";
 
 export const GroupStudents = () => {
-  return <TableGroupStudents />;
+	return <TableGroupStudents />;
 };

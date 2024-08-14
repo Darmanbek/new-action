@@ -1,18 +1,30 @@
-import { Form, Input } from "antd";
+import { Form, FormProps } from "antd";
 import { GlobalDrawer } from "src/components/shared";
+import { UiDatePicker } from "src/components/ui";
 import { useEditHolidayMutation } from "src/services/index.api";
-import { THoliday } from "src/services/index.types";
+import { THolidayChange } from "src/services/index.types";
+import { useFormStorageStore } from "src/store";
+import { datePlaceholder, formMessage } from "src/utils";
 
 export const FormHoliday = () => {
-	const [form] = Form.useForm<THoliday>();
+	const [form] = Form.useForm<THolidayChange>();
+
+	const paramsForm = useFormStorageStore(
+		state => state.paramsForm
+	);
+
 	const {
-		// mutate: editHoliday,
+		mutate: editHoliday,
 		isLoading: editLoading,
 		isError: editError,
 	} = useEditHolidayMutation();
 
-	const onFinish = (values: THoliday) => {
-		return values;
+	const onFinish: FormProps<THolidayChange>["onFinish"] = (values) => {
+		if (paramsForm) {
+			editHoliday({
+				...values
+			});
+		}
 	};
 
 	return (
@@ -28,17 +40,17 @@ export const FormHoliday = () => {
 				}}
 				requiredMark={false}
 			>
-				<Form.Item<THoliday>
-					name="date"
-					label="Выходные"
+				<Form.Item<THolidayChange>
+					name={"date"}
+					label={"Выходные"}
 					rules={[
 						{
 							required: true,
-							message: "Пожалуйста, укажите выходные!",
+							message: formMessage("Выходные"),
 						},
 					]}
 				>
-					<Input type="date" placeholder="Введите выходные" />
+					<UiDatePicker placeholder={datePlaceholder} />
 				</Form.Item>
 				{/*<Form.Item<THoliday>*/}
 				{/*	name="any"*/}

@@ -30,6 +30,20 @@ export const monthGrammar = <T>(value: T) => {
 	}
 };
 
+export const groupGrammar = (value: number) => {
+	switch (value) {
+		case 1:
+			return "группа";
+		case 2:
+		case 3:
+		case 4:
+			return "группы";
+
+		default:
+			return "групп";
+	}
+};
+
 
 export const errorResponse = (error: TResponseError) => {
 	if (error?.response?.data?.message) {

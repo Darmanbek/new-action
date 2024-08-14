@@ -12,7 +12,7 @@ import {
 	Admin,
 	Acceptance,
 	Company,
-	Holiday,
+	// Holiday,
 	FinanceProfits,
 	FinanceDebtors,
 
@@ -48,7 +48,7 @@ export const useRoutes = () => {
 			element: <GroupStudentsBalances />,
 		},
 
-		{ path: "/holiday", element: <Holiday /> },
+		// { path: "/holiday", element: <Holiday /> },
 
 		{ path: "/finance", element: <Home /> },
 		{ path: "/finance/profits/:group_id", element: <FinanceProfits /> },
@@ -65,19 +65,15 @@ export const useRoutes = () => {
 		admin: [
 			"/",
 
-			"/admins",
-			"/admins/:admin_id",
-			"/companies",
-			"/companies/:company_id",
 			"/acceptance",
 			"/acceptance/:acceptance_id",
+
 			"/teachers",
 			"/teachers/:teacher_id",
 			"/groups",
 			"/groups/:group_id/lessons",
 			"/groups/:group_id/students",
 			"/groups/:group_id/students/:student_id/payments",
-			"/holiday",
 			"/finance",
 			"/finance/profits/:group_id",
 			"/finance/debtors/:group_id",
@@ -92,17 +88,12 @@ export const useRoutes = () => {
 
 			"/admins",
 			"/admins/:admin_id",
-			"/companies",
-			"/companies/:company_id",
-			"/acceptance",
-			"/acceptance/:acceptance_id",
 			"/teachers",
 			"/teachers/:teacher_id",
 			"/groups",
 			"/groups/:group_id/lessons",
 			"/groups/:group_id/students",
 			"/groups/:group_id/students/:student_id/payments",
-			"/holiday",
 			"/finance",
 			"/finance/profits/:group_id",
 			"/finance/debtors/:group_id",

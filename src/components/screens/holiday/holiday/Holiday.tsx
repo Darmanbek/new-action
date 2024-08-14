@@ -1,14 +1,14 @@
-import { FormHoliday } from 'src/components/screens/holiday/holiday/form/FormHoliday';
-import { TableHoliday } from 'src/components/screens/holiday/holiday/table/TableHoliday';
 import { FC } from "react";
+import { FormHoliday } from "./form/FormHoliday";
+import { TableHoliday } from "./table/TableHoliday";
 
 const Holiday: FC = () => {
-  return (
-    <>
-      <FormHoliday />
-      <TableHoliday />
-    </>
-  );
+	return (
+		<>
+			<FormHoliday />
+			<TableHoliday />
+		</>
+	);
 };
 
 export default Holiday;

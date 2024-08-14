@@ -3,7 +3,7 @@ import { ColumnsType } from "antd/es/table";
 import { FaTelegramPlane } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { UiButton } from "src/components/ui";
-import { TMessage } from "src/services/message/message.types";
+import { TMessage } from "src/services/shared/message/message.types";
 import { phoneFormatter } from "src/utils";
 
 

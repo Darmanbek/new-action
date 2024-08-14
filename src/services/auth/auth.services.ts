@@ -1,6 +1,6 @@
 import { api } from "src/api";
+import { TResponseSingleData } from "src/services/index.types";
 import { TAuthLogin, TTokenAuth, TProfileAuth } from "./auth.types";
-import { TResponseSingleData } from "../index.types";
 
 const fetchSignIn = async (
 	value: TAuthLogin

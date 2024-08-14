@@ -8,7 +8,7 @@ import {
 	axiosEditTeachers,
 	axiosGetTeachers,
 	axiosGetTeachersById,
-} from "./teachers.services";
+} from "src/services/shared/teachers/teachers.services";
 
 const useGetTeachersQuery = (params: TGetParams) => {
 	const { message } = App.useApp();

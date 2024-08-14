@@ -2,9 +2,9 @@ import { useEffect } from "react";
 import { Divider, Popover, Space, Spin, Tag, Tooltip, Avatar } from "antd";
 import {
 	SettingOutlined,
-	LogoutOutlined,
 } from "@ant-design/icons";
 import { BsArrowsFullscreen } from "react-icons/bs";
+import { MdOutlineLogout } from "react-icons/md";
 import { useLocation, useNavigate } from "react-router-dom";
 import screenfull from "screenfull";
 import { UiButton, UiMenu, UiSettingsButton } from "src/components/ui";
@@ -61,7 +61,7 @@ export const HeaderRight = () => {
 					},
 					{
 						key: "/logout",
-						icon: isLoading ? null : <LogoutOutlined />,
+						icon: isLoading ? null : <MdOutlineLogout />,
 						label: isLoading ? (
 							<div style={{ textAlign: "center" }}>
 								<Spin />

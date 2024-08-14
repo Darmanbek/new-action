@@ -10,7 +10,7 @@ import {
 	axiosGetMessageById,
 	axiosCreateMessage,
 	axiosEditMessage
-} from "./message.services";
+} from "src/services/shared/message/message.services";
 
 const useGetMessageQuery = (params: TGetParams) => {
 	const { message } = App.useApp();

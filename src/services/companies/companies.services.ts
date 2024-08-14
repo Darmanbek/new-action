@@ -17,7 +17,7 @@ const axiosCreateCompanies = async (
 const axiosEditCompanies = async (
 	value: TCompanyChange
 ): Promise<TResponseSingleData<TCompany>> => {
-	const response = await api.put(`/admin/companies/${value.id}`, value);
+	const response = await api.patch(`/admin/companies/${value.id}`, value);
 	return response.data;
 };
 

@@ -7,7 +7,7 @@ import {
 	axiosDeleteCompanies,
 	axiosEditCompanies,
 	axiosGetCompanies,
-} from "./companies.services";
+} from "src/services/companies/companies.services";
 
 const useGetCompaniesQuery = () => {
 	const { message } = App.useApp();

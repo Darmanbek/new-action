@@ -9,6 +9,7 @@ import {
 } from "src/services/index.api";
 import { TCompanyChange } from "src/services/index.types";
 import { useFormStorageStore } from "src/store";
+import { formMessage, selectPlaceholder } from "src/utils";
 
 export const FormCompany = () => {
 	const [form] = Form.useForm<TCompanyChange>();
@@ -47,6 +48,7 @@ export const FormCompany = () => {
 		if (paramsForm) {
 			form.setFieldsValue({
 				...paramsForm,
+				admin_id: paramsForm?.admin?.id
 			});
 		}
 	}, [paramsForm, form]);
@@ -74,7 +76,7 @@ export const FormCompany = () => {
 					rules={[
 						{
 							required: true,
-							message: "Пожалуйста, введите Название!",
+							message: formMessage("Название"),
 						},
 					]}
 				>
@@ -87,11 +89,11 @@ export const FormCompany = () => {
 					rules={[
 						{
 							required: true,
-							message: "Пожалуйста, выберите Админ!",
+							message: formMessage("Админ"),
 						},
 					]}
 				>
-					<UiSelect placeholder="Выберите Админ" options={adminsOptions} />
+					<UiSelect placeholder={selectPlaceholder} options={adminsOptions} />
 				</Form.Item>
 			</Form>
 		</GlobalDrawer>
