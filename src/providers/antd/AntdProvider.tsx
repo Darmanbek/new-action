@@ -16,7 +16,7 @@ export const AntdProvider: FC<PropsWithChildren> = ({ children }) => {
 			componentSize={isMobile ? "middle" : "large"}
 			theme={{
 				token: {
-					colorPrimary: "#980000",
+					colorPrimary: "#DE070F",
 					fontFamily: "Roboto, sans-serif",
 					borderRadius: isMobile ? borderRadius : 10,
 				},

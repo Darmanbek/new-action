@@ -1,21 +1,42 @@
-import { Flex, Input } from "antd";
+import { Flex, Spin } from "antd";
 import dayjs from "dayjs";
+import { FC, useEffect, useRef } from "react";
 import { MessageBox } from "react-chat-elements";
-import { FC } from "react";
-import { IoSend } from "react-icons/io5";
 import { useParams } from "react-router-dom";
+import { InputChat } from "src/components/screens/message/chat/input/InputChat";
 import { UiCard } from "src/components/ui";
-import { useGetMessageByIdQuery } from "src/services/index.api";
+import { useGetMessageByIdQuery, useGetMessageQuery } from "src/services/index.api";
 
 const Chat: FC = () => {
 	const { chat_id } = useParams();
+	const cardRef = useRef<HTMLDivElement>(null);
+
+	const { data: messages } = useGetMessageQuery({});
 	const { data: chat, isLoading, isFetching } = useGetMessageByIdQuery(chat_id);
 
+
+	const scrollToBottom = () => {
+		if (cardRef.current) {
+			cardRef.current.scrollIntoView();
+		}
+	};
+
+	useEffect(() => {
+		if (chat) {
+			scrollToBottom();
+		}
+	}, [chat]);
 	return (
 		<>
 			<UiCard
-				loading={isLoading || isFetching}
-				title={"Чат"}
+				loading={isLoading}
+				title={messages ? <span style={{ textTransform: "capitalize" }}>{
+					`${
+						messages.data.find(el => el.id === chat_id)?.first_name
+					} ${
+						messages.data.find(el => el.id === chat_id)?.last_name
+					}`
+				}</span> : "Чат"}
 				styles={{
 					title: {
 						fontWeight: 500,
@@ -24,7 +45,8 @@ const Chat: FC = () => {
 					body: {
 						overflowX: "hidden",
 						overflowY: "auto",
-						flexGrow: 1
+						flexGrow: 1,
+						// scrollBehavior: "smooth",
 					},
 					actions: {
 						padding: "0 16px 16px"
@@ -32,33 +54,39 @@ const Chat: FC = () => {
 				}}
 				style={{
 					flexGrow: 1,
+					height: "calc(100vh - 144px)",
 					display: "flex",
 					flexDirection: "column"
 				}}
 				actions={[
-					<Input suffix={<IoSend color={"royalblue"} style={{ fontSize: 21 }} />} />
+					<InputChat />
 				]}
 			>
-				<Flex vertical={true} gap={8}>
-					{chat?.data.reverse().map(item => (
-						<MessageBox
-							focus={!item.closed}
-							status={(!item.closed && item.is_answer) ? "sent" : "read"}
-							title={""}
-							forwarded={true}
-							notch={true}
-							removeButton={false}
-							replyButton={false}
-							retracted={false}
-							titleColor={""}
-							id={item.message_id}
-							position={item.is_answer ? "right" : "left"}
-							type="text"
-							text={item.message}
-							date={dayjs(item.date).toDate()}
-						/>
-					))}
-				</Flex>
+				<Spin spinning={isFetching}>
+					<Flex vertical={true} gap={8} style={{ flexDirection: "column-reverse" }}>
+						{chat?.data?.map(item => (
+							<MessageBox
+								key={item.message_id}
+								focus={false}
+								status={(!item.closed && item.is_answer) ? "sent" : "read"}
+								title={""}
+								forwarded={false}
+								notch={true}
+								removeButton={false}
+								replyButton={false}
+								dateString={item.date}
+								retracted={false}
+								titleColor={""}
+								id={item.message_id}
+								position={item.is_answer ? "right" : "left"}
+								type="text"
+								text={item.message}
+								date={dayjs(item.date).toDate()}
+							/>
+						))}
+					</Flex>
+				</Spin>
+				<div ref={cardRef} />
 			</UiCard>
 		</>
 	);
