@@ -1,6 +1,6 @@
 import { FC } from "react";
-import { FormCompany } from "src/components/screens/company/company/form/FormCompany.tsx";
-import { TableCompany } from "src/components/screens/company/company/table/TableCompany.tsx";
+import { FormCompany } from "./form/FormCompany";
+import { TableCompany } from "./table/TableCompany";
 
 const Company: FC = () => {
 	return (
