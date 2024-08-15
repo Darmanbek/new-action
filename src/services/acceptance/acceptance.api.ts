@@ -1,33 +1,33 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { App } from "antd";
+import { useMessage } from "src/hooks";
 import { errorResponse } from "src/utils";
 import { TGetParams, TResponseError } from "src/services/index.types";
 import {
-	axiosCreateAcceptances,
-	axiosDeleteAcceptances,
-	axiosEditAcceptances,
-	axiosGetAcceptances,
-} from "src/services/acceptance/acceptance.services";
+	axiosCreateAcceptance,
+	axiosDeleteAcceptance,
+	axiosEditAcceptance,
+	axiosGetAcceptance,
+} from "./acceptance.services";
 
-const useGetAcceptancesQuery = (params: TGetParams) => {
-	const { message } = App.useApp();
+const useGetAcceptanceQuery = (params: TGetParams) => {
+	const { message } = useMessage();
 	return useQuery({
-		queryFn: () => axiosGetAcceptances(params),
-		queryKey: ["acceptances", ...Object.values(params)],
+		queryFn: () => axiosGetAcceptance(params),
+		queryKey: ["acceptance", ...Object.values(params)],
 		onError: (error: TResponseError) => {
 			message.error(errorResponse(error));
 		},
 	});
 };
 
-const useCreateAcceptancesMutation = () => {
-	const { message } = App.useApp();
+const useCreateAcceptanceMutation = () => {
+	const { message } = useMessage();
 	const queryClient = useQueryClient();
 	return useMutation({
-		mutationFn: axiosCreateAcceptances,
+		mutationFn: axiosCreateAcceptance,
 		onSuccess: () => {
 			queryClient.invalidateQueries({
-				queryKey: ["acceptances"],
+				queryKey: ["acceptance"],
 			});
 			message.success("Успешно");
 		},
@@ -37,14 +37,17 @@ const useCreateAcceptancesMutation = () => {
 	});
 };
 
-const useEditAcceptancesMutation = () => {
-	const { message } = App.useApp();
+const useEditAcceptanceMutation = () => {
+	const { message } = useMessage();
 	const queryClient = useQueryClient();
 	return useMutation({
-		mutationFn: axiosEditAcceptances,
+		mutationFn: axiosEditAcceptance,
 		onSuccess: () => {
 			queryClient.invalidateQueries({
-				queryKey: ["acceptances"],
+				queryKey: ["acceptance"],
+			});
+			queryClient.invalidateQueries({
+				queryKey: ["groups"],
 			});
 			message.success("Успешно");
 		},
@@ -54,14 +57,14 @@ const useEditAcceptancesMutation = () => {
 	});
 };
 
-const useDeleteAcceptancesMutation = () => {
-	const { message } = App.useApp();
+const useDeleteAcceptanceMutation = () => {
+	const { message } = useMessage();
 	const queryClient = useQueryClient();
 	return useMutation({
-		mutationFn: axiosDeleteAcceptances,
+		mutationFn: axiosDeleteAcceptance,
 		onSuccess: () => {
 			queryClient.invalidateQueries({
-				queryKey: ["acceptances"],
+				queryKey: ["acceptance"],
 			});
 			message.success("Успешно");
 		},
@@ -72,8 +75,8 @@ const useDeleteAcceptancesMutation = () => {
 };
 
 export {
-	useGetAcceptancesQuery,
-	useCreateAcceptancesMutation,
-	useEditAcceptancesMutation,
-	useDeleteAcceptancesMutation,
+	useGetAcceptanceQuery,
+	useCreateAcceptanceMutation,
+	useEditAcceptanceMutation,
+	useDeleteAcceptanceMutation,
 };

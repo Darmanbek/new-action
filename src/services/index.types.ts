@@ -4,6 +4,9 @@ export type * from "./auth/auth.types";
 export type * from "./companies/companies.types";
 export type * from "./groups/groups.types";
 export type * from "./teachers/teachers.types";
+export type * from "./debtors/debtors.types";
+export type * from "./payment/payment.types";
+export type * from "./balance/balance.types";
 
 export type * from "./message/message.types";
 

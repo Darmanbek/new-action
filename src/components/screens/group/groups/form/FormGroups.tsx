@@ -123,7 +123,7 @@ export const FormGroups = () => {
 				{!paramsForm && (
 					<Form.Item<TGroupChange>
 						name="start_date"
-						label="Старт"
+						label="Стартовая дата"
 						rules={[
 							{
 								required: true,

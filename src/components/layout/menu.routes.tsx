@@ -6,12 +6,12 @@ import {
 	UsergroupDeleteOutlined,
 } from "@ant-design/icons";
 import { BsBuildings } from "react-icons/bs";
-import { HiOutlineViewGridAdd } from "react-icons/hi";
+import { IoLayersOutline } from "react-icons/io5";
 import { LuPieChart } from "react-icons/lu";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { PiChatsLight } from "react-icons/pi";
 import { getRoleFromToken } from "src/config/token.config";
-import { TRoleTypes } from "src/services/shared/index.types";
+import { TRoleTypes } from "src/services/index.types";
 
 export const useMenuRoutes = () => {
 	const role = getRoleFromToken();
@@ -19,7 +19,7 @@ export const useMenuRoutes = () => {
 	const menuItems = [
 		{ key: "/admins", icon: <UserOutlined />, label: "Админы" },
 		{ key: "/teachers", icon: <TeamOutlined />, label: "Учителя" },
-		{ key: "/groups", icon: <HiOutlineViewGridAdd />, label: "Группы" },
+		{ key: "/groups", icon: <IoLayersOutline />, label: "Группы" },
 		{ key: "/companies", icon: <BsBuildings />, label: "Филиалы" },
 		{ key: "/acceptance", icon: <MdOutlineMailOutline />, label: "Заявки" },
 		// { key: "/holiday", icon: <LuCalendarCheck />, label: "Каникулы" },

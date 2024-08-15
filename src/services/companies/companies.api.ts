@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { App } from "antd";
+import { useMessage } from "src/hooks";
 import { errorResponse } from "src/utils";
 import { TResponseError } from "src/services/index.types";
 import {
@@ -10,7 +10,7 @@ import {
 } from "src/services/companies/companies.services";
 
 const useGetCompaniesQuery = () => {
-	const { message } = App.useApp();
+	const { message } = useMessage();
 	return useQuery({
 		queryFn: axiosGetCompanies,
 		queryKey: ["companies"],
@@ -21,7 +21,7 @@ const useGetCompaniesQuery = () => {
 };
 
 const useCreateCompaniesMutation = () => {
-	const { message } = App.useApp();
+	const { message } = useMessage();
 	const queryClient = useQueryClient();
 	return useMutation({
 		mutationFn: axiosCreateCompanies,
@@ -38,7 +38,7 @@ const useCreateCompaniesMutation = () => {
 };
 
 const useEditCompaniesMutation = () => {
-	const { message } = App.useApp();
+	const { message } = useMessage();
 	const queryClient = useQueryClient();
 	return useMutation({
 		mutationFn: axiosEditCompanies,
@@ -55,7 +55,7 @@ const useEditCompaniesMutation = () => {
 };
 
 const useDeleteCompaniesMutation = () => {
-	const { message } = App.useApp();
+	const { message } = useMessage();
 	const queryClient = useQueryClient();
 	return useMutation({
 		mutationFn: axiosDeleteCompanies,

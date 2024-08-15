@@ -1,16 +1,13 @@
-import { TCompany, TGroup, TRoleTypes } from "src/services/index.types";
+import { TGroup, TStudent } from "src/services/index.types";
 
 export type TAcceptance = {
 	id: string | number;
 	is_acceptance: boolean;
 	group: TGroup;
-	student: TAcceptanceStudent;
+	student: TStudent;
 };
 
-export type TAcceptanceStudent = {
-	id: string | number;
-	role: TRoleTypes;
-	last_name: string;
-	phone: string;
-	company: TCompany;
-};
+export type TAcceptanceChange = {
+	id?: string | number;
+	is_acceptance: boolean
+}

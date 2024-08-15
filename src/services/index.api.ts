@@ -4,6 +4,9 @@ export * from "./auth/auth.api";
 export * from "./companies/companies.api";
 export * from "./groups/groups.api";
 export * from "./teachers/teachers.api";
+export * from "./debtors/debtors.api";
+export * from "./payment/payment.api";
+export * from "./balance/balance.api";
 
 export * from "./message/message.api";
 

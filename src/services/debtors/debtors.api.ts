@@ -1,11 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { App } from "antd";
+import { useMessage } from "src/hooks";
 import { errorResponse } from "src/utils";
 import { TGetParams, TResponseError } from "src/services/index.types";
-import { axiosEditDebtors, axiosGetDebtors } from "src/services/debtors/debtors.services";
+import { axiosEditDebtors, axiosGetDebtors } from "./debtors.services";
 
 const useGetDebtorsQuery = (params: TGetParams) => {
-	const { message } = App.useApp();
+	const { message } = useMessage();
 	return useQuery({
 		queryFn: () => axiosGetDebtors(params),
 		queryKey: ["debtors", ...Object.values(params)],
@@ -16,7 +16,7 @@ const useGetDebtorsQuery = (params: TGetParams) => {
 };
 
 const useEditDebtorsMutation = () => {
-	const { message } = App.useApp();
+	const { message } = useMessage();
 	const queryClient = useQueryClient();
 	return useMutation({
 		mutationFn: axiosEditDebtors,

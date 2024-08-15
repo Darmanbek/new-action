@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { App } from "antd";
+import { useMessage } from "src/hooks";
 import { errorResponse } from "src/utils";
 import { TResponseError } from "src/services/index.types";
 import {
@@ -10,7 +10,7 @@ import {
 } from "./admin.services";
 
 const useGetAdminsQuery = () => {
-	const { message } = App.useApp();
+	const { message } = useMessage();
 	return useQuery({
 		queryFn: axiosGetAdmins,
 		queryKey: ["admins"],
@@ -21,7 +21,7 @@ const useGetAdminsQuery = () => {
 };
 
 const useCreateAdminsMutation = () => {
-	const { message } = App.useApp();
+	const { message } = useMessage();
 	const queryClient = useQueryClient();
 	return useMutation({
 		mutationFn: axiosCreateAdmins,
@@ -38,7 +38,7 @@ const useCreateAdminsMutation = () => {
 };
 
 const useEditAdminsMutation = () => {
-	const { message } = App.useApp();
+	const { message } = useMessage();
 	const queryClient = useQueryClient();
 	return useMutation({
 		mutationFn: axiosEditAdmins,
@@ -55,7 +55,7 @@ const useEditAdminsMutation = () => {
 };
 
 const useDeleteAdminsMutation = () => {
-	const { message } = App.useApp();
+	const { message } = useMessage();
 	const queryClient = useQueryClient();
 	return useMutation({
 		mutationFn: axiosDeleteAdmins,

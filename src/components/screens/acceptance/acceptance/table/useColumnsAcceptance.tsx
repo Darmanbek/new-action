@@ -1,17 +1,16 @@
 import { Space, Tooltip } from "antd";
 import { ColumnsType } from "antd/es/table";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { DeleteOutlined, CheckOutlined } from "@ant-design/icons";
+import { Link } from "react-router-dom";
 import { GlobalPopconfirm, ApproveCheck } from "src/components/shared";
 import { UiButton } from "src/components/ui";
-import { useDeleteAcceptancesMutation } from "src/services/index.api";
+import { useDeleteAcceptanceMutation, useEditAcceptanceMutation } from "src/services/index.api";
 import { TAcceptance } from "src/services/index.types";
-import { useFormStorageStore } from "src/store";
 import { phoneFormatter } from "src/utils";
 
 export const useColumnsAcceptance = () => {
-	const { mutate: deleteAcceptance } = useDeleteAcceptancesMutation();
-	const onEditAcceptance = (item: TAcceptance) => setParamsForm(item);
-	const setParamsForm = useFormStorageStore((state) => state.setParamsForm);
+	const { mutate: deleteAcceptance } = useDeleteAcceptanceMutation();
+	const { mutate: acceptAcceptance } = useEditAcceptanceMutation();
 
 	const columns: ColumnsType<TAcceptance> = [
 		{
@@ -19,18 +18,30 @@ export const useColumnsAcceptance = () => {
 			title: "Студент",
 			dataIndex: "student",
 			key: "name",
-			render: (_name, st) => `${st.student.last_name}`,
+			render: (student: TAcceptance["student"]) => `${student?.first_name} ${student?.last_name}`,
 		},
 		{
 			ellipsis: true,
 			title: "Телефон",
 			dataIndex: "student",
 			key: "phone",
-			render: (_phone, st) => phoneFormatter(st.student.phone),
+			render: (student: TAcceptance["student"]) => phoneFormatter(student?.phone),
 		},
 		{
 			ellipsis: true,
-			title: "Заявка",
+			title: "Группа",
+			dataIndex: "group",
+			key: "group",
+			render: (group: TAcceptance["group"]) => (
+				<Link to={`/groups/${group.id}`}>
+					{group.name}
+				</Link>
+			),
+		},
+		{
+			ellipsis: true,
+			align: "center",
+			title: "Подтверждено",
 			dataIndex: "is_acceptance",
 			key: "is_acceptance",
 			render: (is_acceptance: boolean) => (
@@ -38,31 +49,30 @@ export const useColumnsAcceptance = () => {
 			),
 		},
 		{
-			ellipsis: true,
-			title: "Группа",
-			dataIndex: "group",
-			key: "group_name",
-			render: (_, group) => `${group.group.name}`,
-		},
-		{
 			fixed: "right",
 			width: 100,
 			title: "Действия",
 			key: "action",
-			render: (_, acceptances) => (
+			render: (_, acceptance) => (
 				<Space>
-					<Tooltip title="Изменить">
+					<Tooltip title="Потвердить">
 						<UiButton
-							type="primary"
-							color="orange"
-							icon={<EditOutlined />}
-							onClick={() => onEditAcceptance(acceptances)}
-							aria-label="Edit"
+							type={"primary"}
+							color={"green"}
+							disabled={acceptance.is_acceptance}
+							icon={<CheckOutlined />}
+							onClick={() => {
+								acceptAcceptance({
+									id: acceptance.id,
+									is_acceptance: !acceptance.is_acceptance,
+								});
+							}}
+							aria-label="Accept"
 						/>
 					</Tooltip>
 					<GlobalPopconfirm
-						onConfirm={() => deleteAcceptance(acceptances.id)}
-						title={`${acceptances.student.last_name}`}
+						onConfirm={() => deleteAcceptance(acceptance.id)}
+						title={`${acceptance.student.last_name}`}
 					>
 						<Tooltip title="Удалить">
 							<UiButton

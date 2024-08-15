@@ -4,7 +4,7 @@ import {
 	TResponseSingleData,
 	TGetParams,
 } from "src/services/index.types";
-import { TMessage, TMessageChange, TMessageItem } from "src/services/shared/message/message.types";
+import { TMessage, TMessageChange, TMessageItem } from "./message.types";
 
 const axiosGetMessage = async (
 	params: TGetParams,

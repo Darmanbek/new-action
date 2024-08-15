@@ -1,8 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { App } from "antd";
 import Pusher from "pusher-js";
 import { useEffect } from "react";
 import { PUSHER_KEY, pusherOptions } from "src/config";
+import { useMessage } from "src/hooks";
 import { errorResponse } from "src/utils";
 import { TGetParams, TResponseError } from "src/services/index.types";
 import {
@@ -10,10 +10,10 @@ import {
 	axiosGetMessageById,
 	axiosCreateMessage,
 	axiosEditMessage
-} from "src/services/shared/message/message.services";
+} from "./message.services";
 
 const useGetMessageQuery = (params: TGetParams) => {
-	const { message } = App.useApp();
+	const { message } = useMessage();
 	return useQuery({
 		queryFn: () => axiosGetMessage(params),
 		queryKey: ["message", ...Object.values(params)],
@@ -48,7 +48,7 @@ const useGetMessageByIdPusherQuery = (id?: number | string) => {
 
 const useGetMessageByIdQuery = (id?: number | string) => {
 	useGetMessageByIdPusherQuery(id);
-	const { message } = App.useApp();
+	const { message } = useMessage();
 	return useQuery({
 		queryFn: () => axiosGetMessageById(id),
 		queryKey: ["message", id],
@@ -61,7 +61,7 @@ const useGetMessageByIdQuery = (id?: number | string) => {
 };
 
 const useCreateMessageMutation = () => {
-	const { message } = App.useApp();
+	const { message } = useMessage();
 	// const queryClient = useQueryClient();
 	return useMutation({
 		mutationFn: axiosCreateMessage,
@@ -77,7 +77,7 @@ const useCreateMessageMutation = () => {
 };
 
 const useEditMessageMutation = () => {
-	const { message } = App.useApp();
+	const { message } = useMessage();
 	const queryClient = useQueryClient();
 	return useMutation({
 		mutationFn: axiosEditMessage,

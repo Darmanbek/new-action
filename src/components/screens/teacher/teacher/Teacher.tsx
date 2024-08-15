@@ -1,11 +1,13 @@
 import { FC } from "react";
+import { FormTeachers } from "src/components/screens/teacher/teachers/form/FormTeachers";
+import { DescriptionTeacher } from "./description/DescriptionTeacher";
 import { TableTeacher } from "./table/TableTeacher";
-import { FormTeacher } from "./form/FormTeacher";
 
 const Teacher: FC = () => {
 	return (
 		<>
-			<FormTeacher />
+			<FormTeachers />
+			<DescriptionTeacher />
 			<TableTeacher />
 		</>
 	);

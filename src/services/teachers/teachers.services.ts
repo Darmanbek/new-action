@@ -1,5 +1,5 @@
 import { api } from "src/api";
-import { TTeacher, TTeacherChange } from "src/services/shared/teachers/teachers.types";
+import { TTeacher, TTeacherChange } from "./teachers.types";
 import {
 	TResponse,
 	TResponseSingleData,

@@ -4,22 +4,24 @@ import {
 	Profile,
 	NotFound,
 
+	Teachers,
 	Teacher,
+
 	Groups,
-	Lessons,
-	GroupStudents,
-	GroupStudentsBalances,
+	Group,
+	Student,
+
 	Admin,
 	Acceptance,
 	Company,
-	// Holiday,
+
 	FinanceProfits,
 	FinanceDebtors,
 
 	Message,
 	Chat,
 } from "src/components/screens";
-import { TRoleTypes } from "src/services/shared/index.types";
+import { TRoleTypes } from "src/services/index.types";
 import { useAuthPersistStore } from "src/store";
 
 export const useRoutes = () => {
@@ -37,15 +39,14 @@ export const useRoutes = () => {
 		{ path: "/acceptance", element: <Acceptance /> },
 		{ path: "/acceptance/:acceptance_id", element: <Acceptance /> },
 
-		{ path: "/teachers", element: <Teacher /> },
+		{ path: "/teachers", element: <Teachers /> },
 		{ path: "/teachers/:teacher_id", element: <Teacher /> },
 
 		{ path: "/groups", element: <Groups /> },
-		{ path: "/groups/:group_id/lessons", element: <Lessons /> },
-		{ path: "/groups/:group_id/students", element: <GroupStudents /> },
+		{ path: "/groups/:group_id", element: <Group /> },
 		{
-			path: "/groups/:group_id/students/:student_id/payments",
-			element: <GroupStudentsBalances />,
+			path: "/groups/:group_id/students/:student_id",
+			element: <Student />,
 		},
 
 		// { path: "/holiday", element: <Holiday /> },
@@ -70,13 +71,17 @@ export const useRoutes = () => {
 
 			"/teachers",
 			"/teachers/:teacher_id",
+
 			"/groups",
+			"/groups/:group_id",
 			"/groups/:group_id/lessons",
 			"/groups/:group_id/students",
 			"/groups/:group_id/students/:student_id/payments",
+
 			"/finance",
 			"/finance/profits/:group_id",
 			"/finance/debtors/:group_id",
+
 			"/chat",
 			"/chat/:chat_id",
 
@@ -88,15 +93,20 @@ export const useRoutes = () => {
 
 			"/admins",
 			"/admins/:admin_id",
+
 			"/teachers",
 			"/teachers/:teacher_id",
+
 			"/groups",
+			"/groups/:group_id",
 			"/groups/:group_id/lessons",
 			"/groups/:group_id/students",
 			"/groups/:group_id/students/:student_id/payments",
+
 			"/finance",
 			"/finance/profits/:group_id",
 			"/finance/debtors/:group_id",
+
 			"/chat",
 			"/chat/:chat_id",
 

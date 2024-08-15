@@ -1,9 +1,9 @@
 import { Space, Tooltip } from "antd";
 import { ColumnsType } from "antd/es/table";
-import { EditOutlined, DeleteOutlined, EyeOutlined } from "@ant-design/icons";
+import { EditOutlined, DeleteOutlined, EyeFilled } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { ApproveCheck, GlobalPopconfirm } from "src/components/shared";
-import { UiButton } from "src/components/ui";
+import { UiButton, UiTag } from "src/components/ui";
 import { useDeleteGroupsMutation } from "src/services/index.api";
 import { TGroup } from "src/services/index.types";
 import { useFormStorageStore } from "src/store";
@@ -53,8 +53,20 @@ export const useColumnsGroups = () => {
 			},
 		},
 		{
+			align: "center",
 			ellipsis: true,
-			title: "Старт",
+			title: "Дни",
+			dataIndex: "day",
+			key: "day",
+			render: (day: TGroup["day"]) => (
+				<UiTag color={day.id === 1 ? "blue" : "green"}>
+					{formatEmpty(day?.name)}
+				</UiTag>
+			)
+		},
+		{
+			ellipsis: true,
+			title: "Стартовая дата",
 			dataIndex: "start_date",
 			key: "start_date",
 			render: formatEmpty,
@@ -70,7 +82,7 @@ export const useColumnsGroups = () => {
 			title: "Цена",
 			dataIndex: "price",
 			key: "price",
-			render: (pr) => `${priceFormatter(pr)} uzs`,
+			render: (price: string) => `${priceFormatter(Number(price))} uzs`,
 		},
 		{
 			align: "center",
@@ -81,56 +93,64 @@ export const useColumnsGroups = () => {
 				<ApproveCheck isValue={is_completed} />
 			),
 		},
-		{
-			align: "center",
-			title: "Уроки",
-			key: "lessons",
-			render: (_v, groups) => (
-				<Tooltip title="Смотреть">
-					<UiButton
-						type="primary"
-						icon={<EyeOutlined />}
-						onClick={() => navigate(`/groups/${groups.id}/lessons`)}
-						aria-label="lessons"
-					/>
-				</Tooltip>
-			),
-		},
-		{
-			align: "center",
-			title: "Студенты",
-			key: "students",
-			render: (_v, groups) => (
-				<Tooltip title="Смотреть">
-					<UiButton
-						type="primary"
-						icon={<EyeOutlined />}
-						onClick={() => navigate(`/groups/${groups.id}/students`)}
-						aria-label="Students"
-					/>
-				</Tooltip>
-			),
-		},
+		// {
+		// 	align: "center",
+		// 	title: "Уроки",
+		// 	key: "lessons",
+		// 	render: (_v, groups) => (
+		// 		<Tooltip title="Смотреть">
+		// 			<UiButton
+		// 				type="primary"
+		// 				icon={<EyeOutlined />}
+		// 				onClick={() => navigate(`/groups/${groups.id}/lessons`)}
+		// 				aria-label="lessons"
+		// 			/>
+		// 		</Tooltip>
+		// 	),
+		// },
+		// {
+		// 	align: "center",
+		// 	title: "Студенты",
+		// 	key: "students",
+		// 	render: (_v, groups) => (
+		// 		<Tooltip title="Смотреть">
+		// 			<UiButton
+		// 				type="primary"
+		// 				icon={<EyeOutlined />}
+		// 				onClick={() => navigate(`/groups/${groups.id}/students`)}
+		// 				aria-label="Students"
+		// 			/>
+		// 		</Tooltip>
+		// 	),
+		// },
 		{
 			fixed: "right",
 			align: "center",
 			width: 150,
 			title: "Действия",
 			key: "action",
-			render: (_, groups) => (
-				<Space>
+			render: (_, group) => (
+				<Space onClick={(e) => e.stopPropagation()}>
+					<Tooltip title="Смотреть">
+						<UiButton
+							type="primary"
+							icon={<EyeFilled />}
+							onClick={() => navigate(`/groups/${group.id}`)}
+							aria-label="View"
+						/>
+					</Tooltip>
 					<Tooltip title="Изменить">
 						<UiButton
 							type="primary"
 							color="orange"
 							icon={<EditOutlined />}
-							onClick={() => onEditGroups(groups)}
+							onClick={() => onEditGroups(group)}
 							aria-label="Edit"
 						/>
 					</Tooltip>
 					<GlobalPopconfirm
-						onConfirm={() => deleteGroups(groups.id)}
-						title={groups.name}
+						onConfirm={() => deleteGroups(group.id)}
+						title={group.name}
 					>
 						<Tooltip title="Удалить">
 							<UiButton

@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { App } from "antd";
+import { useMessage } from "src/hooks";
 import { TGetParams, TResponseError } from "src/services/index.types";
 import { errorResponse } from "src/utils";
 import {
@@ -8,22 +8,21 @@ import {
 	axiosEditTeachers,
 	axiosGetTeachers,
 	axiosGetTeachersById,
-} from "src/services/shared/teachers/teachers.services";
+} from "./teachers.services";
 
 const useGetTeachersQuery = (params: TGetParams) => {
-	const { message } = App.useApp();
-	const query = useQuery({
+	const { message } = useMessage();
+	return useQuery({
 		queryFn: () => axiosGetTeachers(params),
 		queryKey: ["teachers", ...Object.values(params)],
 		onError: (error: TResponseError) => {
 			message.error(errorResponse(error));
 		},
 	});
-	return query;
 };
 
 const useGetTeachersByIdQuery = (id?: string | number) => {
-	const { message } = App.useApp();
+	const { message } = useMessage();
 	return useQuery({
 		queryFn: () => axiosGetTeachersById(id),
 		queryKey: ["teachers", id],
@@ -35,7 +34,7 @@ const useGetTeachersByIdQuery = (id?: string | number) => {
 };
 
 const useCreateTeachersMutation = () => {
-	const { message } = App.useApp();
+	const { message } = useMessage();
 	const queryClient = useQueryClient();
 	return useMutation({
 		mutationFn: axiosCreateTeachers,
@@ -52,7 +51,7 @@ const useCreateTeachersMutation = () => {
 };
 
 const useEditTeachersMutation = () => {
-	const { message } = App.useApp();
+	const { message } = useMessage();
 	const queryClient = useQueryClient();
 	return useMutation({
 		mutationFn: axiosEditTeachers,
@@ -69,7 +68,7 @@ const useEditTeachersMutation = () => {
 };
 
 const useDeleteTeachersMutation = () => {
-	const { message } = App.useApp();
+	const { message } = useMessage();
 	const queryClient = useQueryClient();
 	return useMutation({
 		mutationFn: axiosDeleteTeachers,

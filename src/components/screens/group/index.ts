@@ -6,8 +6,11 @@ import { Loader } from "src/components/shared";
 export const Groups = loadable(() => import("./groups/Groups"), {
 	fallback: createElement(Loader)
 });
-export const Lessons = loadable(() => import("./lessons/Lessons"), {
+
+export const Group = loadable(() => import("./group/Group"), {
 	fallback: createElement(Loader)
 });
 
-export * from "./students";
+export const Student = loadable(() => import("./student/Student"), {
+	fallback: createElement(Loader)
+});

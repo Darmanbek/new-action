@@ -1,29 +1,29 @@
 import { api } from "src/api";
-import { TResponse, TResponseSingleData, TGetParams } from "src/services/index.types";
-import { TAcceptance } from "./acceptance.types";
+import { TResponseSingleData, TGetParams, TResponseData } from "src/services/index.types";
+import { TAcceptance, TAcceptanceChange } from "./acceptance.types";
 
-const axiosGetAcceptances = async (
+const axiosGetAcceptance = async (
 	params: TGetParams
-): Promise<TResponse<TAcceptance>> => {
+): Promise<TResponseData<TAcceptance>> => {
 	const response = await api.get(`/admin/acceptances`, { params });
 	return response.data;
 };
 
-const axiosCreateAcceptances = async (
-	value: TAcceptance
+const axiosCreateAcceptance = async (
+	value: TAcceptanceChange
 ): Promise<TResponseSingleData<TAcceptance>> => {
 	const response = await api.post(`/admin/acceptances`, value);
 	return response.data;
 };
 
-const axiosEditAcceptances = async (
-	value: TAcceptance
+const axiosEditAcceptance = async (
+	value: TAcceptanceChange
 ): Promise<TResponseSingleData<TAcceptance>> => {
 	const response = await api.put(`/admin/acceptances/${value.id}`, value);
 	return response.data;
 };
 
-const axiosDeleteAcceptances = async (
+const axiosDeleteAcceptance = async (
 	id?: number | string
 ): Promise<TResponseSingleData<void>> => {
 	const response = await api.delete(`/admin/acceptances/${id}`);
@@ -31,8 +31,8 @@ const axiosDeleteAcceptances = async (
 };
 
 export {
-	axiosGetAcceptances,
-	axiosCreateAcceptances,
-	axiosEditAcceptances,
-	axiosDeleteAcceptances,
+	axiosGetAcceptance,
+	axiosCreateAcceptance,
+	axiosEditAcceptance,
+	axiosDeleteAcceptance,
 };

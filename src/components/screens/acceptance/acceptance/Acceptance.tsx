@@ -1,6 +1,5 @@
-// import { FormAcceptance } from './form/FormAcceptance';
-import { TableAcceptance } from "./table/TableAcceptance";
 import { FC } from "react";
+import { TableAcceptance } from "./table/TableAcceptance";
 
 const Acceptance: FC = () => {
 	return (

@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { App } from "antd";
+import { useMessage } from "src/hooks";
 import { TGetParams, TResponseError } from "src/services/index.types";
 import { errorResponse } from "src/utils";
 import {
@@ -8,10 +8,10 @@ import {
 	axiosEditGroups,
 	axiosGetGroups,
 	axiosGetGroupsById,
-} from "src/services/groups/groups.services";
+} from "./groups.services";
 
 const useGetGroupsQuery = (params: TGetParams) => {
-	const { message } = App.useApp();
+	const { message } = useMessage();
 	return useQuery({
 		queryFn: () => axiosGetGroups(params),
 		queryKey: ["groups", ...Object.values(params)],
@@ -22,7 +22,7 @@ const useGetGroupsQuery = (params: TGetParams) => {
 };
 
 const useGetGroupsByIdQuery = (id?: string | number) => {
-	const { message } = App.useApp();
+	const { message } = useMessage();
 	return useQuery({
 		queryFn: () => axiosGetGroupsById(id),
 		queryKey: ["groups", id],
@@ -34,7 +34,7 @@ const useGetGroupsByIdQuery = (id?: string | number) => {
 };
 
 const useCreateGroupsMutation = () => {
-	const { message } = App.useApp();
+	const { message } = useMessage();
 	const queryClient = useQueryClient();
 	return useMutation({
 		mutationFn: axiosCreateGroups,
@@ -51,7 +51,7 @@ const useCreateGroupsMutation = () => {
 };
 
 const useEditGroupsMutation = () => {
-	const { message } = App.useApp();
+	const { message } = useMessage();
 	const queryClient = useQueryClient();
 	return useMutation({
 		mutationFn: axiosEditGroups,
@@ -68,7 +68,7 @@ const useEditGroupsMutation = () => {
 };
 
 const useDeleteGroupsMutation = () => {
-	const { message } = App.useApp();
+	const { message } = useMessage();
 	const queryClient = useQueryClient();
 	return useMutation({
 		mutationFn: axiosDeleteGroups,

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Tooltip } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
 import { HeadTable, SearchListInput } from "src/components/shared";
 import { UiButton, UiTable } from "src/components/ui";
 import { TGroup } from "src/services/index.types";
@@ -9,6 +10,7 @@ import { useFormStorageStore, useSearchListStore } from "src/store";
 import { useColumnsGroups } from "./useColumnsGroups";
 
 export const TableGroups = () => {
+	const navigate = useNavigate();
 	const [currentPage, setCurrentPage] = useState<number>(1);
 	const debounceValue = useSearchListStore((state) => state.debounceValue);
 	const {
@@ -41,6 +43,9 @@ export const TableGroups = () => {
 					]}
 				/>
 			)}
+			onRow={(data) => ({
+				onClick: () => navigate(`/groups/${data.id}`),
+			})}
 			dataSource={groups?.data}
 			columns={columns}
 			loading={isLoading || isFetching}
