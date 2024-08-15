@@ -1,5 +1,6 @@
 import { EChartsOption } from "echarts";
 import { TFinanceCompanies } from "src/services/finance/finance.types";
+import { priceFormatter } from "src/utils";
 
 
 export const useOptionsFinanceCompanies = (data?: TFinanceCompanies) => {
@@ -15,20 +16,17 @@ export const useOptionsFinanceCompanies = (data?: TFinanceCompanies) => {
 	const options: EChartsOption = {
 		tooltip: {
 			trigger: "item",
-			// formatter: "<b>{a}</b> <br/>{b}: {c} ({d}%)",
 		},
 		legend: {
 			orient: "vertical",
 			bottom: "bottom",
-
-			// data: categoryData,
 		},
 		series: [
 			{
 				name: "Платежи",
 				type: "pie",
 				data: seriesData,
-				avoidLabelOverlap: false,
+				// avoidLabelOverlap: false,
 				radius: ["40%", "70%"],
 				itemStyle: {
 					borderRadius: 10,
@@ -36,18 +34,20 @@ export const useOptionsFinanceCompanies = (data?: TFinanceCompanies) => {
 					borderWidth: 2
 				},
 				label: {
-					show: false,
-					position: "center",
+					show: true,
+					fontSize: 16,
+					fontWeight: "bold",
+					formatter: params => `${priceFormatter(Number(params.value))}`
 				},
 				emphasis: {
 					label: {
 						show: true,
 						fontSize: 18,
 						fontWeight: "bold"
-					}
+					},
 				},
 				labelLine: {
-					show: false
+					show: true
 				},
 			},
 		]

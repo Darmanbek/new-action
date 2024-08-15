@@ -13,7 +13,7 @@ export const phoneReverseFormatter = (phone?: string | null) => {
 
 export const priceFormatter = (price?: number) => {
 	if (price === undefined) return 0;
-	return Intl.NumberFormat("ru-RU", {}).format(price);
+	return Intl.NumberFormat("en-EN", {}).format(price);
 };
 
 export const formatEmpty = <T>(value?: T) => value ?? "-";

@@ -3,6 +3,9 @@ import { createElement } from "react";
 
 import { Loader } from "src/components/shared";
 
+export const Finance = loadable(() => import("./finance/Finance"), {
+	fallback: createElement(Loader)
+});
 export const FinanceDebtors = loadable(() => import("./debtors/FinanceDebtors"), {
 	fallback: createElement(Loader)
 });

@@ -7,7 +7,7 @@ import { TableFinanceCompanies } from "./table/TableFinanceCompanies";
 const FinanceCompanies: FC = () => {
 	return (
 		<>
-			<Row gutter={8}>
+			<Row gutter={20}>
 				<Col span={10}>
 					<StatisticFinanceCompanies />
 				</Col>

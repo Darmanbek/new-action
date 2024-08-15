@@ -8,6 +8,7 @@ export * from "./debtors/debtors.api";
 export * from "./payment/payment.api";
 export * from "./balance/balance.api";
 export * from "./finance/finance.api";
+export * from "./dashboard/dashboard.api";
 
 export * from "./message/message.api";
 

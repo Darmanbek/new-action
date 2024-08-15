@@ -8,6 +8,7 @@ export type * from "./debtors/debtors.types";
 export type * from "./payment/payment.types";
 export type * from "./balance/balance.types";
 export type * from "./finance/finance.types";
+export type * from "./dashboard/dashboard.types";
 
 export type * from "./message/message.types";
 

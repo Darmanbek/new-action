@@ -4,7 +4,7 @@ import { TTransactionData } from "src/services/index.types";
 import { formatEmpty, priceFormatter } from "src/utils";
 
 
-export const useColumnsFinanceCompanies = () => {
+export const useColumnsFinance = () => {
 
 	const columns: ColumnsType<TTransactionData> = [
 		{

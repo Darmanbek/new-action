@@ -12,8 +12,8 @@ const ChartFinanceCompanies: FC = () => {
 	const options = useOptionsFinanceCompanies(finances?.data);
 
 	return (
-		<SectionContainer>
-			<ReactEcharts option={options} />
+		<SectionContainer style={{ height: "100%" }}>
+			<ReactEcharts option={options} style={{ minHeight: "50vh" }} />
 		</SectionContainer>
 	);
 };

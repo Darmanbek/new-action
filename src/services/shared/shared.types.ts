@@ -6,6 +6,8 @@ export type TGetParams = {
 	limit?: number;
 	page?: number;
 	search?: string;
+	date?: string[];
+	is_completed?: number;
 };
 
 export type TLangType = {

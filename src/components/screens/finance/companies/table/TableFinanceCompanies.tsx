@@ -4,6 +4,7 @@ import { UiSelect, UiTable } from "src/components/ui";
 import { useGetCompaniesQuery } from "src/services/companies/companies.api";
 import { useGetFinanceCompaniesByIdQuery } from "src/services/finance/finance.api";
 import { TTransactionData } from "src/services/finance/finance.types";
+import { priceFormatter } from "src/utils";
 
 import { useColumnsFinanceCompanies } from "./useColumnsFinanceCompanies";
 
@@ -24,7 +25,7 @@ const TableFinanceCompanies: FC = () => {
 		<UiTable<TTransactionData>
 			title={() => (
 				<HeadTable
-					title={"Транзакций"}
+					title={`Транзакций | Общая сумма ${priceFormatter(Number(finance?.data.total_amount))} uzs`}
 					children={[
 						<UiSelect
 							key={"Companies"}
