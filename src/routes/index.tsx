@@ -15,7 +15,7 @@ import {
 	Acceptance,
 	Company,
 
-	FinanceProfits,
+	FinanceCompanies,
 	FinanceDebtors,
 
 	Message,
@@ -52,8 +52,8 @@ export const useRoutes = () => {
 		// { path: "/holiday", element: <Holiday /> },
 
 		{ path: "/finance", element: <Home /> },
-		{ path: "/finance/profits/:group_id", element: <FinanceProfits /> },
-		{ path: "/finance/debtors/:group_id", element: <FinanceDebtors /> },
+		{ path: "/finance/companies", element: <FinanceCompanies /> },
+		{ path: "/finance/debtors", element: <FinanceDebtors /> },
 
 		{ path: "/chat", element: <Message /> },
 		{ path: "/chat/:chat_id", element: <Chat /> },

@@ -8,6 +8,7 @@ export * from "./date";
 export * from "./select";
 // export * from './upload';
 // export * from './date';
+export * from "./statistic";
 export * from "./tag";
 export * from "./card";
 // export * from './checkbox';

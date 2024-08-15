@@ -6,6 +6,6 @@ import { Loader } from "src/components/shared";
 export const FinanceDebtors = loadable(() => import("./debtors/FinanceDebtors"), {
 	fallback: createElement(Loader)
 });
-export const FinanceProfits = loadable(() => import("./profits/FinanceProfits"), {
+export const FinanceCompanies = loadable(() => import("./companies/FinanceCompanies"), {
 	fallback: createElement(Loader)
 });

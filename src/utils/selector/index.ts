@@ -1,12 +1,12 @@
-import { TResponseError } from "src/services/index.types";
+import { TResponseError, TRoleTypes } from "src/services/index.types";
 
-export const roleColor = (role?: number) => {
+export const roleColor = (role?: TRoleTypes) => {
 	switch (role) {
-		case 1:
+		case "super_admin":
 			return "magenta";
-		case 2:
+		case "admin":
 			return "geekblue";
-		case 3:
+		case "director":
 			return "cyan";
 		default:
 			return "green";

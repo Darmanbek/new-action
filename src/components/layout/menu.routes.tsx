@@ -27,12 +27,12 @@ export const useMenuRoutes = () => {
 			key: "/finance", icon: <LuPieChart />, label: "Финансы",
 			children: [
 				{
-					key: "/finance/profits/:group_id",
+					key: "/finance/companies",
 					icon: <DollarOutlined />,
-					label: "Прибыль",
+					label: "Все платежи",
 				},
 				{
-					key: "/finance/debtors/:group_id",
+					key: "/finance/debtors",
 					icon: <UsergroupDeleteOutlined />,
 					label: "Должники",
 				},

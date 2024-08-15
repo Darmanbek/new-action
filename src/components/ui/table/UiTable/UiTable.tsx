@@ -15,7 +15,7 @@ export const UiTable = <T extends object>(props: TableProps<T>) => {
 						footerBg: "#fff",
 						rowExpandedBg: "#fff",
 						fontSize: isMobile ? 14 : 16,
-						rowHoverBg: "#f5f7fa",
+						rowHoverBg: "#f7f5f5",
 					},
 					Dropdown: {
 						fontSize: isMobile ? 14 : 16,
