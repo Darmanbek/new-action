@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { useEffect } from "react";
 import { Form, Input, Radio, Upload, Avatar, Flex, Row, Col } from "antd";
 import { BsGenderFemale, BsGenderMale, BsPersonBoundingBox } from "react-icons/bs";
@@ -44,18 +45,16 @@ export const FormTeachers = () => {
 		formData.append("first_name", values.first_name);
 		formData.append("last_name", values.last_name);
 		formData.append("is_male", Number(values.is_male).toString());
-		formData.append("password", values.password);
+		if (values.password) {
+			formData.append("password", values.password);
+		}
 		if (values.birthday) {
 			formData.append("birthday", dateFormatter(values.birthday));
 		}
 		if (paramsForm) {
 			editTeacher({
-				...values,
-				assistant: false,
-				id: paramsForm.id,
-				group_count: 0,
-				groups: [],
-				company: paramsForm?.company,
+				formData,
+				id: paramsForm.id
 			});
 		} else {
 			addTeacher(formData);
@@ -68,6 +67,7 @@ export const FormTeachers = () => {
 				...paramsForm,
 				phone: `+${paramsForm.phone}`,
 				is_male: paramsForm.teacher_data?.is_male,
+				birthday: paramsForm.teacher_data?.birthday ? dayjs(paramsForm.teacher_data.birthday) : null
 			});
 		}
 	}, [paramsForm, form]);
@@ -127,20 +127,18 @@ export const FormTeachers = () => {
 					/>
 				</Form.Item>
 
-				{!paramsForm && (
-					<Form.Item<TTeacherChange>
-						name="birthday"
-						label="Дата"
-						rules={[
-							{
-								required: true,
-								message: formMessage("Дата"),
-							},
-						]}
-					>
-						<UiDatePicker placeholder={datePlaceholder} />
-					</Form.Item>
-				)}
+				<Form.Item<TTeacherChange>
+					name="birthday"
+					label="Дата рождения"
+					rules={[
+						{
+							required: true,
+							message: formMessage("Дата рождения"),
+						},
+					]}
+				>
+					<UiDatePicker placeholder={datePlaceholder} />
+				</Form.Item>
 
 				<Row gutter={8}>
 					<Col span={12}>

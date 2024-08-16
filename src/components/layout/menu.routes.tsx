@@ -27,9 +27,9 @@ export const useMenuRoutes = () => {
 			key: "/finance", icon: <LuPieChart />, label: "Финансы",
 			children: [
 				{
-					key: "/finance/companies",
+					key: "/finance/profits",
 					icon: <DollarOutlined />,
-					label: "Все платежи",
+					label: "Прибыль",
 				},
 				{
 					key: "/finance/debtors",
@@ -68,7 +68,7 @@ export const useMenuRoutes = () => {
 			"/groups",
 			"/teachers",
 			"/finance",
-			// "/chat"
+			"/chat"
 		],
 	};
 

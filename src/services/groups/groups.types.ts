@@ -1,8 +1,8 @@
-import { TTeacher, TStudent, TLesson } from "src/services/index.types";
+import { TTeacher, TStudent, TLesson, TDay } from "src/services/index.types";
 
 export type TGroup = {
 	id: string | number;
-	day: TGroupDay;
+	day: TDay;
 	teachers: Pick<TTeacher, "id" | "first_name" | "last_name" | "assistant">[];
 	name: string;
 	description: string;
@@ -15,11 +15,6 @@ export type TGroup = {
 	students: TStudent[];
 	lessons: TLesson[];
 };
-
-export type TGroupDay = {
-	id: string | number;
-	name: string;
-}
 
 export type TGroupChange = {
 	id: string | number;

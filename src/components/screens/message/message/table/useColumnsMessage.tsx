@@ -32,14 +32,13 @@ export const useColumnsMessage = () => {
 			title: "Действия",
 			key: "actions",
 			render: (_v, message) => (
-				<Space>
+				<Space onClick={(e) => e.stopPropagation()}>
 					<Tooltip title={"Чат"}>
 						<Badge count={message.closed_count}>
 							<UiButton
-								shape={"circle"}
 								color={"royalblue"}
 								type={"primary"}
-								icon={<FaTelegramPlane style={{ fontSize: 18 }} />}
+								icon={<FaTelegramPlane style={{ fontSize: 24 }} />}
 								onClick={() => navigate(`/chat/${message.id}`)}
 							/>
 						</Badge>

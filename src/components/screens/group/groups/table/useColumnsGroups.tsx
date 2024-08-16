@@ -7,7 +7,7 @@ import { UiButton, UiTag } from "src/components/ui";
 import { useDeleteGroupsMutation } from "src/services/index.api";
 import { TGroup } from "src/services/index.types";
 import { useFormStorageStore } from "src/store";
-import { priceFormatter, formatEmpty, monthGrammar } from "src/utils";
+import { priceFormatter, formatEmpty, monthGrammar, dayTranslation } from "src/utils";
 
 export const useColumnsGroups = () => {
 	const navigate = useNavigate();
@@ -60,7 +60,7 @@ export const useColumnsGroups = () => {
 			key: "day",
 			render: (day: TGroup["day"]) => (
 				<UiTag color={day.id === 1 ? "blue" : "green"}>
-					{formatEmpty(day?.name)}
+					{dayTranslation(day?.name)}
 				</UiTag>
 			)
 		},
@@ -93,40 +93,11 @@ export const useColumnsGroups = () => {
 				<ApproveCheck isValue={is_completed} />
 			),
 		},
-		// {
-		// 	align: "center",
-		// 	title: "Уроки",
-		// 	key: "lessons",
-		// 	render: (_v, groups) => (
-		// 		<Tooltip title="Смотреть">
-		// 			<UiButton
-		// 				type="primary"
-		// 				icon={<EyeOutlined />}
-		// 				onClick={() => navigate(`/groups/${groups.id}/lessons`)}
-		// 				aria-label="lessons"
-		// 			/>
-		// 		</Tooltip>
-		// 	),
-		// },
-		// {
-		// 	align: "center",
-		// 	title: "Студенты",
-		// 	key: "students",
-		// 	render: (_v, groups) => (
-		// 		<Tooltip title="Смотреть">
-		// 			<UiButton
-		// 				type="primary"
-		// 				icon={<EyeOutlined />}
-		// 				onClick={() => navigate(`/groups/${groups.id}/students`)}
-		// 				aria-label="Students"
-		// 			/>
-		// 		</Tooltip>
-		// 	),
-		// },
 		{
 			fixed: "right",
 			align: "center",
 			width: 150,
+			dataIndex: "actions",
 			title: "Действия",
 			key: "action",
 			render: (_, group) => (

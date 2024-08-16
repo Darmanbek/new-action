@@ -9,15 +9,9 @@ export type TTeacher = {
 	assistant: boolean;
 	phone: string;
 	teacher_data?: TTeacherInfo;
-	company: TTeacherCompany[];
 	group_count: number;
 	groups: TGroup[];
 };
-
-export type TTeacherCompany = {
-	company_id: string;
-	name: string;
-}
 
 export type TTeacherInfo = {
 	birthday: string;
@@ -35,3 +29,9 @@ export type TTeacherChange = {
 	is_male: number;
 	avatar?: RcFile | UploadFile | UploadFile[];
 };
+
+export type TTeacherFormDataChange = {
+	id?: string;
+	formData: FormData;
+};
+

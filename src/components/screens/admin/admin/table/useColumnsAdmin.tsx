@@ -2,10 +2,10 @@ import { Space, Tooltip } from "antd";
 import { ColumnsType } from "antd/es/table";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { GlobalPopconfirm } from "src/components/shared";
-import { UiButton } from "src/components/ui";
+import { UiButton, UiTag } from "src/components/ui";
 import { useDeleteAdminsMutation } from "src/services/index.api";
 import { useFormStorageStore } from "src/store";
-import { phoneFormatter } from "src/utils";
+import { formatEmpty, phoneFormatter } from "src/utils";
 import { TAdmin } from "src/services/index.types";
 
 export const useColumnsAdmin = () => {
@@ -28,16 +28,17 @@ export const useColumnsAdmin = () => {
 			key: "phone",
 			render: phoneFormatter,
 		},
-		// {
-		//     ellipsis: true,
-		//     title: 'Филиал',
-		//     dataIndex: '',
-		//     key: 'branch',
-		//     render: (branch) => {
-		//         if (branch) `${branch}`;
-		//         else return null;
-		//     },
-		// },
+		{
+			ellipsis: true,
+			title: "Филиал",
+			dataIndex: "company",
+			key: "company",
+			render: (company: TAdmin["company"]) => company ? (
+				<UiTag color={"red"}>
+					{formatEmpty(company?.name)}
+				</UiTag>
+			) : "-",
+		},
 		{
 			fixed: "right",
 			width: 100,

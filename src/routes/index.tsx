@@ -63,7 +63,7 @@ export const useRoutes = () => {
 		// { path: "/holiday", element: <Holiday /> },
 
 		{ path: "/finance", element: <Home /> },
-		{ path: "/finance/companies", element: <CustomFinance /> },
+		{ path: "/finance/profits", element: <CustomFinance /> },
 		{ path: "/finance/debtors", element: <FinanceDebtors /> },
 
 		{ path: "/chat", element: <Message /> },
@@ -88,7 +88,7 @@ export const useRoutes = () => {
 			"/groups/:group_id/students/:student_id",
 
 			"/finance",
-			"/finance/companies",
+			"/finance/profits",
 			"/finance/debtors",
 
 			"/chat",
@@ -111,7 +111,7 @@ export const useRoutes = () => {
 			"/groups/:group_id/students/:student_id",
 
 			"/finance",
-			"/finance/companies",
+			"/finance/profits",
 			"/finance/debtors",
 
 			"/chat",

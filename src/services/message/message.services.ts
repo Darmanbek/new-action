@@ -9,26 +9,26 @@ import { TMessage, TMessageChange, TMessageItem } from "./message.types";
 const axiosGetMessage = async (
 	params: TGetParams,
 ): Promise<TResponseData<TMessage>> => {
-	const response = await api.get(`/admin/message`, { params });
+	const response = await api.get(`/message`, { params });
 	return response.data;
 };
 
 const axiosGetMessageById = async (id?: number | string): Promise<TResponseData<TMessageItem>> => {
-	const response = await api.get(`/admin/message/${id}`);
+	const response = await api.get(`/message/${id}`);
 	return response.data;
 };
 
 const axiosCreateMessage = async (
 	value: TMessageChange,
 ): Promise<TResponseSingleData<TMessageItem>> => {
-	const response = await api.post(`/admin/message`, value);
+	const response = await api.post(`/message`, value);
 	return response.data;
 };
 
 const axiosEditMessage = async (
 	value: Record<string, unknown>,
 ): Promise<TResponseSingleData<TMessageItem>> => {
-	const response = await api.put(`/admin/messages/${value.id}`, value);
+	const response = await api.put(`/messages/${value.id}`, value);
 	return response.data;
 };
 

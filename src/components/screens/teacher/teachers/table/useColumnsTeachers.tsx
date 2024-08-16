@@ -45,13 +45,13 @@ export const useColumnsTeachers = () => {
 			key: "phone",
 			render: phoneFormatter,
 		},
-		{
-			ellipsis: true,
-			title: "Филиал",
-			dataIndex: "company",
-			key: "company",
-			render: (company: TTeacher["company"]) => company.map(el => el.name).join(", "),
-		},
+		// {
+		// 	ellipsis: true,
+		// 	title: "Филиал",
+		// 	dataIndex: "company",
+		// 	key: "company",
+		// 	render: (company: TTeacher["company"]) => company.map(el => el.name).join(", "),
+		// },
 		{
 			align: "center",
 			ellipsis: true,

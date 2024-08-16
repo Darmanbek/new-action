@@ -1,5 +1,5 @@
 import { api } from "src/api";
-import { TTeacher, TTeacherChange } from "./teachers.types";
+import { TTeacher, TTeacherChange, TTeacherFormDataChange } from "./teachers.types";
 import {
 	TResponse,
 	TResponseSingleData,
@@ -28,9 +28,9 @@ const axiosCreateTeachers = async (
 };
 
 const axiosEditTeachers = async (
-	value: TTeacher
+	value: TTeacherFormDataChange
 ): Promise<TResponseSingleData<TTeacher>> => {
-	const response = await api.put(`/admin/teachers/${value.id}`, value);
+	const response = await api.put(`/admin/teachers/${value.id}`, value.formData);
 	return response.data;
 };
 
