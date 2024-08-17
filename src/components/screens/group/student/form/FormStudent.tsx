@@ -1,10 +1,10 @@
 import { FC } from "react";
-import { Payments } from "./payments/Payments";
+import { FormTransactions } from "./transactions/FormTransactions";
 
 const FormStudent: FC = () => {
 	return (
 		<>
-			<Payments />
+			<FormTransactions />
 		</>
 	);
 };

@@ -16,7 +16,7 @@ import {
 	Company,
 
 	Finance,
-	FinanceCompanies,
+	// FinanceCompanies,
 	FinanceDebtors,
 
 	Message,
@@ -36,7 +36,7 @@ export const useRoutes = () => {
 	const CustomTeacher = roleName === "director" ? DashboardTeachers : Teachers;
 	const CustomGroups = roleName === "director" ? DashboardGroups : Groups;
 
-	const CustomFinance = roleName === "admin" ? Finance : FinanceCompanies;
+	// const CustomFinance = roleName === "admin" ? Finance : FinanceCompanies;
 
 	const routes: RouteProps[] = [
 		{ path: "/", element: <Home /> },
@@ -63,7 +63,7 @@ export const useRoutes = () => {
 		// { path: "/holiday", element: <Holiday /> },
 
 		{ path: "/finance", element: <Home /> },
-		{ path: "/finance/profits", element: <CustomFinance /> },
+		{ path: "/finance/profits", element: <Finance /> },
 		{ path: "/finance/debtors", element: <FinanceDebtors /> },
 
 		{ path: "/chat", element: <Message /> },

@@ -3,7 +3,7 @@ import { HeadTable } from "src/components/shared";
 import { UiSelect, UiTable } from "src/components/ui";
 import { useGetCompaniesQuery } from "src/services/companies/companies.api";
 import { useGetFinanceCompaniesByIdQuery } from "src/services/finance/finance.api";
-import { TTransactionData } from "src/services/finance/finance.types";
+import { TFinanceTransactionData } from "src/services/finance/finance.types";
 import { priceFormatter } from "src/utils";
 
 import { useColumnsFinanceCompanies } from "./useColumnsFinanceCompanies";
@@ -22,7 +22,7 @@ const TableFinanceCompanies: FC = () => {
 		}
 	}, [companies]);
 	return (
-		<UiTable<TTransactionData>
+		<UiTable<TFinanceTransactionData>
 			title={() => (
 				<HeadTable
 					title={`Транзакций | Общая сумма ${priceFormatter(Number(finance?.data.total_amount))} uzs`}

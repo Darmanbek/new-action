@@ -45,9 +45,6 @@ export const TableGroups = () => {
 			)}
 			onRow={(data) => ({
 				onClick: () => navigate(`/groups/${data.id}`),
-				// style: {
-				// 	background: "#fff1f0",
-				// },
 			})}
 			dataSource={groups?.data}
 			columns={columns}

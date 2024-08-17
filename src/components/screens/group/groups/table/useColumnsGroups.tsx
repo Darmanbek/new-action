@@ -2,8 +2,8 @@ import { Space, Tooltip } from "antd";
 import { ColumnsType } from "antd/es/table";
 import { EditOutlined, DeleteOutlined, EyeFilled } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
-import { ApproveCheck, GlobalPopconfirm } from "src/components/shared";
-import { UiButton, UiTag } from "src/components/ui";
+import { GlobalPopconfirm } from "src/components/shared";
+import { UiBadge, UiButton, UiTag } from "src/components/ui";
 import { useDeleteGroupsMutation } from "src/services/index.api";
 import { TGroup } from "src/services/index.types";
 import { useFormStorageStore } from "src/store";
@@ -22,7 +22,11 @@ export const useColumnsGroups = () => {
 			title: "№",
 			dataIndex: "index",
 			key: "index",
-			render: (_v, _r, index) => index + 1,
+			render: (_v, group, index) => (
+				<Tooltip title={group.is_completed ? "Завершён" : "В процессе"}>
+					<UiBadge status={group.is_completed ? "success" : "processing"} text={index + 1} />
+				</Tooltip>
+			),
 		},
 		{
 			ellipsis: true,
@@ -82,16 +86,13 @@ export const useColumnsGroups = () => {
 			title: "Цена",
 			dataIndex: "price",
 			key: "price",
-			render: (price: string) => `${priceFormatter(Number(price))} uzs`,
+			render: priceFormatter,
 		},
 		{
-			align: "center",
-			title: "Завершено",
-			dataIndex: "is_completed",
-			key: "is_completed",
-			render: (is_completed: boolean) => (
-				<ApproveCheck isValue={is_completed} />
-			),
+			title: "Студентов",
+			dataIndex: "student_count",
+			key: "student_count",
+			render: formatEmpty,
 		},
 		{
 			fixed: "right",

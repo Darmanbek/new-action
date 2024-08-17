@@ -1,5 +1,5 @@
 import { DescriptionsItemType } from "antd/es/descriptions";
-import { ApproveCheck } from "src/components/shared";
+import { UiBadge } from "src/components/ui";
 import { TGroup } from "src/services/index.types";
 import { formatEmpty, monthGrammar, priceFormatter } from "src/utils";
 
@@ -33,7 +33,7 @@ export const useItemsGroup = (data?: TGroup) => {
 		{
 			key: "price",
 			label: "Цена",
-			children: `${priceFormatter(data?.price)} uzs`
+			children: priceFormatter(data?.price)
 		},
 		{
 			key: "duration",
@@ -47,8 +47,11 @@ export const useItemsGroup = (data?: TGroup) => {
 		},
 		{
 			key: "is_completed",
-			label: "Завершено",
-			children: <ApproveCheck isValue={data?.is_completed || false} />
+			label: "Статус",
+			children: <UiBadge
+				status={data?.is_completed ? "success" : "processing"}
+				text={data?.is_completed ? "Завершено" : "В процессе"}
+			/>
 		},
 		{
 			key: "description",

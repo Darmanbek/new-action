@@ -1,12 +1,12 @@
 import { ColumnsType } from "antd/es/table";
 import { Link } from "react-router-dom";
-import { TTransactionData } from "src/services/index.types";
+import { TFinanceTransactionData } from "src/services/index.types";
 import { formatEmpty, priceFormatter } from "src/utils";
 
 
 export const useColumnsFinanceCompanies = () => {
 
-	const columns: ColumnsType<TTransactionData> = [
+	const columns: ColumnsType<TFinanceTransactionData> = [
 		{
 			ellipsis: true,
 			title: "Дата",
@@ -19,7 +19,7 @@ export const useColumnsFinanceCompanies = () => {
 			title: "Студент",
 			dataIndex: "student",
 			key: "student",
-			render: (student: TTransactionData["student"]) => `${student?.first_name} ${student?.last_name}`
+			render: (student: TFinanceTransactionData["student"]) => `${student?.first_name} ${student?.last_name}`
 		},
 		{
 			ellipsis: true,
@@ -33,14 +33,14 @@ export const useColumnsFinanceCompanies = () => {
 			title: "Способ оплаты",
 			dataIndex: "payment_type",
 			key: "payment_type",
-			render: (payment_type: TTransactionData["payment_type"]) => formatEmpty(payment_type?.name)
+			render: (payment_type: TFinanceTransactionData["payment_type"]) => formatEmpty(payment_type?.name)
 		},
 		{
 			ellipsis: true,
 			title: "Группа",
 			dataIndex: "group",
 			key: "group",
-			render: (group: TTransactionData["group"]) => group ? (
+			render: (group: TFinanceTransactionData["group"]) => group ? (
 				<Link to={`/groups/${group.id}`}>
 					{group?.name}
 				</Link>

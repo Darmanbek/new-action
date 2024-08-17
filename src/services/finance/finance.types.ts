@@ -6,8 +6,8 @@ import { TStudent } from "src/services/shared/shared.types";
 
 export type TFinance = {
 	total_amount: string | number;
-	transaction: TTransaction;
-	transactions: TTransaction;
+	transaction: TFinanceTransaction;
+	transactions: TFinanceTransaction;
 }
 
 export type TFinanceCompanies = {
@@ -17,12 +17,12 @@ export type TFinanceCompanies = {
 	})[];
 }
 
-export type TTransaction = {
-	data: TTransactionData[];
+export type TFinanceTransaction = {
+	data: TFinanceTransactionData[];
 	total: number;
 }
 
-export type TTransactionData = {
+export type TFinanceTransactionData = {
 	id: string;
 	company_id: string;
 	group_id: string;

@@ -1,7 +1,8 @@
 import { api } from "src/api";
+import { TResponseData } from "src/services/index.types";
 import { TPaymentType, TPaymentTypeChange } from "./payment.types";
 
-const axiosGetPaymentTypes = async (): Promise<TPaymentType[]> => {
+const axiosGetPaymentTypes = async (): Promise<TResponseData<TPaymentType>> => {
 	const response = await api.get(`/admin/payment-types`);
 	return response.data;
 };

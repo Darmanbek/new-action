@@ -10,6 +10,11 @@ export type TPaymentTypeChange = {
 
 export type TPaymentHistory = {
 	amount: number;
-	payment_type: string;
+	assessment: TPaymentAssessment;
 	date: string;
+}
+
+export type TPaymentAssessment = {
+	id: string;
+	title: string;
 }

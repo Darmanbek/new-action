@@ -1,4 +1,4 @@
-import { TCompany, TPaymentHistory } from "src/services/index.types";
+import { TBalance, TPaymentHistory } from "src/services/index.types";
 
 export type TRoleTypes = "super_admin" | "admin" | "director";
 
@@ -6,7 +6,10 @@ export type TGetParams = {
 	limit?: number;
 	page?: number;
 	search?: string;
-	date?: string[];
+	date?: {
+		start?: string | null
+		end?: string | null;
+	};
 	is_completed?: number;
 };
 
@@ -21,8 +24,27 @@ export type TStudent = {
 	last_name: string;
 	role: TRoleTypes;
 	phone: string;
+	balance: TBalance | null;
 	payment_history: TPaymentHistory[];
-	company: null | TCompany;
+	transactions: TTransaction[];
+	assessments: TAssessment[];
+}
+
+export type TAssessment = {
+	id: string;
+	is_free: boolean;
+	holiday: boolean;
+	is_exam: boolean;
+	value: number;
+	is_available: boolean;
+	consented: boolean | null;
+	date: string;
+}
+
+export type TTransaction = {
+	amount: number;
+	date: string;
+	payment_type: string;
 }
 
 export type TLesson = {

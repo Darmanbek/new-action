@@ -1,7 +1,8 @@
-import { Spin } from "antd";
+import { CheckCircleOutlined, SyncOutlined } from "@ant-design/icons";
+import { Divider, Space, Spin } from "antd";
 import { FC } from "react";
 import { useParams } from "react-router-dom";
-import { UiCard, UiDescriptions } from "src/components/ui";
+import { UiCard, UiDescriptions, UiTag } from "src/components/ui";
 import { useGetGroupsByIdQuery } from "src/services/index.api";
 
 import { useItemsGroup } from "./useItemsGroup";
@@ -16,7 +17,18 @@ const DescriptionGroup: FC = () => {
 	return (
 		<Spin spinning={isLoading || isFetching}>
 			<UiCard
-				title={group ? group.data.name : "Группа"}
+				title={group ? (
+					<Space split={<Divider type={"vertical"} />}>
+						{group.data.name}
+						<UiTag
+							color={group?.data?.is_completed ? "success" : "processing"}
+							icon={group?.data?.is_completed ? <CheckCircleOutlined /> : <SyncOutlined spin={true} />}
+						>
+							{group?.data?.is_completed ? "Завершено" : "В процессе"}
+						</UiTag>
+					</Space>
+
+				) : "Группа"}
 			>
 				<UiDescriptions
 					items={items}

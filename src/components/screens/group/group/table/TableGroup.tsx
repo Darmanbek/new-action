@@ -1,7 +1,7 @@
 import { Tabs } from "antd";
 import { FC } from "react";
-import { Students } from "./students/Students";
-import { Lessons } from "./lessons/Lessons";
+import { TableStudents } from "./students/TableStudents";
+import { TableAssessments } from "./assessments/TableAssessments";
 
 const TableGroup: FC = () => {
 	return (
@@ -15,12 +15,12 @@ const TableGroup: FC = () => {
 					{
 						key: "students",
 						label: "Студенты",
-						children: <Students />
+						children: <TableStudents />
 					},
 					{
-						key: "lessons",
-						label: "Уроки",
-						children: <Lessons />
+						key: "assessments",
+						label: "Посещаемость",
+						children: <TableAssessments />
 					}
 				]}
 			/>

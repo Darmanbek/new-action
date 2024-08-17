@@ -6,7 +6,7 @@ import { useCreateBalanceMutation, useGetPaymentTypesQuery } from "src/services/
 import { TBalanceChange } from "src/services/index.types";
 import { formMessage, selectPlaceholder } from "src/utils";
 
-export const FormPayments = () => {
+export const FormTransactions = () => {
 	const [form] = Form.useForm<TBalanceChange>();
 	const { student_id, group_id } = useParams();
 	const {
@@ -52,7 +52,7 @@ export const FormPayments = () => {
 					]}
 				>
 					<UiSelect
-						options={payments?.map(pay => ({
+						options={payments?.data.map(pay => ({
 							value: pay.id,
 							label: pay.name
 						}))}
