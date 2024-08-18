@@ -1,11 +1,20 @@
-import { MenuSider } from './MenuSider';
-import { MenuDrawer } from './MenuDrawer';
+import { MenuList } from "./MenuList";
+import { useResponsive } from "src/hooks";
+import { MenuSider } from "./MenuSider";
+import { MenuDrawer } from "./MenuDrawer";
 
 export const Menu = () => {
-  return (
-    <>
-      <MenuSider />
-      <MenuDrawer />
-    </>
-  );
+	const { isMobile } = useResponsive(768);
+
+	if (isMobile) return (
+		<MenuDrawer>
+			<MenuList />
+		</MenuDrawer>
+	);
+
+	return (
+		<MenuSider>
+			<MenuList />
+		</MenuSider>
+	);
 };

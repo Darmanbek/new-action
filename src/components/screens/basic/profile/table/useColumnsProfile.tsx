@@ -9,7 +9,7 @@ export const useColumnsProfile = () => {
 			title: "Имя Фамилия",
 			dataIndex: "first_name",
 			key: "name",
-			render: (_, r) => `${r.first_name} ${r.last_name}`,
+			render: (_, r) => `${r?.first_name} ${r?.last_name}`,
 		},
 		{
 			title: "Телефон",

@@ -1,6 +1,6 @@
 import { UiButton, UiTag } from "src/components/ui";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
-import { primaryBgColorComponents, primaryColor } from "src/data";
+import { primaryColorText } from "src/data";
 import { useGetMeQuery } from "src/services/auth/auth.api";
 import { useMenuStore } from "src/store";
 import { useResponsive } from "src/hooks";
@@ -18,29 +18,46 @@ export const HeaderLeft = () => {
 		onToggleActive();
 	};
 
-	const MenuIcon = active ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />;
+	const MenuIcon = active ? MenuUnfoldOutlined : MenuFoldOutlined;
 
 	return (
 		<div className={styles.left}>
 			<UiButton
 				type="text"
-				className={styles.burger}
-				icon={MenuIcon}
+				// className={styles.burger}
+				icon={<MenuIcon />}
+				colorText={primaryColorText}
 				onClick={onToggleMenu}
+				shape={"circle"}
 				aria-label="burger"
 			/>
+			{/*{profile?.data.company && (*/}
+			{/*	<UiTag*/}
+			{/*		color={primaryBgColorComponents}*/}
+			{/*		bordered={false}*/}
+			{/*		style={{*/}
+			{/*			display: "flex",*/}
+			{/*			justifyContent: "center",*/}
+			{/*			alignItems: "center",*/}
+			{/*			borderRadius: 10*/}
+			{/*		}}*/}
+			{/*	>*/}
+			{/*		<h3 style={{ color: primaryColor }}>*/}
+			{/*			{profile?.data?.company?.name}*/}
+			{/*		</h3>*/}
+			{/*	</UiTag>*/}
+			{/*)}*/}
 			{profile?.data.company && (
 				<UiTag
-					color={primaryBgColorComponents}
+					color={"transparent"}
 					bordered={false}
 					style={{
 						display: "flex",
 						justifyContent: "center",
 						alignItems: "center",
-						borderRadius: 10
 					}}
 				>
-					<h3 style={{ color: primaryColor }}>
+					<h3 style={{ color: primaryColorText, textTransform: "uppercase" }}>
 						{profile?.data?.company?.name}
 					</h3>
 				</UiTag>

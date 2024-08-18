@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Space } from "antd";
+import { Space, theme } from "antd";
 import styles from "./head.module.scss";
 
 interface HeadTableProps {
@@ -8,16 +8,16 @@ interface HeadTableProps {
 	extra?: ReactNode[];
 }
 
-export const HeadTable = ({
-	children,
-	extra,
-	title,
-}: HeadTableProps) => (
-	<div className={styles.head}>
-		<h3>{title}</h3>
-		<Space align="start">
-			{children?.map((child, index) => <div key={index}>{child}</div>)}
-			{extra?.map((child, index) => <div key={index}>{child}</div>)}
-		</Space>
-	</div>
-);
+export const HeadTable = ({ children, extra, title }: HeadTableProps) => {
+	const { token } = theme.useToken();
+
+	return (
+		<div className={styles.head} style={{ backgroundColor: token.colorBgContainer }}>
+			<h3>{title}</h3>
+			<Space align="start">
+				{children?.map((child, index) => <div key={index}>{child}</div>)}
+				{extra?.map((child, index) => <div key={index}>{child}</div>)}
+			</Space>
+		</div>
+	);
+};

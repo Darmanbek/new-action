@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Form, FormProps, Input, Spin } from "antd";
+import { Divider, Form, FormProps, Input, Spin } from "antd";
 import type { ButtonProps } from "antd";
 import { useNavigate } from "react-router-dom";
 import { Logo1 } from "src/assets/images";
@@ -81,7 +81,7 @@ export const Auth = () => {
 					>
 						<Input.Password placeholder={"Пароль"} />
 					</Form.Item>
-
+					<Divider></Divider>
 					<Form.Item<ButtonProps>>
 						<UiButton
 							type={"primary"}

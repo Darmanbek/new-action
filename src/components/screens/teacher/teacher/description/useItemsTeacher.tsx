@@ -31,14 +31,14 @@ export const useItemsTeacher = (data?: TTeacher) => {
 			label: "Пол",
 			children: data?.teacher_data?.is_male ? "Мужчина" : "Женщина",
 		},
-		{
-			key: "company",
-			label: "Филиал",
-			children: data?.company?.map(item => item.name).join(", "),
-			contentStyle: {
-				fontWeight: "bold"
-			}
-		},
+		// {
+		// 	key: "company",
+		// 	label: "Филиал",
+		// 	children: data?.company?.map(item => item.name).join(", "),
+		// 	contentStyle: {
+		// 		fontWeight: "bold"
+		// 	}
+		// },
 	];
 
 	return items;

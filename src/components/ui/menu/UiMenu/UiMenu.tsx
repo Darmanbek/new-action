@@ -1,32 +1,34 @@
-import React from 'react';
-import { ConfigProvider, Menu, MenuProps, theme } from 'antd';
-import { useResponsive } from 'src/hooks';
+import React from "react";
+import { ConfigProvider, Menu, MenuProps, theme } from "antd";
+import { useResponsive } from "src/hooks";
 
 export const UiMenu = (props: React.PropsWithChildren<MenuProps>) => {
-  const { isMobile } = useResponsive(768);
+	const { isMobile } = useResponsive(768);
 
-  const {
-    token: { colorPrimary },
-  } = theme.useToken();
-  return (
-    <ConfigProvider
-      theme={{
-        components: {
-          Menu: {
-            itemHoverBg: '#ffe8e8',
-            itemSelectedColor: colorPrimary,
-            subMenuItemBg: '#fff',
-            controlItemBgActive: '#ffe8e8',
-            groupTitleFontSize: isMobile ? 14 : 16,
-            itemHeight: isMobile ? 40 : 50,
-            fontSize: isMobile ? 14 : 16,
-            iconSize: isMobile ? 14 : 16,
-            collapsedIconSize: 18,
-          },
-        },
-      }}
-    >
-      <Menu {...props} />
-    </ConfigProvider>
-  );
+	const {
+		token: { colorPrimary },
+	} = theme.useToken();
+	return (
+		<ConfigProvider
+			theme={{
+				components: {
+					Menu: {
+						// itemHoverBg: '#ffe8e8',
+						itemHoverBg: "rgba(255, 232, 232, 0.3)",
+						itemSelectedColor: colorPrimary,
+						subMenuItemBg: "#fff",
+						itemColor: "rgba(22, 52, 88, 0.6)",
+						controlItemBgActive: "#ffe8e8",
+						groupTitleFontSize: isMobile ? 14 : 16,
+						itemHeight: isMobile ? 40 : 44,
+						fontSize: isMobile ? 14 : 16,
+						iconSize: isMobile ? 14 : 16,
+						collapsedIconSize: 18,
+					},
+				},
+			}}
+		>
+			<Menu {...props} />
+		</ConfigProvider>
+	);
 };

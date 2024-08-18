@@ -1,20 +1,23 @@
-import { ConfigProvider, Card, CardProps } from "antd";
+import { ConfigProvider, Card, CardProps, theme } from "antd";
 import { FC } from "react";
 
 const UiCard: FC<CardProps> = (props) => {
+	const { style, ...rest } = props;
+	const { token } = theme.useToken();
 	return (
 		<ConfigProvider>
 			<Card
 				style={{
-					boxShadow: "0px 2px 14px 2px rgba(229, 229, 229, .33)"
+					boxShadow: token.boxShadow,
+					...style
 				}}
 				styles={{
 					title: {
 						fontWeight: 500,
-						fontSize: "1.25rem",
+						fontSize: 20,
 					}
 				}}
-				{...props}
+				{...rest}
 			/>
 		</ConfigProvider>
 	);

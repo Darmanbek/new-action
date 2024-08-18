@@ -1,21 +1,27 @@
-import { ConfigProvider, Table, TableProps } from "antd";
+import { ConfigProvider, Table, TableProps, theme } from "antd";
 import { useResponsive } from "src/hooks";
+import { useThemeStore } from "src/store";
 import uniqid from "uniqid";
 
 export const UiTable = <T extends object>(props: TableProps<T>) => {
 	const { isMobile } = useResponsive(768);
+	const { isDark } = useThemeStore();
 	const { style, scroll, pagination, ...rest } = props;
+
+	const {
+		token
+	} = theme.useToken();
 
 	return (
 		<ConfigProvider
 			theme={{
 				components: {
 					Table: {
-						headerBg: "#fff",
-						footerBg: "#fff",
-						rowExpandedBg: "#fff",
+						headerBg: token.colorBgContainer,
+						footerBg: token.colorBgContainer,
+						rowExpandedBg: token.colorBgContainer,
 						fontSize: isMobile ? 14 : 16,
-						rowHoverBg: "#f7f5f5",
+						// rowHoverBg: "#f7f5f5",
 					},
 					Dropdown: {
 						fontSize: isMobile ? 14 : 16,
@@ -24,9 +30,11 @@ export const UiTable = <T extends object>(props: TableProps<T>) => {
 			}}
 		>
 			<Table
+				className={isDark ? "dark" : "light"}
 				rowKey={() => uniqid()}
 				style={{
-					boxShadow: "0px 2px 14px 2px rgba(229, 229, 229, .33)",
+					boxShadow: token.boxShadow,
+					borderRadius: token.borderRadiusLG,
 					...style,
 				}}
 				scroll={{ x: "auto", ...scroll }}

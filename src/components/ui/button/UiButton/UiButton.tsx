@@ -3,30 +3,24 @@ import { ConfigProvider, Button, ButtonProps, theme } from "antd";
 
 interface UiButtonProps {
 	color?: string;
-	borderRadius?: number;
+	colorText?: string;
 }
 
 export const UiButton = (
 	props: React.PropsWithChildren<UiButtonProps & ButtonProps>
 ) => {
-	const { borderRadius, color, ...rest } = props;
+	const { color, colorText, ...rest } = props;
 
 	const {
-		token: { colorPrimary },
+		token
 	} = theme.useToken();
 
 	return (
 		<ConfigProvider
 			theme={{
 				token: {
-					colorPrimary: color || colorPrimary,
-				},
-				components: {
-					Button: {
-						borderRadius: borderRadius || 6,
-						borderRadiusLG: borderRadius || 10,
-						borderRadiusSM: borderRadius || 4,
-					},
+					colorPrimary: color || token.colorPrimary,
+					colorText: colorText || token.colorText
 				},
 			}}
 		>

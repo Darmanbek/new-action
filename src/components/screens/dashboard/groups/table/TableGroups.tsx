@@ -13,7 +13,10 @@ const TableGroups: FC = () => {
 	const { data: companies } = useGetDashboardCompaniesQuery();
 	const { data: company, isLoading, isFetching } = useGetDashboardCompaniesByIdQuery({
 		is_completed: 1,
-		date: [dayjs().format("YYYY-MM-DD"), dayjs().format("YYYY-MM-DD")]
+		date: {
+			start: dayjs().format("YYYY-MM-DD"),
+			end: dayjs().format("YYYY-MM-DD")
+		}
 	}, companyId);
 
 	const columns = useColumnsGroups();
