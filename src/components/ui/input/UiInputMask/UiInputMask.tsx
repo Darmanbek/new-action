@@ -1,4 +1,4 @@
-import { theme } from "antd";
+// import { theme } from "antd";
 import React from "react";
 import ReactInputMask, { Props } from "react-input-mask";
 import { useResponsive } from "src/hooks";
@@ -15,9 +15,9 @@ export const UiInputMask = (
 	const { isMobile } = useResponsive(768);
 	const { mySize, ...rest } = props;
 	const { "aria-invalid": isInvalid, disabled } = props;
-	const { token } = theme.useToken();
+	// const { token } = theme.useToken();
 	// const [a, b, c, d, e] = useToken();
-	console.log(token);
+	// console.log(token);
 	return (
 		<>
 			<ReactInputMask

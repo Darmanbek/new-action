@@ -1,13 +1,17 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useMessage } from "src/hooks";
-import { TGetParams, TResponseError } from "src/services/index.types";
+import { TGetParams, TGroupStudentChange, TResponseError } from "src/services/index.types";
 import { errorResponse } from "src/utils";
 import {
-	axiosCreateGroups,
-	axiosDeleteGroups,
-	axiosEditGroups,
 	axiosGetGroups,
 	axiosGetGroupsById,
+	axiosGetGroupsByIdStudents,
+	axiosGetGroupsByIdAssessments,
+	axiosGetGroupsByIdCalendar,
+	axiosCreateGroups,
+	axiosEditGroups,
+	axiosDeleteGroups,
+	axiosDeleteGroupsStudents
 } from "./groups.services";
 
 const useGetGroupsQuery = (params: TGetParams) => {
@@ -32,6 +36,43 @@ const useGetGroupsByIdQuery = (id?: string | number) => {
 		},
 	});
 };
+
+const useGetGroupsByIdStudentsQuery = (id?: string | number) => {
+	const { message } = useMessage();
+	return useQuery({
+		queryFn: () => axiosGetGroupsByIdStudents(id),
+		queryKey: ["groups-students", id],
+		enabled: !!id,
+		onError: (error: TResponseError) => {
+			message.error(errorResponse(error));
+		},
+	});
+};
+
+const useGetGroupsByIdAssessmentsQuery = (id?: string | number) => {
+	const { message } = useMessage();
+	return useQuery({
+		queryFn: () => axiosGetGroupsByIdAssessments(id),
+		queryKey: ["groups-assessments", id],
+		enabled: !!id,
+		onError: (error: TResponseError) => {
+			message.error(errorResponse(error));
+		},
+	});
+};
+
+const useGetGroupsByIdCalendarQuery = (params: TGetParams, id?: string | number) => {
+	const { message } = useMessage();
+	return useQuery({
+		queryFn: () => axiosGetGroupsByIdCalendar(params, id),
+		queryKey: ["groups-calendar", id, ...Object.values(params)],
+		enabled: !!id,
+		onError: (error: TResponseError) => {
+			message.error(errorResponse(error));
+		},
+	});
+};
+
 
 const useCreateGroupsMutation = () => {
 	const { message } = useMessage();
@@ -84,10 +125,38 @@ const useDeleteGroupsMutation = () => {
 	});
 };
 
+const useDeleteGroupsStudentsMutation = (id?: number | string) => {
+	const { message } = useMessage();
+	const queryClient = useQueryClient();
+	return useMutation({
+		mutationFn: (form: TGroupStudentChange) => axiosDeleteGroupsStudents(form, id),
+		onSuccess: () => {
+			queryClient.invalidateQueries({
+				queryKey: ["groups"],
+			});
+			queryClient.invalidateQueries({
+				queryKey: ["groups-students"],
+			});
+			queryClient.invalidateQueries({
+				queryKey: ["groups-assessments"],
+			});
+			message.success("Успешно");
+		},
+		onError: (error: TResponseError) => {
+			message.error(errorResponse(error));
+		},
+	});
+};
+
+
 export {
 	useGetGroupsQuery,
 	useGetGroupsByIdQuery,
+	useGetGroupsByIdStudentsQuery,
+	useGetGroupsByIdAssessmentsQuery,
+	useGetGroupsByIdCalendarQuery,
 	useCreateGroupsMutation,
 	useEditGroupsMutation,
 	useDeleteGroupsMutation,
+	useDeleteGroupsStudentsMutation
 };

@@ -1,4 +1,4 @@
-import { TTeacher, TStudent, TLesson, TDay } from "src/services/index.types";
+import { TTeacher, TStudent, TLesson, TDay, TAssessment } from "src/services/index.types";
 
 export type TGroup = {
 	id: string | number;
@@ -16,6 +16,14 @@ export type TGroup = {
 	lessons: TLesson[];
 };
 
+export type TGroupAssessment = {
+	id: string;
+	first_name: string;
+	last_name: string;
+	phone: string;
+	assessments: TAssessment[];
+}
+
 export type TGroupChange = {
 	id: string | number;
 	teacher_id: number | string;
@@ -26,3 +34,8 @@ export type TGroupChange = {
 	start_date?: string;
 	duration: number;
 };
+
+
+export type TGroupStudentChange = {
+	student_id: string[];
+}

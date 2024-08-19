@@ -1,4 +1,5 @@
 import { DescriptionsItemType } from "antd/es/descriptions";
+import dayjs from "dayjs";
 import { UiBadge } from "src/components/ui";
 import { TGroup } from "src/services/index.types";
 import { formatEmpty, monthGrammar, priceFormatter } from "src/utils";
@@ -43,7 +44,7 @@ export const useItemsGroup = (data?: TGroup) => {
 		{
 			key: "start_date",
 			label: "Стартовая дата",
-			children: formatEmpty(data?.start_date)
+			children: formatEmpty(dayjs(data?.start_date).format("YYYY-MMMM-DD HH:mm:ss"))
 		},
 		{
 			key: "is_completed",

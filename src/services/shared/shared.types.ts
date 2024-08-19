@@ -9,7 +9,7 @@ export type TGetParams = {
 	date?: {
 		start?: string | null
 		end?: string | null;
-	};
+	} | string[];
 	is_completed?: number;
 };
 

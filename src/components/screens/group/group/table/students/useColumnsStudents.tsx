@@ -3,16 +3,22 @@ import {
 	Tooltip,
 } from "antd";
 import {
+	DeleteOutlined,
 	EyeFilled,
 } from "@ant-design/icons";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ColumnsType } from "antd/es/table";
+import { GlobalPopconfirm } from "src/components/shared";
 import { UiButton } from "src/components/ui";
+import { useDeleteGroupsStudentsMutation } from "src/services/groups/groups.api";
 import { TStudent } from "src/services/index.types";
 import { phoneFormatter } from "src/utils";
 
 export const useColumnsStudents = () => {
 	const navigate = useNavigate();
+	const { group_id } = useParams();
+
+	const { mutate: deleteStudent } = useDeleteGroupsStudentsMutation(group_id);
 
 	const columns: ColumnsType<TStudent> = [
 		{
@@ -26,9 +32,9 @@ export const useColumnsStudents = () => {
 		{
 			ellipsis: true,
 			title: "Студент",
-			dataIndex: "first_name",
-			key: "full_name",
-			render: (_, n) => `${n.first_name} ${n.last_name}`,
+			dataIndex: "name",
+			key: "name",
+			render: (_, student) => `${student.first_name} ${student.last_name}`,
 		},
 		{
 			ellipsis: true,
@@ -54,15 +60,28 @@ export const useColumnsStudents = () => {
 			title: "Действия",
 			key: "actions",
 			render: (_v, student) => (
-				<Space>
+				<Space onClick={(e) => e.stopPropagation()}>
 					<Tooltip title="Смотреть">
 						<UiButton
-							type="primary"
+							type={"default"}
+							shape={"circle"}
 							icon={<EyeFilled />}
 							onClick={() => navigate(`students/${student.id}`)}
 							aria-label="View"
 						/>
 					</Tooltip>
+					<GlobalPopconfirm
+						title={`${student.first_name} ${student.last_name}`}
+						onConfirm={() => deleteStudent({ student_id: [student.id] })}
+					>
+						<UiButton
+							type={"default"}
+							shape={"circle"}
+							danger={true}
+							icon={<DeleteOutlined />}
+							aria-label="Delete"
+						/>
+					</GlobalPopconfirm>
 				</Space>
 			),
 		},

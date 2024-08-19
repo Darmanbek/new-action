@@ -3,18 +3,18 @@ import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import { HeadTable } from "src/components/shared";
 import { UiButton, UiTable } from "src/components/ui";
-import { useGetGroupsByIdQuery } from "src/services/index.api";
+import { useGetGroupsByIdStudentsQuery } from "src/services/index.api";
 import { TStudent } from "src/services/shared/shared.types";
-import { useColumnsStudents } from "src/components/screens/group/group/table/students/useColumnsStudents";
+import { useColumnsStudents } from "./useColumnsStudents";
 
 export const TableStudents = () => {
 	const { group_id } = useParams();
 	const navigate = useNavigate();
 	const {
-		data: group,
+		data: students,
 		isLoading,
 		isFetching,
-	} = useGetGroupsByIdQuery(group_id);
+	} = useGetGroupsByIdStudentsQuery(group_id);
 	const columns = useColumnsStudents();
 
 	return (
@@ -34,7 +34,7 @@ export const TableStudents = () => {
 					]}
 				/>
 			)}
-			dataSource={group?.data?.students}
+			dataSource={students?.data}
 			onRow={(data) => ({
 				onClick: () => navigate(`students/${data.id}`)
 			})}

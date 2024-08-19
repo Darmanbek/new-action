@@ -22,7 +22,7 @@ export const UiMenu = (props: React.PropsWithChildren<MenuProps>) => {
 						groupTitleFontSize: isMobile ? 14 : 16,
 						itemHeight: isMobile ? 40 : 44,
 						fontSize: isMobile ? 14 : 16,
-						iconSize: isMobile ? 14 : 16,
+						iconSize: isMobile ? 14 : 18,
 						collapsedIconSize: 18,
 					},
 				},

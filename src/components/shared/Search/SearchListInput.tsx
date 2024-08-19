@@ -32,12 +32,12 @@ export const SearchListInput: FC<InputProps> = (props) => {
 	return (
 		<Space.Compact>
 			<Input
-				{...props}
 				prefix={<SearchOutlined />}
 				value={searchValue}
 				onChange={(e) => setSearchValue({ searchValue: e.target.value })}
 				allowClear={true}
 				onClear={onClearInput}
+				{...props}
 			/>
 		</Space.Compact>
 	);

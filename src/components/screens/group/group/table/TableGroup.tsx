@@ -11,17 +11,18 @@ const TableGroup: FC = () => {
 					marginBottom: 0
 				}}
 				type={"card"}
+				animated={true}
 				items={[
+					{
+						key: "assessments",
+						label: "Посещаемость",
+						children: <TableAssessments />
+					},
 					{
 						key: "students",
 						label: "Студенты",
 						children: <TableStudents />
 					},
-					{
-						key: "assessments",
-						label: "Посещаемость",
-						children: <TableAssessments />
-					}
 				]}
 			/>
 
