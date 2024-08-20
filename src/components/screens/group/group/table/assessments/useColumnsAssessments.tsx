@@ -5,14 +5,13 @@ import { ApproveCheckValue } from "src/components/shared";
 import { useGetGroupsByIdCalendarQuery } from "src/services/groups/groups.api";
 import { TGroupAssessment } from "src/services/groups/groups.types";
 
-
 export const useColumnsAssessments = (date: Dayjs) => {
 	const { group_id } = useParams();
 
 	const {
 		data: calendar,
 	} = useGetGroupsByIdCalendarQuery({
-		date: [date.startOf("month").format("YYYY-MM-DD"), date.endOf("month").format("YYYY-MM-DD")]
+		date: [date.startOf("month").format("YYYY-MM-DD"), date.endOf("month").format("YYYY-MM-DD")],
 	}, group_id);
 
 	const columns: ColumnsType<TGroupAssessment> = calendar?.data.map(date => ({
@@ -20,27 +19,34 @@ export const useColumnsAssessments = (date: Dayjs) => {
 		ellipsis: true,
 		title: `${dayjs(date).get("date")} ${dayjs(date).format("MMM")}`,
 		key: date,
-		// onHeaderCell: () => ({
-		// 	style: {
-		// 		backgroundColor: "rgba(255, 0, 0, 0.3)"
-		// 	}
-		// }),
-		// onCell: (data) => ({
-		// 	style: {
-		//
-		// 	}
-		// }),
+		// onHeaderCell: () => ({}),
+		// onCell: (data) => ({}),
+
 		render: (_v, r) => {
-			const is_available = r.assessments.find(el => el.date === date)?.is_available;
-			if (is_available === undefined) return "";
+			const assessments = r.assessments.find(el => el.date === date);
+			if (!assessments) return "";
+			if (assessments.holiday) return "";
+
+			if (assessments.is_available) return assessments.value;
+
+			if (assessments.consented) return (
+				<ApproveCheckValue
+					colorInverse={true}
+					isValue={assessments.is_available}
+					yesText={"Был"}
+					noText={"Нет с причиной"}
+				/>
+			);
+
 			return (
 				<ApproveCheckValue
-					isValue={is_available}
+					colorInverse={true}
+					isValue={assessments.is_available}
 					yesText={"Был"}
 					noText={"Нет"}
 				/>
 			);
-		}
+		},
 	})) || [];
 
 	columns.unshift({

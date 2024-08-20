@@ -49,7 +49,7 @@ const TableFinance: FC = () => {
 							}}
 							allowClear={false}
 						/>
-						<Tooltip title={"Сегодняшний месяц"}>
+						<Tooltip title={"Текущий месяц"}>
 							<UiButton
 								type={"primary"}
 								icon={<CalendarOutlined />}

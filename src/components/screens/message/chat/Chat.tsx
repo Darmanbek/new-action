@@ -54,7 +54,7 @@ const Chat: FC = () => {
 				}}
 				style={{
 					flexGrow: 1,
-					height: "calc(100vh - 144px)",
+					height: "calc(100vh - 148px)", // 6
 					display: "flex",
 					flexDirection: "column"
 				}}

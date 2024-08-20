@@ -1,32 +1,28 @@
-import { Tabs } from "antd";
 import { FC } from "react";
-import { TableAssessments } from "src/components/screens/group/student/table/assessments/TableAssessments";
+import { UiTabs } from "src/components/ui";
+import { TableAssessments } from "./assessments/TableAssessments";
 import { TableTransactions } from "./transactions/TableTransactions";
 import { TablePayments } from "./payments/TablePayments";
 
 const TableStudent: FC = () => {
 	return (
 		<>
-			<Tabs
-				tabBarStyle={{
-					marginBottom: 0
-				}}
-				type={"card"}
+			<UiTabs
 				items={[
 					{
 						key: "transactions",
 						label: "Транзакции",
-						children: <TableTransactions />
+						children: <TableTransactions />,
 					},
 					{
 						key: "assessments",
 						label: "Посещаемость",
-						children: <TableAssessments />
+						children: <TableAssessments />,
 					},
 					{
 						key: "payments",
 						label: "История платежи",
-						children: <TablePayments />
+						children: <TablePayments />,
 					},
 				]}
 			/>

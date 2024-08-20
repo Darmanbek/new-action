@@ -10,3 +10,4 @@ export * from "./badge";
 export * from "./statistic";
 export * from "./tag";
 export * from "./card";
+export * from "./tabs";

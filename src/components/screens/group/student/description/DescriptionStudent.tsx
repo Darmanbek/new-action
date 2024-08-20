@@ -3,16 +3,16 @@ import { Spin, Tooltip } from "antd";
 import { FC } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { UiButton, UiCard, UiDescriptions } from "src/components/ui";
-import { useGetGroupsByIdQuery } from "src/services/index.api";
+import { useGetGroupsByIdStudentsQuery } from "src/services/index.api";
 
 import { useItemsStudent } from "./useItemsStudent";
 
 const DescriptionStudent: FC = () => {
 	const navigate = useNavigate();
 	const { group_id, student_id } = useParams();
-	const { data: group, isLoading, isFetching } = useGetGroupsByIdQuery(group_id);
+	const { data: students, isLoading, isFetching } = useGetGroupsByIdStudentsQuery(group_id);
 
-	const student = group?.data.students.find(el => el.id === student_id);
+	const student = students?.data.find(el => el.id === student_id);
 
 	const items = useItemsStudent(student);
 

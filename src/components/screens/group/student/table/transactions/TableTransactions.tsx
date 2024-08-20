@@ -7,18 +7,15 @@ import { TTransaction } from "src/services/index.types";
 import { useFormStorageStore } from "src/store";
 import { useColumnsTransactions } from "./useColumnsTransactions";
 import { UiButton, UiTable } from "src/components/ui";
-import { useGetGroupsByIdQuery } from "src/services/groups/groups.api";
+import { useGetGroupsByIdStudentsQuery } from "src/services/index.api";
 
 const TableTransactions: FC = () => {
 	const { group_id, student_id } = useParams();
 
 	const columns = useColumnsTransactions();
 
-	const {
-		data: payments,
-		isLoading,
-		isFetching,
-	} = useGetGroupsByIdQuery(group_id);
+	const { data: students, isLoading, isFetching } = useGetGroupsByIdStudentsQuery(group_id);
+
 
 	const toggleDrawer = useFormStorageStore((state) => state.toggleDrawer);
 
@@ -40,7 +37,7 @@ const TableTransactions: FC = () => {
 				/>
 			)}
 			dataSource={
-				payments?.data?.students.find((el) => el.id === student_id)
+				students?.data?.find((el) => el.id === student_id)
 					?.transactions
 			}
 			columns={columns}

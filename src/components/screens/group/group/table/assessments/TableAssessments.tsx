@@ -1,10 +1,12 @@
+import { CalendarOutlined } from "@ant-design/icons";
+import { Space, Tooltip } from "antd";
 import dayjs from "dayjs";
 import isBetween from "dayjs/plugin/isBetween";
 import { FC, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import { HeadTable } from "src/components/shared";
-import { UiDatePicker, UiTable } from "src/components/ui";
-import { TGroupAssessment } from "src/services/groups/groups.types";
+import { UiButton, UiDatePicker, UiTable } from "src/components/ui";
+import { TGroupAssessment } from "src/services/index.types";
 import { useGetGroupsByIdAssessmentsQuery, useGetGroupsByIdQuery } from "src/services/index.api";
 
 import { useColumnsAssessments } from "./useColumnsAssessments";
@@ -41,19 +43,28 @@ const TableAssessments: FC = () => {
 				<HeadTable
 					title={"Посещаемость"}
 					children={[
-						<UiDatePicker
-							key={"Date"}
-							picker={"month"}
-							value={date}
-							onChange={(date) => {
-								setDate(date);
-							}}
-							format={"YYYY MMMM"}
-							disabledDate={(date) => {
-								return !dayjs(date).isBetween(start, end);
-							}}
-							allowClear={false}
-						/>
+						<Space.Compact>
+							<UiDatePicker
+								key={"Date"}
+								picker={"month"}
+								value={date}
+								onChange={(date) => {
+									setDate(date);
+								}}
+								format={"YYYY MMMM"}
+								disabledDate={(date) => {
+									return !dayjs(date).isBetween(start, end);
+								}}
+								allowClear={false}
+							/>
+							<Tooltip title={"Текущий месяц"}>
+								<UiButton
+									type={"primary"}
+									icon={<CalendarOutlined />}
+									onClick={() => setDate(dayjs())}
+								/>
+							</Tooltip>
+						</Space.Compact>,
 					]}
 				/>
 			)}

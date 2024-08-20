@@ -32,12 +32,12 @@ export const useItemsStudent = (data?: TStudent) => {
 					prefix={Number(data?.balance?.total_amount) >= 0 ? <ArrowUpOutlined /> : <ArrowDownOutlined />}
 					suffix="UZS"
 				/>
-			)
+			),
 		},
 		{
 			key: "phone",
 			label: "Телефон",
-			children: phoneFormatter(data?.phone)
+			children: phoneFormatter(data?.phone),
 		},
 
 	];

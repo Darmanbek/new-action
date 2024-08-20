@@ -2,17 +2,13 @@ import { useParams } from "react-router-dom";
 import { HeadTable } from "src/components/shared";
 import { UiTable } from "src/components/ui";
 import { TPaymentHistory } from "src/services/payment/payment.types";
-import { useGetGroupsByIdQuery } from "src/services/index.api";
-import { useColumnsPayments } from "src/components/screens/group/student/table/payments/useColumnsPayments";
+import { useGetGroupsByIdStudentsQuery } from "src/services/index.api";
+import { useColumnsPayments } from "./useColumnsPayments";
 
 export const TablePayments = () => {
 
 	const { group_id, student_id } = useParams();
-	const {
-		data: payments,
-		isLoading,
-		isFetching,
-	} = useGetGroupsByIdQuery(group_id);
+	const { data: students, isLoading, isFetching } = useGetGroupsByIdStudentsQuery(group_id);
 	const columns = useColumnsPayments();
 
 	return (
@@ -23,7 +19,7 @@ export const TablePayments = () => {
 				/>
 			)}
 			dataSource={
-				payments?.data?.students.find((el) => el.id === student_id)
+				students?.data?.find((el) => el.id === student_id)
 					?.payment_history
 			}
 			columns={columns}
