@@ -4,36 +4,37 @@ import ReactInputMask from "react-input-mask";
 import { styled, css } from "styled-components";
 
 interface StyledInputMaskProps {
-	size?: SizeType;
+	mySize?: SizeType;
+	isInvalid?: boolean;
 }
 
 export const StyledInputMask = styled(ReactInputMask).withConfig({
-	shouldForwardProp: prop => !["size"].includes(prop),
+	shouldForwardProp: prop => !["mySize", "isInvalid"].includes(prop),
 })<StyledInputMaskProps>`${(props) => {
 
-	const { size = "middle" } = props;
+	const size = props.mySize || "middle";
 
 	const { token } = theme.useToken();
 
-	const fontSize = {
-		"small": "14px",
-		"middle": "14px",
-		"large": "16px",
-	}[size] ?? "14px";
-	const padding = {
-		"small": "0 7px",
-		"middle": "4px 11px",
-		"large": "7px 11px",
-	}[size] ?? "";
-	const borderRadius = {
-		"small": "4px",
-		"middle": "6px",
-		"large": "8px",
-	}[size];
-	const lineHeight = {
-		"small": 1.5714285714285714,
-		"middle": 1.5714285714285714,
-		"large": 1.5,
+	const sizeStyles = {
+		"small": css`
+			font-size: ${token.fontSize}px;
+			padding: 0 7px;
+			border-radius: ${token.borderRadiusSM}px;
+			line-height: ${token.lineHeight};
+		`,
+		"middle": css`
+			font-size: ${token.fontSize}px;
+			padding: 4px 11px;
+			border-radius: ${token.borderRadius}px;
+			line-height: ${token.lineHeight};
+		`,
+		"large": css`
+			font-size: ${token.fontSizeLG}px;
+			padding: 7px 11px;
+			border-radius: ${token.borderRadiusLG}px;
+			line-height: ${token.lineHeightLG};
+		`,
 	}[size];
 
 	return css`
@@ -56,7 +57,7 @@ export const StyledInputMask = styled(ReactInputMask).withConfig({
 			text-overflow: ellipsis;
 		}
 
-		&:hover:not(.disabled)
+		&:hover:not(&:disabled)
 		{
 			border-color: ${token.colorPrimaryHover};
 		}
@@ -73,8 +74,7 @@ export const StyledInputMask = styled(ReactInputMask).withConfig({
 			box-shadow: 0 0 0 2px ${token.controlOutline};
 		}
 
-		&:invalid
-		{
+		${props.isInvalid && css`
 			background-color: ${token.colorBgContainer};
 			border-color: ${token.colorError};
 
@@ -85,12 +85,12 @@ export const StyledInputMask = styled(ReactInputMask).withConfig({
 				box-shadow: 0 0 0 2px ${token.colorErrorOutline};
 			}
 
-			&:hover
+			&:hover:not(&:disabled)
 			{
 				border-color: ${token.colorErrorBorderHover};
 				background-color: ${token.colorBgContainer};
 			}
-		}
+		`}
 
 		&:disabled
 		{
@@ -99,9 +99,6 @@ export const StyledInputMask = styled(ReactInputMask).withConfig({
 			color: ${token.colorTextDisabled};
 		}
 
-		font-size: ${fontSize};
-		padding: ${padding};
-		border-radius: ${borderRadius};
-		line-height: ${lineHeight};
+		${sizeStyles}
 	`;
 }}`;

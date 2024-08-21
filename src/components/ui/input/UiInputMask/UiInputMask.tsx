@@ -1,33 +1,25 @@
-// import { theme } from "antd";
 import React from "react";
-import ReactInputMask, { Props } from "react-input-mask";
+import { Props } from "react-input-mask";
+import { StyledInputMask } from "./mask.styles";
 import { useResponsive } from "src/hooks";
-import styles from "./mask.module.scss";
-import clsx from "clsx";
 
 interface UiPhoneInputProps {
 	mySize?: "small" | "middle" | "large";
 }
 
 export const UiInputMask = (
-	props: React.PropsWithChildren<UiPhoneInputProps & Props>
+	props: React.PropsWithChildren<UiPhoneInputProps & Props>,
 ) => {
 	const { isMobile } = useResponsive(768);
 	const { mySize, ...rest } = props;
-	const { "aria-invalid": isInvalid, disabled } = props;
-	// const { token } = theme.useToken();
-	// const [a, b, c, d, e] = useToken();
-	// console.log(token);
+	const { "aria-invalid": isInvalid } = props;
+
 	return (
 		<>
-			<ReactInputMask
+			<StyledInputMask
+				mySize={mySize ? mySize : isMobile ? "middle" : "large"}
+				isInvalid={!!isInvalid}
 				{...rest}
-				className={clsx(
-					styles.phone,
-					styles[mySize ? mySize : isMobile ? "middle" : "large"],
-					isInvalid && styles.error,
-					disabled && styles.disabled
-				)}
 			/>
 		</>
 	);

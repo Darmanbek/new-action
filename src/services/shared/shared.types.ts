@@ -32,10 +32,7 @@ export type TStudent = {
 
 export type TAssessment = {
 	id: string;
-	is_free: boolean;
-	holiday: boolean;
-	is_exam: boolean;
-	value: number;
+	value: number | null;
 	is_available: boolean;
 	consented: boolean | null;
 	date: string;
@@ -50,7 +47,9 @@ export type TTransaction = {
 export type TLesson = {
 	id: string | number;
 	title: string;
-	price: number;
+	is_holiday: false;
+	is_exam: false;
+	price?: number;
 	date: string;
 	is_free: boolean;
 }

@@ -8,6 +8,7 @@ import {
 	axiosGetGroupsByIdStudents,
 	axiosGetGroupsByIdAssessments,
 	axiosGetGroupsByIdCalendar,
+	axiosGetGroupsByIdLessons,
 	axiosCreateGroups,
 	axiosEditGroups,
 	axiosDeleteGroups,
@@ -66,6 +67,18 @@ const useGetGroupsByIdCalendarQuery = (params: TGetParams, id?: string | number)
 	return useQuery({
 		queryFn: () => axiosGetGroupsByIdCalendar(params, id),
 		queryKey: ["groups-calendar", id, ...Object.values(params)],
+		enabled: !!id,
+		onError: (error: TResponseError) => {
+			message.error(errorResponse(error));
+		},
+	});
+};
+
+const useGetGroupsByIdLessonsQuery = (id?: string | number) => {
+	const { message } = useMessage();
+	return useQuery({
+		queryFn: () => axiosGetGroupsByIdLessons(id),
+		queryKey: ["groups-lessons", id],
 		enabled: !!id,
 		onError: (error: TResponseError) => {
 			message.error(errorResponse(error));
@@ -155,6 +168,7 @@ export {
 	useGetGroupsByIdStudentsQuery,
 	useGetGroupsByIdAssessmentsQuery,
 	useGetGroupsByIdCalendarQuery,
+	useGetGroupsByIdLessonsQuery,
 	useCreateGroupsMutation,
 	useEditGroupsMutation,
 	useDeleteGroupsMutation,
