@@ -1,13 +1,18 @@
-.home {
-  flex-grow: 1;
-  display: grid;
-  place-items: center;
-  background-color: #fff;
-  border-radius: 8px;
-  overflow: hidden;
+@import "src/assets/styles/variables";
 
-  img {
-    width: 200px;
-    height: 200px;
-  }
+.home
+{
+	flex-grow: 1;
+	display: grid;
+	place-items: center;
+	background-color: #fff;
+	box-shadow: $primary-box-shadow2;
+	border-radius: 8px;
+	overflow: hidden;
+
+	img
+	{
+		width: 200px;
+		height: 200px;
+	}
 }

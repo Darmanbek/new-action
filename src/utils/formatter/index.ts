@@ -23,7 +23,7 @@ export const formatNum = <T>(value: T) =>
 	`${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
 export const formatPercent = <T>(value: T) => `${value}%`;
-export const formatMonth = <T>(value: T) => !Number.isNaN(value) ? `${value} ${monthGrammar(value)}` : "";
+export const formatMonth = <T>(value: T) => value ? `${value} ${monthGrammar(value)}` : "";
 
 export const dateFormatter = (date: string, format?: string) =>
 	dayjs(date).format(format || "YYYY-MM-DD");

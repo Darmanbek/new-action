@@ -1,8 +1,7 @@
 import type { ColumnsType } from "antd/es/table";
-import { ApproveCheck } from "src/components/shared";
 import { UiTag } from "src/components/ui";
 import { TGroup } from "src/services/index.types";
-import { formatEmpty } from "src/utils";
+import { completeColor, completeIcon, completeName, formatEmpty, monthGrammar } from "src/utils";
 
 export const useColumnsGroups = () => {
 
@@ -31,22 +30,20 @@ export const useColumnsGroups = () => {
 		{
 			align: "center",
 			ellipsis: true,
-			title: "Уроки",
-			dataIndex: "lesson_count",
-			key: "lesson_count",
-			render: (group_count: number) => group_count ? (
-				<UiTag color={"red"}>
-					{formatEmpty(group_count)}
-				</UiTag>
-			) : "-",
+			title: "Длительность",
+			dataIndex: "duration",
+			key: "duration",
+			render: (duration: number) => `${duration} ${monthGrammar(duration.toString())}`,
 		},
 		{
 			align: "center",
-			title: "Завершено",
+			title: "Статус",
 			dataIndex: "is_completed",
 			key: "is_completed",
 			render: (is_completed: boolean) => (
-				<ApproveCheck isValue={is_completed} />
+				<UiTag icon={completeIcon(is_completed)} color={completeColor(is_completed)}>
+					{completeName(is_completed)}
+				</UiTag>
 			),
 		},
 	];

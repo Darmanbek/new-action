@@ -1,7 +1,8 @@
 import { Space, Tooltip } from "antd";
 import { ColumnsType } from "antd/es/table";
 import { EditOutlined, DeleteOutlined, EyeFilled } from "@ant-design/icons";
-import { useNavigate } from "react-router-dom";
+import dayjs from "dayjs";
+import { Link, useNavigate } from "react-router-dom";
 import { GlobalPopconfirm } from "src/components/shared";
 import { UiBadge, UiButton, UiTag } from "src/components/ui";
 import { useDeleteGroupsMutation } from "src/services/index.api";
@@ -41,7 +42,14 @@ export const useColumnsGroups = () => {
 			key: "teachers",
 			render: (teachers: TGroup["teachers"]) => {
 				const teacher = teachers.find((t) => !t.assistant);
-				return teacher ? `${teacher.first_name} ${teacher.last_name}` : "-";
+				return teacher ?
+					<Link
+						onClick={(e) => e.stopPropagation()}
+						to={`/teachers/${teacher.id}`}>
+						{`${teacher.first_name} ${teacher.last_name}`}
+					</Link>
+					:
+					"-";
 			},
 		},
 		{
@@ -52,8 +60,14 @@ export const useColumnsGroups = () => {
 			render: (teachers: TGroup["teachers"]) => {
 				const assistant = teachers.find((t) => t.assistant);
 				return assistant
-					? `${assistant.first_name} ${assistant.last_name}`
-					: "-";
+					? <Link
+						onClick={(e) => e.stopPropagation()}
+						to={`/teachers/${assistant.id}`}
+					>
+						{`${assistant.first_name} ${assistant.last_name}`}
+					</Link>
+					:
+					"-";
 			},
 		},
 		{
@@ -66,14 +80,19 @@ export const useColumnsGroups = () => {
 				<UiTag color={day.id === 1 ? "blue" : "green"}>
 					{dayTranslation(day?.name)}
 				</UiTag>
-			)
+			),
 		},
 		{
 			ellipsis: true,
 			title: "Стартовая дата",
 			dataIndex: "start_date",
 			key: "start_date",
-			render: formatEmpty,
+			render: (start_date: TGroup["start_date"]) => (
+				<>
+					<p>{dayjs(start_date).format("D MMMM YYYY")}</p>
+					<p>{dayjs(start_date).format("HH:mm")}</p>
+				</>
+			),
 		},
 		{
 			ellipsis: true,
@@ -89,10 +108,13 @@ export const useColumnsGroups = () => {
 			render: priceFormatter,
 		},
 		{
+			align: "center",
 			title: "Студентов",
-			dataIndex: "student_count",
-			key: "student_count",
-			render: formatEmpty,
+			dataIndex: "students_count",
+			key: "students_count",
+			render: (students_count) => (
+				<UiTag color={"red"}>{formatEmpty(students_count)}</UiTag>
+			),
 		},
 		{
 			fixed: "right",

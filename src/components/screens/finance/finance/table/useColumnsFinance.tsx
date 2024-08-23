@@ -1,5 +1,6 @@
 import { ColumnsType } from "antd/es/table";
 import { Link } from "react-router-dom";
+import { UiTag } from "src/components/ui";
 import { TFinanceTransactionData } from "src/services/index.types";
 import { formatEmpty, priceFormatter } from "src/utils";
 
@@ -30,7 +31,11 @@ export const useColumnsFinance = () => {
 			title: "Сумма",
 			dataIndex: "amount",
 			key: "amount",
-			render: priceFormatter,
+			render: (amount) => (
+				<UiTag color={"green"} bordered={false}>
+					{priceFormatter(amount)}
+				</UiTag>
+			),
 		},
 		{
 			ellipsis: true,

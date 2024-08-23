@@ -67,7 +67,7 @@ const UiInputChat: FC<InputProps & RefAttributes<InputRef> & UiInputChatProps> =
 						>
 							<IoSend
 								color={"royalblue"}
-								style={{ fontSize: 21 }}
+								style={{ fontSize: 21, cursor: "pointer" }}
 							/>
 						</button>
 					)

@@ -1,4 +1,4 @@
-import { Flex, Spin } from "antd";
+import { ConfigProvider, Empty, Flex, Spin } from "antd";
 import dayjs from "dayjs";
 import { FC, useEffect, useRef } from "react";
 import { MessageBox } from "react-chat-elements";
@@ -13,7 +13,6 @@ const Chat: FC = () => {
 
 	const { data: messages } = useGetMessageQuery({});
 	const { data: chat, isLoading, isFetching } = useGetMessageByIdQuery(chat_id);
-
 
 	const scrollToBottom = () => {
 		if (cardRef.current) {
@@ -46,46 +45,63 @@ const Chat: FC = () => {
 						overflowX: "hidden",
 						overflowY: "auto",
 						flexGrow: 1,
+						position: "relative",
 						// scrollBehavior: "smooth",
 					},
 					actions: {
-						padding: "0 16px 16px"
-					}
+						padding: "0 16px 16px",
+					},
 				}}
 				style={{
 					flexGrow: 1,
-					height: "calc(100vh - 148px)", // 6
+					height: "calc(100vh - 148px)",
 					display: "flex",
-					flexDirection: "column"
+					flexDirection: "column",
 				}}
 				actions={[
-					<InputChat />
+					<InputChat />,
 				]}
 			>
-				<Spin spinning={isFetching}>
-					<Flex vertical={true} gap={8} style={{ flexDirection: "column-reverse" }}>
-						{chat?.data?.map(item => (
-							<MessageBox
-								key={item.message_id}
-								focus={false}
-								status={(!item.closed && item.is_answer) ? "sent" : "read"}
-								title={""}
-								forwarded={false}
-								notch={true}
-								removeButton={false}
-								replyButton={false}
-								dateString={item.date}
-								retracted={false}
-								titleColor={""}
-								id={item.message_id}
-								position={item.is_answer ? "right" : "left"}
-								type="text"
-								text={item.message}
-								date={dayjs(item.date).toDate()}
-							/>
-						))}
-					</Flex>
-				</Spin>
+				<ConfigProvider
+					theme={{
+						components: {
+							Spin: {
+								contentHeight: "100%",
+							},
+						},
+					}}
+				>
+					{chat && chat.data.length ? (
+						<Spin spinning={isFetching} style={{ height: "100% !important" }}>
+							<Flex vertical={true} gap={8} style={{ flexDirection: "column-reverse" }}>
+								{chat?.data?.map(item => (
+									<MessageBox
+										key={item.message_id}
+										focus={false}
+										status={(!item.closed && item.is_answer) ? "sent" : "read"}
+										title={""}
+										forwarded={false}
+										notch={true}
+										removeButton={false}
+										replyButton={false}
+										dateString={item.date}
+										retracted={false}
+										titleColor={""}
+										id={item.message_id}
+										position={item.is_answer ? "right" : "left"}
+										type="text"
+										text={item.message}
+										date={dayjs(item.date).toDate()}
+									/>
+								))}
+							</Flex>
+						</Spin>
+					) : (
+						<Flex justify={"center"} align={"center"} style={{ height: "100%" }}>
+							<Empty />
+						</Flex>
+					)}
+				</ConfigProvider>
 				<div ref={cardRef} />
 			</UiCard>
 		</>

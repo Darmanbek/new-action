@@ -24,29 +24,12 @@ export const HeaderLeft = () => {
 		<div className={styles.left}>
 			<UiButton
 				type="text"
-				// className={styles.burger}
 				icon={<MenuIcon />}
 				colorText={primaryColorText}
 				onClick={onToggleMenu}
 				shape={"circle"}
 				aria-label="burger"
 			/>
-			{/*{profile?.data.company && (*/}
-			{/*	<UiTag*/}
-			{/*		color={primaryBgColorComponents}*/}
-			{/*		bordered={false}*/}
-			{/*		style={{*/}
-			{/*			display: "flex",*/}
-			{/*			justifyContent: "center",*/}
-			{/*			alignItems: "center",*/}
-			{/*			borderRadius: 10*/}
-			{/*		}}*/}
-			{/*	>*/}
-			{/*		<h3 style={{ color: primaryColor }}>*/}
-			{/*			{profile?.data?.company?.name}*/}
-			{/*		</h3>*/}
-			{/*	</UiTag>*/}
-			{/*)}*/}
 			{profile?.data.company && (
 				<UiTag
 					color={"transparent"}

@@ -17,7 +17,7 @@ const UiTag: FC<TagProps> = (props) => {
 				}
 			}}
 		>
-			<Tag {...props} />
+			<Tag bordered={false} {...props} />
 		</ConfigProvider>
 	);
 };

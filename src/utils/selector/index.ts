@@ -1,7 +1,9 @@
+import { CheckCircleOutlined, SyncOutlined } from "@ant-design/icons";
+import { createElement } from "react";
 import { TDayTypes, TResponseError, TRoleTypes } from "src/services/index.types";
 
 export const dayTranslation = (day: TDayTypes) => {
-	switch (day) {
+	switch (day.toLowerCase()) {
 		case "odd day":
 			return "Нечетные дни";
 		case "even day":
@@ -11,6 +13,27 @@ export const dayTranslation = (day: TDayTypes) => {
 		default:
 			return day;
 	}
+};
+
+export const completeColor = (is_completed?: boolean): "success" | "processing" => {
+	if (is_completed) {
+		return "success";
+	}
+	return "processing";
+};
+
+export const completeIcon = (is_completed?: boolean) => {
+	if (is_completed) {
+		return createElement(CheckCircleOutlined);
+	}
+	return createElement(SyncOutlined, { spin: true });
+};
+
+export const completeName = (is_completed?: boolean): string => {
+	if (is_completed) {
+		return "Завершено";
+	}
+	return "В процессе";
 };
 
 export const roleColor = (role?: TRoleTypes) => {

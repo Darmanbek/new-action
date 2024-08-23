@@ -63,7 +63,7 @@ export const useColumnsStudents = () => {
 				<Space onClick={(e) => e.stopPropagation()}>
 					<Tooltip title="Смотреть">
 						<UiButton
-							type={"default"}
+							type={"primary"}
 							shape={"circle"}
 							icon={<EyeFilled />}
 							onClick={() => navigate(`students/${student.id}`)}
@@ -75,7 +75,7 @@ export const useColumnsStudents = () => {
 						onConfirm={() => deleteStudent({ student_id: [student.id] })}
 					>
 						<UiButton
-							type={"default"}
+							type={"primary"}
 							shape={"circle"}
 							danger={true}
 							icon={<DeleteOutlined />}

@@ -1,5 +1,5 @@
 import { EditOutlined, UserOutlined } from "@ant-design/icons";
-import { Avatar, Col, Image, Row, Spin, Tooltip } from "antd";
+import { Avatar, Image, Space, Spin, Tooltip } from "antd";
 import { FC } from "react";
 import { useParams } from "react-router-dom";
 import { TTeacher } from "src/services/teachers/teachers.types";
@@ -38,41 +38,40 @@ const DescriptionTeacher: FC = () => {
 						/>
 					</Tooltip>
 				}
+
 			>
-				<Row gutter={16}>
-					<Col span={2}>
-						{teacher?.data?.teacher_data?.avatar ? (
-							<Avatar
-								src={<Image src={teacher.data?.teacher_data?.avatar} />}
-								alt="Teacher avatar"
-								shape={"square"}
-								size={"large"}
-								style={{
-									height: "100%",
-									width: "100%",
-									objectFit: "cover"
-								}}
-							/>
-						) : (
-							<Avatar
-								icon={<UserOutlined style={{ fontSize: 72 }} />}
-								shape={"square"}
-								size={"large"}
-								style={{
-									height: "100%",
-									width: "100%"
-								}}
-							/>
-						)
-						}
-					</Col>
-					<Col span={20}>
-						<UiDescriptions
-							layout={"vertical"}
-							items={items}
+				<Space size={16} style={{ width: "100%" }} align={"start"}>
+					{teacher?.data?.teacher_data?.avatar ? (
+						<Avatar
+							src={<Image src={teacher.data?.teacher_data?.avatar} />}
+							alt="Teacher avatar"
+							shape={"square"}
+							size={"large"}
+							style={{
+								height: "100%",
+								objectFit: "cover",
+								aspectRatio: 1,
+								width: 150,
+							}}
 						/>
-					</Col>
-				</Row>
+					) : (
+						<Avatar
+							icon={<UserOutlined style={{ fontSize: 72 }} />}
+							shape={"square"}
+							size={"large"}
+							style={{
+								height: "100%",
+								aspectRatio: 1,
+								width: 150,
+							}}
+						/>
+					)
+					}
+					<UiDescriptions
+						layout={"vertical"}
+						items={items}
+					/>
+				</Space>
 			</UiCard>
 		</Spin>
 	);

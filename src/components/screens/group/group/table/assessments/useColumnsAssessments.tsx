@@ -38,10 +38,14 @@ export const useColumnsAssessments = (date: Dayjs) => {
 					<span>
 						{`${dayjs(date).get("date")} ${dayjs(date).format("MMM")}`}
 					</span>
-					<Divider style={{ margin: 0 }} />
-					<span>
-						{value}
-					</span>
+					{lesson &&
+						<>
+							<Divider style={{ margin: 0 }} />
+							<span>
+							{value}
+							</span>
+						</>
+					}
 				</Space>
 			);
 		},

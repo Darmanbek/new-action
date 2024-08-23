@@ -13,7 +13,7 @@ import {
 
 	Admin,
 	Acceptance,
-	Company,
+	// Company,
 
 	Finance,
 	// FinanceCompanies,
@@ -44,8 +44,8 @@ export const useRoutes = () => {
 		{ path: "/admins", element: <CustomAdmin /> },
 		{ path: "/admins/:admin_id", element: <CustomAdmin /> },
 
-		{ path: "/companies", element: <Company /> },
-		{ path: "/companies/:company_id", element: <Company /> },
+		// { path: "/companies", element: <Company /> },
+		// { path: "/companies/:company_id", element: <Company /> },
 
 		{ path: "/acceptance", element: <Acceptance /> },
 		{ path: "/acceptance/:acceptance_id", element: <Acceptance /> },

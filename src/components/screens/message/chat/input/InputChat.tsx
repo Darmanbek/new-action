@@ -12,6 +12,7 @@ const InputChat: FC = () => {
 
 	const onFinish: FormProps<TMessageChange>["onFinish"] = (values) => {
 		if (!chat_id) return;
+		if (!values.message) return;
 		addMessage({
 			...values,
 			to_user: chat_id
@@ -35,9 +36,9 @@ const InputChat: FC = () => {
 			<Form.Item<TMessageChange>
 				name={"message"}
 				noStyle={true}
-				rules={[
-					{ required: true }
-				]}
+				// rules={[
+				// 	{ required: true }
+				// ]}
 			>
 				<UiInputChat
 					loading={isLoading}

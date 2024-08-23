@@ -33,6 +33,7 @@ export type TGroupChange = {
 	price: number;
 	start_date?: string;
 	duration: number;
+	day_id: number;
 };
 
 

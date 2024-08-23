@@ -1,20 +1,29 @@
+import dayjs from "dayjs";
 import { useEffect } from "react";
 import { Form, Input } from "antd";
 import { GlobalDrawer } from "src/components/shared";
 import { UiDatePicker, UiInputMonth, UiInputPrice, UiSelect } from "src/components/ui";
 import {
 	useCreateGroupsMutation,
-	useEditGroupsMutation,
+	useEditGroupsMutation, useGetDayQuery,
 	useGetTeachersQuery,
 } from "src/services/index.api";
 import { TGroupChange, TTeacher } from "src/services/index.types";
 import { useFormStorageStore } from "src/store";
-import { dateFormatter, formMessage, inputPlaceholder, selectPlaceholder, datePlaceholder } from "src/utils";
+import {
+	dateFormatter,
+	formMessage,
+	inputPlaceholder,
+	selectPlaceholder,
+	datePlaceholder,
+	dayTranslation,
+} from "src/utils";
 
 export const FormGroups = () => {
 	const [form] = Form.useForm<TGroupChange>();
 	const paramsForm = useFormStorageStore((state) => state.paramsForm);
 	const { data: teachers } = useGetTeachersQuery({});
+	const { data: days } = useGetDayQuery();
 	const {
 		mutate: createGroup,
 		isLoading: createLoading,
@@ -26,14 +35,19 @@ export const FormGroups = () => {
 		isError: editError,
 	} = useEditGroupsMutation();
 
+
 	const teachersOptions = teachers?.data.map((teacher) => ({
 		value: teacher.id,
 		label: `${teacher.first_name} ${teacher.last_name}`,
 	}));
+	const daysOptions = days?.data.map((day) => ({
+		value: day.id,
+		label: dayTranslation(day.name),
+	}));
 
 	const onFinish = (values: TGroupChange) => {
 		if (values.start_date) {
-			values.start_date = dateFormatter(values.start_date);
+			values.start_date = dateFormatter(values.start_date, "YYYY-MM-DD HH:mm:ss");
 		}
 		if (paramsForm) {
 			editGroup({
@@ -52,11 +66,13 @@ export const FormGroups = () => {
 			form.setFieldsValue({
 				...paramsForm,
 				teacher_id:
-					paramsForm.teachers.find((el: TTeacher) => !el.assistant).id ||
+					paramsForm?.teachers?.find((el: TTeacher) => !el.assistant)?.id ||
 					null,
 				assistant:
-					paramsForm.teachers.find((el: TTeacher) => el.assistant).id ||
+					paramsForm?.teachers?.find((el: TTeacher) => el.assistant)?.id ||
 					null,
+				day_id: paramsForm?.day?.id,
+				start_date: paramsForm.start_date ? dayjs(paramsForm.start_date) : null,
 			});
 		}
 	}, [paramsForm, form]);
@@ -120,35 +136,33 @@ export const FormGroups = () => {
 					/>
 				</Form.Item>
 
-				{!paramsForm && (
-					<Form.Item<TGroupChange>
-						name="start_date"
-						label="Стартовая дата"
-						rules={[
-							{
-								required: true,
-								message: formMessage("Дата"),
-							},
-						]}
-					>
-						<UiDatePicker placeholder={datePlaceholder} />
-					</Form.Item>
-				)}
-
-				<Form.Item
-					name="price"
-					label="Цена"
+				<Form.Item<TGroupChange>
+					name={"day_id"}
+					label="Дни"
 					rules={[
 						{
 							required: true,
-							message: formMessage("Цена"),
+							message: formMessage("Дни"),
 						},
 					]}
 				>
-					<UiInputPrice
-						addonAfter={"uzs"}
-						placeholder={inputPlaceholder}
+					<UiSelect
+						placeholder={selectPlaceholder}
+						options={daysOptions}
 					/>
+				</Form.Item>
+
+				<Form.Item<TGroupChange>
+					name={"start_date"}
+					label={"Стартовая дата"}
+					rules={[
+						{
+							required: true,
+							message: formMessage("Стартовая дата"),
+						},
+					]}
+				>
+					<UiDatePicker showTime={true} placeholder={datePlaceholder} />
 				</Form.Item>
 
 				<Form.Item<TGroupChange>
@@ -163,6 +177,22 @@ export const FormGroups = () => {
 				>
 					<UiInputMonth
 						min={0}
+						placeholder={inputPlaceholder}
+					/>
+				</Form.Item>
+
+				<Form.Item
+					name="price"
+					label="Цена"
+					rules={[
+						{
+							required: true,
+							message: formMessage("Цена"),
+						},
+					]}
+				>
+					<UiInputPrice
+						addonAfter={"UZS"}
 						placeholder={inputPlaceholder}
 					/>
 				</Form.Item>

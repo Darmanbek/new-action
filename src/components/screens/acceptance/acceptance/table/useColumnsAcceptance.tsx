@@ -2,11 +2,11 @@ import { Space, Tooltip } from "antd";
 import { ColumnsType } from "antd/es/table";
 import { DeleteOutlined, CheckOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-import { GlobalPopconfirm, ApproveCheck } from "src/components/shared";
-import { UiButton } from "src/components/ui";
+import { GlobalPopconfirm } from "src/components/shared";
+import { UiButton, UiTag } from "src/components/ui";
 import { useDeleteAcceptanceMutation, useEditAcceptanceMutation } from "src/services/index.api";
 import { TAcceptance } from "src/services/index.types";
-import { phoneFormatter } from "src/utils";
+import { completeColor, completeIcon, phoneFormatter } from "src/utils";
 
 export const useColumnsAcceptance = () => {
 	const { mutate: deleteAcceptance } = useDeleteAcceptanceMutation();
@@ -41,11 +41,15 @@ export const useColumnsAcceptance = () => {
 		{
 			ellipsis: true,
 			align: "center",
-			title: "Подтверждено",
+			title: "Статус",
 			dataIndex: "is_acceptance",
 			key: "is_acceptance",
 			render: (is_acceptance: boolean) => (
-				<ApproveCheck isValue={is_acceptance} />
+				<UiTag
+					icon={completeIcon(is_acceptance)}
+					color={completeColor(is_acceptance)}>
+					{is_acceptance ? "Подтвержден" : "Ожидание"}
+				</UiTag>
 			),
 		},
 		{
