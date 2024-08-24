@@ -30,7 +30,7 @@ const axiosCreateTeachers = async (
 const axiosEditTeachers = async (
 	value: TTeacherFormDataChange
 ): Promise<TResponseSingleData<TTeacher>> => {
-	const response = await api.put(`/admin/teachers/${value.id}`, value.formData);
+	const response = await api.post(`/admin/teachers/${value.id}`, value.formData);
 	return response.data;
 };
 

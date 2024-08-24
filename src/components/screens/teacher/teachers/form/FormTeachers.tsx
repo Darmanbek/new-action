@@ -52,9 +52,10 @@ export const FormTeachers = () => {
 			formData.append("birthday", dateFormatter(values.birthday));
 		}
 		if (paramsForm) {
+			formData.append("_method", "PATCH");
 			editTeacher({
 				formData,
-				id: paramsForm.id
+				id: paramsForm.id,
 			});
 		} else {
 			addTeacher(formData);
@@ -67,7 +68,7 @@ export const FormTeachers = () => {
 				...paramsForm,
 				phone: `+${paramsForm.phone}`,
 				is_male: paramsForm.teacher_data?.is_male,
-				birthday: paramsForm.teacher_data?.birthday ? dayjs(paramsForm.teacher_data.birthday) : null
+				birthday: paramsForm.teacher_data?.birthday ? dayjs(paramsForm.teacher_data.birthday) : null,
 			});
 		}
 	}, [paramsForm, form]);
@@ -155,7 +156,7 @@ export const FormTeachers = () => {
 								accept=".png, .jpg, .jpeg"
 								style={{
 									display: "flex",
-									justifyContent: "center"
+									justifyContent: "center",
 								}}
 							>
 								{/*<Button icon={<UploadOutlined />}>Нажмите, чтобы загрузить</Button>*/}
@@ -175,7 +176,7 @@ export const FormTeachers = () => {
 							name={"is_male"}
 							label={"Пол"}
 							rules={[
-								{ required: true, message: formMessage("Пол") }
+								{ required: true, message: formMessage("Пол") },
 							]}
 						>
 							<Radio.Group

@@ -1,3 +1,4 @@
+import { Key } from "react";
 import { TBalance, TPaymentHistory } from "src/services/index.types";
 
 export type TRoleTypes = "super_admin" | "admin" | "director";
@@ -19,6 +20,7 @@ export type TLangType = {
 };
 
 export type TStudent = {
+	key: Key,
 	id: string;
 	first_name: string;
 	last_name: string;
@@ -47,7 +49,7 @@ export type TTransaction = {
 export type TLesson = {
 	id: string | number;
 	title: string;
-	is_holiday: false;
+	// is_holiday: false;
 	is_exam: false;
 	price?: number;
 	date: string;

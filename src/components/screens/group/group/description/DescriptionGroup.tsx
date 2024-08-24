@@ -1,8 +1,8 @@
 import { ArrowLeftOutlined } from "@ant-design/icons";
-import { Divider, Space, Spin, Tooltip } from "antd";
+import { Divider, Space, Spin } from "antd";
 import { FC } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { UiButton, UiCard, UiDescriptions, UiTag } from "src/components/ui";
+import { UiCard, UiDescriptions, UiTag, UiTooltipButton } from "src/components/ui";
 import { useGetGroupsByIdQuery } from "src/services/index.api";
 import { completeColor, completeIcon, completeName } from "src/utils";
 
@@ -32,9 +32,14 @@ const DescriptionGroup: FC = () => {
 
 				) : "Группа"}
 				extra={
-					<Tooltip title={"Назад"}>
-						<UiButton type={"primary"} icon={<ArrowLeftOutlined />} onClick={() => navigate(-1)}/>
-					</Tooltip>
+					<UiTooltipButton
+						title={"Назад"}
+						type={"primary"}
+						icon={<ArrowLeftOutlined />}
+						onClick={() => navigate(-1)}
+					>
+						Назад
+					</UiTooltipButton>
 				}
 			>
 				<UiDescriptions

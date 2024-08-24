@@ -1,4 +1,5 @@
 import { ColumnsType } from "antd/es/table";
+import { UiTag } from "src/components/ui";
 import { TDashboardAdmin } from "src/services/index.types";
 import { formatEmpty, phoneFormatter } from "src/utils";
 
@@ -32,8 +33,12 @@ export const useColumnsAdmins = () => {
 			title: "Филиал",
 			dataIndex: "company",
 			key: "company",
-			render: formatEmpty
-		}
+			render: (company: TDashboardAdmin["company"]) => company ? (
+				<UiTag color={"red"}>
+					{formatEmpty(company)}
+				</UiTag>
+			) : "-",
+		},
 	];
 
 	return columns;

@@ -73,7 +73,7 @@ export const useColumnsTeachers = () => {
 				<Space onClick={(e) => e.stopPropagation()}>
 					<Tooltip title="Смотреть">
 						<UiButton
-							type={"primary"}
+							shape={"circle"}
 							icon={<EyeFilled />}
 							onClick={() => navigate(`/teachers/${teacher.id}`)}
 							aria-label={"View"}
@@ -81,6 +81,7 @@ export const useColumnsTeachers = () => {
 					</Tooltip>
 					<Tooltip title="Изменить">
 						<UiButton
+							shape={"circle"}
 							type={"primary"}
 							color={"orange"}
 							icon={<EditOutlined />}
@@ -94,6 +95,7 @@ export const useColumnsTeachers = () => {
 					>
 						<Tooltip title="Удалить">
 							<UiButton
+								shape={"circle"}
 								type={"primary"}
 								danger={true}
 								icon={<DeleteOutlined />}

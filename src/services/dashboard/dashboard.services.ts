@@ -5,7 +5,7 @@ import {
 	TDashboardCompany,
 	TDashboardCompanyItem,
 	TDashboardStudentsRating,
-	TDashboardTeachersRating
+	TDashboardTeachersRating,
 } from "./dashboard.types";
 
 
@@ -24,13 +24,13 @@ const axiosGetDashboardAdmins = async (): Promise<TResponseData<TDashboardAdmin>
 	return response.data;
 };
 
-const axiosGetDashboardStudentsRating = async (): Promise<TResponse<TDashboardStudentsRating>> => {
-	const response = await api.get(`/dashboard/students/rating`);
+const axiosGetDashboardStudentsRating = async (id?: number | string): Promise<TResponse<TDashboardStudentsRating>> => {
+	const response = await api.get(`/dashboard/students/rating/${id}`);
 	return response.data;
 };
 
-const axiosGetDashboardTeachersRating = async (): Promise<TResponse<TDashboardTeachersRating>> => {
-	const response = await api.get(`/dashboard/teachers/rating`);
+const axiosGetDashboardTeachersRating = async (id?: number | string): Promise<TResponse<TDashboardTeachersRating>> => {
+	const response = await api.get(`/dashboard/teachers/rating/${id}`);
 	return response.data;
 };
 
@@ -39,5 +39,5 @@ export {
 	axiosGetDashboardCompaniesById,
 	axiosGetDashboardAdmins,
 	axiosGetDashboardStudentsRating,
-	axiosGetDashboardTeachersRating
+	axiosGetDashboardTeachersRating,
 };

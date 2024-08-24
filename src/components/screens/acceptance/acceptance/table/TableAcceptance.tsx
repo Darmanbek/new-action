@@ -22,7 +22,7 @@ export const TableAcceptance = () => {
 				<HeadTable
 					title="Заявки"
 					children={[
-						<SearchListInput placeholder="Поиск" />,
+						<SearchListInput key={"Search"} placeholder="Поиск" />,
 					]}
 				/>
 			)}

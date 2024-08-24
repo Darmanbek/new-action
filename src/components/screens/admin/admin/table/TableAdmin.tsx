@@ -1,6 +1,5 @@
-import { Tooltip } from "antd";
 import { HeadTable } from "src/components/shared";
-import { UiButton, UiTable } from "src/components/ui";
+import { UiTable, UiTooltipButton } from "src/components/ui";
 import { TAdmin } from "src/services/index.types";
 import { useGetAdminsQuery } from "src/services/index.api";
 import { useFormStorageStore } from "src/store";
@@ -18,14 +17,15 @@ export const TableAdmin = () => {
 				<HeadTable
 					title="Админы"
 					children={[
-						<Tooltip title="Добавить" key="Add">
-							<UiButton
-								key="Add_Button"
-								type="primary"
-								icon={<PlusOutlined />}
-								onClick={toggleDrawer}
-							/>
-						</Tooltip>,
+						<UiTooltipButton
+							title="Добавить"
+							key="Add_Button"
+							type="primary"
+							icon={<PlusOutlined />}
+							onClick={toggleDrawer}
+						>
+							Добавить
+						</UiTooltipButton>,
 					]}
 				/>
 			)}

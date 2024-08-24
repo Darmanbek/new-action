@@ -62,6 +62,7 @@ export const useColumnsAcceptance = () => {
 					<Tooltip title="Потвердить">
 						<UiButton
 							type={"primary"}
+							shape={"circle"}
 							color={"green"}
 							disabled={acceptance.is_acceptance}
 							icon={<CheckOutlined />}
@@ -81,6 +82,7 @@ export const useColumnsAcceptance = () => {
 						<Tooltip title="Удалить">
 							<UiButton
 								type="primary"
+								shape={"circle"}
 								danger
 								icon={<DeleteOutlined />}
 								aria-label="Delete"

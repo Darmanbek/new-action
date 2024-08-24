@@ -6,7 +6,7 @@ export const UiMenu = (props: React.PropsWithChildren<MenuProps>) => {
 	const { isMobile } = useResponsive(768);
 
 	const {
-		token: { colorPrimary },
+		token: { colorPrimary, colorPrimaryBg },
 	} = theme.useToken();
 	return (
 		<ConfigProvider
@@ -18,7 +18,7 @@ export const UiMenu = (props: React.PropsWithChildren<MenuProps>) => {
 						itemSelectedColor: colorPrimary,
 						subMenuItemBg: "#fff",
 						itemColor: "rgba(22, 52, 88, 0.6)",
-						controlItemBgActive: "#ffe8e8",
+						controlItemBgActive: colorPrimaryBg,
 						groupTitleFontSize: isMobile ? 14 : 16,
 						itemHeight: isMobile ? 40 : 44,
 						fontSize: isMobile ? 14 : 16,

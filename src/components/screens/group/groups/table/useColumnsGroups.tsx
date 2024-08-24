@@ -34,6 +34,7 @@ export const useColumnsGroups = () => {
 			title: "Название",
 			dataIndex: "name",
 			key: "name",
+			render: formatEmpty
 		},
 		{
 			ellipsis: true,
@@ -127,7 +128,7 @@ export const useColumnsGroups = () => {
 				<Space onClick={(e) => e.stopPropagation()}>
 					<Tooltip title="Смотреть">
 						<UiButton
-							type="primary"
+							shape={"circle"}
 							icon={<EyeFilled />}
 							onClick={() => navigate(`/groups/${group.id}`)}
 							aria-label="View"
@@ -136,6 +137,7 @@ export const useColumnsGroups = () => {
 					<Tooltip title="Изменить">
 						<UiButton
 							type="primary"
+							shape={"circle"}
 							color="orange"
 							icon={<EditOutlined />}
 							onClick={() => onEditGroups(group)}
@@ -149,6 +151,7 @@ export const useColumnsGroups = () => {
 						<Tooltip title="Удалить">
 							<UiButton
 								type="primary"
+								shape={"circle"}
 								danger
 								icon={<DeleteOutlined />}
 								aria-label="Delete"

@@ -1,8 +1,8 @@
-import { Space, Tooltip } from "antd";
+import { Space } from "antd";
 import { ColumnsType } from "antd/es/table";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { GlobalPopconfirm } from "src/components/shared";
-import { UiButton, UiTag } from "src/components/ui";
+import { UiTag, UiTooltipButton } from "src/components/ui";
 import { useDeleteAdminsMutation } from "src/services/index.api";
 import { useFormStorageStore } from "src/store";
 import { formatEmpty, phoneFormatter } from "src/utils";
@@ -46,27 +46,29 @@ export const useColumnsAdmin = () => {
 			key: "action",
 			render: (_, admin) => (
 				<Space>
-					<Tooltip title="Изменить">
-						<UiButton
-							type="primary"
-							color="orange"
-							icon={<EditOutlined />}
-							onClick={() => onEditAdmin(admin)}
-							aria-label="Edit"
-						/>
-					</Tooltip>
+					<UiTooltipButton
+						title="Изменить"
+						shape={"circle"}
+						type="primary"
+						color="orange"
+						showTitle={true}
+						icon={<EditOutlined />}
+						onClick={() => onEditAdmin(admin)}
+						aria-label="Edit"
+					/>
 					<GlobalPopconfirm
 						onConfirm={() => deleteAdmin(admin.id)}
 						title={`${admin.first_name} ${admin.last_name}`}
 					>
-						<Tooltip title="Удалить">
-							<UiButton
-								type="primary"
-								danger
-								icon={<DeleteOutlined />}
-								aria-label="Delete"
-							/>
-						</Tooltip>
+						<UiTooltipButton
+							title="Удалить"
+							shape={"circle"}
+							type="primary"
+							showTitle={true}
+							danger
+							icon={<DeleteOutlined />}
+							aria-label="Delete"
+						/>
 					</GlobalPopconfirm>
 				</Space>
 			),

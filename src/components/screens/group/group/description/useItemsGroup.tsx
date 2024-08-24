@@ -1,8 +1,9 @@
 import { DescriptionsItemType } from "antd/es/descriptions";
 import dayjs from "dayjs";
+import { Link } from "react-router-dom";
 import { UiBadge } from "src/components/ui";
 import { TGroup } from "src/services/index.types";
-import { completeColor, completeName, formatEmpty, monthGrammar, priceFormatter } from "src/utils";
+import { completeColor, completeName, dayTranslation, formatEmpty, monthGrammar, priceFormatter } from "src/utils";
 
 
 export const useItemsGroup = (data?: TGroup) => {
@@ -19,17 +20,25 @@ export const useItemsGroup = (data?: TGroup) => {
 		{
 			key: "teacher",
 			label: "Учитель",
-			children: `${formatEmpty(teacher?.first_name)} ${formatEmpty(teacher?.last_name)}`,
+			children: (
+				<Link to={`/teachers/${teacher?.id}`}>
+					{`${formatEmpty(teacher?.first_name)} ${formatEmpty(teacher?.last_name)}`}
+				</Link>
+			),
 		},
 		{
 			key: "assistant",
 			label: "Ассистент",
-			children: `${formatEmpty(assistant?.first_name)} ${formatEmpty(assistant?.last_name)}`,
+			children: (
+				<Link to={`/teachers/${assistant?.id}`}>
+					{`${formatEmpty(assistant?.first_name)} ${formatEmpty(assistant?.last_name)}`}
+				</Link>
+			),
 		},
 		{
 			key: "day",
 			label: "Дни",
-			children: formatEmpty(data?.day?.name),
+			children: dayTranslation(data?.day?.name || ""),
 		},
 		{
 			key: "price",

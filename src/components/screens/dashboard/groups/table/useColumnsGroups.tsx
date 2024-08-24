@@ -1,11 +1,17 @@
+import { EyeFilled } from "@ant-design/icons";
+import { Space, Tooltip } from "antd";
 import { ColumnsType } from "antd/es/table";
-import { ApproveCheck } from "src/components/shared";
-import { UiTag } from "src/components/ui";
+import dayjs from "dayjs";
+import "dayjs/locale/ru";
+import { useNavigate } from "react-router-dom";
+import { UiBadge, UiButton, UiTag } from "src/components/ui";
 import { TGroup } from "src/services/groups/groups.types";
-import { formatEmpty, monthGrammar, priceFormatter } from "src/utils";
+import { dayTranslation, formatEmpty, monthGrammar, priceFormatter } from "src/utils";
 
+dayjs.locale("ru");
 
 export const useColumnsGroups = () => {
+	const navigate = useNavigate();
 
 	const columns: ColumnsType<TGroup> = [
 		{
@@ -14,36 +20,41 @@ export const useColumnsGroups = () => {
 			title: "№",
 			dataIndex: "index",
 			key: "index",
-			render: (_v, _r, index) => index + 1,
+			render: (_v, group, index) => (
+				<Tooltip title={group.is_completed ? "Завершён" : "В процессе"}>
+					<UiBadge status={group.is_completed ? "success" : "processing"} text={index + 1} />
+				</Tooltip>
+			),
 		},
 		{
 			ellipsis: true,
 			title: "Название",
 			dataIndex: "name",
 			key: "name",
+			render: formatEmpty,
 		},
-		{
-			ellipsis: true,
-			title: "Учитель",
-			dataIndex: "teachers",
-			key: "teachers",
-			render: (teachers: TGroup["teachers"]) => {
-				const teacher = teachers.find((t) => !t.assistant);
-				return teacher ? `${teacher.first_name} ${teacher.last_name}` : "-";
-			},
-		},
-		{
-			ellipsis: true,
-			title: "Ассистент",
-			dataIndex: "teachers",
-			key: "assistant",
-			render: (teachers: TGroup["teachers"]) => {
-				const assistant = teachers.find((t) => t.assistant);
-				return assistant
-					? `${assistant.first_name} ${assistant.last_name}`
-					: "-";
-			},
-		},
+		// {
+		// 	ellipsis: true,
+		// 	title: "Учитель",
+		// 	dataIndex: "teachers",
+		// 	key: "teachers",
+		// 	render: (teachers: TGroup["teachers"]) => {
+		// 		const teacher = teachers?.find((t) => !t.assistant);
+		// 		return teacher ? `${teacher?.first_name} ${teacher?.last_name}` : "-";
+		// 	},
+		// },
+		// {
+		// 	ellipsis: true,
+		// 	title: "Ассистент",
+		// 	dataIndex: "teachers",
+		// 	key: "assistant",
+		// 	render: (teachers: TGroup["teachers"]) => {
+		// 		const assistant = teachers?.find((t) => t.assistant);
+		// 		return assistant
+		// 			? `${assistant?.first_name} ${assistant?.last_name}`
+		// 			: "-";
+		// 	},
+		// },
 		{
 			align: "center",
 			ellipsis: true,
@@ -52,16 +63,21 @@ export const useColumnsGroups = () => {
 			key: "day",
 			render: (day: TGroup["day"]) => (
 				<UiTag color={day.id === 1 ? "blue" : "green"}>
-					{formatEmpty(day?.name)}
+					{dayTranslation(day?.name)}
 				</UiTag>
-			)
+			),
 		},
 		{
 			ellipsis: true,
 			title: "Стартовая дата",
 			dataIndex: "start_date",
 			key: "start_date",
-			render: formatEmpty,
+			render: (start_date: TGroup["start_date"]) => (
+				<>
+					<p>{dayjs(start_date).format("D MMMM YYYY")}</p>
+					<p>{dayjs(start_date).format("HH:mm")}</p>
+				</>
+			),
 		},
 		{
 			ellipsis: true,
@@ -74,15 +90,35 @@ export const useColumnsGroups = () => {
 			title: "Цена",
 			dataIndex: "price",
 			key: "price",
-			render: (price: string) => `${priceFormatter(Number(price))} uzs`,
+			render: priceFormatter,
 		},
 		{
 			align: "center",
-			title: "Завершено",
-			dataIndex: "is_completed",
-			key: "is_completed",
-			render: (is_completed: boolean) => (
-				<ApproveCheck isValue={is_completed} />
+			title: "Студентов",
+			dataIndex: "student_count",
+			key: "student_count",
+			render: (students_count) => (
+				<UiTag color={"red"}>{formatEmpty(students_count)}</UiTag>
+			),
+		},
+		{
+			fixed: "right",
+			align: "center",
+			width: 150,
+			dataIndex: "actions",
+			title: "Действия",
+			key: "action",
+			render: (_, group) => (
+				<Space onClick={(e) => e.stopPropagation()}>
+					<Tooltip title="Смотреть">
+						<UiButton
+							shape={"circle"}
+							icon={<EyeFilled />}
+							onClick={() => navigate(`/groups/${group.id}`)}
+							aria-label="View"
+						/>
+					</Tooltip>
+				</Space>
 			),
 		},
 	];

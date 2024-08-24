@@ -7,5 +7,6 @@ export * from "./finance";
 export * from "./group";
 export * from "./teacher";
 export * from "./dashboard";
+export * from "./holiday";
 
 export * from "./message";

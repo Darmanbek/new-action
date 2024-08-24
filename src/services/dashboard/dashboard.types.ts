@@ -1,9 +1,9 @@
-import { TGroup } from "src/services/index.types";
+import { TAdmin, TGroup } from "src/services/index.types";
 
 export type TDashboardCompany = {
 	id: string;
 	name: string;
-	admin: string;
+	admin: TAdmin;
 }
 
 export type TDashboardCompanyItem = {

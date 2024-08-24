@@ -25,7 +25,7 @@ export const formatNum = <T>(value: T) =>
 export const formatPercent = <T>(value: T) => `${value}%`;
 export const formatMonth = <T>(value: T) => value ? `${value} ${monthGrammar(value)}` : "";
 
-export const dateFormatter = (date: string, format?: string) =>
+export const dateFormatter = (date?: string, format?: string) =>
 	dayjs(date).format(format || "YYYY-MM-DD");
 
 export const lowerCase = (text: string) => text.toLowerCase();

@@ -36,6 +36,7 @@ export const useColumnsMessage = () => {
 					<Tooltip title={"Чат"}>
 						<Badge count={message.closed_count}>
 							<UiButton
+								shape={"circle"}
 								color={"royalblue"}
 								type={"primary"}
 								icon={<FaTelegramPlane style={{ fontSize: 24 }} />}

@@ -6,13 +6,13 @@ import {
 	DeleteOutlined,
 	EyeFilled,
 } from "@ant-design/icons";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { ColumnsType } from "antd/es/table";
 import { GlobalPopconfirm } from "src/components/shared";
-import { UiButton } from "src/components/ui";
+import { UiButton, UiTag } from "src/components/ui";
 import { useDeleteGroupsStudentsMutation } from "src/services/groups/groups.api";
 import { TStudent } from "src/services/index.types";
-import { phoneFormatter } from "src/utils";
+import { phoneFormatter, priceFormatter } from "src/utils";
 
 export const useColumnsStudents = () => {
 	const navigate = useNavigate();
@@ -34,7 +34,11 @@ export const useColumnsStudents = () => {
 			title: "Студент",
 			dataIndex: "name",
 			key: "name",
-			render: (_, student) => `${student.first_name} ${student.last_name}`,
+			render: (_, student) => (
+				<Link to={`students/${student.id}`}>
+					{`${student.first_name} ${student.last_name}`}
+				</Link>
+			),
 		},
 		{
 			ellipsis: true,
@@ -43,16 +47,18 @@ export const useColumnsStudents = () => {
 			key: "phone",
 			render: phoneFormatter,
 		},
-		// {
-		// 	align: "center",
-		// 	ellipsis: true,
-		// 	title: "Оплата",
-		// 	dataIndex: "payment_history",
-		// 	key: "payment_check",
-		// 	render: (payment_history: boolean) => (
-		// 		<ApproveCheck isValue={payment_history} />
-		// 	),
-		// },
+		{
+			align: "center",
+			ellipsis: true,
+			title: "Баланс",
+			dataIndex: "balance",
+			key: "balance",
+			render: (balance: TStudent["balance"]) => (
+				<UiTag color={Number(balance?.total_amount) >= 0 ? "green" : "red"}>
+					{priceFormatter(balance?.total_amount)}
+				</UiTag>
+			),
+		},
 		{
 			fixed: "right",
 			width: 100,
@@ -63,7 +69,6 @@ export const useColumnsStudents = () => {
 				<Space onClick={(e) => e.stopPropagation()}>
 					<Tooltip title="Смотреть">
 						<UiButton
-							type={"primary"}
 							shape={"circle"}
 							icon={<EyeFilled />}
 							onClick={() => navigate(`students/${student.id}`)}
@@ -75,7 +80,6 @@ export const useColumnsStudents = () => {
 						onConfirm={() => deleteStudent({ student_id: [student.id] })}
 					>
 						<UiButton
-							type={"primary"}
 							shape={"circle"}
 							danger={true}
 							icon={<DeleteOutlined />}

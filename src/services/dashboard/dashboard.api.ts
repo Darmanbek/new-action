@@ -47,24 +47,26 @@ const useGetDashboardAdminsQuery = () => {
 	});
 };
 
-const useGetDashboardStudentsRatingQuery = () => {
+const useGetDashboardStudentsRatingQuery = (id?: number | string) => {
 	const { message } = useMessage();
 	return useQuery({
-		queryFn: axiosGetDashboardStudentsRating,
-		queryKey: ["dashboard-students-rating"],
+		queryFn: () => axiosGetDashboardStudentsRating(id),
+		queryKey: ["dashboard-students-rating", id],
 		keepPreviousData: true,
+		enabled: !!id,
 		onError: (error: TResponseError) => {
 			message.error(errorResponse(error));
 		},
 	});
 };
 
-const useGetDashboardTeachersRatingQuery = () => {
+const useGetDashboardTeachersRatingQuery = (id?: number | string) => {
 	const { message } = useMessage();
 	return useQuery({
-		queryFn: axiosGetDashboardTeachersRating,
-		queryKey: ["dashboard-teachers-rating"],
+		queryFn: () => axiosGetDashboardTeachersRating(id),
+		queryKey: ["dashboard-teachers-rating", id],
 		keepPreviousData: true,
+		enabled: !!id,
 		onError: (error: TResponseError) => {
 			message.error(errorResponse(error));
 		},

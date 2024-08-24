@@ -9,6 +9,7 @@ export type TTokenAuth = {
 	role: TRoleTypes;
 	role_id: number;
 	token: string;
+	company: TCompany;
 };
 
 export type TProfileAuth = {

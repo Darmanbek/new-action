@@ -1,10 +1,14 @@
-import { Divider, Space } from "antd";
 import { ColumnsType } from "antd/es/table";
-import dayjs, { Dayjs } from "dayjs";
+import { Dayjs } from "dayjs";
 import { Link, useParams } from "react-router-dom";
-import { ApproveCheckValue } from "src/components/shared";
-import { useGetGroupsByIdCalendarQuery, useGetGroupsByIdLessonsQuery } from "src/services/index.api";
+import { AssessmentsTitle, AssessmentsValue } from "src/components/shared";
+import {
+	useGetGroupsByIdCalendarQuery,
+	useGetGroupsByIdLessonsQuery,
+	useGetHolidayQuery,
+} from "src/services/index.api";
 import { TGroupAssessment } from "src/services/groups/groups.types";
+import { dateFormatter } from "src/utils";
 
 export const useColumnsAssessments = (date: Dayjs) => {
 	const { group_id } = useParams();
@@ -18,101 +22,92 @@ export const useColumnsAssessments = (date: Dayjs) => {
 		data: lessons,
 	} = useGetGroupsByIdLessonsQuery(group_id);
 
+	const { data: holiday } = useGetHolidayQuery({
+		date: [date.startOf("month").format("YYYY-MM-DD"), date.endOf("month").format("YYYY-MM-DD")],
+	});
+
 	const columns: ColumnsType<TGroupAssessment> = calendar?.data.map(date => ({
 		align: "center",
 		ellipsis: true,
-		title: () => {
-			const lesson = lessons?.data.find(el => dayjs(el.date).format("YYYY-MM-DD") === dayjs(date).format("YYYY-MM-DD"));
-			const value =
-				lesson ?
-					lesson.is_holiday ?
-						"Выходной" : lesson.is_exam ?
-							"Экзамен" : lesson.is_free ?
-								"Бесплатно" : lesson.title ?
-									lesson.title :
-									"Урок" :
-					"";
-
-			return (
-				<Space direction={"vertical"}>
-					<span>
-						{`${dayjs(date).get("date")} ${dayjs(date).format("MMM")}`}
-					</span>
-					{lesson &&
-						<>
-							<Divider style={{ margin: 0 }} />
-							<span>
-							{value}
-							</span>
-						</>
-					}
-				</Space>
-			);
-		},
+		title: () => <AssessmentsTitle date={date} holiday={holiday?.data} lessons={lessons?.data} />,
 		key: date,
 		onHeaderCell: () => {
-			const lesson = lessons?.data.find(el => dayjs(el.date).format("YYYY-MM-DD") === dayjs(date).format("YYYY-MM-DD"));
-			if (!lesson) return {};
+			const lesson = lessons?.data.find(el => dateFormatter(el.date) === dateFormatter(date));
 
-			const color = lesson.is_holiday ?
-				"rgba(255, 0, 0, 0.4)" : lesson.is_exam ?
-					"rgba(0, 255, 0, 0.4)" : lesson.is_free ?
-						"rgba(0, 0, 255, 0.4)" : "transparent";
+			const isHoliday = holiday?.data.some(el => dateFormatter(el.date) === dateFormatter(date)) ?? false;
+
+			const getValue = () => {
+				if (lesson) {
+					if (lesson.is_exam) {
+						return {
+							backgroundColor: "#fff1f0",
+							color: "#cf1322",
+						};
+					}
+					if (lesson.is_free) {
+						return {
+							backgroundColor: "#fff1f0",
+							color: "#cf1322",
+						};
+					}
+				}
+				if (isHoliday) {
+					return {
+						backgroundColor: "#f6ffed",
+						color: "#389e0d",
+					};
+				}
+				return {};
+			};
+
+			const style = getValue();
 
 			return ({
-				style: {
-					backgroundColor: color,
-					// borderInline: "1px solid #f0f0f0",
-					// borderRadius: 8,
-				},
+				style,
 			});
 		},
 		onCell: () => {
-			const lesson = lessons?.data.find(el => dayjs(el.date).format("YYYY-MM-DD") === dayjs(date).format("YYYY-MM-DD"));
-			if (!lesson) return {};
+			const lesson = lessons?.data.find(el => dateFormatter(el.date) === dateFormatter(date));
 
-			const color = lesson.is_holiday ?
-				"rgba(255, 0, 0, 0.4)" : lesson.is_exam ?
-					"rgba(0, 255, 0, 0.4)" : lesson.is_free ?
-						"rgba(0, 0, 255, 0.4)" : "transparent";
+			const isHoliday = !!holiday?.data.find(el => dateFormatter(el.date) === dateFormatter(date));
+
+			const getValue = () => {
+				if (lesson) {
+					if (lesson.is_exam) {
+						return {
+							backgroundColor: "#fff1f0",
+							color: "#cf1322",
+						};
+					}
+					if (lesson.is_free) {
+						return {
+							backgroundColor: "#e6f4ff",
+							color: "#0958d9",
+						};
+					}
+				}
+				if (isHoliday) {
+					return {
+						backgroundColor: "#f6ffed",
+						color: "#389e0d",
+					};
+				}
+				return {};
+			};
+
+			const style = getValue();
 
 			return ({
-				style: {
-					backgroundColor: color,
-					// borderInline: "1px solid #f0f0f0",
-					// borderRadius: 8,
-				},
+				style,
 			});
 		},
 
-		render: (_v, r) => {
-			const assessments = r.assessments.find(el => el.date === date);
-			if (!assessments) return "";
-
-			if (assessments.is_available) return assessments.value;
-
-			if (assessments.consented) return (
-				<ApproveCheckValue
-					colorInverse={true}
-					isValue={assessments.is_available}
-					yesText={"Был"}
-					noText={"Нет с причиной"}
-				/>
-			);
-
-			return (
-				<ApproveCheckValue
-					colorInverse={true}
-					isValue={assessments.is_available}
-					yesText={"Был"}
-					noText={"Нет"}
-				/>
-			);
-		},
+		render: (_v, assessment) => <AssessmentsValue date={date} assessments={assessment.assessments} />,
 	})) || [];
 
 	columns.unshift({
 		ellipsis: true,
+		fixed: "left",
 		// rowScope: "row",
 		title: "Студент",
 		key: "student",

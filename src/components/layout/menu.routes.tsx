@@ -7,7 +7,7 @@ import {
 } from "@ant-design/icons";
 import { BsBuildings } from "react-icons/bs";
 import { IoLayersOutline } from "react-icons/io5";
-import { LuPieChart } from "react-icons/lu";
+import { LuCalendarCheck, LuPieChart } from "react-icons/lu";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { PiChatsLight } from "react-icons/pi";
 import { getRoleFromToken } from "src/config/token.config";
@@ -22,7 +22,7 @@ export const useMenuRoutes = () => {
 		{ key: "/groups", icon: <IoLayersOutline />, label: "Группы" },
 		{ key: "/companies", icon: <BsBuildings />, label: "Филиалы" },
 		{ key: "/acceptance", icon: <MdOutlineMailOutline />, label: "Заявки" },
-		// { key: "/holiday", icon: <LuCalendarCheck />, label: "Каникулы" },
+		{ key: "/holiday", icon: <LuCalendarCheck />, label: "Праздничные дни" },
 		{
 			key: "/finance", icon: <LuPieChart />, label: "Финансы",
 			children: [

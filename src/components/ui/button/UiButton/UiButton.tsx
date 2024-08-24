@@ -7,12 +7,12 @@ interface UiButtonProps {
 }
 
 export const UiButton = (
-	props: React.PropsWithChildren<UiButtonProps & ButtonProps>
+	props: React.PropsWithChildren<UiButtonProps & ButtonProps>,
 ) => {
 	const { color, colorText, ...rest } = props;
 
 	const {
-		token
+		token,
 	} = theme.useToken();
 
 	return (
@@ -20,7 +20,7 @@ export const UiButton = (
 			theme={{
 				token: {
 					colorPrimary: color || token.colorPrimary,
-					colorText: colorText || token.colorText
+					colorText: colorText || token.colorText,
 				},
 			}}
 		>

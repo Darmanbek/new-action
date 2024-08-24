@@ -10,6 +10,7 @@ export * from "./balance/balance.api";
 export * from "./finance/finance.api";
 export * from "./dashboard/dashboard.api";
 export * from "./day/day.api";
+export * from "./holiday/holiday.api";
 
 export * from "./message/message.api";
 

@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { Tooltip } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { HeadTable, SearchListInput } from "src/components/shared";
-import { UiButton, UiTable } from "src/components/ui";
+import { UiTable, UiTooltipButton } from "src/components/ui";
 import { TGroup } from "src/services/index.types";
 import { useGetGroupsQuery } from "src/services/index.api";
 import { useFormStorageStore, useSearchListStore } from "src/store";
@@ -32,14 +31,15 @@ export const TableGroups = () => {
 					title="Группы"
 					children={[
 						<SearchListInput key="Search" placeholder="Поиск" />,
-						<Tooltip title="Добавить" key="Add">
-							<UiButton
-								key="Add_Button"
-								type="primary"
-								icon={<PlusOutlined />}
-								onClick={toggleDrawer}
-							/>
-						</Tooltip>,
+						<UiTooltipButton
+							title={"Добавить"}
+							key="Add_Button"
+							type="primary"
+							icon={<PlusOutlined />}
+							onClick={toggleDrawer}
+						>
+							Добавить
+						</UiTooltipButton>,
 					]}
 				/>
 			)}

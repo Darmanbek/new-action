@@ -25,7 +25,7 @@ export const TableFinanceDebtors = () => {
       title={() => (
         <HeadTable
           title="Должники"
-          children={[<SearchListInput placeholder="Поиск" />]}
+          children={[<SearchListInput key={"Search"} placeholder="Поиск" />]}
         />
       )}
       dataSource={debtors?.data}

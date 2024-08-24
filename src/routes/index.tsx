@@ -25,6 +25,8 @@ import {
 	DashboardAdmins,
 	DashboardTeachers,
 	DashboardGroups,
+
+	Holiday
 } from "src/components/screens";
 import { TRoleTypes } from "src/services/index.types";
 import { useAuthPersistStore } from "src/store";
@@ -60,7 +62,7 @@ export const useRoutes = () => {
 			element: <Student />,
 		},
 
-		// { path: "/holiday", element: <Holiday /> },
+		{ path: "/holiday", element: <Holiday /> },
 
 		{ path: "/finance", element: <Home /> },
 		{ path: "/finance/profits", element: <Finance /> },
@@ -87,6 +89,8 @@ export const useRoutes = () => {
 			"/groups/:group_id",
 			"/groups/:group_id/students/:student_id",
 
+			"/holiday",
+			
 			"/finance",
 			"/finance/profits",
 			"/finance/debtors",
