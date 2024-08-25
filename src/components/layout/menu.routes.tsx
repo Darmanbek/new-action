@@ -3,7 +3,7 @@ import {
 	UserOutlined,
 	TeamOutlined,
 	DollarOutlined,
-	UsergroupDeleteOutlined,
+	UsergroupDeleteOutlined, HomeOutlined,
 } from "@ant-design/icons";
 import { BsBuildings } from "react-icons/bs";
 import { IoLayersOutline } from "react-icons/io5";
@@ -19,6 +19,7 @@ export const useMenuRoutes = () => {
 	);
 
 	const menuItems = [
+		{ key: "/", icon: <HomeOutlined />, label: "Главная" },
 		{ key: "/admins", icon: <UserOutlined />, label: "Админы" },
 		{ key: "/teachers", icon: <TeamOutlined />, label: "Учителя" },
 		{ key: "/groups", icon: <IoLayersOutline />, label: "Группы" },
@@ -68,9 +69,10 @@ export const useMenuRoutes = () => {
 			"/chat",
 		],
 		director: [
+			"/",
 			"/admins",
 			"/groups",
-			"/teachers",
+			// "/teachers",
 			"/finance",
 			"/chat",
 		],

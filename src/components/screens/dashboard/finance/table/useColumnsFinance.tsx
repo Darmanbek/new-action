@@ -1,6 +1,7 @@
+import capitalize from "antd/es/_util/capitalize";
 import { ColumnsType } from "antd/es/table";
 import { Link } from "react-router-dom";
-import { UiTag } from "src/components/ui";
+import { UiFilterIcon, UiTag } from "src/components/ui";
 import { TDashboardFinance } from "src/services/index.types";
 import { useGetPaymentTypesQuery } from "src/services/payment/payment.api";
 import { formatEmpty, priceFormatter } from "src/utils";
@@ -43,11 +44,13 @@ export const useColumnsFinance = () => {
 			title: "Способ оплаты",
 			dataIndex: "payment_type",
 			key: "payment_type",
-			render: (payment_type: TDashboardFinance["payment_type"]) => formatEmpty(payment_type?.name),
+			render: (payment_type: TDashboardFinance["payment_type"]) => capitalize(formatEmpty(payment_type?.name)),
 			filters: paymentTypes?.data.map(el => ({
 				value: el.id,
-				text: el.name
-			}))
+				text: capitalize(el.name)
+			})),
+			filterIcon: <UiFilterIcon />,
+			filterMultiple: false
 		},
 		{
 			ellipsis: true,

@@ -3,7 +3,7 @@ import { TResponseData } from "src/services/index.types";
 import { TPaymentType, TPaymentTypeChange } from "./payment.types";
 
 const axiosGetPaymentTypes = async (): Promise<TResponseData<TPaymentType>> => {
-	const response = await api.get(`/admin/payment-types`);
+	const response = await api.get(`/payment-types`);
 	return response.data;
 };
 

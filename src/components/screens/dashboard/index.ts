@@ -26,3 +26,6 @@ export const DashboardGroup = loadable(() => import("./groups/group/Group"), {
 export const DashboardFinance = loadable(() => import("./finance/Finance"), {
 	fallback: createElement(Loader),
 });
+export const DashboardRating = loadable(() => import("./rating/Rating"), {
+	fallback: createElement(Loader),
+});

@@ -15,6 +15,19 @@ export const dayTranslation = (day: TDayTypes) => {
 	}
 };
 
+export const dayColor = (day: TDayTypes) => {
+	switch (day.toLowerCase()) {
+		case "odd day":
+			return "Нечетные дни";
+		case "even day":
+			return "Четные дни";
+		case "every day":
+			return "Каждый день";
+		default:
+			return day;
+	}
+};
+
 export const completeColor = (is_completed?: boolean): "success" | "processing" => {
 	if (is_completed) {
 		return "success";

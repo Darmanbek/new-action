@@ -29,7 +29,7 @@ import {
 	DashboardGroup,
 	DashboardFinance,
 
-	Holiday,
+	Holiday, DashboardRating,
 } from "src/components/screens";
 import { TRoleTypes } from "src/services/index.types";
 import { useAuthPersistStore } from "src/store";
@@ -42,10 +42,26 @@ export const useRoutes = () => {
 	const CustomGroups = roleName === "director" ? DashboardGroups : Groups;
 	const CustomGroup = roleName === "director" ? DashboardGroup : Group;
 
-	// const CustomFinance = roleName === "admin" ? Finance : FinanceCompanies;
+	const homeRoute: RouteProps = roleName ? ({
+		"admin": {
+			path: "/",
+			element: <Navigate to={"/groups"} replace={true} />,
+		},
+		"super_admin": {
+			path: "/",
+			element: <Navigate to={"/groups"} replace={true} />,
+		},
+		"director": {
+			path: "/",
+			element: <DashboardRating />,
+		},
+	} as Record<TRoleTypes, RouteProps>)[roleName] : {
+		path: "/",
+		element: <Home />,
+	};
 
 	const routes: RouteProps[] = [
-		{ path: "/", element: <Home /> },
+		homeRoute,
 
 		{ path: "/admins", element: <CustomAdmin /> },
 		{ path: "/admins/:admin_id", element: <CustomAdmin /> },

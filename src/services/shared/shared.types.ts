@@ -12,6 +12,8 @@ export type TGetParams = {
 		end?: string | null;
 	} | string[];
 	is_completed?: number;
+	payment_type?: number;
+	price?: string | null;
 };
 
 export type TLangType = {

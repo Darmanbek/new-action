@@ -4,9 +4,18 @@ import { ColumnsType } from "antd/es/table";
 import dayjs from "dayjs";
 import "dayjs/locale/ru";
 import { useNavigate } from "react-router-dom";
-import { UiBadge, UiButton, UiTag } from "src/components/ui";
+import { UiBadge, UiButton, UiFilterIcon, UiTag } from "src/components/ui";
+import { completeData } from "src/data";
 import { TGroup } from "src/services/groups/groups.types";
-import { dayTranslation, formatEmpty, monthGrammar, priceFormatter } from "src/utils";
+import {
+	completeColor,
+	completeIcon,
+	completeName,
+	dayTranslation,
+	formatEmpty,
+	monthGrammar,
+	priceFormatter,
+} from "src/utils";
 
 dayjs.locale("ru");
 
@@ -91,6 +100,7 @@ export const useColumnsGroups = () => {
 			dataIndex: "price",
 			key: "price",
 			render: priceFormatter,
+			sorter: true,
 		},
 		{
 			align: "center",
@@ -100,6 +110,20 @@ export const useColumnsGroups = () => {
 			render: (students_count) => (
 				<UiTag color={"red"}>{formatEmpty(students_count)}</UiTag>
 			),
+		},
+		{
+			align: "center",
+			title: "Статус",
+			dataIndex: "is_completed",
+			key: "is_completed",
+			render: (is_completed: boolean) => (
+				<UiTag icon={completeIcon(is_completed)} color={completeColor(is_completed)}>
+					{completeName(is_completed)}
+				</UiTag>
+			),
+			filters: completeData,
+			filterIcon: <UiFilterIcon />,
+			filterMultiple: false
 		},
 		{
 			fixed: "right",
