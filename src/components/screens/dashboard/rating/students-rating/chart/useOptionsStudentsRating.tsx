@@ -11,8 +11,8 @@ export const useOptionsStudentsRating = ({ data }: useOptionsStudentsRatingProps
 		value: el.rating,
 		itemStyle: {
 			color: "#b22234",
-			borderRadius: [0, 8, 8, 0]
-		}
+			borderRadius: [0, 8, 8, 0],
+		},
 	}));
 
 	const SeriesName = data?.map(el => `${el.first_name} ${el.last_name}`);
@@ -31,8 +31,13 @@ export const useOptionsStudentsRating = ({ data }: useOptionsStudentsRatingProps
 			type: "category",
 			data: SeriesName,
 			inverse: true,
-			animationDuration: 300,
-			animationDurationUpdate: 300,
+		},
+		grid: {
+			top: "3%",
+			left: "3%",
+			right: "4%",
+			bottom: "3%",
+			containLabel: true,
 		},
 		series: [
 			{
@@ -50,10 +55,6 @@ export const useOptionsStudentsRating = ({ data }: useOptionsStudentsRatingProps
 		legend: {
 			show: false,
 		},
-		animationDuration: 0,
-		animationDurationUpdate: 3000,
-		animationEasing: "linear",
-		animationEasingUpdate: "linear",
 	};
 
 	return options;

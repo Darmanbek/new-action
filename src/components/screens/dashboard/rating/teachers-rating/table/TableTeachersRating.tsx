@@ -22,8 +22,9 @@ const TableTeachersRating: FC = () => {
 				<HeadTable title={"Учителя"} />
 			)}
 			loading={isLoading || isFetching}
-			dataSource={teachers?.data}
+			dataSource={teachers?.data.sort((a, b) => Number(b.rating) - Number(a.rating))}
 			columns={columns}
+			pagination={false}
 		/>
 	);
 };

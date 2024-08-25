@@ -17,10 +17,13 @@ export const DashboardTeachers = loadable(() => import("./teachers-rating/Teache
 export const DashboardStudents = loadable(() => import("./students-rating/StudentsRating"), {
 	fallback: createElement(Loader),
 });
-export const DashboardGroups = loadable(() => import("./groups/groups/Groups"), {
+export const DashboardGroups = loadable(() => import("./group/groups/Groups"), {
 	fallback: createElement(Loader),
 });
-export const DashboardGroup = loadable(() => import("./groups/group/Group"), {
+export const DashboardGroup = loadable(() => import("./group/group/Group"), {
+	fallback: createElement(Loader),
+});
+export const DashboardGroupStudent = loadable(() => import("./group/student/Student"), {
 	fallback: createElement(Loader),
 });
 export const DashboardFinance = loadable(() => import("./finance/Finance"), {

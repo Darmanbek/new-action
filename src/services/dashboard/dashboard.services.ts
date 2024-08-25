@@ -1,5 +1,5 @@
 import { api } from "src/api";
-import { TGetParams, TResponse, TResponseData, TResponseSingleData } from "src/services/index.types";
+import { TGetParams, TGroup, TResponse, TResponseData, TResponseSingleData } from "src/services/index.types";
 import {
 	TDashboardAdmin,
 	TDashboardCompany,
@@ -20,6 +20,11 @@ const axiosGetDashboardCompaniesById = async (params: TGetParams, id?: number | 
 	return response.data;
 };
 
+const axiosGetDashboardCompaniesGroupsById = async (id?: number | string): Promise<TResponseSingleData<TGroup>> => {
+	const response = await api.get(`/dashboard/companies/groups/${id}`);
+	return response.data;
+};
+
 const axiosGetDashboardAdmins = async (): Promise<TResponseData<TDashboardAdmin>> => {
 	const response = await api.get(`/dashboard/admins`);
 	return response.data;
@@ -35,7 +40,7 @@ const axiosGetDashboardTeachersRating = async (id?: number | string): Promise<TR
 	return response.data;
 };
 
-const axiosGetDashboardFinances = async (params: TGetParams, id?: number | string): Promise<TResponse<TDashboardFinance>> => {
+const axiosGetDashboardFinances = async (params: TGetParams, id?: number | string): Promise<TDashboardFinance> => {
 	const response = await api.get(`dashboard/finance/${id}`, { params });
 	return response.data;
 };
@@ -43,6 +48,7 @@ const axiosGetDashboardFinances = async (params: TGetParams, id?: number | strin
 export {
 	axiosGetDashboardCompanies,
 	axiosGetDashboardCompaniesById,
+	axiosGetDashboardCompaniesGroupsById,
 	axiosGetDashboardAdmins,
 	axiosGetDashboardStudentsRating,
 	axiosGetDashboardTeachersRating,

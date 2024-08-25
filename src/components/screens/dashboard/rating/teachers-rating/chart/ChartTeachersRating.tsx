@@ -35,18 +35,20 @@ const ChartTeachersRating: FC = () => {
 					padding: 0,
 				},
 				header: {
+					padding: 16,
 					border: "none",
 				},
 			}}
-		>
+		>k
 			<EChartsReact
 				option={options}
 				showLoading={isLoading || isFetching}
 				style={{
-					minHeight: teachers?.data.length ? `${teachers?.data.length * 6}vh` : "auto",
+					minHeight: teachers?.data.length ? `${teachers?.data.length * 60}px` : "50vh",
+					transition: "height 0.2s linear",
 				}}
 				loadingOption={{
-					text: "Загрузка"
+					text: "Загрузка",
 				}}
 			/>
 		</UiCard>

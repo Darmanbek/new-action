@@ -16,6 +16,7 @@ export type TGetParams = {
 	price?: string | null;
 	day?: number;
 	group_id?: string;
+	per_page?: number;
 };
 
 export type TLangType = {

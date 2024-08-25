@@ -27,10 +27,12 @@ import {
 	DashboardStudents,
 	DashboardGroups,
 	DashboardGroup,
+	DashboardGroupStudent,
 	DashboardCompanies,
 	DashboardFinance,
+	DashboardRating,
 
-	Holiday, DashboardRating,
+	Holiday,
 } from "src/components/screens";
 import { TRoleTypes } from "src/services/index.types";
 import { useAuthPersistStore } from "src/store";
@@ -42,6 +44,7 @@ export const useRoutes = () => {
 	const CustomTeacher = roleName === "director" ? DashboardTeachers : Teachers;
 	const CustomGroups = roleName === "director" ? DashboardGroups : Groups;
 	const CustomGroup = roleName === "director" ? DashboardGroup : Group;
+	const CustomStudent = roleName === "director" ? DashboardGroupStudent : Student;
 
 	const homeRoute: RouteProps = roleName ? ({
 		"admin": {
@@ -82,7 +85,7 @@ export const useRoutes = () => {
 		{ path: "/groups/:group_id", element: <CustomGroup /> },
 		{
 			path: "/groups/:group_id/students/:student_id",
-			element: <Student />,
+			element: <CustomStudent />,
 		},
 
 		{ path: "/holiday", element: <Holiday /> },
@@ -135,11 +138,9 @@ export const useRoutes = () => {
 
 			"/companies",
 
-			"/teachers",
-			"/teachers/:teacher_id",
-
 			"/groups",
 			"/groups/:group_id",
+			"/groups/:group_id/students/:student_id",
 
 			"/finance",
 

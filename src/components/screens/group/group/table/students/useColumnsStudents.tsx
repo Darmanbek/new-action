@@ -31,7 +31,7 @@ export const useColumnsStudents = () => {
 		},
 		{
 			ellipsis: true,
-			title: "Студент",
+			title: "Имя Фамилия",
 			dataIndex: "name",
 			key: "name",
 			render: (_, student) => (

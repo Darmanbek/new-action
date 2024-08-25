@@ -1,3 +1,5 @@
+import { TLesson } from "src/services/index.types";
+
 export type TPaymentType = {
 	id: number;
 	name: string;
@@ -11,6 +13,7 @@ export type TPaymentTypeChange = {
 export type TPaymentHistory = {
 	amount: number;
 	assessment: TPaymentAssessment;
+	lesson: TLesson;
 	date: string;
 }
 

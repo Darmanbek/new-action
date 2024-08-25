@@ -5,9 +5,11 @@ import { errorResponse } from "src/utils";
 import {
 	axiosGetDashboardCompanies,
 	axiosGetDashboardCompaniesById,
+	axiosGetDashboardCompaniesGroupsById,
 	axiosGetDashboardAdmins,
 	axiosGetDashboardStudentsRating,
-	axiosGetDashboardTeachersRating, axiosGetDashboardFinances,
+	axiosGetDashboardTeachersRating,
+	axiosGetDashboardFinances,
 } from "./dashboard.services";
 
 const useGetDashboardCompaniesQuery = () => {
@@ -27,6 +29,19 @@ const useGetDashboardCompaniesByIdQuery = (params: TGetParams, id?: number | str
 	return useQuery({
 		queryFn: () => axiosGetDashboardCompaniesById(params, id),
 		queryKey: ["dashboard-companies", ...Object.values(params), id],
+		enabled: !!id,
+		keepPreviousData: true,
+		onError: (error: TResponseError) => {
+			message.error(errorResponse(error));
+		},
+	});
+};
+
+const useGetDashboardCompaniesGroupsByIdQuery = (id?: number | string) => {
+	const { message } = useMessage();
+	return useQuery({
+		queryFn: () => axiosGetDashboardCompaniesGroupsById(id),
+		queryKey: ["dashboard-companies-groups", id],
 		enabled: !!id,
 		keepPreviousData: true,
 		onError: (error: TResponseError) => {
@@ -89,6 +104,7 @@ const useGetDashboardFinancesQuery = (params: TGetParams, id?: number | string) 
 export {
 	useGetDashboardCompaniesQuery,
 	useGetDashboardCompaniesByIdQuery,
+	useGetDashboardCompaniesGroupsByIdQuery,
 	useGetDashboardAdminsQuery,
 	useGetDashboardStudentsRatingQuery,
 	useGetDashboardTeachersRatingQuery,

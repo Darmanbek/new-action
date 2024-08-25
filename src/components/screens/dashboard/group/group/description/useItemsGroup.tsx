@@ -7,8 +7,8 @@ import { completeColor, completeName, dayTranslation, formatEmpty, monthGrammar,
 
 export const useItemsGroup = (data?: TGroup) => {
 
-	// const teacher = data?.teachers.find(el => !el.assistant);
-	// const assistant = data?.teachers.find(el => el.assistant);
+	const teacher = data?.teachers.find(el => !el.assistant);
+	const assistant = data?.teachers.find(el => el.assistant);
 
 	const items: DescriptionsItemType[] = [
 		// {
@@ -16,24 +16,16 @@ export const useItemsGroup = (data?: TGroup) => {
 		// 	label: "Название",
 		// 	children: formatEmpty(data?.name)
 		// },
-		// {
-		// 	key: "teacher",
-		// 	label: "Учитель",
-		// 	children: (
-		// 		<Link to={`/teachers/${teacher?.id}`}>
-		// 			{`${formatEmpty(teacher?.first_name)} ${formatEmpty(teacher?.last_name)}`}
-		// 		</Link>
-		// 	),
-		// },
-		// {
-		// 	key: "assistant",
-		// 	label: "Ассистент",
-		// 	children: (
-		// 		<Link to={`/teachers/${assistant?.id}`}>
-		// 			{`${formatEmpty(assistant?.first_name)} ${formatEmpty(assistant?.last_name)}`}
-		// 		</Link>
-		// 	),
-		// },
+		{
+			key: "teacher",
+			label: "Учитель",
+			children: `${teacher?.first_name} ${teacher?.last_name}`,
+		},
+		{
+			key: "assistant",
+			label: "Ассистент",
+			children: `${assistant?.first_name} ${assistant?.last_name}`,
+		},
 		{
 			key: "day",
 			label: "Дни",
@@ -52,7 +44,7 @@ export const useItemsGroup = (data?: TGroup) => {
 		{
 			key: "start_date",
 			label: "Стартовая дата",
-			children: formatEmpty(dayjs(data?.start_date).format("YYYY-MMMM-DD HH:mm:ss")),
+			children: formatEmpty(dayjs(data?.start_date).format("D MMMM YYYY HH:mm")),
 		},
 		{
 			key: "is_completed",

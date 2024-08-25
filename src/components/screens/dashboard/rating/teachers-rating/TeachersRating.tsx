@@ -5,20 +5,23 @@ import { TableTeachersRating } from "./table/TableTeachersRating";
 
 const TeachersRating: FC = () => {
 	return (
-			<UiTabs
-				items={[
-					{
-						key: "/teachers-chart",
-						label: "График",
-						children: <ChartTeachersRating />,
-					},
-					{
-						key: "/teachers-table",
-						label: "Таблица",
-						children: <TableTeachersRating />,
-					},
-				]}
-			/>
+		<UiTabs
+			style={{
+				marginBottom: 60,
+			}}
+			items={[
+				{
+					key: "/teachers-chart",
+					label: "График",
+					children: <ChartTeachersRating />,
+				},
+				{
+					key: "/teachers-table",
+					label: "Таблица",
+					children: <TableTeachersRating />,
+				},
+			]}
+		/>
 
 	);
 };

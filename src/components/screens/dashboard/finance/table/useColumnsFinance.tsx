@@ -2,7 +2,7 @@ import capitalize from "antd/es/_util/capitalize";
 import { ColumnsType } from "antd/es/table";
 import { Link } from "react-router-dom";
 import { UiFilterIcon, UiTag } from "src/components/ui";
-import { TDashboardFinance } from "src/services/index.types";
+import { TDashboardFinanceTransaction } from "src/services/index.types";
 import { useGetPaymentTypesQuery } from "src/services/payment/payment.api";
 import { formatEmpty, priceFormatter } from "src/utils";
 
@@ -10,10 +10,10 @@ import { formatEmpty, priceFormatter } from "src/utils";
 export const useColumnsFinance = () => {
 
 	const {
-		data: paymentTypes
+		data: paymentTypes,
 	} = useGetPaymentTypesQuery();
 
-	const columns: ColumnsType<TDashboardFinance> = [
+	const columns: ColumnsType<TDashboardFinanceTransaction> = [
 		{
 			ellipsis: true,
 			title: "Дата",
@@ -26,7 +26,11 @@ export const useColumnsFinance = () => {
 			title: "Студент",
 			dataIndex: "student",
 			key: "student",
-			render: (student: TDashboardFinance["student"]) => `${student?.first_name} ${student?.last_name}`,
+			render: (student: TDashboardFinanceTransaction["student"], r) => (
+				<Link to={`/groups/${r.group.id}/students/${student.id}`}>
+					{`${student?.first_name} ${student?.last_name}`}
+				</Link>
+			),
 		},
 		{
 			ellipsis: true,
@@ -44,20 +48,20 @@ export const useColumnsFinance = () => {
 			title: "Способ оплаты",
 			dataIndex: "payment_type",
 			key: "payment_type",
-			render: (payment_type: TDashboardFinance["payment_type"]) => capitalize(formatEmpty(payment_type?.name)),
+			render: (payment_type: TDashboardFinanceTransaction["payment_type"]) => capitalize(formatEmpty(payment_type?.name)),
 			filters: paymentTypes?.data.map(el => ({
 				value: el.id,
-				text: capitalize(el.name)
+				text: capitalize(el.name),
 			})),
 			filterIcon: <UiFilterIcon />,
-			filterMultiple: false
+			filterMultiple: false,
 		},
 		{
 			ellipsis: true,
 			title: "Группа",
 			dataIndex: "group",
 			key: "group",
-			render: (group: TDashboardFinance["group"]) => group ? (
+			render: (group: TDashboardFinanceTransaction["group"]) => group ? (
 				<Link to={`/groups/${group.id}`}>
 					{group?.name}
 				</Link>

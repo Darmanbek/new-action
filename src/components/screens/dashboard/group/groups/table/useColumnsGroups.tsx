@@ -42,28 +42,28 @@ export const useColumnsGroups = () => {
 			key: "name",
 			render: formatEmpty,
 		},
-		// {
-		// 	ellipsis: true,
-		// 	title: "Учитель",
-		// 	dataIndex: "teachers",
-		// 	key: "teachers",
-		// 	render: (teachers: TGroup["teachers"]) => {
-		// 		const teacher = teachers?.find((t) => !t.assistant);
-		// 		return teacher ? `${teacher?.first_name} ${teacher?.last_name}` : "-";
-		// 	},
-		// },
-		// {
-		// 	ellipsis: true,
-		// 	title: "Ассистент",
-		// 	dataIndex: "teachers",
-		// 	key: "assistant",
-		// 	render: (teachers: TGroup["teachers"]) => {
-		// 		const assistant = teachers?.find((t) => t.assistant);
-		// 		return assistant
-		// 			? `${assistant?.first_name} ${assistant?.last_name}`
-		// 			: "-";
-		// 	},
-		// },
+		{
+			ellipsis: true,
+			title: "Учитель",
+			dataIndex: "teachers",
+			key: "teachers",
+			render: (teachers: TGroup["teachers"]) => {
+				const teacher = teachers?.find((t) => !t.assistant);
+				return teacher ? `${teacher?.first_name} ${teacher?.last_name}` : "-";
+			},
+		},
+		{
+			ellipsis: true,
+			title: "Ассистент",
+			dataIndex: "teachers",
+			key: "assistant",
+			render: (teachers: TGroup["teachers"]) => {
+				const assistant = teachers?.find((t) => t.assistant);
+				return assistant
+					? `${assistant?.first_name} ${assistant?.last_name}`
+					: "-";
+			},
+		},
 		{
 			align: "center",
 			ellipsis: true,
@@ -123,7 +123,7 @@ export const useColumnsGroups = () => {
 			),
 			filters: completeData,
 			filterIcon: <UiFilterIcon />,
-			filterMultiple: false
+			filterMultiple: false,
 		},
 		{
 			fixed: "right",

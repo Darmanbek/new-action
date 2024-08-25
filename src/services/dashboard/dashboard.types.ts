@@ -40,6 +40,14 @@ export type TDashboardTeachersRating = {
 }
 
 export type TDashboardFinance = {
+	profit: string;
+	data: {
+		total: number;
+		data: TDashboardFinanceTransaction[]
+	}
+}
+
+export type TDashboardFinanceTransaction = {
 	id: string;
 	amount: number;
 	date: string;

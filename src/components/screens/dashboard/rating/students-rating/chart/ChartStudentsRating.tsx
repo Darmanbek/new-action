@@ -33,6 +33,7 @@ const ChartStudentsRating: FC = () => {
 					padding: 0,
 				},
 				header: {
+					padding: 16,
 					border: "none",
 				},
 			}}
@@ -41,10 +42,11 @@ const ChartStudentsRating: FC = () => {
 				option={options}
 				showLoading={isLoading || isFetching}
 				style={{
-					minHeight: students?.data.length ? `${students?.data.length * 6}vh` : "auto"
+					minHeight: students?.data.length ? `${students?.data.length * 60}px` : "50vh",
+					transition: "all 0.2s linear",
 				}}
 				loadingOption={{
-					text: "Загрузка"
+					text: "Загрузка",
 				}}
 			/>
 		</UiCard>
