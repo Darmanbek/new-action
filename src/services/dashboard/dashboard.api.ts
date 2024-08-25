@@ -7,7 +7,7 @@ import {
 	axiosGetDashboardCompaniesById,
 	axiosGetDashboardAdmins,
 	axiosGetDashboardStudentsRating,
-	axiosGetDashboardTeachersRating
+	axiosGetDashboardTeachersRating, axiosGetDashboardFinances,
 } from "./dashboard.services";
 
 const useGetDashboardCompaniesQuery = () => {
@@ -73,10 +73,24 @@ const useGetDashboardTeachersRatingQuery = (id?: number | string) => {
 	});
 };
 
+const useGetDashboardFinancesQuery = (params: TGetParams, id?: number | string) => {
+	const { message } = useMessage();
+	return useQuery({
+		queryFn: () => axiosGetDashboardFinances(params, id),
+		queryKey: ["dashboard-finances", ...Object.values(params), id],
+		enabled: !!id,
+		keepPreviousData: true,
+		onError: (error: TResponseError) => {
+			message.error(errorResponse(error));
+		},
+	});
+};
+
 export {
 	useGetDashboardCompaniesQuery,
 	useGetDashboardCompaniesByIdQuery,
 	useGetDashboardAdminsQuery,
 	useGetDashboardStudentsRatingQuery,
-	useGetDashboardTeachersRatingQuery
+	useGetDashboardTeachersRatingQuery,
+	useGetDashboardFinancesQuery,
 };

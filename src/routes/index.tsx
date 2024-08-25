@@ -1,4 +1,4 @@
-import { RouteProps } from "react-router-dom";
+import { Navigate, RouteProps } from "react-router-dom";
 import {
 	Home,
 	Profile,
@@ -24,9 +24,12 @@ import {
 
 	DashboardAdmins,
 	DashboardTeachers,
+	DashboardStudents,
 	DashboardGroups,
+	DashboardGroup,
+	DashboardFinance,
 
-	Holiday
+	Holiday,
 } from "src/components/screens";
 import { TRoleTypes } from "src/services/index.types";
 import { useAuthPersistStore } from "src/store";
@@ -37,6 +40,7 @@ export const useRoutes = () => {
 	const CustomAdmin = roleName === "director" ? DashboardAdmins : Admin;
 	const CustomTeacher = roleName === "director" ? DashboardTeachers : Teachers;
 	const CustomGroups = roleName === "director" ? DashboardGroups : Groups;
+	const CustomGroup = roleName === "director" ? DashboardGroup : Group;
 
 	// const CustomFinance = roleName === "admin" ? Finance : FinanceCompanies;
 
@@ -55,8 +59,10 @@ export const useRoutes = () => {
 		{ path: "/teachers", element: <CustomTeacher /> },
 		{ path: "/teachers/:teacher_id", element: <Teacher /> },
 
+		{ path: "/students", element: <DashboardStudents /> },
+
 		{ path: "/groups", element: <CustomGroups /> },
-		{ path: "/groups/:group_id", element: <Group /> },
+		{ path: "/groups/:group_id", element: <CustomGroup /> },
 		{
 			path: "/groups/:group_id/students/:student_id",
 			element: <Student />,
@@ -64,7 +70,10 @@ export const useRoutes = () => {
 
 		{ path: "/holiday", element: <Holiday /> },
 
-		{ path: "/finance", element: <Home /> },
+		{
+			path: "/finance",
+			element: roleName === "director" ? <DashboardFinance /> : <Navigate to={"/finance/profits"} replace={true} />,
+		},
 		{ path: "/finance/profits", element: <Finance /> },
 		{ path: "/finance/debtors", element: <FinanceDebtors /> },
 
@@ -90,7 +99,7 @@ export const useRoutes = () => {
 			"/groups/:group_id/students/:student_id",
 
 			"/holiday",
-			
+
 			"/finance",
 			"/finance/profits",
 			"/finance/debtors",
@@ -112,11 +121,8 @@ export const useRoutes = () => {
 
 			"/groups",
 			"/groups/:group_id",
-			"/groups/:group_id/students/:student_id",
 
 			"/finance",
-			"/finance/profits",
-			"/finance/debtors",
 
 			"/chat",
 			"/chat/:chat_id",

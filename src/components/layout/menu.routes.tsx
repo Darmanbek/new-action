@@ -10,11 +10,13 @@ import { IoLayersOutline } from "react-icons/io5";
 import { LuCalendarCheck, LuPieChart } from "react-icons/lu";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { PiChatsLight } from "react-icons/pi";
-import { getRoleFromToken } from "src/config/token.config";
 import { TRoleTypes } from "src/services/index.types";
+import { useAuthPersistStore } from "src/store";
 
 export const useMenuRoutes = () => {
-	const role = getRoleFromToken();
+	const role = useAuthPersistStore(
+		state => state.role,
+	);
 
 	const menuItems = [
 		{ key: "/admins", icon: <UserOutlined />, label: "Админы" },
@@ -23,7 +25,7 @@ export const useMenuRoutes = () => {
 		{ key: "/companies", icon: <BsBuildings />, label: "Филиалы" },
 		{ key: "/acceptance", icon: <MdOutlineMailOutline />, label: "Заявки" },
 		{ key: "/holiday", icon: <LuCalendarCheck />, label: "Праздничные дни" },
-		{
+		role !== "director" ? {
 			key: "/finance", icon: <LuPieChart />, label: "Финансы",
 			children: [
 				{
@@ -37,6 +39,8 @@ export const useMenuRoutes = () => {
 					label: "Должники",
 				},
 			],
+		} : {
+			key: "/finance", icon: <LuPieChart />, label: "Финансы",
 		},
 		{ key: "/chat", icon: <PiChatsLight />, label: "Чат" },
 	];
@@ -61,14 +65,14 @@ export const useMenuRoutes = () => {
 			"/groups",
 			"/acceptance",
 			"/finance",
-			"/chat"
+			"/chat",
 		],
 		director: [
 			"/admins",
 			"/groups",
 			"/teachers",
 			"/finance",
-			"/chat"
+			"/chat",
 		],
 	};
 

@@ -6,6 +6,7 @@ import {
 	TDashboardCompanyItem,
 	TDashboardStudentsRating,
 	TDashboardTeachersRating,
+	TDashboardFinance,
 } from "./dashboard.types";
 
 
@@ -34,10 +35,16 @@ const axiosGetDashboardTeachersRating = async (id?: number | string): Promise<TR
 	return response.data;
 };
 
+const axiosGetDashboardFinances = async (params: TGetParams, id?: number | string): Promise<TResponse<TDashboardFinance>> => {
+	const response = await api.get(`dashboard/finance/${id}`, { params });
+	return response.data;
+};
+
 export {
 	axiosGetDashboardCompanies,
 	axiosGetDashboardCompaniesById,
 	axiosGetDashboardAdmins,
 	axiosGetDashboardStudentsRating,
 	axiosGetDashboardTeachersRating,
+	axiosGetDashboardFinances,
 };

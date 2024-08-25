@@ -25,7 +25,7 @@ const TableFinanceCompanies: FC = () => {
 		<UiTable<TFinanceTransactionData>
 			title={() => (
 				<HeadTable
-					title={`Транзакций | Общая сумма ${priceFormatter(Number(finance?.data.total_amount))} uzs`}
+					title={`Транзакций | Общая сумма ${priceFormatter(Number(finance?.data.profit))} uzs`}
 					children={[
 						<UiSelect
 							key={"Companies"}

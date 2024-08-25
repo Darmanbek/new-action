@@ -1,4 +1,4 @@
-import { TAdmin, TGroup } from "src/services/index.types";
+import { TAdmin, TGroup, TPaymentType, TStudent } from "src/services/index.types";
 
 export type TDashboardCompany = {
 	id: string;
@@ -27,8 +27,8 @@ export type TDashboardStudentsRating = {
 	first_name: string;
 	last_name: string;
 	phone: string;
-	avg_rating: string;
-	group: TGroup[];
+	rating: string;
+	// group: TGroup[];
 }
 
 export type TDashboardTeachersRating = {
@@ -37,4 +37,13 @@ export type TDashboardTeachersRating = {
 	last_name: string;
 	phone: string;
 	rating: string;
+}
+
+export type TDashboardFinance = {
+	id: string;
+	amount: number;
+	date: string;
+	student: TStudent;
+	payment_type: TPaymentType;
+	group: TGroup;
 }

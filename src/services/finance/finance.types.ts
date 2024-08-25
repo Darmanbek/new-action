@@ -5,8 +5,7 @@ import { TStudent } from "src/services/shared/shared.types";
 
 
 export type TFinance = {
-	total_amount: string | number;
-	transaction: TFinanceTransaction;
+	profit: string | number;
 	transactions: TFinanceTransaction;
 }
 

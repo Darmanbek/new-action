@@ -29,8 +29,8 @@ export const Auth = () => {
 
 	useEffect(() => {
 		if (isSuccess) {
-			const { role, role_id, token } = loginData.data;
-			signIn({ role: role, role_id: role_id, token: token });
+			const { role, role_id, token, company } = loginData.data;
+			signIn({ role, role_id, token, company });
 			navigate("/", { replace: true });
 		}
 	}, [isSuccess, login, loginData, navigate, signIn]);

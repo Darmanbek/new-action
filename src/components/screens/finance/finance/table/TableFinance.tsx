@@ -30,7 +30,7 @@ const TableFinance: FC = () => {
 				<Flex justify={"space-between"}>
 					<UiStatistic
 						// title={"Прибыль"}
-						value={finance?.data.total_amount}
+						value={finance?.data.profit}
 						// suffix={"uzs"}
 						valueRender={(node) => (
 							<Space>

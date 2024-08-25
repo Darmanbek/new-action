@@ -95,8 +95,8 @@ export const useColumnsGroups = () => {
 		{
 			align: "center",
 			title: "Студентов",
-			dataIndex: "student_count",
-			key: "student_count",
+			dataIndex: "students_count",
+			key: "students_count",
 			render: (students_count) => (
 				<UiTag color={"red"}>{formatEmpty(students_count)}</UiTag>
 			),
