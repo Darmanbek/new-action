@@ -37,6 +37,7 @@ export const SearchListInput: FC<InputProps> = (props) => {
 				onChange={(e) => setSearchValue({ searchValue: e.target.value })}
 				allowClear={true}
 				onClear={onClearInput}
+				placeholder={"Поиск"}
 				{...props}
 			/>
 		</Space.Compact>

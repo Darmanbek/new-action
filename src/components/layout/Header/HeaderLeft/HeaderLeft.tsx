@@ -1,3 +1,4 @@
+import { Flex } from "antd";
 import { HeadCompanies } from "src/components/shared";
 import { UiButton } from "src/components/ui";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
@@ -37,10 +38,12 @@ export const HeaderLeft = () => {
 				aria-label="burger"
 			/>
 			{role === "director" ? <HeadCompanies /> : profile?.data.company && (
-				<h3
-					style={{ color: primaryColorText, fontSize: 16, textTransform: "uppercase" }}>
-					{profile?.data?.company?.name}
-				</h3>
+				<Flex align={"center"} justify={"center"}>
+					<h3
+						style={{ color: primaryColorText, fontSize: 16, textTransform: "uppercase" }}>
+						{profile?.data?.company?.name}
+					</h3>
+				</Flex>
 			)
 			}
 		</div>

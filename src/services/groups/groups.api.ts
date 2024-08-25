@@ -20,6 +20,7 @@ const useGetGroupsQuery = (params: TGetParams) => {
 	return useQuery({
 		queryFn: () => axiosGetGroups(params),
 		queryKey: ["groups", ...Object.values(params)],
+		keepPreviousData: true,
 		onError: (error: TResponseError) => {
 			message.error(errorResponse(error));
 		},

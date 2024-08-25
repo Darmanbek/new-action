@@ -53,7 +53,7 @@ export const useItemsGroup = (data?: TGroup) => {
 		{
 			key: "start_date",
 			label: "Стартовая дата",
-			children: formatEmpty(dayjs(data?.start_date).format("YYYY-MMMM-DD HH:mm:ss")),
+			children: dayjs(data?.start_date).format("D MMMM YYYY HH:mm"),
 		},
 		{
 			key: "is_completed",

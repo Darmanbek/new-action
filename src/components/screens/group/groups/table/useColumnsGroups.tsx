@@ -4,15 +4,25 @@ import { EditOutlined, DeleteOutlined, EyeFilled } from "@ant-design/icons";
 import dayjs from "dayjs";
 import { Link, useNavigate } from "react-router-dom";
 import { GlobalPopconfirm } from "src/components/shared";
-import { UiBadge, UiButton, UiTag } from "src/components/ui";
-import { useDeleteGroupsMutation } from "src/services/index.api";
+import { UiBadge, UiButton, UiFilterIcon, UiTag } from "src/components/ui";
+import { completeData } from "src/data";
+import { useDeleteGroupsMutation, useGetDayQuery } from "src/services/index.api";
 import { TGroup } from "src/services/index.types";
 import { useFormStorageStore } from "src/store";
-import { priceFormatter, formatEmpty, monthGrammar, dayTranslation } from "src/utils";
+import {
+	priceFormatter,
+	formatEmpty,
+	monthGrammar,
+	dayTranslation,
+	completeIcon,
+	completeColor,
+	completeName, dayColor,
+} from "src/utils";
 
 export const useColumnsGroups = () => {
 	const navigate = useNavigate();
 	const { mutate: deleteGroups } = useDeleteGroupsMutation();
+	const { data: days } = useGetDayQuery();
 	const setParamsForm = useFormStorageStore((state) => state.setParamsForm);
 	const onEditGroups = (item: TGroup) => setParamsForm(item);
 
@@ -34,7 +44,7 @@ export const useColumnsGroups = () => {
 			title: "Название",
 			dataIndex: "name",
 			key: "name",
-			render: formatEmpty
+			render: formatEmpty,
 		},
 		{
 			ellipsis: true,
@@ -78,10 +88,16 @@ export const useColumnsGroups = () => {
 			dataIndex: "day",
 			key: "day",
 			render: (day: TGroup["day"]) => (
-				<UiTag color={day.id === 1 ? "blue" : "green"}>
+				<UiTag color={dayColor(day.id)}>
 					{dayTranslation(day?.name)}
 				</UiTag>
 			),
+			filters: days?.data.map(el => ({
+				value: el.id,
+				text: dayTranslation(el.name),
+			})),
+			filterIcon: <UiFilterIcon />,
+			filterMultiple: false,
 		},
 		{
 			ellipsis: true,
@@ -107,6 +123,7 @@ export const useColumnsGroups = () => {
 			dataIndex: "price",
 			key: "price",
 			render: priceFormatter,
+			// sorter: true,
 		},
 		{
 			align: "center",
@@ -116,6 +133,20 @@ export const useColumnsGroups = () => {
 			render: (students_count) => (
 				<UiTag color={"red"}>{formatEmpty(students_count)}</UiTag>
 			),
+		},
+		{
+			align: "center",
+			title: "Статус",
+			dataIndex: "is_completed",
+			key: "is_completed",
+			render: (is_completed: boolean) => (
+				<UiTag icon={completeIcon(is_completed)} color={completeColor(is_completed)}>
+					{completeName(is_completed)}
+				</UiTag>
+			),
+			filters: completeData,
+			filterIcon: <UiFilterIcon />,
+			filterMultiple: false,
 		},
 		{
 			fixed: "right",

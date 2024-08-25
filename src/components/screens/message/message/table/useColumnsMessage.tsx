@@ -13,7 +13,7 @@ export const useColumnsMessage = () => {
 	const columns: ColumnsType<TMessage> = [
 		{
 			ellipsis: true,
-			title: "Ф.И.О",
+			title: "Имя Фамилия",
 			key: "name",
 			render: (_v, r) => `${r?.last_name || ""} ${r?.first_name || ""}`,
 		},

@@ -1,4 +1,5 @@
 import { CheckCircleOutlined, SyncOutlined } from "@ant-design/icons";
+import { PresetColorType } from "antd/es/_util/colors";
 import { createElement } from "react";
 import { TDayTypes, TResponseError, TRoleTypes } from "src/services/index.types";
 
@@ -15,16 +16,16 @@ export const dayTranslation = (day: TDayTypes) => {
 	}
 };
 
-export const dayColor = (day: TDayTypes) => {
-	switch (day.toLowerCase()) {
-		case "odd day":
-			return "Нечетные дни";
-		case "even day":
-			return "Четные дни";
-		case "every day":
-			return "Каждый день";
+export const dayColor = (day: number): PresetColorType | "default" => {
+	switch (day) {
+		case 1:
+			return "blue";
+		case 2:
+			return "green";
+		case 3:
+			return "red";
 		default:
-			return day;
+			return "default";
 	}
 };
 

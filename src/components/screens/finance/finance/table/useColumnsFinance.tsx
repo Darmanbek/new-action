@@ -1,11 +1,20 @@
+import capitalize from "antd/es/_util/capitalize";
 import { ColumnsType } from "antd/es/table";
 import { Link } from "react-router-dom";
 import { UiTag } from "src/components/ui";
+// import { useGetGroupsQuery } from "src/services/groups/groups.api";
 import { TFinanceTransactionData } from "src/services/index.types";
+// import { useGetPaymentTypesQuery } from "src/services/payment/payment.api";
 import { formatEmpty, priceFormatter } from "src/utils";
 
 
 export const useColumnsFinance = () => {
+	//
+	// const {
+	// 	data: paymentTypes
+	// } = useGetPaymentTypesQuery();
+
+	// const { data: groups } = useGetGroupsQuery({});
 
 	const columns: ColumnsType<TFinanceTransactionData> = [
 		{
@@ -42,7 +51,13 @@ export const useColumnsFinance = () => {
 			title: "Способ оплаты",
 			dataIndex: "payment_type",
 			key: "payment_type",
-			render: (payment_type: TFinanceTransactionData["payment_type"]) => formatEmpty(payment_type?.name),
+			render: (payment_type: TFinanceTransactionData["payment_type"]) => capitalize(formatEmpty(payment_type?.name)),
+			// filters: paymentTypes?.data.map(el => ({
+			// 	value: el.id,
+			// 	text: capitalize(el.name)
+			// })),
+			// filterIcon: <UiFilterIcon />,
+			// filterMultiple: false
 		},
 		{
 			ellipsis: true,
@@ -54,6 +69,13 @@ export const useColumnsFinance = () => {
 					{group?.name}
 				</Link>
 			) : "-",
+			// filters: groups?.data.map(el => ({
+			// 	value: el.id,
+			// 	text: el.name,
+			// })),
+			// filterSearch: true,
+			// filterIcon: <UiFilterIcon />,
+			// filterMultiple: false
 		},
 	];
 

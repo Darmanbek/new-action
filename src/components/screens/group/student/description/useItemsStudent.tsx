@@ -27,7 +27,7 @@ export const useItemsStudent = (data?: TStudent) => {
 				// </UiTag>
 
 				<Statistic
-					value={data?.balance?.total_amount}
+					value={data?.balance?.total_amount ?? 0}
 					valueStyle={{ color: Number(data?.balance?.total_amount) >= 0 ? "#3f8600" : "#cf1322" }}
 					prefix={Number(data?.balance?.total_amount) >= 0 ? <ArrowUpOutlined /> : <ArrowDownOutlined />}
 					suffix="UZS"

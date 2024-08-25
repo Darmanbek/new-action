@@ -18,7 +18,7 @@ export const useColumnsPayments = () => {
 			title: "Сумма",
 			dataIndex: "amount",
 			key: "amount",
-			render: priceFormatter
+			render: priceFormatter,
 		},
 		{
 			ellipsis: true,
