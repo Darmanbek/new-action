@@ -1,11 +1,11 @@
 import { EChartsOption } from "echarts";
-import { TDashboardStudentsRating } from "src/services/index.types";
+import { TDashboardTeachersRating } from "src/services/index.types";
 
 interface useOptionsStudentsRatingProps {
-	data?: TDashboardStudentsRating[];
+	data?: TDashboardTeachersRating[];
 }
 
-export const useOptionsStudentsRating = ({ data }: useOptionsStudentsRatingProps) => {
+export const useOptionsTeachersRating = ({ data }: useOptionsStudentsRatingProps) => {
 
 	const SeriesData = data?.map(el => ({
 		value: el.rating,

@@ -1,29 +1,31 @@
 import EChartsReact from "echarts-for-react";
 import { FC } from "react";
 import { UiCard } from "src/components/ui";
-import { useGetDashboardStudentsRatingQuery } from "src/services/dashboard/dashboard.api";
+import {
+	useGetDashboardTeachersRatingQuery,
+} from "src/services/dashboard/dashboard.api";
 import { useAuthPersistStore } from "src/store";
 import {
-	useOptionsStudentsRating,
-} from "./useOptionsStudentsRating";
+	useOptionsTeachersRating,
+} from "./useOptionsTeachersRating";
 
-const ChartStudentsRating: FC = () => {
+const ChartTeachersRating: FC = () => {
 
 	const company = useAuthPersistStore(
 		state => state.company,
 	);
 
 	const {
-		data: students,
+		data: teachers,
 		isLoading,
 		isFetching,
-	} = useGetDashboardStudentsRatingQuery(company?.id);
+	} = useGetDashboardTeachersRatingQuery(company?.id);
 
-	const options = useOptionsStudentsRating({ data: students?.data });
+	const options = useOptionsTeachersRating({ data: teachers?.data });
 
 	return (
 		<UiCard
-			title={"Студенты"}
+			title={"Учителя"}
 			styles={{
 				title: {
 					fontWeight: 500,
@@ -41,7 +43,7 @@ const ChartStudentsRating: FC = () => {
 				option={options}
 				showLoading={isLoading || isFetching}
 				style={{
-					minHeight: students?.data.length ? `${students?.data.length * 6}vh` : "auto"
+					minHeight: teachers?.data.length ? `${teachers?.data.length * 6}vh` : "auto",
 				}}
 				loadingOption={{
 					text: "Загрузка"
@@ -51,4 +53,4 @@ const ChartStudentsRating: FC = () => {
 	);
 };
 
-export { ChartStudentsRating };
+export { ChartTeachersRating };
