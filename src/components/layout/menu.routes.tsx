@@ -72,6 +72,7 @@ export const useMenuRoutes = () => {
 			"/",
 			"/admins",
 			"/groups",
+			"/companies",
 			// "/teachers",
 			"/finance",
 			"/chat",

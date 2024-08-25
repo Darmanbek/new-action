@@ -27,6 +27,7 @@ import {
 	DashboardStudents,
 	DashboardGroups,
 	DashboardGroup,
+	DashboardCompanies,
 	DashboardFinance,
 
 	Holiday, DashboardRating,
@@ -66,7 +67,7 @@ export const useRoutes = () => {
 		{ path: "/admins", element: <CustomAdmin /> },
 		{ path: "/admins/:admin_id", element: <CustomAdmin /> },
 
-		// { path: "/companies", element: <Company /> },
+		{ path: "/companies", element: <DashboardCompanies /> },
 		// { path: "/companies/:company_id", element: <Company /> },
 
 		{ path: "/acceptance", element: <Acceptance /> },
@@ -131,6 +132,8 @@ export const useRoutes = () => {
 
 			"/admins",
 			"/admins/:admin_id",
+
+			"/companies",
 
 			"/teachers",
 			"/teachers/:teacher_id",
