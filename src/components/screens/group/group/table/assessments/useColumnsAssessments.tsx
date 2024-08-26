@@ -46,8 +46,8 @@ export const useColumnsAssessments = (date: Dayjs) => {
 					}
 					if (lesson.is_free) {
 						return {
-							backgroundColor: "#fff1f0",
-							color: "#cf1322",
+							backgroundColor: "#e6f4ff",
+							color: "#0958d9",
 						};
 					}
 				}

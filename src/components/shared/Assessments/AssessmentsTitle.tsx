@@ -1,4 +1,4 @@
-import { Divider, Space, Tooltip } from "antd";
+import { Divider, Space } from "antd";
 import { FC } from "react";
 import { THoliday } from "src/services/holiday/holiday.types";
 import { TLesson } from "src/services/shared/shared.types";
@@ -22,9 +22,10 @@ const AssessmentsTitle: FC<AssessmentsTitleProps> = ({ date, lessons, holiday })
 			}
 			if (lesson?.is_free && lesson?.title) {
 				return (
-					<Tooltip title={"Бесплатно"}>
+					<Space>
 						{lesson?.title}
-					</Tooltip>
+						(Бесплатно)
+					</Space>
 				);
 			}
 			if (lesson?.title) {

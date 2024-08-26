@@ -28,5 +28,7 @@ export const formatMonth = <T>(value: T) => value ? `${value} ${monthGrammar(val
 export const dateFormatter = (date?: string, format?: string) =>
 	dayjs(date).format(format || "YYYY-MM-DD");
 
+export const formatDate = (date?: string) => dateFormatter(date, "D MMMM YYYY")
+
 export const lowerCase = (text: string) => text.toLowerCase();
 export const formMessage = (text: string) => `Пожалуйста, заполните поле ${lowerCase(text)}!`;

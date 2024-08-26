@@ -23,8 +23,6 @@ import {
 	Chat,
 
 	DashboardAdmins,
-	DashboardTeachers,
-	DashboardStudents,
 	DashboardGroups,
 	DashboardGroup,
 	DashboardGroupStudent,
@@ -41,7 +39,6 @@ export const useRoutes = () => {
 	const roleName = useAuthPersistStore((state) => state.role);
 
 	const CustomAdmin = roleName === "director" ? DashboardAdmins : Admin;
-	const CustomTeacher = roleName === "director" ? DashboardTeachers : Teachers;
 	const CustomGroups = roleName === "director" ? DashboardGroups : Groups;
 	const CustomGroup = roleName === "director" ? DashboardGroup : Group;
 	const CustomStudent = roleName === "director" ? DashboardGroupStudent : Student;
@@ -76,10 +73,8 @@ export const useRoutes = () => {
 		{ path: "/acceptance", element: <Acceptance /> },
 		{ path: "/acceptance/:acceptance_id", element: <Acceptance /> },
 
-		{ path: "/teachers", element: <CustomTeacher /> },
+		{ path: "/teachers", element: <Teachers /> },
 		{ path: "/teachers/:teacher_id", element: <Teacher /> },
-
-		{ path: "/students", element: <DashboardStudents /> },
 
 		{ path: "/groups", element: <CustomGroups /> },
 		{ path: "/groups/:group_id", element: <CustomGroup /> },

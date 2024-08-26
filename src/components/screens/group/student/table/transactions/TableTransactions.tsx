@@ -1,12 +1,11 @@
 import { PlusOutlined } from "@ant-design/icons";
-import { Tooltip } from "antd";
 import { FC } from "react";
 import { useParams } from "react-router-dom";
 import { HeadTable } from "src/components/shared";
 import { TTransaction } from "src/services/index.types";
 import { useFormStorageStore } from "src/store";
 import { useColumnsTransactions } from "./useColumnsTransactions";
-import { UiButton, UiTable } from "src/components/ui";
+import { UiTable, UiTooltipButton } from "src/components/ui";
 import { useGetGroupsByIdStudentsQuery } from "src/services/index.api";
 
 const TableTransactions: FC = () => {
@@ -25,14 +24,15 @@ const TableTransactions: FC = () => {
 				<HeadTable
 					title={"Транзакции"}
 					children={[
-						<Tooltip title="Добавить" key="Add">
-							<UiButton
-								key="Add_Button"
-								type="primary"
-								icon={<PlusOutlined />}
-								onClick={toggleDrawer}
-							/>
-						</Tooltip>,
+						<UiTooltipButton
+							title="Добавить"
+							key="Add_Button"
+							type="primary"
+							icon={<PlusOutlined />}
+							onClick={toggleDrawer}
+						>
+							Добавить
+						</UiTooltipButton>,
 					]}
 				/>
 			)}

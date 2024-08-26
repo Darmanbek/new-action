@@ -9,10 +9,32 @@ import {
 	axiosGetMessage,
 	axiosGetMessageById,
 	axiosCreateMessage,
-	axiosEditMessage
+	axiosEditMessage,
 } from "./message.services";
 
+const useGetMessagePusherQuery = () => {
+	const queryClient = useQueryClient();
+	useEffect(() => {
+		const pusher = new Pusher(PUSHER_KEY, pusherOptions);
+
+		const channel = pusher.subscribe(`new-action-chat`);
+
+		const handleCall = () => {
+			queryClient.invalidateQueries(["message"]);
+		};
+
+		channel.bind("chat", handleCall);
+
+		return () => {
+			channel.unbind("chat", handleCall);
+			pusher.unsubscribe("chat");
+		};
+	}, [queryClient]);
+};
+
+
 const useGetMessageQuery = (params: TGetParams) => {
+	useGetMessagePusherQuery();
 	const { message } = useMessage();
 	return useQuery({
 		queryFn: () => axiosGetMessage(params),
@@ -36,7 +58,6 @@ const useGetMessageByIdPusherQuery = (id?: number | string) => {
 				return { data: newArray };
 			});
 		};
-
 		channel.bind("chat", handleCall);
 
 		return () => {

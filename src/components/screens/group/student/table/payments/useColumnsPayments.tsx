@@ -1,5 +1,4 @@
 import { ColumnsType } from "antd/es/table";
-// import { ApproveCheck } from 'src/components/shared';
 import { formatEmpty, priceFormatter } from "src/utils";
 import { TPaymentHistory } from "src/services/index.types";
 
@@ -23,9 +22,9 @@ export const useColumnsPayments = () => {
 		{
 			ellipsis: true,
 			title: "Комментарий",
-			dataIndex: "assessment",
-			key: "assessment",
-			render: (assessment: TPaymentHistory["assessment"]) => formatEmpty(assessment?.title),
+			dataIndex: "lesson",
+			key: "lesson",
+			render: (lesson: TPaymentHistory["lesson"]) => formatEmpty(lesson?.title),
 		},
 		{
 			ellipsis: true,

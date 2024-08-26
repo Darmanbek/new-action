@@ -11,12 +11,6 @@ export const DashboardAdmins = loadable(() => import("./admins/Admins"), {
 	fallback: createElement(Loader),
 });
 
-export const DashboardTeachers = loadable(() => import("./teachers-rating/TeachersRating"), {
-	fallback: createElement(Loader),
-});
-export const DashboardStudents = loadable(() => import("./students-rating/StudentsRating"), {
-	fallback: createElement(Loader),
-});
 export const DashboardGroups = loadable(() => import("./group/groups/Groups"), {
 	fallback: createElement(Loader),
 });

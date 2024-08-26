@@ -18,6 +18,9 @@ const useSignInMutation = () => {
 			queryClient.invalidateQueries({
 				queryKey: ["login"],
 			});
+			queryClient.invalidateQueries({
+				queryKey: ["message"],
+			});
 			message.success("Успешно");
 		},
 		onError: (error: TResponseError) => {
