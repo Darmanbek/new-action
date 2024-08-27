@@ -51,7 +51,7 @@ const useGetMessageByIdPusherQuery = (id?: number | string) => {
 		if (!id) return;
 		const pusher = new Pusher(PUSHER_KEY, pusherOptions);
 
-		const channel = pusher.subscribe(`new-action-chat.${id}.messages`);
+		const channel = pusher.subscribe(`message.${id}`);
 
 		const handleCall = (event: any) => {
 			queryClient.setQueryData(["message", id], (oldData: any) => {
@@ -63,7 +63,7 @@ const useGetMessageByIdPusherQuery = (id?: number | string) => {
 
 		return () => {
 			channel.unbind("chat", handleCall);
-			pusher.unsubscribe(`new-action-chat.${id}.messages`);
+			pusher.unsubscribe(`message.${id}`);
 		};
 	}, [id, queryClient]);
 };
