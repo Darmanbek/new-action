@@ -52,8 +52,10 @@ const useGetMessageByIdPusherQuery = (id?: number | string) => {
 		const pusher = new Pusher(PUSHER_KEY, pusherOptions);
 
 		const channel = pusher.subscribe(`message.${id}`);
-
+		console.log({ pusher })
+		console.log({ channel })
 		const handleCall = (event: any) => {
+			console.log({ event })
 			queryClient.setQueryData(["message", id], (oldData: any) => {
 				const newArray = [...oldData.data, event];
 				return { data: newArray };
