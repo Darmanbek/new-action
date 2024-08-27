@@ -48,6 +48,7 @@ const useGetMessageQuery = (params: TGetParams) => {
 const useGetMessageByIdPusherQuery = (id?: number | string) => {
 	const queryClient = useQueryClient();
 	useEffect(() => {
+		if (!id) return;
 		const pusher = new Pusher(PUSHER_KEY, pusherOptions);
 
 		const channel = pusher.subscribe(`new-action-chat.${id}.messages`);
