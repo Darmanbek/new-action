@@ -50,7 +50,7 @@ const useGetMessageByIdPusherQuery = (id?: number | string) => {
 	useEffect(() => {
 		const pusher = new Pusher(PUSHER_KEY, pusherOptions);
 
-		const channel = pusher.subscribe(`new-action-chat-${id}-messages`);
+		const channel = pusher.subscribe(`new-action-chat.${id}.messages`);
 
 		const handleCall = (event: any) => {
 			queryClient.setQueryData(["message", id], (oldData: any) => {
@@ -58,13 +58,11 @@ const useGetMessageByIdPusherQuery = (id?: number | string) => {
 				return { data: newArray };
 			});
 		};
-		channel.bind("chat", handleCall, {
-			title: "Pusher",
-		});
+		channel.bind("chat", handleCall);
 
 		return () => {
 			channel.unbind("chat", handleCall);
-			pusher.unsubscribe(`new-action-chat-${id}-messages`);
+			pusher.unsubscribe(`new-action-chat.${id}.messages`);
 		};
 	}, [id, queryClient]);
 };
