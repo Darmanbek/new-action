@@ -1,7 +1,6 @@
-import capitalize from "antd/es/_util/capitalize";
 import { ColumnsType } from "antd/es/table";
 import { TTransaction } from "src/services/index.types";
-import { formatEmpty, priceFormatter } from "src/utils";
+import { formatEmpty, paymentFormatToTag, priceFormatter } from "src/utils";
 
 
 export const useColumnsTransactions = () => {
@@ -26,7 +25,7 @@ export const useColumnsTransactions = () => {
 			title: "Способ оплаты",
 			dataIndex: "payment_type",
 			key: "payment_type",
-			render: (payment_type) => capitalize(formatEmpty(payment_type)),
+			render: paymentFormatToTag,
 		},
 		{
 			ellipsis: true,

@@ -1,6 +1,6 @@
 import { ColumnsType } from "antd/es/table";
 import { ApproveCheckValue } from "src/components/shared";
-import { formatEmpty } from "src/utils";
+import { formatEmpty, formatShortDate } from "src/utils";
 import { TAssessment } from "src/services/index.types";
 
 export const useColumnsAssessments = () => {
@@ -11,14 +11,14 @@ export const useColumnsAssessments = () => {
 			dataIndex: "date",
 			key: "date",
 			rowScope: "row",
-			render: formatEmpty,
+			render: formatShortDate,
 		},
 		{
 			ellipsis: true,
 			title: "Балл",
 			dataIndex: "value",
 			key: "value",
-			render: formatEmpty
+			render: formatEmpty,
 		},
 		{
 			align: "center",

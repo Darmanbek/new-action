@@ -17,7 +17,7 @@ const useGetMessagePusherQuery = () => {
 	useEffect(() => {
 		const pusher = new Pusher(PUSHER_KEY, pusherOptions);
 
-		const channel = pusher.subscribe(`new-action-chat`);
+		const channel = pusher.subscribe("new-action-chat");
 
 		const handleCall = () => {
 			queryClient.invalidateQueries(["message"]);
@@ -27,7 +27,7 @@ const useGetMessagePusherQuery = () => {
 
 		return () => {
 			channel.unbind("chat", handleCall);
-			pusher.unsubscribe("chat");
+			pusher.unsubscribe("new-action-chat");
 		};
 	}, [queryClient]);
 };
@@ -50,9 +50,12 @@ const useGetMessageByIdPusherQuery = (id?: number | string) => {
 	useEffect(() => {
 		const pusher = new Pusher(PUSHER_KEY, pusherOptions);
 
-		const channel = pusher.subscribe(`new-action-chat.${id}.messages`);
+		const channel = pusher.subscribe(`new-action-chat-${id}-messages`);
 
+		console.log("bind");
 		const handleCall = (event: any) => {
+			console.log(event);
+			console.log("event");
 			queryClient.setQueryData(["message", id], (oldData: any) => {
 				const newArray = [...oldData.data, event];
 				return { data: newArray };
@@ -62,7 +65,7 @@ const useGetMessageByIdPusherQuery = (id?: number | string) => {
 
 		return () => {
 			channel.unbind("chat", handleCall);
-			pusher.unsubscribe("chat");
+			pusher.unsubscribe(`new-action-chat-${id}-messages`);
 		};
 	}, [id, queryClient]);
 };

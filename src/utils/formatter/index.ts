@@ -1,4 +1,10 @@
+import Icon from "@ant-design/icons";
 import dayjs from "dayjs";
+import { createElement } from "react";
+import { IoCardOutline } from "react-icons/io5";
+import { PiContactlessPayment } from "react-icons/pi";
+import { TbCashBanknote, TbSquareRoundedPercentage } from "react-icons/tb";
+import { UiTag } from "src/components/ui";
 import { monthGrammar } from "src/utils/selector";
 
 export const phoneFormatter = (phone?: string | null) => {
@@ -28,7 +34,42 @@ export const formatMonth = <T>(value: T) => value ? `${value} ${monthGrammar(val
 export const dateFormatter = (date?: string, format?: string) =>
 	dayjs(date).format(format || "YYYY-MM-DD");
 
-export const formatDate = (date?: string) => dateFormatter(date, "D MMMM YYYY")
+export const formatDate = (date?: string) => dateFormatter(date, "D MMMM YYYY");
+export const formatShortDate = (date?: string) => dateFormatter(date, "D MMM YYYY");
 
 export const lowerCase = (text: string) => text.toLowerCase();
 export const formMessage = (text: string) => `Пожалуйста, заполните поле ${lowerCase(text)}!`;
+
+export const paymentFormatToTag = (payment?: string) => {
+	if (!payment) return "";
+	switch (payment) {
+		case "cash":
+			return createElement(UiTag, {
+				children: "Наличные",
+				color: "green",
+				icon: createElement(Icon, { children: createElement(TbCashBanknote) }),
+			});
+		case "click":
+			return createElement(UiTag, {
+				children: "Click",
+				color: "geekblue",
+				icon: createElement(Icon, { children: createElement(TbSquareRoundedPercentage) }),
+			});
+		case "payme":
+			return createElement(UiTag, {
+				children: "Payme",
+				color: "cyan",
+				icon: createElement(Icon, { children: createElement(PiContactlessPayment) }),
+			});
+		case "paynet":
+			return createElement(UiTag, {
+				children: "Paynet",
+				color: "cyan",
+				icon: createElement(Icon, { children: createElement(IoCardOutline) }),
+			});
+		default:
+			return createElement(UiTag, {
+				children: payment,
+			});
+	}
+};
