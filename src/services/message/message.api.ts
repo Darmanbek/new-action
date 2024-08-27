@@ -52,16 +52,15 @@ const useGetMessageByIdPusherQuery = (id?: number | string) => {
 
 		const channel = pusher.subscribe(`new-action-chat-${id}-messages`);
 
-		console.log("bind");
 		const handleCall = (event: any) => {
-			console.log(event);
-			console.log("event");
 			queryClient.setQueryData(["message", id], (oldData: any) => {
 				const newArray = [...oldData.data, event];
 				return { data: newArray };
 			});
 		};
-		channel.bind("chat", handleCall);
+		channel.bind("chat", handleCall, {
+			title: "Pusher",
+		});
 
 		return () => {
 			channel.unbind("chat", handleCall);
