@@ -29,6 +29,9 @@ const useCreateCompaniesMutation = () => {
 			queryClient.invalidateQueries({
 				queryKey: ["companies"],
 			});
+			queryClient.invalidateQueries({
+				queryKey: ["admins"],
+			});
 			message.success("Успешно");
 		},
 		onError: (error: TResponseError) => {
@@ -46,6 +49,9 @@ const useEditCompaniesMutation = () => {
 			queryClient.invalidateQueries({
 				queryKey: ["companies"],
 			});
+			queryClient.invalidateQueries({
+				queryKey: ["admins"],
+			});
 			message.success("Успешно");
 		},
 		onError: (error: TResponseError) => {
@@ -62,6 +68,9 @@ const useDeleteCompaniesMutation = () => {
 		onSuccess: () => {
 			queryClient.invalidateQueries({
 				queryKey: ["companies"],
+			});
+			queryClient.invalidateQueries({
+				queryKey: ["admins"],
 			});
 			message.success("Успешно");
 		},

@@ -5,16 +5,16 @@ import { useGetDashboardCompaniesQuery } from "src/services/index.api";
 import { TDashboardCompany } from "src/services/index.types";
 import { useAuthPersistStore } from "src/store";
 
-import { useColumnsCompanies } from "./useColumnsCompanies";
+import { useColumnsCompany } from "./useColumnsCompany";
 
-const TableCompanies: FC = () => {
+const TableCompany: FC = () => {
 	const toCompany = useAuthPersistStore(
 		state => state.toCompany,
 	);
 	const { data: companies, isLoading, isFetching } = useGetDashboardCompaniesQuery();
 
-	const columns = useColumnsCompanies();
-
+	const columns = useColumnsCompany();
+1
 	return (
 		<UiTable<TDashboardCompany>
 			title={() => (
@@ -32,4 +32,4 @@ const TableCompanies: FC = () => {
 	);
 };
 
-export { TableCompanies };
+export { TableCompany };

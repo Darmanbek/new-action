@@ -1,7 +1,6 @@
-import { Tooltip } from "antd";
 import { ColumnsType } from "antd/es/table";
 import { HeadTable } from "src/components/shared";
-import { UiButton, UiTable } from "src/components/ui";
+import { UiTable, UiTooltipButton } from "src/components/ui";
 import { useGetCompaniesQuery } from "src/services/index.api";
 import { useFormStorageStore } from "src/store";
 import { PlusOutlined } from "@ant-design/icons";
@@ -19,14 +18,15 @@ export const TableCompany = () => {
 				<HeadTable
 					title="Филиалы"
 					children={[
-						<Tooltip title="Добавить" key="Add">
-							<UiButton
-								key="Add_Button"
-								type="primary"
-								icon={<PlusOutlined />}
-								onClick={toggleDrawer}
-							/>
-						</Tooltip>,
+						<UiTooltipButton
+							title="Добавить"
+							key="Add_Button"
+							type="primary"
+							icon={<PlusOutlined />}
+							onClick={toggleDrawer}
+						>
+							Добавить
+						</UiTooltipButton>,
 					]}
 				/>
 			)}

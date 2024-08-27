@@ -55,7 +55,7 @@ export const useMenuRoutes = () => {
 			"/admins",
 			"/teachers",
 			"/groups",
-			// "/companies",
+			"/companies",
 			"/acceptance",
 			"/holiday",
 			"/finance",

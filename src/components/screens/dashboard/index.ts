@@ -3,7 +3,7 @@ import { createElement } from "react";
 
 import { Loader } from "src/components/shared";
 
-export const DashboardCompanies = loadable(() => import("./companies/Companies"), {
+export const DashboardCompany = loadable(() => import("./company/Company"), {
 	fallback: createElement(Loader),
 });
 

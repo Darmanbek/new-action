@@ -44,6 +44,7 @@ export const useColumnsCompany = () => {
 				<Space>
 					<Tooltip title="Изменить">
 						<UiButton
+							shape={"circle"}
 							type="primary"
 							color="orange"
 							icon={<EditOutlined />}
@@ -57,6 +58,7 @@ export const useColumnsCompany = () => {
 					>
 						<Tooltip title="Удалить">
 							<UiButton
+								shape={"circle"}
 								type="primary"
 								danger
 								icon={<DeleteOutlined />}

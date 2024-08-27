@@ -6,7 +6,7 @@ import { useAuthPersistStore } from "src/store";
 import { formatEmpty } from "src/utils";
 
 
-export const useColumnsCompanies = () => {
+export const useColumnsCompany = () => {
 	const { company, toCompany } = useAuthPersistStore();
 
 	const columns: ColumnsType<TDashboardCompany> = [

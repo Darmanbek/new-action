@@ -9,7 +9,7 @@ import {
 } from "src/services/index.api";
 import { TCompanyChange } from "src/services/index.types";
 import { useFormStorageStore } from "src/store";
-import { formMessage, selectPlaceholder } from "src/utils";
+import { formMessage, inputPlaceholder, selectPlaceholder } from "src/utils";
 
 export const FormCompany = () => {
 	const [form] = Form.useForm<TCompanyChange>();
@@ -46,12 +46,13 @@ export const FormCompany = () => {
 
 	useEffect(() => {
 		if (paramsForm) {
+			const admin = admins?.data?.find(el => el?.id === paramsForm?.admin?.id);
 			form.setFieldsValue({
 				...paramsForm,
-				admin_id: paramsForm?.admin?.id
+				admin_id: admin?.id || null,
 			});
 		}
-	}, [paramsForm, form]);
+	}, [paramsForm, form, admins]);
 
 	return (
 		<GlobalDrawer
@@ -80,7 +81,7 @@ export const FormCompany = () => {
 						},
 					]}
 				>
-					<Input placeholder="Введите Название" />
+					<Input placeholder={inputPlaceholder} />
 				</Form.Item>
 
 				<Form.Item<TCompanyChange>
@@ -93,7 +94,10 @@ export const FormCompany = () => {
 						},
 					]}
 				>
-					<UiSelect placeholder={selectPlaceholder} options={adminsOptions} />
+					<UiSelect
+						placeholder={selectPlaceholder}
+						options={adminsOptions}
+					/>
 				</Form.Item>
 			</Form>
 		</GlobalDrawer>

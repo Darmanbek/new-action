@@ -13,7 +13,7 @@ import {
 
 	Admin,
 	Acceptance,
-	// Company,
+	Company,
 
 	Finance,
 	// FinanceCompanies,
@@ -26,7 +26,7 @@ import {
 	DashboardGroups,
 	DashboardGroup,
 	DashboardGroupStudent,
-	DashboardCompanies,
+	DashboardCompany,
 	DashboardFinance,
 	DashboardRating,
 
@@ -42,6 +42,7 @@ export const useRoutes = () => {
 	const CustomGroups = roleName === "director" ? DashboardGroups : Groups;
 	const CustomGroup = roleName === "director" ? DashboardGroup : Group;
 	const CustomStudent = roleName === "director" ? DashboardGroupStudent : Student;
+	const CustomCompany = roleName === "director" ? DashboardCompany : Company;
 
 	const homeRoute: RouteProps = roleName ? ({
 		"admin": {
@@ -67,8 +68,7 @@ export const useRoutes = () => {
 		{ path: "/admins", element: <CustomAdmin /> },
 		{ path: "/admins/:admin_id", element: <CustomAdmin /> },
 
-		{ path: "/companies", element: <DashboardCompanies /> },
-		// { path: "/companies/:company_id", element: <Company /> },
+		{ path: "/companies", element: <CustomCompany /> },
 
 		{ path: "/acceptance", element: <Acceptance /> },
 		{ path: "/acceptance/:acceptance_id", element: <Acceptance /> },
