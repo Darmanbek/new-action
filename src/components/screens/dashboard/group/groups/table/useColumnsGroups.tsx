@@ -6,6 +6,7 @@ import "dayjs/locale/ru";
 import { useNavigate } from "react-router-dom";
 import { UiBadge, UiButton, UiFilterIcon, UiTag } from "src/components/ui";
 import { completeData } from "src/data";
+import { useGetDayQuery } from "src/services/day/day.api";
 import { TGroup } from "src/services/groups/groups.types";
 import {
 	completeColor,
@@ -21,6 +22,8 @@ dayjs.locale("ru");
 
 export const useColumnsGroups = () => {
 	const navigate = useNavigate();
+
+	const { data: days } = useGetDayQuery();
 
 	const columns: ColumnsType<TGroup> = [
 		{
@@ -75,6 +78,12 @@ export const useColumnsGroups = () => {
 					{dayTranslation(day?.name)}
 				</UiTag>
 			),
+			filters: days?.data.map(el => ({
+				value: el.id,
+				text: dayTranslation(el.name),
+			})),
+			filterIcon: <UiFilterIcon />,
+			filterMultiple: false,
 		},
 		{
 			ellipsis: true,

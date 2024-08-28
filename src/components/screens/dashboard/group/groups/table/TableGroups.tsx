@@ -20,6 +20,7 @@ const TableGroups: FC = () => {
 	const debounceValue = useSearchListStore((state) => state.debounceValue);
 
 	const [price, setPrice] = useState<string>();
+	const [day, setDay] = useState<number>();
 	const [completed, setCompleted] = useState<number>();
 	const [date, setDate] = useState<RangePickerProps["value"]>();
 
@@ -32,9 +33,16 @@ const TableGroups: FC = () => {
 		search: debounceValue,
 		price,
 		is_completed: completed,
+		day,
 	}, currentCompany?.id);
 
 	const onChangeTable: TableProps<TGroup>["onChange"] = (_pagination, filters, sorter) => {
+
+		if (filters.day && Array.isArray(filters.day) && typeof filters.day[0] === "number") {
+			setDay(filters.day[0]);
+		} else {
+			setDay(undefined);
+		}
 
 		if (filters.is_completed && Array.isArray(filters.is_completed) && typeof filters.is_completed[0] === "number") {
 			setCompleted(filters.is_completed[0]);

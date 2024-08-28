@@ -12,7 +12,7 @@ import { GlobalPopconfirm } from "src/components/shared";
 import { UiButton, UiTag } from "src/components/ui";
 import { useDeleteGroupsStudentsMutation } from "src/services/groups/groups.api";
 import { TStudent } from "src/services/index.types";
-import { phoneFormatter, priceFormatter } from "src/utils";
+import { formatEmpty, phoneFormatter, priceFormatter } from "src/utils";
 
 export const useColumnsStudents = () => {
 	const navigate = useNavigate();
@@ -58,6 +58,14 @@ export const useColumnsStudents = () => {
 					{priceFormatter(balance?.total_amount)}
 				</UiTag>
 			),
+		},
+		{
+			align: "center",
+			ellipsis: true,
+			title: "Дата оплаты",
+			dataIndex: "balance",
+			key: "balance_recharge",
+			render: (balance: TStudent["balance"]) => formatEmpty(balance?.balance_recharge?.deadline),
 		},
 		{
 			fixed: "right",

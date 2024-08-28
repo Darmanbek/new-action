@@ -1,6 +1,7 @@
 export type TBalance = {
   id: string;
   total_amount: string;
+  balance_recharge: TBalanceRecharge;
 };
 
 export type TBalanceChange = {

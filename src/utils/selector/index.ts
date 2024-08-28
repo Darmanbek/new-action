@@ -3,6 +3,22 @@ import { PresetColorType } from "antd/es/_util/colors";
 import { createElement } from "react";
 import { TDayTypes, TResponseError, TRoleTypes } from "src/services/index.types";
 
+export const paymentTranlation = (payment?: string) => {
+	if (!payment) return "";
+	switch (payment.toLowerCase()) {
+		case "cash":
+			return "Наличные";
+		case "click":
+			return "Click";
+		case "payme":
+			return "Payme";
+		case "paynet":
+			return "Paynet";
+		default:
+			return payment;
+	}
+};
+
 export const dayTranslation = (day: TDayTypes) => {
 	switch (day.toLowerCase()) {
 		case "odd day":

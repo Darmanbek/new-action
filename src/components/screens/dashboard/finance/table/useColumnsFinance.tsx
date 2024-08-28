@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { UiFilterIcon, UiTag } from "src/components/ui";
 import { TDashboardFinanceTransaction } from "src/services/index.types";
 import { useGetPaymentTypesQuery } from "src/services/payment/payment.api";
-import { formatEmpty, priceFormatter } from "src/utils";
+import { formatEmpty, paymentFormatToTag, paymentTranlation, priceFormatter } from "src/utils";
 
 
 export const useColumnsFinance = () => {
@@ -48,10 +48,10 @@ export const useColumnsFinance = () => {
 			title: "Способ оплаты",
 			dataIndex: "payment_type",
 			key: "payment_type",
-			render: (payment_type: TDashboardFinanceTransaction["payment_type"]) => capitalize(formatEmpty(payment_type?.name)),
+			render: (payment_type: TDashboardFinanceTransaction["payment_type"]) => paymentFormatToTag(payment_type?.name),
 			filters: paymentTypes?.data.map(el => ({
 				value: el.id,
-				text: capitalize(el.name),
+				text: capitalize(paymentTranlation(el.name)),
 			})),
 			filterIcon: <UiFilterIcon />,
 			filterMultiple: false,

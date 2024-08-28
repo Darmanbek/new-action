@@ -3,7 +3,7 @@ import { TDay } from "src/services/day/day.types";
 import { TResponseData } from "src/services/index.types";
 
 const axiosGetDay = async (): Promise<TResponseData<TDay>> => {
-	const response = await api.get(`/admin/day`);
+	const response = await api.get(`/day`);
 	return response.data;
 };
 

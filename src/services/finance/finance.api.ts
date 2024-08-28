@@ -13,6 +13,7 @@ const useGetFinanceQuery = (params: TGetParams) => {
 	return useQuery({
 		queryFn: () => axiosGetFinance(params),
 		queryKey: ["finance", ...Object.values(params)],
+		keepPreviousData: true,
 		onError: (error: TResponseError) => {
 			message.error(errorResponse(error));
 		},

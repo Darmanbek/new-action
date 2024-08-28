@@ -42,7 +42,7 @@ export const formMessage = (text: string) => `Пожалуйста, заполн
 
 export const paymentFormatToTag = (payment?: string) => {
 	if (!payment) return "";
-	switch (payment) {
+	switch (payment.toLowerCase()) {
 		case "cash":
 			return createElement(UiTag, {
 				children: "Наличные",
