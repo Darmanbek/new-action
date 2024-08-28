@@ -2,9 +2,11 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useMessage } from "src/hooks";
 import { TResponseError } from "src/services/index.types";
 import { TGetParams } from "src/services/shared/shared.types";
+import { errorResponse } from "src/utils";
 import {
 	axiosGetHoliday,
 	axiosCreateHoliday,
+	axiosDeleteHoliday,
 } from "./holiday.services";
 
 
@@ -36,7 +38,25 @@ const useCreateHolidayMutation = () => {
 	});
 };
 
+const useDeleteHolidayMutation = () => {
+	const { message } = useMessage();
+	const queryClient = useQueryClient();
+	return useMutation({
+		mutationFn: axiosDeleteHoliday,
+		onSuccess: () => {
+			queryClient.invalidateQueries({
+				queryKey: ["holiday"],
+			});
+			message.success("Успешно");
+		},
+		onError: (error: TResponseError) => {
+			message.error(errorResponse(error));
+		},
+	});
+};
+
 export {
 	useGetHolidayQuery,
 	useCreateHolidayMutation,
+	useDeleteHolidayMutation,
 };

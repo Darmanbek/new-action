@@ -11,7 +11,7 @@ const useCreateBalanceMutation = () => {
 		mutationFn: axiosCreateBalance,
 		onSuccess: () => {
 			queryClient.invalidateQueries({
-				queryKey: ["groups"],
+				queryKey: ["groups-students"],
 			});
 			message.success("Успешно");
 		},

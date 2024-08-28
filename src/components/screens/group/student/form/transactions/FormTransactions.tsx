@@ -4,7 +4,7 @@ import { GlobalDrawer } from "src/components/shared";
 import { UiInputPrice, UiSelect } from "src/components/ui";
 import { useCreateBalanceMutation, useGetPaymentTypesQuery } from "src/services/index.api";
 import { TBalanceChange } from "src/services/index.types";
-import { formMessage, selectPlaceholder } from "src/utils";
+import { formMessage, inputPlaceholder, paymentTranlation, selectPlaceholder } from "src/utils";
 
 export const FormTransactions = () => {
 	const [form] = Form.useForm<TBalanceChange>();
@@ -54,7 +54,7 @@ export const FormTransactions = () => {
 					<UiSelect
 						options={payments?.data.map(pay => ({
 							value: pay.id,
-							label: pay.name
+							label: paymentTranlation(pay.name)
 						}))}
 						placeholder={selectPlaceholder}
 					/>
@@ -70,7 +70,8 @@ export const FormTransactions = () => {
 					]}
 				>
 					<UiInputPrice
-						addonAfter="uzs"
+						addonAfter="UZS"
+						placeholder={inputPlaceholder}
 					/>
 				</Form.Item>
 

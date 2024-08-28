@@ -2,11 +2,14 @@ import { DeleteOutlined } from "@ant-design/icons";
 import { ColumnsType } from "antd/es/table";
 import { GlobalPopconfirm } from "src/components/shared";
 import { UiTooltipButton } from "src/components/ui";
+import { useDeleteHolidayMutation } from "src/services/holiday/holiday.api";
 import { THoliday } from "src/services/holiday/holiday.types";
 import { formatDate } from "src/utils";
 
 
 export const useColumnsHoliday = () => {
+
+	const { mutate: deleteHoliday } = useDeleteHolidayMutation();
 
 	const columns: ColumnsType<THoliday> = [
 		{
@@ -29,13 +32,13 @@ export const useColumnsHoliday = () => {
 			title: "Действия",
 			render: (_v, record) => (
 				<GlobalPopconfirm
-					title={record.date}
-					onConfirm={() => console.error("Deleted")}
+					title={formatDate(record.date)}
+					onConfirm={() => deleteHoliday(record.id)}
 				>
 					<UiTooltipButton
-						danger={true}
 						type={"primary"}
 						shape={"circle"}
+						danger={true}
 						icon={<DeleteOutlined />}
 						showTitle={true}
 						title={"Удалить"}

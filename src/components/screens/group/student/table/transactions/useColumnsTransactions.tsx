@@ -1,9 +1,16 @@
+import capitalize from "antd/es/_util/capitalize";
 import { ColumnsType } from "antd/es/table";
+import { UiFilterIcon } from "src/components/ui";
 import { TTransaction } from "src/services/index.types";
-import { formatEmpty, paymentFormatToTag, priceFormatter } from "src/utils";
+import { useGetPaymentTypesQuery } from "src/services/index.api";
+import { formatEmpty, paymentFormatToTag, paymentTranlation, priceFormatter } from "src/utils";
 
 
 export const useColumnsTransactions = () => {
+	const {
+		data: paymentTypes,
+	} = useGetPaymentTypesQuery();
+
 	const columns: ColumnsType<TTransaction> = [
 		{
 			width: 50,
@@ -26,6 +33,13 @@ export const useColumnsTransactions = () => {
 			dataIndex: "payment_type",
 			key: "payment_type",
 			render: paymentFormatToTag,
+			filters: paymentTypes?.data.map(el => ({
+				value: el.name,
+				text: capitalize(paymentTranlation(el.name)),
+			})),
+			onFilter: (value, record) => record.payment_type.toLowerCase() === value.toString().toLowerCase(),
+			filterIcon: <UiFilterIcon />,
+			filterMultiple: false,
 		},
 		{
 			ellipsis: true,

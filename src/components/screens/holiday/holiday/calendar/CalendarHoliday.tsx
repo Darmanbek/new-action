@@ -1,4 +1,4 @@
-import { CalendarOutlined, CheckCircleOutlined, CloseOutlined, PlusOutlined } from "@ant-design/icons";
+import { CalendarOutlined, CheckCircleOutlined, CloseOutlined, LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import { Calendar, Divider, Flex, Space, Spin, Tooltip, Typography } from "antd";
 import dayjs from "dayjs";
 import { FC, useEffect, useState } from "react";
@@ -8,7 +8,11 @@ import "dayjs/locale/ru";
 import { GlobalPopconfirm } from "src/components/shared";
 import { UiButton, UiCard, UiDatePicker, UiTag, UiTooltipButton } from "src/components/ui";
 import { useResponsive } from "src/hooks";
-import { useCreateHolidayMutation, useGetHolidayQuery } from "src/services/holiday/holiday.api";
+import {
+	useCreateHolidayMutation,
+	useDeleteHolidayMutation,
+	useGetHolidayQuery,
+} from "src/services/holiday/holiday.api";
 
 dayjs.extend(dayLocaleData);
 dayjs.extend(isBetween);
@@ -26,6 +30,7 @@ const CalendarHoliday: FC = () => {
 	});
 
 	const { mutate: createHoliday, isLoading: addLoading } = useCreateHolidayMutation();
+	const { mutate: deleteHoliday, isLoading: deleteLoading } = useDeleteHolidayMutation();
 
 	const isHoliday = (date: string) => {
 		return !!holiday?.data.find(el => el.date === date);
@@ -111,22 +116,27 @@ const CalendarHoliday: FC = () => {
 
 					cellRender={(date) => {
 						if (!holiday) return null;
-						if (holiday.data.find(el => el.date === date.format("YYYY-MM-DD"))) {
+						const currentHoliday = holiday.data.find(el => el.date === date.format("YYYY-MM-DD"));
+						const CustomCloseIcon = deleteLoading ? LoadingOutlined : CloseOutlined;
+						if (currentHoliday) {
 							return (
 								<UiTag
 									closable={date.format("YYYY-MM-DD") === currentDate.format("YYYY-MM-DD")}
-									closeIcon={<CloseOutlined
-										style={isMobile ? {
-											fontSize: 18,
-											color: "red",
-										} : {
-											fontSize: 18,
-											color: "red",
-											position: "absolute",
-											top: "5%",
-											right: "5%",
-										}} />}
-									onClose={() => console.error("Closed")}
+									closeIcon={
+										<CustomCloseIcon
+											spin={deleteLoading}
+											style={isMobile ? {
+												fontSize: 18,
+												color: "red",
+											} : {
+												fontSize: 18,
+												color: "red",
+												position: "absolute",
+												top: "5%",
+												right: "5%",
+											}} />
+									}
+									onClose={() => deleteHoliday(currentHoliday.id)}
 									color={"green"}
 									style={{
 										position: "relative",
