@@ -21,6 +21,8 @@ import {
 
 export const FormGroups = () => {
 	const [form] = Form.useForm<TGroupChange>();
+	const teacher_id = Form.useWatch("teacher_id", form);
+	const assistant_id = Form.useWatch("assistant", form);
 	const paramsForm = useFormStorageStore((state) => state.paramsForm);
 	const { data: teachers } = useGetTeachersQuery({});
 	const { data: days } = useGetDayQuery();
@@ -116,7 +118,7 @@ export const FormGroups = () => {
 				>
 					<UiSelect
 						placeholder={selectPlaceholder}
-						options={teachersOptions}
+						options={teachersOptions?.filter(el => el.value !== assistant_id)}
 					/>
 				</Form.Item>
 
@@ -132,7 +134,7 @@ export const FormGroups = () => {
 				>
 					<UiSelect
 						placeholder={selectPlaceholder}
-						options={teachersOptions}
+						options={teachersOptions?.filter(el => el.value !== teacher_id)}
 					/>
 				</Form.Item>
 
