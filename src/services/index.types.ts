@@ -11,6 +11,7 @@ export type * from "./finance/finance.types";
 export type * from "./dashboard/dashboard.types";
 export type * from "./day/day.types";
 export type * from "./holiday/holiday.types";
+export type * from "./frozen-status/frozen.status.types";
 
 export type * from "./message/message.types";
 

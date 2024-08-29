@@ -1,4 +1,4 @@
-import { TTeacher, TStudent, TLesson, TDay, TAssessment } from "src/services/index.types";
+import { TTeacher, TStudent, TLesson, TDay, TAssessment, TFrozenStatus } from "src/services/index.types";
 
 export type TGroup = {
 	id: string | number;
@@ -20,6 +20,8 @@ export type TGroupAssessment = {
 	id: string;
 	first_name: string;
 	last_name: string;
+	rating: string;
+	frozen_status: TFrozenStatus;
 	phone: string;
 	assessments: TAssessment[];
 }

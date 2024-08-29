@@ -1,15 +1,18 @@
 import {
+	Rate,
 	Space,
 	Tooltip,
 } from "antd";
-import {
+import Icon, {
 	DeleteOutlined,
 	EyeFilled,
 } from "@ant-design/icons";
+import { IoSnow, IoSunny } from "react-icons/io5";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { ColumnsType } from "antd/es/table";
 import { GlobalPopconfirm } from "src/components/shared";
-import { UiButton, UiTag } from "src/components/ui";
+import { UiButton, UiTag, UiTooltipButton } from "src/components/ui";
+import { useCreateFrozenStatusMutation } from "src/services/frozen-status/frozen.status.api";
 import { useDeleteGroupsStudentsMutation } from "src/services/groups/groups.api";
 import { TStudent } from "src/services/index.types";
 import { formatEmpty, phoneFormatter, priceFormatter } from "src/utils";
@@ -19,6 +22,14 @@ export const useColumnsStudents = () => {
 	const { group_id } = useParams();
 
 	const { mutate: deleteStudent } = useDeleteGroupsStudentsMutation(group_id);
+	const { mutate: onFrozen } = useCreateFrozenStatusMutation();
+
+	const frozenStudent = (item: TStudent) => {
+		onFrozen({
+			student_id: item.id,
+			is_frozen: !item?.frozen_status?.is_frozen,
+		});
+	};
 
 	const columns: ColumnsType<TStudent> = [
 		{
@@ -35,9 +46,28 @@ export const useColumnsStudents = () => {
 			dataIndex: "name",
 			key: "name",
 			render: (_, student) => (
-				<Link to={`students/${student.id}`}>
-					{`${student.first_name} ${student.last_name}`}
-				</Link>
+				<Space>
+					<Link to={`students/${student.id}`}>
+						{`${student.first_name} ${student.last_name}`}
+					</Link>
+					{student?.frozen_status?.is_frozen && (
+						<UiTag icon={<Icon><IoSnow /></Icon>} color={"cyan"}>
+							Заморожен
+						</UiTag>
+					)}
+				</Space>
+			),
+		},
+		{
+			ellipsis: true,
+			// rowScope: "row",
+			title: "Рейтинг",
+			key: "rating",
+			render: (_v, student) => (
+				<Space>
+					<Rate count={1} value={1} disabled={true} />
+					{student?.rating}
+				</Space>
 			),
 		},
 		{
@@ -85,10 +115,27 @@ export const useColumnsStudents = () => {
 					</Tooltip>
 					<GlobalPopconfirm
 						title={`${student.first_name} ${student.last_name}`}
+						onConfirm={() => frozenStudent(student)}
+					>
+						<UiTooltipButton
+							title={student?.frozen_status?.is_frozen ? "Разморозить" : "Заморозить"}
+							type={"primary"}
+							shape={"circle"}
+							showTitle={true}
+							color={student?.frozen_status?.is_frozen ? "orange" : "darkcyan"}
+							icon={<Icon>{student?.frozen_status?.is_frozen ? <IoSunny /> : <IoSnow />}</Icon>}
+							aria-label="Snow"
+						/>
+					</GlobalPopconfirm>
+					<GlobalPopconfirm
+						title={`${student.first_name} ${student.last_name}`}
 						onConfirm={() => deleteStudent({ student_id: [student.id] })}
 					>
-						<UiButton
+						<UiTooltipButton
+							title={"Удалить"}
+							type={"primary"}
 							shape={"circle"}
+							showTitle={true}
 							danger={true}
 							icon={<DeleteOutlined />}
 							aria-label="Delete"

@@ -1,13 +1,18 @@
+import Icon from "@ant-design/icons";
+import { Rate, Space, Tooltip } from "antd";
 import { ColumnsType } from "antd/es/table";
 import { Dayjs } from "dayjs";
+import { useCallback, useEffect } from "react";
+import { IoSnow } from "react-icons/io5";
 import { Link, useParams } from "react-router-dom";
 import { AssessmentsTitle, AssessmentsValue } from "src/components/shared";
+import { UiTag } from "src/components/ui";
 import {
 	useGetGroupsByIdCalendarQuery,
 	useGetGroupsByIdLessonsQuery,
 	useGetHolidayQuery,
 } from "src/services/index.api";
-import { TGroupAssessment } from "src/services/groups/groups.types";
+import { TGroupAssessment } from "src/services/index.types";
 import { dateFormatter } from "src/utils";
 
 export const useColumnsAssessments = (date: Dayjs) => {
@@ -26,6 +31,66 @@ export const useColumnsAssessments = (date: Dayjs) => {
 		date: [date.startOf("month").format("YYYY-MM-DD"), date.endOf("month").format("YYYY-MM-DD")],
 	});
 
+	const updateCursor = (ele: HTMLDivElement) => {
+		ele.style.cursor = "grabbing";
+		ele.style.userSelect = "none";
+	};
+
+	const resetCursor = (ele: HTMLDivElement) => {
+		ele.style.cursor = "grab";
+		ele.style.removeProperty("user-select");
+	};
+
+	const handleMouseDown = useCallback((e: any) => {
+		const ele = document.querySelector(".ant-table-content");
+		if (!calendar) return;
+		if (!ele) {
+			return;
+		}
+		const startPos = {
+			left: ele.scrollLeft,
+			top: ele.scrollTop,
+			x: e.clientX,
+			y: e.clientY,
+		};
+
+		const handleMouseMove = (e: MouseEvent) => {
+			const dx = e.clientX - startPos.x;
+			const dy = e.clientY - startPos.y;
+			ele.scrollTop = startPos.top - dy;
+			ele.scrollLeft = startPos.left - dx;
+			updateCursor(ele as HTMLDivElement);
+		};
+
+		const handleMouseUp = () => {
+			document.removeEventListener("mousemove", handleMouseMove);
+			document.removeEventListener("mouseup", handleMouseUp);
+			resetCursor(ele as HTMLDivElement);
+		};
+
+		document.addEventListener("mousemove", handleMouseMove);
+		document.addEventListener("mouseup", handleMouseUp);
+	}, [calendar]);
+
+	useEffect(() => {
+		const content = document.querySelector(".ant-table-content");
+		if (!calendar) return;
+		if (!content) return;
+		const onWheel = (e: any) => {
+			if (e.deltaY === 0) return;
+			e.preventDefault();
+			content.scrollTo({
+				left: content.scrollLeft + e.deltaY,
+				// behavior: "smooth",
+			});
+		};
+		content.addEventListener("wheel", onWheel);
+		content.addEventListener("mousedown", handleMouseDown);
+		return () => {
+			content.removeEventListener("wheel", onWheel);
+			content.removeEventListener("mousedown", handleMouseDown);
+		};
+	}, [calendar, handleMouseDown]);
 	const columns: ColumnsType<TGroupAssessment> = calendar?.data.map(date => ({
 		align: "center",
 		ellipsis: true,
@@ -64,6 +129,7 @@ export const useColumnsAssessments = (date: Dayjs) => {
 
 			return ({
 				style,
+				id: date,
 			});
 		},
 		onCell: () => {
@@ -112,9 +178,30 @@ export const useColumnsAssessments = (date: Dayjs) => {
 		title: "Студент",
 		key: "student",
 		render: (_v, student) => (
-			<Link to={`/groups/${group_id}/students/${student.id}`}>
-				{`${student?.first_name} ${student?.last_name}`}
-			</Link>
+			<Space>
+				<Link to={`students/${student.id}`}>
+					{`${student.first_name} ${student.last_name}`}
+				</Link>
+				{student?.frozen_status?.is_frozen && (
+					<Tooltip title={"Заморожен"}>
+						<UiTag icon={<Icon><IoSnow /></Icon>} color={"cyan"} />
+					</Tooltip>
+				)}
+			</Space>
+		),
+	});
+
+	columns.push({
+		ellipsis: true,
+		fixed: "right",
+		// rowScope: "row",
+		title: "Рейтинг",
+		key: "rating",
+		render: (_v, student) => (
+			<Space>
+				<Rate count={1} value={1} disabled={true} />
+				{student?.rating}
+			</Space>
 		),
 	});
 

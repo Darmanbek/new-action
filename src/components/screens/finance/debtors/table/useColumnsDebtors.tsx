@@ -1,10 +1,17 @@
+import { MessageOutlined } from "@ant-design/icons";
 import { ColumnsType } from "antd/es/table";
 import { Link } from "react-router-dom";
-import { UiTag } from "src/components/ui";
+import { UiTag, UiTooltipButton } from "src/components/ui";
 import { TFinanceDebtors } from "src/services/index.types";
-import { phoneFormatter, priceFormatter } from "src/utils";
+import { useFormStorageStore } from "src/store";
+import { formatEmpty, phoneFormatter, priceFormatter } from "src/utils";
 
 export const useColumnsDebtors = () => {
+
+	const addComment = useFormStorageStore(
+		state => state.setParamsForm,
+	);
+
 	const columns: ColumnsType<TFinanceDebtors> = [
 		{
 			width: 50,
@@ -20,8 +27,16 @@ export const useColumnsDebtors = () => {
 			dataIndex: "student",
 			key: "student",
 			render: (student: TFinanceDebtors["student"], debtor) => student ? (
-				<Link to={`/groups/${debtor?.group?.id}/students/${student?.id}`}>{`${student?.first_name} ${student?.last_name}`}</Link>
+				<Link
+					to={`/groups/${debtor?.group?.id}/students/${student?.id}`}>{`${student?.first_name} ${student?.last_name}`}</Link>
 			) : "-",
+		},
+		{
+			ellipsis: true,
+			title: "Комментарий",
+			dataIndex: "comment_debtor",
+			key: "comment_debtor",
+			render: (comment_debtor: TFinanceDebtors["comment_debtor"]) => comment_debtor?.comment,
 		},
 		{
 			ellipsis: true,
@@ -48,6 +63,31 @@ export const useColumnsDebtors = () => {
 			render: (group: TFinanceDebtors["group"]) => group ? (
 				<Link to={`/groups/${group?.id}`}>{group?.name}</Link>
 			) : "-",
+		},
+		{
+			ellipsis: true,
+			title: "Дата оплаты",
+			dataIndex: "balance_recharge",
+			key: "balance_recharge",
+			render: (balance_recharge: TFinanceDebtors["balance_recharge"]) => formatEmpty(balance_recharge?.deadline),
+		},
+		{
+			align: "center",
+			width: 100,
+			ellipsis: false,
+			title: "Действия",
+			key: "actions",
+			render: (_v, record) => (
+				<UiTooltipButton
+					title={"Добавить комментарий"}
+					showTitle={true}
+					color={"orange"}
+					type={"primary"}
+					shape={"circle"}
+					icon={<MessageOutlined />}
+					onClick={() => addComment(record)}
+				/>
+			),
 		},
 	];
 

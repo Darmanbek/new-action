@@ -1,4 +1,4 @@
-import { Form, FormProps } from "antd";
+import { Form, FormProps, Input } from "antd";
 import { useParams } from "react-router-dom";
 import { GlobalDrawer } from "src/components/shared";
 import { UiInputPrice, UiSelect } from "src/components/ui";
@@ -54,7 +54,7 @@ export const FormTransactions = () => {
 					<UiSelect
 						options={payments?.data.map(pay => ({
 							value: pay.id,
-							label: paymentTranlation(pay.name)
+							label: paymentTranlation(pay.name),
 						}))}
 						placeholder={selectPlaceholder}
 					/>
@@ -74,7 +74,21 @@ export const FormTransactions = () => {
 						placeholder={inputPlaceholder}
 					/>
 				</Form.Item>
-
+				<Form.Item
+					name={"comment"}
+					label={"Комментарий"}
+					rules={[
+						{
+							required: true,
+							message: formMessage("Комментарий"),
+						},
+					]}
+				>
+					<Input.TextArea
+						rows={8}
+						placeholder={inputPlaceholder}
+					/>
+				</Form.Item>
 			</Form>
 		</GlobalDrawer>
 	);

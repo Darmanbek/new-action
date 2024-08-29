@@ -1,5 +1,5 @@
 import { Key } from "react";
-import { TBalance, TPaymentHistory } from "src/services/index.types";
+import { TBalance, TFrozenStatus, TPaymentHistory, TPaymentType } from "src/services/index.types";
 
 export type TRoleTypes = "super_admin" | "admin" | "director";
 
@@ -31,6 +31,8 @@ export type TStudent = {
 	last_name: string;
 	role: TRoleTypes;
 	phone: string;
+	rating: string;
+	frozen_status: TFrozenStatus;
 	balance: TBalance | null;
 	payment_history: TPaymentHistory[];
 	transactions: TTransaction[];
@@ -48,7 +50,8 @@ export type TAssessment = {
 export type TTransaction = {
 	amount: number;
 	date: string;
-	payment_type: string;
+	comment: string | null,
+	payment_type: TPaymentType;
 }
 
 export type TLesson = {

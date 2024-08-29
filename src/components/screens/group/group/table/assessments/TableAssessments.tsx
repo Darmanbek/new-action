@@ -46,6 +46,7 @@ const TableAssessments: FC = () => {
 			setDate(end);
 		}
 	}, [date, end, start]);
+
 	return (
 		<UiTable<TGroupAssessment>
 			title={() => (
@@ -79,6 +80,7 @@ const TableAssessments: FC = () => {
 			columns={columns}
 			dataSource={assessment?.data}
 			loading={isLoading || isFetching}
+			pagination={false}
 		/>
 	);
 };

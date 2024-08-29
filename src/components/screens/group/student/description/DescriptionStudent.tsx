@@ -1,8 +1,9 @@
-import { ArrowLeftOutlined } from "@ant-design/icons";
-import { Spin } from "antd";
+import Icon, { ArrowLeftOutlined } from "@ant-design/icons";
+import { Divider, Space, Spin } from "antd";
 import { FC } from "react";
+import { IoSnow } from "react-icons/io5";
 import { useNavigate, useParams } from "react-router-dom";
-import { UiCard, UiDescriptions, UiTooltipButton } from "src/components/ui";
+import { UiCard, UiDescriptions, UiTag, UiTooltipButton } from "src/components/ui";
 import { useGetGroupsByIdStudentsQuery } from "src/services/index.api";
 
 import { useItemsStudent } from "./useItemsStudent";
@@ -20,7 +21,17 @@ const DescriptionStudent: FC = () => {
 		<Spin spinning={isLoading || isFetching}>
 			<UiCard
 				style={{ height: "100%" }}
-				title={student ? `${student?.first_name} ${student?.last_name}` : "Студент"}
+				title={student ? (
+						<Space split={<Divider type={"vertical"} />}>
+							{`${student?.first_name} ${student?.last_name}`}
+							{student?.frozen_status?.is_frozen && (
+								<UiTag icon={<Icon><IoSnow /></Icon>} color={"cyan"}>
+									Заморожен
+								</UiTag>
+							)}
+						</Space>
+					)
+					: "Студент"}
 				extra={
 					<UiTooltipButton
 						key="Back_Button"
