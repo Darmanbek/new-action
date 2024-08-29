@@ -1,5 +1,13 @@
 import { api } from "src/api";
-import { TGetParams, TGroup, TResponse, TResponseData, TResponseSingleData } from "src/services/index.types";
+import {
+	TGetParams,
+	TGroup,
+	TGroupAssessment, THoliday,
+	TLesson,
+	TResponse,
+	TResponseData,
+	TResponseSingleData,
+} from "src/services/index.types";
 import {
 	TDashboardAdmin,
 	TDashboardCompany,
@@ -25,6 +33,21 @@ const axiosGetDashboardCompaniesGroupsById = async (id?: number | string): Promi
 	return response.data;
 };
 
+const axiosGetDashboardCompaniesGroupsByIdCalendar = async (params: TGetParams, id?: number | string): Promise<TResponseData<string>> => {
+	const response = await api.get(`/dashboard/companies/groups/${id}/calendar`, { params });
+	return response.data;
+};
+
+const axiosGetDashboardCompaniesGroupsByIdLessons = async (id?: number | string): Promise<TResponseData<TLesson>> => {
+	const response = await api.get(`/dashboard/companies/groups/${id}/lessons`);
+	return response.data;
+};
+
+const axiosGetDashboardCompaniesGroupsByIdAssessments = async (id?: number | string): Promise<TResponseData<TGroupAssessment>> => {
+	const response = await api.get(`/dashboard/companies/groups/${id}/assessments`);
+	return response.data;
+};
+
 const axiosGetDashboardAdmins = async (): Promise<TResponseData<TDashboardAdmin>> => {
 	const response = await api.get(`/dashboard/admins`);
 	return response.data;
@@ -45,12 +68,22 @@ const axiosGetDashboardFinances = async (params: TGetParams, id?: number | strin
 	return response.data;
 };
 
+const axiosGetDashboardHolidays = async (params: TGetParams, id?: number | string): Promise<TResponseData<THoliday>> => {
+	const response = await api.get(`dashboard/holidays/${id}`, { params });
+	return response.data;
+};
+
+
 export {
 	axiosGetDashboardCompanies,
 	axiosGetDashboardCompaniesById,
 	axiosGetDashboardCompaniesGroupsById,
+	axiosGetDashboardCompaniesGroupsByIdCalendar,
+	axiosGetDashboardCompaniesGroupsByIdLessons,
+	axiosGetDashboardCompaniesGroupsByIdAssessments,
 	axiosGetDashboardAdmins,
 	axiosGetDashboardStudentsRating,
 	axiosGetDashboardTeachersRating,
 	axiosGetDashboardFinances,
+	axiosGetDashboardHolidays,
 };

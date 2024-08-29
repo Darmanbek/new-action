@@ -1,6 +1,6 @@
 import { ColumnsType } from "antd/es/table";
 import { ApproveCheckValue } from "src/components/shared";
-import { formatEmpty } from "src/utils";
+import { formatEmpty, formatShortDate } from "src/utils";
 import { TAssessment } from "src/services/index.types";
 
 export const useColumnsAssessments = () => {
@@ -11,45 +11,45 @@ export const useColumnsAssessments = () => {
 			dataIndex: "date",
 			key: "date",
 			rowScope: "row",
-			render: formatEmpty,
+			render: formatShortDate,
 		},
 		{
 			ellipsis: true,
 			title: "Балл",
 			dataIndex: "value",
 			key: "value",
-			render: formatEmpty
+			render: formatEmpty,
 		},
-		{
-			align: "center",
-			ellipsis: true,
-			title: "Присутствовал",
-			dataIndex: "is_available",
-			key: "is_available",
-			render: (is_available: boolean) => (
-				<ApproveCheckValue
-					colorInverse={true}
-					isValue={is_available}
-					yesText={"Был"}
-					noText={"Нет"}
-				/>
-			),
-		},
-		{
-			align: "center",
-			ellipsis: true,
-			title: "Причина отсутствия",
-			dataIndex: "consented",
-			key: "consented",
-			render: (consented: boolean | null) => consented ? (
-				<ApproveCheckValue
-					colorInverse={true}
-					isValue={consented}
-					yesText={"Был"}
-					noText={"Нет"}
-				/>
-			) : "-",
-		},
+		// {
+		// 	align: "center",
+		// 	ellipsis: true,
+		// 	title: "Присутствовал",
+		// 	dataIndex: "is_available",
+		// 	key: "is_available",
+		// 	render: (is_available: boolean) => (
+		// 		<ApproveCheckValue
+		// 			colorInverse={true}
+		// 			isValue={is_available}
+		// 			yesText={"Был"}
+		// 			noText={"Нет"}
+		// 		/>
+		// 	),
+		// },
+		// {
+		// 	align: "center",
+		// 	ellipsis: true,
+		// 	title: "Причина отсутствия",
+		// 	dataIndex: "consented",
+		// 	key: "consented",
+		// 	render: (consented: boolean | null) => consented ? (
+		// 		<ApproveCheckValue
+		// 			colorInverse={true}
+		// 			isValue={consented}
+		// 			yesText={"Был"}
+		// 			noText={"Нет"}
+		// 		/>
+		// 	) : "-",
+		// },
 		{
 			align: "center",
 			ellipsis: true,

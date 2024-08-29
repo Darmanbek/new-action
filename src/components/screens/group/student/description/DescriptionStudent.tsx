@@ -1,5 +1,5 @@
 import Icon, { ArrowLeftOutlined } from "@ant-design/icons";
-import { Divider, Space, Spin } from "antd";
+import { Divider, Rate, Space, Spin } from "antd";
 import { FC } from "react";
 import { IoSnow } from "react-icons/io5";
 import { useNavigate, useParams } from "react-router-dom";
@@ -24,6 +24,10 @@ const DescriptionStudent: FC = () => {
 				title={student ? (
 						<Space split={<Divider type={"vertical"} />}>
 							{`${student?.first_name} ${student?.last_name}`}
+							<Space>
+								<Rate count={1} value={1} disabled={true} />
+								{student?.rating}
+							</Space>
 							{student?.frozen_status?.is_frozen && (
 								<UiTag icon={<Icon><IoSnow /></Icon>} color={"cyan"}>
 									Заморожен

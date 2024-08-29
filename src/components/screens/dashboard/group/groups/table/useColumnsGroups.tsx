@@ -11,7 +11,7 @@ import { TGroup } from "src/services/groups/groups.types";
 import {
 	completeColor,
 	completeIcon,
-	completeName,
+	completeName, dayColor,
 	dayTranslation,
 	formatEmpty,
 	monthGrammar,
@@ -74,7 +74,7 @@ export const useColumnsGroups = () => {
 			dataIndex: "day",
 			key: "day",
 			render: (day: TGroup["day"]) => (
-				<UiTag color={day.id === 1 ? "blue" : "green"}>
+				<UiTag color={dayColor(day.id)}>
 					{dayTranslation(day?.name)}
 				</UiTag>
 			),

@@ -1,7 +1,15 @@
-import { EyeFilled } from "@ant-design/icons";
+import {
+	Rate,
+	Space,
+	Tooltip,
+} from "antd";
+import Icon, {
+	EyeFilled,
+} from "@ant-design/icons";
+import { IoSnow } from "react-icons/io5";
+import { Link, useNavigate } from "react-router-dom";
 import { ColumnsType } from "antd/es/table";
-import { useNavigate } from "react-router-dom";
-import { UiTag, UiTooltipButton } from "src/components/ui";
+import { UiButton, UiTag } from "src/components/ui";
 import { TStudent } from "src/services/index.types";
 import { formatEmpty, phoneFormatter, priceFormatter } from "src/utils";
 
@@ -22,7 +30,30 @@ export const useColumnsStudents = () => {
 			title: "Имя Фамилия",
 			dataIndex: "name",
 			key: "name",
-			render: (_, student) => `${student?.first_name} ${student?.last_name}`,
+			render: (_, student) => (
+				<Space>
+					<Link to={`students/${student.id}`}>
+						{`${student.first_name} ${student.last_name}`}
+					</Link>
+					{student?.frozen_status?.is_frozen && (
+						<UiTag icon={<Icon><IoSnow /></Icon>} color={"cyan"}>
+							Заморожен
+						</UiTag>
+					)}
+				</Space>
+			),
+		},
+		{
+			ellipsis: true,
+			// rowScope: "row",
+			title: "Рейтинг",
+			key: "rating",
+			render: (_v, student) => (
+				<Space>
+					<Rate count={1} value={1} disabled={true} />
+					{student?.rating}
+				</Space>
+			),
 		},
 		{
 			ellipsis: true,
@@ -53,19 +84,21 @@ export const useColumnsStudents = () => {
 		},
 		{
 			fixed: "right",
-			width: 50,
+			width: 100,
 			align: "center",
 			title: "Действия",
 			key: "actions",
 			render: (_v, student) => (
-				<UiTooltipButton
-					title="Смотреть"
-					showTitle={true}
-					shape={"circle"}
-					icon={<EyeFilled />}
-					onClick={() => navigate(`students/${student.id}`)}
-					aria-label="View"
-				/>
+				<Space onClick={(e) => e.stopPropagation()}>
+					<Tooltip title="Смотреть">
+						<UiButton
+							shape={"circle"}
+							icon={<EyeFilled />}
+							onClick={() => navigate(`students/${student.id}`)}
+							aria-label="View"
+						/>
+					</Tooltip>
+				</Space>
 			),
 		},
 	];

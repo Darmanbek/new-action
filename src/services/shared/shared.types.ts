@@ -42,8 +42,8 @@ export type TStudent = {
 export type TAssessment = {
 	id: string;
 	value: number | null;
-	is_available: boolean;
-	consented: boolean | null;
+	// is_available: boolean;
+	// consented: boolean | null;
 	date: string;
 }
 

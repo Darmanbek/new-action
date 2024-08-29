@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { HeadTable } from "src/components/shared";
 import { UiTable } from "src/components/ui";
-import { useGetDashboardCompaniesGroupsByIdQuery } from "src/services/index.api";
+import { useGetDashboardCompaniesGroupsByIdQuery } from "src/services/dashboard/dashboard.api";
 import { TStudent } from "src/services/shared/shared.types";
 import { useColumnsStudents } from "./useColumnsStudents";
 
