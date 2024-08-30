@@ -29,7 +29,7 @@ const DescriptionStudent: FC = () => {
 								{student?.rating}
 							</Space>
 							{student?.frozen_status?.is_frozen && (
-								<UiTag icon={<Icon><IoSnow /></Icon>} color={"cyan"}>
+								<UiTag icon={<Icon component={IoSnow} />} color={"cyan"}>
 									Заморожен
 								</UiTag>
 							)}

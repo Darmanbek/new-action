@@ -184,7 +184,7 @@ export const useColumnsAssessments = (date: Dayjs) => {
 				</Link>
 				{student?.frozen_status?.is_frozen && (
 					<Tooltip title={"Заморожен"}>
-						<UiTag icon={<Icon><IoSnow /></Icon>} color={"cyan"} />
+						<UiTag icon={<Icon component={IoSnow} />} color={"cyan"} />
 					</Tooltip>
 				)}
 			</Space>

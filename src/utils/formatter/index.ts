@@ -47,25 +47,25 @@ export const paymentFormatToTag = (payment?: string) => {
 			return createElement(UiTag, {
 				children: "Наличные",
 				color: "green",
-				icon: createElement(Icon, { children: createElement(TbCashBanknote) }),
+				icon: createElement(Icon, { children: createElement(TbCashBanknote), viewBox: "0 0 14 14" }),
 			});
 		case "click":
 			return createElement(UiTag, {
 				children: "Click",
 				color: "geekblue",
-				icon: createElement(Icon, { children: createElement(TbSquareRoundedPercentage) }),
+				icon: createElement(Icon, { children: createElement(TbSquareRoundedPercentage), viewBox: "0 0 14 14" }),
 			});
 		case "payme":
 			return createElement(UiTag, {
 				children: "Payme",
 				color: "cyan",
-				icon: createElement(Icon, { children: createElement(PiContactlessPayment) }),
+				icon: createElement(Icon, { children: createElement(PiContactlessPayment), viewBox: "0 0 14 14" }),
 			});
 		case "paynet":
 			return createElement(UiTag, {
 				children: "Paynet",
 				color: "cyan",
-				icon: createElement(Icon, { children: createElement(IoCardOutline) }),
+				icon: createElement(Icon, { children: createElement(IoCardOutline), viewBox: "0 0 14 14" }),
 			});
 		default:
 			return createElement(UiTag, {

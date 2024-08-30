@@ -51,7 +51,7 @@ export const useColumnsStudents = () => {
 						{`${student.first_name} ${student.last_name}`}
 					</Link>
 					{student?.frozen_status?.is_frozen && (
-						<UiTag icon={<Icon><IoSnow /></Icon>} color={"cyan"}>
+						<UiTag icon={<Icon component={IoSnow} />} color={"cyan"}>
 							Заморожен
 						</UiTag>
 					)}
@@ -123,7 +123,7 @@ export const useColumnsStudents = () => {
 							shape={"circle"}
 							showTitle={true}
 							color={student?.frozen_status?.is_frozen ? "orange" : "darkcyan"}
-							icon={<Icon>{student?.frozen_status?.is_frozen ? <IoSunny /> : <IoSnow />}</Icon>}
+							icon={<Icon component={student?.frozen_status?.is_frozen ? IoSunny : IoSnow} />}
 							aria-label="Snow"
 						/>
 					</GlobalPopconfirm>
