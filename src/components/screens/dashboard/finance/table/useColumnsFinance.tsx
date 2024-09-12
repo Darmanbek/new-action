@@ -26,11 +26,7 @@ export const useColumnsFinance = () => {
 			title: "Студент",
 			dataIndex: "student",
 			key: "student",
-			render: (student: TDashboardFinanceTransaction["student"], r) => (
-				<Link to={`/groups/${r.group.id}/students/${student.id}`}>
-					{`${student?.first_name} ${student?.last_name}`}
-				</Link>
-			),
+			render: (student: TDashboardFinanceTransaction["student"]) => `${student?.first_name} ${student?.last_name}`,
 		},
 		{
 			ellipsis: true,
@@ -62,7 +58,7 @@ export const useColumnsFinance = () => {
 			dataIndex: "group",
 			key: "group",
 			render: (group: TDashboardFinanceTransaction["group"]) => group ? (
-				<Link to={`/groups/${group.id}`}>
+				<Link to={`/groups/${group?.id}`}>
 					{group?.name}
 				</Link>
 			) : "-",

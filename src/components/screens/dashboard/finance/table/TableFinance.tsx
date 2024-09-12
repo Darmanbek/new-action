@@ -50,14 +50,14 @@ const TableFinance: FC = () => {
 	return (
 		<>
 			<UiCard>
-				<Flex justify={"space-between"}>
+				<Flex justify={"space-between"} wrap={true}>
 					<UiStatistic
 						// title={"Прибыль"}
 						value={finance?.profit}
 						// suffix={"uzs"}
 						valueRender={(node) => (
-							<Space>
-								<FaCoins color={primaryColor} /> Чистая прибыль: {node} uzs
+							<Space wrap={true}>
+								<FaCoins color={primaryColor} /> Чистая прибыль: {node} UZS
 							</Space>
 						)}
 						style={{

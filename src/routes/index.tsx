@@ -147,8 +147,8 @@ export const useRoutes = () => {
 		],
 	};
 
-	const adminRoutes: RouteProps[] = routes.filter((route) => rolesRoutesMap["admin"].includes(route.path as string));
-	const directorRoutes: RouteProps[] = routes.filter((route) => rolesRoutesMap["director"].includes(route.path as string));
+	const adminRoutes: RouteProps[] = routes.filter((route) => rolesRoutesMap["admin"].includes(route?.path as string));
+	const directorRoutes: RouteProps[] = routes.filter((route) => rolesRoutesMap["director"].includes(route?.path as string));
 
 	if (roleName === "director") return directorRoutes;
 

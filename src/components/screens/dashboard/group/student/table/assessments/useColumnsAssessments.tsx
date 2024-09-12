@@ -1,5 +1,5 @@
 import { ColumnsType } from "antd/es/table";
-import { ApproveCheckValue } from "src/components/shared";
+// import { ApproveCheckValue } from "src/components/shared";
 import { formatEmpty, formatShortDate } from "src/utils";
 import { TAssessment } from "src/services/index.types";
 
@@ -50,51 +50,51 @@ export const useColumnsAssessments = () => {
 		// 		/>
 		// 	) : "-",
 		// },
-		{
-			align: "center",
-			ellipsis: true,
-			title: "Бесплатное занятие",
-			dataIndex: "is_free",
-			key: "is_free",
-			render: (is_free: boolean) => (
-				<ApproveCheckValue
-					colorInverse={true}
-					isValue={is_free}
-					yesText={"Был"}
-					noText={"Нет"}
-				/>
-			),
-		},
-		{
-			align: "center",
-			ellipsis: true,
-			title: "Праздничный день",
-			dataIndex: "holiday",
-			key: "holiday",
-			render: (holiday: boolean) => (
-				<ApproveCheckValue
-					colorInverse={true}
-					isValue={holiday}
-					yesText={"Был"}
-					noText={"Нет"}
-				/>
-			),
-		},
-		{
-			align: "center",
-			ellipsis: true,
-			title: "Экзамен",
-			dataIndex: "is_exam",
-			key: "is_exam",
-			render: (is_exam: boolean) => (
-				<ApproveCheckValue
-					colorInverse={true}
-					isValue={is_exam}
-					yesText={"Был"}
-					noText={"Нет"}
-				/>
-			),
-		},
+		// {
+		// 	align: "center",
+		// 	ellipsis: true,
+		// 	title: "Бесплатное занятие",
+		// 	dataIndex: "is_free",
+		// 	key: "is_free",
+		// 	render: (is_free: boolean) => (
+		// 		<ApproveCheckValue
+		// 			colorInverse={true}
+		// 			isValue={is_free}
+		// 			yesText={"Был"}
+		// 			noText={"Нет"}
+		// 		/>
+		// 	),
+		// },
+		// {
+		// 	align: "center",
+		// 	ellipsis: true,
+		// 	title: "Праздничный день",
+		// 	dataIndex: "holiday",
+		// 	key: "holiday",
+		// 	render: (holiday: boolean) => (
+		// 		<ApproveCheckValue
+		// 			colorInverse={true}
+		// 			isValue={holiday}
+		// 			yesText={"Был"}
+		// 			noText={"Нет"}
+		// 		/>
+		// 	),
+		// },
+		// {
+		// 	align: "center",
+		// 	ellipsis: true,
+		// 	title: "Экзамен",
+		// 	dataIndex: "is_exam",
+		// 	key: "is_exam",
+		// 	render: (is_exam: boolean) => (
+		// 		<ApproveCheckValue
+		// 			colorInverse={true}
+		// 			isValue={is_exam}
+		// 			yesText={"Был"}
+		// 			noText={"Нет"}
+		// 		/>
+		// 	),
+		// },
 	];
 
 	return columns;

@@ -37,9 +37,8 @@ export const useColumnsTeachersRating = () => {
 				<Space>
 					<Rate
 						disabled={true}
-						value={Number(rating.replace(",", "."))}
-						allowHalf={true}
-						count={10}
+						value={1}
+						count={1}
 					/>
 					<span>
 						{rating}

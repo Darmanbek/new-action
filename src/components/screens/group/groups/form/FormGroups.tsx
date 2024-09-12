@@ -164,7 +164,10 @@ export const FormGroups = () => {
 						},
 					]}
 				>
-					<UiDatePicker showTime={true} placeholder={datePlaceholder} />
+					<UiDatePicker showTime={{
+						showHour: true,
+						showMinute: true,
+					}} placeholder={datePlaceholder} />
 				</Form.Item>
 
 				<Form.Item<TGroupChange>
