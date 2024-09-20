@@ -39,7 +39,7 @@ const ChartTeachersRating: FC = () => {
 					border: "none",
 				},
 			}}
-		>k
+		>
 			<EChartsReact
 				option={options}
 				showLoading={isLoading || isFetching}
