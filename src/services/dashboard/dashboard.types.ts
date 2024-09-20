@@ -28,7 +28,9 @@ export type TDashboardStudentsRating = {
 	last_name: string;
 	phone: string;
 	rating: string;
-	// group: TGroup[];
+	groups: (TGroup & {
+		rating: number
+	})[];
 }
 
 export type TDashboardTeachersRating = {
