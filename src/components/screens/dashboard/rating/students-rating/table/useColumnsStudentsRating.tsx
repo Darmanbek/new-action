@@ -1,4 +1,4 @@
-import { Divider, Rate, Space } from "antd";
+import { Rate, Space } from "antd";
 import { ColumnsType } from "antd/es/table";
 import { Link } from "react-router-dom";
 import { TDashboardStudentsRating } from "src/services/index.types";
@@ -17,9 +17,10 @@ export const useColumnsStudentsRating = () => {
 		},
 		{
 			ellipsis: true,
-			title: "Имя фамилия",
-			key: "name",
-			render: (_v, teacher) => `${teacher?.first_name} ${teacher?.last_name}`,
+			title: "Студент",
+			dataIndex: "student",
+			key: "student",
+			render: (student: TDashboardStudentsRating["student"]) => `${student?.first_name} ${student?.last_name}`,
 		},
 		// {
 		// 	ellipsis: true,
@@ -30,28 +31,13 @@ export const useColumnsStudentsRating = () => {
 		// },
 		{
 			ellipsis: true,
-			title: "Группы",
-			dataIndex: "groups",
-			key: "groups",
-			render: (groups: TDashboardStudentsRating["groups"]) => groups ? (
-				<Space split={<Divider type={"vertical"} />}>
-					{groups.map((group, index) =>
-						<Link key={index} to={`/groups/${group.id}`}>
-							<Space>
-								{group.name}
-								-
-								<Rate
-									disabled={true}
-									value={1}
-									count={1}
-								/>
-								<span>
-									{group.rating}
-								</span>
-							</Space>
-						</Link>,
-					)}
-				</Space>
+			title: "Группа",
+			dataIndex: "group",
+			key: "group",
+			render: (group: TDashboardStudentsRating["group"]) => group ? (
+				<Link to={`/groups/${group.id}`}>
+					{group?.name}
+				</Link>
 			) : "-",
 		},
 		{

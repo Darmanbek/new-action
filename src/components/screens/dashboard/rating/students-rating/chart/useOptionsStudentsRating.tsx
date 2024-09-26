@@ -15,7 +15,7 @@ export const useOptionsStudentsRating = ({ data }: useOptionsStudentsRatingProps
 		},
 	}));
 
-	const SeriesName = data?.map(el => `${el.first_name} ${el.last_name}`);
+	const SeriesName = data?.map(el => `${el?.student?.first_name} ${el?.student?.last_name}`);
 
 	const options: EChartsOption = {
 		tooltip: {
