@@ -26,3 +26,7 @@ export const DashboardFinance = loadable(() => import("./finance/Finance"), {
 export const DashboardRating = loadable(() => import("./rating/Rating"), {
 	fallback: createElement(Loader),
 });
+
+export const DashboardStory = loadable(() => import("./story/Story"), {
+	fallback: createElement(Loader),
+});

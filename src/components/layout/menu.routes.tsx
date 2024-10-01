@@ -6,7 +6,7 @@ import {
 	UsergroupDeleteOutlined, HomeOutlined,
 } from "@ant-design/icons";
 import { BsBuildings } from "react-icons/bs";
-import { IoLayersOutline } from "react-icons/io5";
+import { IoLayersOutline, IoNewspaperOutline } from "react-icons/io5";
 import { LuCalendarCheck, LuPieChart } from "react-icons/lu";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { PiChatsLight } from "react-icons/pi";
@@ -26,6 +26,7 @@ export const useMenuRoutes = () => {
 		{ key: "/companies", icon: <BsBuildings />, label: "Филиалы" },
 		{ key: "/acceptance", icon: <MdOutlineMailOutline />, label: "Заявки" },
 		{ key: "/holiday", icon: <LuCalendarCheck />, label: "Праздничные дни" },
+		{ key: "/stories", icon: <IoNewspaperOutline />, label: "Новости" },
 		role !== "director" ? {
 			key: "/finance", icon: <LuPieChart />, label: "Финансы",
 			children: [
@@ -58,6 +59,7 @@ export const useMenuRoutes = () => {
 			"/companies",
 			"/acceptance",
 			"/holiday",
+			"/stories",
 			"/finance",
 			"/chat",
 		],
@@ -66,6 +68,7 @@ export const useMenuRoutes = () => {
 			"/groups",
 			"/acceptance",
 			"/holiday",
+			"/stories",
 			"/finance",
 			"/chat",
 		],
@@ -75,6 +78,7 @@ export const useMenuRoutes = () => {
 			"/groups",
 			"/companies",
 			// "/teachers",
+			"/stories",
 			"/finance",
 			"/chat",
 		],

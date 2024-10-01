@@ -1,3 +1,5 @@
+import { AxiosError } from "axios";
+
 export type * from "./acceptance/acceptance.types";
 export type * from "./admin/admin.types";
 export type * from "./auth/auth.types";
@@ -12,6 +14,7 @@ export type * from "./dashboard/dashboard.types";
 export type * from "./day/day.types";
 export type * from "./holiday/holiday.types";
 export type * from "./frozen-status/frozen.status.types";
+export type * from "./story/story.types";
 
 export type * from "./message/message.types";
 
@@ -44,22 +47,10 @@ export type TLinks = {
 	next: null;
 };
 
-export type TResponseError = {
-	code: string;
-	config: unknown;
-	message: string;
-	name: string;
-	request: unknown;
-	response?: {
-		data?: {
-			message?: string;
-			error?: string;
-		};
-		status: number;
-		statusText: string;
-	};
-	stack: string;
-};
+export type TResponseError = AxiosError<{
+	message?: string;
+	error?: string;
+}>;
 
 export type TMeta = {
 	current_page: number;

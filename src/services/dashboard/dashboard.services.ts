@@ -6,7 +6,7 @@ import {
 	TLesson,
 	TResponse,
 	TResponseData,
-	TResponseSingleData,
+	TResponseSingleData, type TStory,
 } from "src/services/index.types";
 import {
 	TDashboardAdmin,
@@ -73,6 +73,11 @@ const axiosGetDashboardHolidays = async (params: TGetParams, id?: number | strin
 	return response.data;
 };
 
+const axiosGetDashboardStory = async (params: TGetParams, id?: number | string): Promise<TResponseData<TStory>> => {
+	const response = await api.get(`dashboard/stories/${id}`, { params });
+	return response.data;
+};
+
 
 export {
 	axiosGetDashboardCompanies,
@@ -86,4 +91,5 @@ export {
 	axiosGetDashboardTeachersRating,
 	axiosGetDashboardFinances,
 	axiosGetDashboardHolidays,
+	axiosGetDashboardStory,
 };

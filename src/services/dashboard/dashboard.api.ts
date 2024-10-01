@@ -13,7 +13,7 @@ import {
 	axiosGetDashboardStudentsRating,
 	axiosGetDashboardTeachersRating,
 	axiosGetDashboardFinances,
-	axiosGetDashboardHolidays,
+	axiosGetDashboardHolidays, axiosGetDashboardStory,
 } from "./dashboard.services";
 
 const useGetDashboardCompaniesQuery = () => {
@@ -157,6 +157,19 @@ const useGetDashboardHolidaysQuery = (params: TGetParams, id?: number | string) 
 	});
 };
 
+const useGetDashboardStoryQuery = (params: TGetParams, id?: number | string) => {
+	const { message } = useMessage();
+	return useQuery({
+		queryFn: () => axiosGetDashboardStory(params, id),
+		queryKey: ["dashboard-stories", ...Object.values(params), id],
+		enabled: !!id,
+		keepPreviousData: true,
+		onError: (error: TResponseError) => {
+			message.error(errorResponse(error));
+		},
+	});
+};
+
 export {
 	useGetDashboardCompaniesQuery,
 	useGetDashboardCompaniesByIdQuery,
@@ -169,4 +182,5 @@ export {
 	useGetDashboardTeachersRatingQuery,
 	useGetDashboardFinancesQuery,
 	useGetDashboardHolidaysQuery,
+	useGetDashboardStoryQuery,
 };

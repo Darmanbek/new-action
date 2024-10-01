@@ -1,5 +1,6 @@
 import { EChartsOption } from "echarts";
 import { TDashboardStudentsRating } from "src/services/index.types";
+import { formatEmpty } from "src/utils";
 
 interface useOptionsStudentsRatingProps {
 	data?: TDashboardStudentsRating[];
@@ -49,6 +50,7 @@ export const useOptionsStudentsRating = ({ data }: useOptionsStudentsRatingProps
 					show: true,
 					position: "right",
 					valueAnimation: true,
+					formatter: params => `${params.value} | ${formatEmpty(data?.find(el => `${el?.student?.first_name} ${el?.student?.last_name}` === params?.name)?.group?.name)}`
 				},
 			},
 		],

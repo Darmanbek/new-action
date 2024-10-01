@@ -15,6 +15,9 @@ import {
 	Acceptance,
 	Company,
 
+	Holiday,
+	Story,
+
 	Finance,
 	// FinanceCompanies,
 	FinanceDebtors,
@@ -29,8 +32,7 @@ import {
 	DashboardCompany,
 	DashboardFinance,
 	DashboardRating,
-
-	Holiday,
+	DashboardStory,
 } from "src/components/screens";
 import { TRoleTypes } from "src/services/index.types";
 import { useAuthPersistStore } from "src/store";
@@ -43,6 +45,7 @@ export const useRoutes = () => {
 	const CustomGroup = roleName === "director" ? DashboardGroup : Group;
 	const CustomStudent = roleName === "director" ? DashboardGroupStudent : Student;
 	const CustomCompany = roleName === "director" ? DashboardCompany : Company;
+	const CustomStory = roleName === "director" ? DashboardStory : Story;
 
 	const homeRoute: RouteProps = roleName ? ({
 		"admin": {
@@ -85,6 +88,8 @@ export const useRoutes = () => {
 
 		{ path: "/holiday", element: <Holiday /> },
 
+		{ path: "/stories", element: <CustomStory /> },
+
 		{
 			path: "/finance",
 			element: roleName === "director" ? <DashboardFinance /> : <Navigate to={"/finance/profits"} replace={true} />,
@@ -114,6 +119,7 @@ export const useRoutes = () => {
 			"/groups/:group_id/students/:student_id",
 
 			"/holiday",
+			"/stories",
 
 			"/finance",
 			"/finance/profits",
@@ -138,6 +144,7 @@ export const useRoutes = () => {
 			"/groups/:group_id/students/:student_id",
 
 			"/finance",
+			"/stories",
 
 			"/chat",
 			"/chat/:chat_id",
