@@ -1,7 +1,9 @@
 import type { ColumnsType } from "antd/es/table";
 import type { TStory } from "src/services/index.types";
-import { Typography } from "antd";
+import { Space, Typography } from "antd";
 import { formatEmpty } from "src/utils";
+import Text from "antd/es/typography/Text";
+import { EyeFilled } from "@ant-design/icons";
 
 
 export const useColumnsStory = () => {
@@ -22,6 +24,20 @@ export const useColumnsStory = () => {
 				>
 					{value}
 				</Typography.Paragraph>
+			),
+		},
+		{
+			ellipsis: false,
+			width: 80,
+			dataIndex: "stock_viewed",
+			key: "stock_viewed",
+			render: (value) => (
+				<Text type={"secondary"} style={{ fontSize: "inherit" }}>
+					<Space>
+						<EyeFilled />
+						{value}
+					</Space>
+				</Text>
 			),
 		},
 		{

@@ -3,10 +3,11 @@ import type { TStory } from "src/services/index.types";
 import { Space, Tooltip, Typography } from "antd";
 import { formatEmpty } from "src/utils";
 import { UiButton } from "src/components/ui";
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { DeleteOutlined, EditOutlined, EyeFilled } from "@ant-design/icons";
 import { GlobalPopconfirm } from "src/components/shared";
 import { useDeleteStoryMutation } from "src/services/index.api";
 import { useFormStorageStore } from "src/store";
+import Text from "antd/es/typography/Text";
 
 
 export const useColumnsStory = () => {
@@ -38,6 +39,20 @@ export const useColumnsStory = () => {
 				>
 					{value}
 				</Typography.Paragraph>
+			),
+		},
+		{
+			ellipsis: false,
+			width: 80,
+			dataIndex: "stock_viewed",
+			key: "stock_viewed",
+			render: (value) => (
+				<Text type={"secondary"} style={{ fontSize: "inherit" }}>
+					<Space>
+						<EyeFilled />
+						{value}
+					</Space>
+				</Text>
 			),
 		},
 		{
