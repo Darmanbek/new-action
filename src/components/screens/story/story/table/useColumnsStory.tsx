@@ -42,8 +42,8 @@ export const useColumnsStory = () => {
 			),
 		},
 		{
-			ellipsis: false,
-			width: 80,
+			ellipsis: true,
+			width: 0,
 			dataIndex: "stock_viewed",
 			key: "stock_viewed",
 			render: (value) => (
