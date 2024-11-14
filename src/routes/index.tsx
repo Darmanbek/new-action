@@ -33,8 +33,6 @@ import {
 	DashboardFinance,
 	DashboardRating,
 	DashboardStory,
-	
-	Privacy
 } from "src/components/screens";
 import { TRoleTypes } from "src/services/index.types";
 import { useAuthPersistStore } from "src/store";
@@ -102,8 +100,6 @@ export const useRoutes = () => {
 		{ path: "/chat", element: <Message /> },
 		{ path: "/chat/:chat_id", element: <Chat /> },
 		
-		{ path: "/privacy", element: <Privacy /> },
-
 		{ path: "/profile", element: <Profile /> },
 		{ path: "/*", element: <NotFound /> },
 	];
@@ -132,8 +128,6 @@ export const useRoutes = () => {
 			"/chat",
 			"/chat/:chat_id",
 			
-			"/privacy",
-
 			"/profile",
 			"/*",
 		],
@@ -155,8 +149,6 @@ export const useRoutes = () => {
 			"/chat",
 			"/chat/:chat_id",
 			
-			"/privacy",
-
 			"/profile",
 			"/*",
 		],

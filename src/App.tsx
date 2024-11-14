@@ -2,7 +2,7 @@ import { App as AntdApp } from "antd";
 import { FC } from "react";
 import { Route, Routes } from "react-router-dom";
 import { Layout } from "src/components/layout";
-import { Auth } from "src/components/screens";
+import { Auth, Privacy } from "src/components/screens";
 import { useRoutes } from "./routes";
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -16,6 +16,7 @@ const App: FC = () => {
 				))}
 			</Route>
 			<Route path={"/login"} element={<Auth />} />
+			<Route path={"/privacy"} element={<Privacy />} />
 		</Routes>
 	);
 };
@@ -25,4 +26,4 @@ export default () => (
 	<AntdApp>
 		<App />
 	</AntdApp>
-)
+);
