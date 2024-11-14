@@ -10,18 +10,17 @@ export const MenuSider: FC<PropsWithChildren> = ({ children }) => {
 	const { isMobile } = useResponsive(768);
 	const collapsed = useMenuStore((state) => state.collapsed);
 
-	const MenuLogo = collapsed ? <img src={Logo1} alt="Menu Logo" /> : <img src={Logo2Edit} alt="Menu Logo" />;
-
 	if (isMobile) return;
 
 	return (
 		<Sider
 			collapsed={collapsed}
 			className={styles["menu-sider"]}
-			width={260}
+			width={285}
 		>
 			<div className={clsx(styles.logo, collapsed && styles.collapse)}>
-				{MenuLogo}
+				<img src={Logo1} style={{display: collapsed ? "block" : "none", flexWrap: "nowrap"}} alt="Menu Logo" />
+				<img src={Logo2Edit} style={{display: collapsed ? "none" : "block", flexWrap: "nowrap"}} alt="Menu Logo" />
 			</div>
 			{children}
 		</Sider>

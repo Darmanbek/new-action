@@ -11,3 +11,5 @@ export * from "./holiday";
 export * from "./story";
 
 export * from "./message";
+
+export * from "./privacy";

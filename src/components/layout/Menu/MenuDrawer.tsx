@@ -16,7 +16,7 @@ export const MenuDrawer: FC<PropsWithChildren> = ({ children }) => {
 			placement="left"
 			padding={0}
 			className={styles["menu-drawer"]}
-			width={260}
+			width={285}
 			closable={false}
 			title={
 				<div className={styles.logo}>

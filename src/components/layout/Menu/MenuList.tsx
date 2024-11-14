@@ -1,5 +1,7 @@
+import { Typography } from "antd";
 import clsx from "clsx";
 import { FC } from "react";
+import { MdOutlinePrivacyTip } from "react-icons/md";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useMenuRoutes } from "src/components/layout/menu.routes";
 import { UiMenu } from "src/components/ui";
@@ -24,6 +26,32 @@ const MenuList: FC = () => {
 				onSelect={(e) => onSelectMenu(e.key)}
 				selectedKeys={[pathname]}
 				items={routes}
+				style={{
+					flexGrow: 1
+				}}
+				className={styles.menu}
+				rootClassName={"nav-menu-root"}
+			/>
+			
+			<UiMenu
+				mode={"inline"}
+				defaultSelectedKeys={[pathname]}
+				onSelect={(e) => onSelectMenu(e.key)}
+				selectedKeys={[pathname]}
+				items={[
+					{
+						key: "/privacy",
+						icon: <MdOutlinePrivacyTip />,
+							label: (
+								<Typography.Link style={{fontSize: 12}}>
+									Политика конфиденциальности
+								</Typography.Link>
+							),
+						// style: {
+						// 	fontSize: 10
+						// }
+					}
+				]}
 				className={styles.menu}
 				rootClassName={"nav-menu-root"}
 			/>
