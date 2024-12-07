@@ -14,7 +14,7 @@ export type TGetParams = {
 	is_completed?: number;
 	payment_type?: number;
 	price?: string | null;
-	day?: number;
+	day?: number | string;
 	group_id?: string;
 	per_page?: number;
 };

@@ -24,7 +24,10 @@ export const FormGroups = () => {
 	const teacher_id = Form.useWatch("teacher_id", form);
 	const assistant_id = Form.useWatch("assistant", form);
 	const paramsForm = useFormStorageStore((state) => state.paramsForm);
-	const { data: teachers } = useGetTeachersQuery({});
+	const { data: teachers } = useGetTeachersQuery({
+		limit: 1000,
+		per_page: 1000
+	});
 	const { data: days } = useGetDayQuery();
 	const {
 		mutate: createGroup,

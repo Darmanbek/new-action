@@ -15,7 +15,7 @@ export const TableGroups = () => {
 	const navigate = useNavigate();
 	// const [price, setPrice] = useState<string>();
 	const [completed, setCompleted] = useState<number>();
-	const [day, setDay] = useState<number>();
+	const [day, setDay] = useState<number | string>();
 	const [date, setDate] = useState<RangePickerProps["value"]>();
 	const [currentPage, setCurrentPage] = useState<number>(1);
 	const debounceValue = useSearchListStore((state) => state.debounceValue);
@@ -45,7 +45,7 @@ export const TableGroups = () => {
 			setCompleted(undefined);
 		}
 
-		if (filters.day && Array.isArray(filters.day) && typeof filters.day[0] === "number") {
+		if (filters.day && Array.isArray(filters.day) && (typeof filters.day[0] === "number" || typeof filters.day[0] === "string")) {
 			setDay(filters.day[0]);
 		} else {
 			setDay(undefined);

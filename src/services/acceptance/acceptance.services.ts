@@ -1,10 +1,14 @@
 import { api } from "src/api";
-import { TResponseSingleData, TGetParams, TResponseData } from "src/services/index.types";
+import {
+	TResponseSingleData,
+	TGetParams,
+	TResponse
+} from "src/services/index.types";
 import { TAcceptance, TAcceptanceChange } from "./acceptance.types";
 
 const axiosGetAcceptance = async (
 	params: TGetParams
-): Promise<TResponseData<TAcceptance>> => {
+): Promise<TResponse<TAcceptance>> => {
 	const response = await api.get(`/admin/acceptances`, { params });
 	return response.data;
 };
