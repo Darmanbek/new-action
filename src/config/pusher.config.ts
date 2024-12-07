@@ -7,4 +7,4 @@ export const PUSHER_CLUSTER = "ap2";
 
 export const pusherOptions = {
 	cluster: PUSHER_CLUSTER
-}
+};
