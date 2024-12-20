@@ -3,7 +3,7 @@ import { HeadCompanies } from "src/components/shared";
 import { UiButton } from "src/components/ui";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { primaryColorText } from "src/data";
-import { useGetMeQuery } from "src/services/auth/auth.api";
+import { useGetMeQuery } from "src/services/index.api";
 import { useAuthPersistStore, useMenuStore } from "src/store";
 import { useResponsive } from "src/hooks";
 import styles from "./left.module.scss";

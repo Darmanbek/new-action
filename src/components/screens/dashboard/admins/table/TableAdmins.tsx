@@ -2,7 +2,7 @@ import { FC } from "react";
 import { HeadTable } from "src/components/shared";
 import { UiTable } from "src/components/ui";
 import { useGetDashboardAdminsQuery } from "src/services/index.api";
-import { TDashboardAdmin } from "src/services/index.types";
+// import { TDashboardAdmin } from "src/services/index.types";
 
 import { useColumnsAdmins } from "./useColumnsAdmins";
 
@@ -12,7 +12,7 @@ const TableAdmins: FC = () => {
 	const columns = useColumnsAdmins();
 
 	return (
-		<UiTable<TDashboardAdmin>
+		<UiTable<any>
 			title={() => (
 				<HeadTable
 					title={"Админы"}

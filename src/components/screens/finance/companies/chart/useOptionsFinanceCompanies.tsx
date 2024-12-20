@@ -1,5 +1,5 @@
 import { EChartsOption } from "echarts";
-import { TFinanceCompanies } from "src/services/finance/finance.types";
+import { TFinanceCompanies } from "src/services/finances/finances.types";
 import { priceFormatter } from "src/utils";
 
 

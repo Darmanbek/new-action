@@ -14,7 +14,7 @@ const TableCompany: FC = () => {
 	const { data: companies, isLoading, isFetching } = useGetDashboardCompaniesQuery();
 
 	const columns = useColumnsCompany();
-1
+
 	return (
 		<UiTable<TDashboardCompany>
 			title={() => (

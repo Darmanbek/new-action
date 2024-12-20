@@ -19,7 +19,7 @@ export const HeaderRight = () => {
 	// const { isDark, onToggleTheme } = useThemeStore();
 	const { signOut } = useAuthPersistStore();
 	const { data: user } = useGetMeQuery();
-	const { mutate: logout, isSuccess, isLoading } = useSignOutMutation();
+	const { mutate: logout, isSuccess, isLoading, isError } = useSignOutMutation();
 	const navigate = useNavigate();
 	const { pathname } = useLocation();
 
@@ -31,7 +31,8 @@ export const HeaderRight = () => {
 		navigate(key);
 		setProfileOpen(false);
 	};
-
+	
+	
 	const content = (
 		<div className={styles.content}>
 			<Flex gap={12} align={"center"}>
@@ -100,12 +101,11 @@ export const HeaderRight = () => {
 	);
 
 	useEffect(() => {
-		if (isSuccess) {
+		if (isSuccess || isError) {
 			signOut();
 			setProfileOpen(false);
 		}
-	}, [isSuccess, setProfileOpen, signOut]);
-
+	}, [isError, isSuccess, setProfileOpen, signOut]);
 	return (
 		<div className={styles.right}>
 			<Space>

@@ -1,7 +1,7 @@
 import { Form, FormProps, Input } from "antd";
 import { FC, useEffect } from "react";
 import { GlobalDrawer } from "src/components/shared";
-import { useCreateDebtorsMutation } from "src/services/debtors/debtors.api";
+import { useCreateDebtorsMutation } from "src/services/finances/debtors/debtors.api";
 import { TFinanceDebtorsChange } from "src/services/index.types";
 import { useFormStorageStore } from "src/store";
 import { formMessage, inputPlaceholder } from "src/utils";

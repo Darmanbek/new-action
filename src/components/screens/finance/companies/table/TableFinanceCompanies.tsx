@@ -2,8 +2,8 @@ import { FC, useEffect, useState } from "react";
 import { HeadTable } from "src/components/shared";
 import { UiSelect, UiTable } from "src/components/ui";
 import { useGetCompaniesQuery } from "src/services/companies/companies.api";
-import { useGetFinanceCompaniesByIdQuery } from "src/services/finance/finance.api";
-import { TFinanceTransactionData } from "src/services/finance/finance.types";
+import { useGetFinanceCompaniesByIdQuery } from "src/services/finances/finances.api";
+import { TFinanceTransactionData } from "src/services/finances/finances.types";
 import { priceFormatter } from "src/utils";
 
 import { useColumnsFinanceCompanies } from "./useColumnsFinanceCompanies";

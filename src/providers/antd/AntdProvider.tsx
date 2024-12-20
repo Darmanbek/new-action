@@ -1,21 +1,21 @@
 import dayjs from "dayjs";
 import { FC, PropsWithChildren } from "react";
-import { ConfigProvider, theme } from "antd";
+import { App, ConfigProvider, theme } from "antd";
 import locale from "antd/locale/ru_RU";
 import { useResponsive } from "src/hooks";
 import { useThemeStore } from "src/store";
 import "dayjs/locale/ru";
 
-dayjs.locale("ru")
+dayjs.locale("ru");
 
 export const AntdProvider: FC<PropsWithChildren> = ({ children }) => {
 	const { isMobile } = useResponsive(768);
 	const { isDark } = useThemeStore();
-
+	
 	// const {
 	// 	token: { borderRadius },
 	// } = theme.useToken();
-
+	
 	return (
 		<ConfigProvider
 			locale={locale}
@@ -36,7 +36,9 @@ export const AntdProvider: FC<PropsWithChildren> = ({ children }) => {
 				},
 			}}
 		>
-			{children}
+			<App>
+				{children}
+			</App>
 		</ConfigProvider>
 	);
 };

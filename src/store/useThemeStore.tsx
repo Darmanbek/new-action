@@ -12,4 +12,4 @@ const useThemeStore = create<IThemeStore>()(
 	})
 );
 
-export { useThemeStore }
+export { useThemeStore };

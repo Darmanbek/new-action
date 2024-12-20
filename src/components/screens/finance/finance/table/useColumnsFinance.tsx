@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { UiFilterIcon, UiTag } from "src/components/ui";
 // import { useGetGroupsQuery } from "src/services/groups/groups.api";
 import { TFinanceTransactionData } from "src/services/index.types";
-import { useGetPaymentTypesQuery } from "src/services/payment/payment.api";
+import { useGetPaymentTypesQuery } from "src/services/shared/payment/payment.api";
 import { formatEmpty, paymentFormatToTag, paymentTranlation, priceFormatter } from "src/utils";
 
 

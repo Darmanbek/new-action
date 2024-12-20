@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { TTokenAuth } from "src/services/auth/auth.types";
+import { TTokenAuth } from "src/services/index.types";
 
 interface IAuthPersistStore {
 	role: TTokenAuth["role"] | null;

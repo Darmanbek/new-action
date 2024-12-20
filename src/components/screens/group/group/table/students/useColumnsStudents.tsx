@@ -12,7 +12,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { ColumnsType } from "antd/es/table";
 import { GlobalPopconfirm } from "src/components/shared";
 import { UiButton, UiTag, UiTooltipButton } from "src/components/ui";
-import { useCreateFrozenStatusMutation } from "src/services/frozen-status/frozen.status.api";
+import { useCreateFrozenStatusMutation } from "src/services/groups/frozen-status/frozen-status.api";
 import { useDeleteGroupsStudentsMutation } from "src/services/groups/groups.api";
 import { TStudent } from "src/services/index.types";
 import { formatEmpty, phoneFormatter, priceFormatter } from "src/utils";

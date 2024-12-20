@@ -3,7 +3,7 @@ import { FC } from "react";
 import { BsBuildings } from "react-icons/bs";
 import { FaCoins } from "react-icons/fa";
 import { UiCard, UiStatistic } from "src/components/ui";
-import { useGetFinanceCompaniesQuery } from "src/services/finance/finance.api";
+import { useGetFinanceCompaniesQuery } from "src/services/finances/finances.api";
 
 const StatisticFinanceCompanies: FC = () => {
 	const { data: finances } = useGetFinanceCompaniesQuery({});

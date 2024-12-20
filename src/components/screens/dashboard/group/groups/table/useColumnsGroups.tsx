@@ -6,7 +6,7 @@ import "dayjs/locale/ru";
 import { useNavigate } from "react-router-dom";
 import { UiBadge, UiButton, UiFilterIcon, UiTag } from "src/components/ui";
 import { completeData } from "src/data";
-import { useGetDayQuery } from "src/services/day/day.api";
+import { useGetDayQuery } from "src/services/shared/day/day.api";
 import { TGroup } from "src/services/groups/groups.types";
 import {
 	completeColor,

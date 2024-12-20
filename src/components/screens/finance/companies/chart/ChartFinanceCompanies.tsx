@@ -1,7 +1,7 @@
 import ReactEcharts from "echarts-for-react";
 import { FC } from "react";
 import { SectionContainer } from "src/components/shared";
-import { useGetFinanceCompaniesQuery } from "src/services/finance/finance.api";
+import { useGetFinanceCompaniesQuery } from "src/services/finances/finances.api";
 
 import { useOptionsFinanceCompanies } from "./useOptionsFinanceCompanies";
 

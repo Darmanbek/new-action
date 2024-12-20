@@ -1,5 +1,6 @@
 import { api } from "src/api";
 import {
+	TAdmin,
 	TGetParams,
 	TGroup,
 	TGroupAssessment, THoliday,
@@ -9,7 +10,6 @@ import {
 	TResponseSingleData, type TStory,
 } from "src/services/index.types";
 import {
-	TDashboardAdmin,
 	TDashboardCompany,
 	TDashboardCompanyItem,
 	TDashboardStudentsRating,
@@ -48,7 +48,7 @@ const axiosGetDashboardCompaniesGroupsByIdAssessments = async (id?: number | str
 	return response.data;
 };
 
-const axiosGetDashboardAdmins = async (): Promise<TResponseData<TDashboardAdmin>> => {
+const axiosGetDashboardAdmins = async (): Promise<TResponseData<TAdmin>> => {
 	const response = await api.get(`/dashboard/admins`);
 	return response.data;
 };

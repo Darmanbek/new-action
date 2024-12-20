@@ -1,36 +1,31 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useMessage } from "src/hooks";
-import { TGetParams, TResponseError } from "src/services/index.types";
+import { TResponseError } from "src/services/index.types";
 import { errorResponse } from "src/utils";
 import {
-	axiosCreateTeachers,
-	axiosDeleteTeachers,
-	axiosEditTeachers,
-	axiosGetTeachers,
-	axiosGetTeachersById,
-} from "./teachers.services";
+	axiosGetPaymentTypes,
+	axiosGetPaymentTypesById,
+	axiosCreatePaymentTypes,
+	axiosEditPaymentTypes,
+	axiosDeletePaymentTypes
+} from "src/services/shared/payment/payment.services";
 
-const teachersQueryOptions = (params: TGetParams) => ({
-	queryFn: () => axiosGetTeachers(params),
-	queryKey: ["teachers", ...Object.values(params)],
-});
-
-const useGetTeachersQuery = (params: TGetParams) => {
+const useGetPaymentTypesQuery = () => {
 	const { message } = useMessage();
 	return useQuery({
-		queryFn: () => axiosGetTeachers(params),
-		queryKey: ["teachers", ...Object.values(params)],
+		queryFn: axiosGetPaymentTypes,
+		queryKey: ["payment"],
 		onError: (error: TResponseError) => {
 			message.error(errorResponse(error));
 		},
 	});
 };
 
-const useGetTeachersByIdQuery = (id?: string | number) => {
+const useGetPaymentTypesByIdQuery = (id?: number | string) => {
 	const { message } = useMessage();
 	return useQuery({
-		queryFn: () => axiosGetTeachersById(id),
-		queryKey: ["teachers", id],
+		queryFn: () => axiosGetPaymentTypesById(id),
+		queryKey: ["payment", id],
 		enabled: !!id,
 		onError: (error: TResponseError) => {
 			message.error(errorResponse(error));
@@ -38,14 +33,14 @@ const useGetTeachersByIdQuery = (id?: string | number) => {
 	});
 };
 
-const useCreateTeachersMutation = () => {
+const useCreatePaymentTypesMutation = () => {
 	const { message } = useMessage();
 	const queryClient = useQueryClient();
 	return useMutation({
-		mutationFn: axiosCreateTeachers,
+		mutationFn: axiosCreatePaymentTypes,
 		onSuccess: () => {
 			queryClient.invalidateQueries({
-				queryKey: ["teachers"],
+				queryKey: ["payment"],
 			});
 			message.success("Успешно");
 		},
@@ -55,14 +50,14 @@ const useCreateTeachersMutation = () => {
 	});
 };
 
-const useEditTeachersMutation = () => {
+const useEditPaymentTypesMutation = () => {
 	const { message } = useMessage();
 	const queryClient = useQueryClient();
 	return useMutation({
-		mutationFn: axiosEditTeachers,
+		mutationFn: axiosEditPaymentTypes,
 		onSuccess: () => {
 			queryClient.invalidateQueries({
-				queryKey: ["teachers"],
+				queryKey: ["payment"],
 			});
 			message.success("Успешно");
 		},
@@ -72,14 +67,14 @@ const useEditTeachersMutation = () => {
 	});
 };
 
-const useDeleteTeachersMutation = () => {
+const useDeletePaymentTypesMutation = () => {
 	const { message } = useMessage();
 	const queryClient = useQueryClient();
 	return useMutation({
-		mutationFn: axiosDeleteTeachers,
+		mutationFn: axiosDeletePaymentTypes,
 		onSuccess: () => {
 			queryClient.invalidateQueries({
-				queryKey: ["teachers"],
+				queryKey: ["payment"],
 			});
 			message.success("Успешно");
 		},
@@ -90,10 +85,9 @@ const useDeleteTeachersMutation = () => {
 };
 
 export {
-	teachersQueryOptions,
-	useGetTeachersQuery,
-	useCreateTeachersMutation,
-	useEditTeachersMutation,
-	useDeleteTeachersMutation,
-	useGetTeachersByIdQuery,
+	useGetPaymentTypesQuery,
+	useGetPaymentTypesByIdQuery,
+	useCreatePaymentTypesMutation,
+	useEditPaymentTypesMutation,
+	useDeletePaymentTypesMutation
 };

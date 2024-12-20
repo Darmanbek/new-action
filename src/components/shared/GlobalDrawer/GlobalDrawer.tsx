@@ -30,6 +30,7 @@ const GlobalDrawer: FC<GlobalDrawerProps & DrawerProps> = (props) => {
 		if (!isError && !isLoading) {
 			onCloseDrawer();
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isLoading, isError]);
 
 	return (

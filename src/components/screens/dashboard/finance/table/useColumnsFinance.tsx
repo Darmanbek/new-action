@@ -3,7 +3,7 @@ import { ColumnsType } from "antd/es/table";
 import { Link } from "react-router-dom";
 import { UiFilterIcon, UiTag } from "src/components/ui";
 import { TDashboardFinanceTransaction } from "src/services/index.types";
-import { useGetPaymentTypesQuery } from "src/services/payment/payment.api";
+import { useGetPaymentTypesQuery } from "src/services/shared/payment/payment.api";
 import { formatEmpty, paymentFormatToTag, paymentTranlation, priceFormatter } from "src/utils";
 
 

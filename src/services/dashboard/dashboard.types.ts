@@ -14,14 +14,6 @@ export type TDashboardCompanyItem = {
 	groups: TGroup[]
 }
 
-export type TDashboardAdmin = {
-	id: string;
-	first_name: string;
-	last_name: string;
-	phone: string;
-	company: string;
-}
-
 export type TDashboardStudentsRating = {
 	rating: string;
 	id: string;

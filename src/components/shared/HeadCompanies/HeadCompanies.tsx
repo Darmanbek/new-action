@@ -26,6 +26,7 @@ const HeadCompanies: FC = () => {
 			value={company?.id}
 			variant={"borderless"}
 			onChange={onChangeCompany}
+			popupMatchSelectWidth={false}
 			options={companies?.data.map(el => ({
 				value: el.id,
 				label: el.name,

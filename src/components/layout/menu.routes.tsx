@@ -10,6 +10,7 @@ import { IoLayersOutline, IoNewspaperOutline } from "react-icons/io5";
 import { LuCalendarCheck, LuPieChart } from "react-icons/lu";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { PiChatsLight } from "react-icons/pi";
+import { ROUTES } from "src/config";
 import { TRoleTypes } from "src/services/index.types";
 import { useAuthPersistStore } from "src/store";
 
@@ -19,32 +20,32 @@ export const useMenuRoutes = () => {
 	);
 
 	const menuItems = [
-		{ key: "/", icon: <HomeOutlined />, label: "Главная" },
-		{ key: "/admins", icon: <UserOutlined />, label: "Админы" },
-		{ key: "/teachers", icon: <TeamOutlined />, label: "Учителя" },
-		{ key: "/groups", icon: <IoLayersOutline />, label: "Группы" },
-		{ key: "/companies", icon: <BsBuildings />, label: "Филиалы" },
-		{ key: "/acceptance", icon: <MdOutlineMailOutline />, label: "Заявки" },
-		{ key: "/holiday", icon: <LuCalendarCheck />, label: "Праздничные дни" },
-		{ key: "/stories", icon: <IoNewspaperOutline />, label: "Новости" },
+		{ key: ROUTES.DASHBOARD, icon: <HomeOutlined />, label: "Главная" },
+		{ key: ROUTES.ADMINS, icon: <UserOutlined />, label: "Админы" },
+		{ key: ROUTES.TEACHERS, icon: <TeamOutlined />, label: "Учителя" },
+		{ key: ROUTES.GROUPS, icon: <IoLayersOutline />, label: "Группы" },
+		{ key: ROUTES.COMPANIES, icon: <BsBuildings />, label: "Филиалы" },
+		{ key: ROUTES.ACCEPTANCES, icon: <MdOutlineMailOutline />, label: "Заявки" },
+		{ key: ROUTES.HOLIDAY, icon: <LuCalendarCheck />, label: "Праздничные дни" },
+		{ key: ROUTES.STORIES, icon: <IoNewspaperOutline />, label: "Новости" },
 		role !== "director" ? {
-			key: "/finance", icon: <LuPieChart />, label: "Финансы",
+			key: ROUTES.FINANCES.ROOT, icon: <LuPieChart />, label: "Финансы",
 			children: [
 				{
-					key: "/finance/profits",
+					key: ROUTES.FINANCES.ROOT + ROUTES.FINANCES.PROFITS,
 					icon: <DollarOutlined />,
 					label: "Прибыль",
 				},
 				{
-					key: "/finance/debtors",
+					key: ROUTES.FINANCES.ROOT + ROUTES.FINANCES.DEBTORS,
 					icon: <UsergroupDeleteOutlined />,
 					label: "Должники",
 				},
 			],
 		} : {
-			key: "/finance", icon: <LuPieChart />, label: "Финансы",
+			key: ROUTES.FINANCES.ROOT, icon: <LuPieChart />, label: "Финансы",
 		},
-		{ key: "/chat", icon: <PiChatsLight />, label: "Чат" },
+		{ key: ROUTES.CHAT, icon: <PiChatsLight />, label: "Чат" },
 	];
 
 	type TRolesMenuMap = {
@@ -53,34 +54,34 @@ export const useMenuRoutes = () => {
 
 	const rolesMenuMap: TRolesMenuMap = {
 		super_admin: [
-			"/admins",
-			"/teachers",
-			"/groups",
-			"/companies",
-			"/acceptance",
-			"/holiday",
-			"/stories",
-			"/finance",
-			"/chat",
+			ROUTES.ADMINS,
+			ROUTES.TEACHERS,
+			ROUTES.GROUPS,
+			ROUTES.COMPANIES,
+			ROUTES.ACCEPTANCES,
+			ROUTES.HOLIDAY,
+			ROUTES.STORIES,
+			ROUTES.FINANCES.ROOT,
+			ROUTES.CHAT,
 		],
 		admin: [
-			"/teachers",
-			"/groups",
-			"/acceptance",
-			"/holiday",
-			"/stories",
-			"/finance",
-			"/chat",
+			ROUTES.TEACHERS,
+			ROUTES.GROUPS,
+			ROUTES.ACCEPTANCES,
+			ROUTES.HOLIDAY,
+			ROUTES.STORIES,
+			ROUTES.FINANCES.ROOT,
+			ROUTES.CHAT,
 		],
 		director: [
-			"/",
-			"/admins",
-			"/groups",
-			"/companies",
+			ROUTES.DASHBOARD,
+			ROUTES.ADMINS,
+			ROUTES.GROUPS,
+			ROUTES.COMPANIES,
 			// "/teachers",
-			"/stories",
-			"/finance",
-			"/chat",
+			ROUTES.STORIES,
+			ROUTES.FINANCES.ROOT,
+			ROUTES.CHAT,
 		],
 	};
 

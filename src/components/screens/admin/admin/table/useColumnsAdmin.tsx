@@ -5,7 +5,7 @@ import { GlobalPopconfirm } from "src/components/shared";
 import { UiTag, UiTooltipButton } from "src/components/ui";
 import { useDeleteAdminsMutation } from "src/services/index.api";
 import { useFormStorageStore } from "src/store";
-import { formatEmpty, phoneFormatter } from "src/utils";
+import { phoneFormatter } from "src/utils";
 import { TAdmin } from "src/services/index.types";
 
 export const useColumnsAdmin = () => {
@@ -35,7 +35,7 @@ export const useColumnsAdmin = () => {
 			key: "company",
 			render: (company: TAdmin["company"]) => company ? (
 				<UiTag color={"red"}>
-					{formatEmpty(company?.name)}
+					{/*{formatEmpty(company?.name)}*/}
 				</UiTag>
 			) : "-",
 		},
