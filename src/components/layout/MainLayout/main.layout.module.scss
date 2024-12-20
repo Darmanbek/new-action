@@ -1,0 +1,15 @@
+@import "src/assets/styles/variables";
+@import "src/assets/styles/mixin";
+
+.layout
+{
+	background-color: #fff;
+	display: flex;
+	flex-direction: row;
+	flex-grow: 1;
+
+	@include md
+	{
+		flex-direction: column;
+	}
+}
