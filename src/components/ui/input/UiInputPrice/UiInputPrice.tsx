@@ -1,11 +1,11 @@
-import React from 'react';
-import { InputNumber, InputNumberProps } from 'antd';
-import { formatNum } from 'src/utils';
+import { ConfigProvider, InputNumber, InputNumberProps } from "antd"
+import { forwardRef } from "react"
+import { formatNum } from "src/utils"
 
-export const UiInputPrice = (
-  props: React.PropsWithChildren<InputNumberProps>
-) => {
-  return (
-    <InputNumber formatter={formatNum} style={{ width: '100%' }} {...props} />
-  );
-};
+export const UiInputPrice = forwardRef<HTMLInputElement, InputNumberProps>((props, ref) => {
+	return (
+		<ConfigProvider>
+			<InputNumber ref={ref} formatter={formatNum} style={{ width: "100%" }} {...props} />
+		</ConfigProvider>
+	)
+})

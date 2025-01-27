@@ -1,72 +1,69 @@
-import { useEffect } from "react";
-import { Form, Input } from "antd";
-import { GlobalDrawer } from "src/components/shared";
-import { UiInputMask } from "src/components/ui";
-import { useFormStorageStore } from "src/store";
-import { TAdmin } from "src/services/index.types";
-import { formMessage, inputPlaceholder } from "src/utils";
+import { Form, Input } from "antd"
+import { useEffect } from "react"
+import { GlobalDrawer } from "src/components/shared"
+import { UiInputMask } from "src/components/ui"
+import type { TAdmin } from "src/services/admins"
+import { useFormStorageStore } from "src/store"
+import { formMessage, inputPlaceholder } from "src/utils"
 
 export const FormProfile = () => {
-	const [form] = Form.useForm<TAdmin>();
-	const paramsForm = useFormStorageStore((state) => state.paramsForm);
+	const [form] = Form.useForm<TAdmin>()
+	const paramsForm = useFormStorageStore((state) => state.paramsForm)
 
 	const onFinish = (values: TAdmin) => {
-		console.log(values);
-	};
+		console.log(values)
+	}
 
 	useEffect(() => {
 		if (paramsForm)
 			form.setFieldsValue({
-				...paramsForm,
-			});
-	}, [paramsForm, form]);
+				...paramsForm
+			})
+	}, [paramsForm, form])
 
 	return (
 		<GlobalDrawer form={form} isLoading={false} isError={false}>
 			<Form
-				name="Me Form"
+				name={"Me Form"}
 				form={form}
 				onFinish={onFinish}
-				autoComplete="off"
-				layout="vertical"
+				autoComplete={"off"}
+				layout={"vertical"}
 				initialValues={{
-					phone: "",
+					phone: ""
 				}}
 				requiredMark={false}
 			>
 				<Form.Item<TAdmin>
-					name="first_name"
-					label="Имя"
+					name={"first_name"}
+					label={"Имя"}
 					rules={[{ required: true, message: formMessage("Имя") }]}
 				>
 					<Input placeholder={inputPlaceholder} />
 				</Form.Item>
 				<Form.Item<TAdmin>
-					name="last_name"
-					label="Фамилия"
+					name={"last_name"}
+					label={"Фамилия"}
 					rules={[
 						{
 							required: true,
-							message: formMessage("Фамилия"),
-						},
+							message: formMessage("Фамилия")
+						}
 					]}
 				>
 					<Input placeholder={inputPlaceholder} />
 				</Form.Item>
 				<Form.Item<TAdmin>
-					name="phone"
-					label="Телефон"
+					name={"phone"}
+					label={"Телефон"}
 					rules={[
 						{
 							required: true,
-							message: formMessage("Телефон"),
-						},
+							message: formMessage("Телефон")
+						}
 					]}
 				>
-					<UiInputMask
-						placeholder={inputPlaceholder}
-						mask={"+\\9\\98 99 999 99 99"}
-					/>
+					<UiInputMask placeholder={inputPlaceholder} mask={"+\\9\\98 99 999 99 99"} />
 				</Form.Item>
 				{/* <Form.Item<TAdmin>
                     name="password"
@@ -85,5 +82,5 @@ export const FormProfile = () => {
                 </Form.Item> */}
 			</Form>
 		</GlobalDrawer>
-	);
-};
+	)
+}

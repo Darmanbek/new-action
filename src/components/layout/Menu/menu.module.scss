@@ -2,15 +2,13 @@
 @import "src/assets/styles/mixin";
 
 .menu-sider,
-.menu-drawer
-{
+.menu-drawer {
 	position: relative;
 	//background-color: #fff;
 	box-shadow: $primary-box-shadow2;
 	transition: all 0.2s;
 
-	.logo
-	{
+	.logo {
 		margin-top: 16px;
 		min-height: 64px;
 		max-height: 64px;
@@ -22,14 +20,12 @@
 		transition: none !important;
 
 
-		&.collapse
-		{
+		&.collapse {
 			padding: 0;
 			justify-content: center;
 		}
 
-		img
-		{
+		img {
 			max-height: 60px;
 			object-fit: contain;
 			//flex-basis: 224px;
@@ -37,8 +33,7 @@
 	}
 }
 
-.menu-nav
-{
+.menu-nav {
 	height: calc(100vh - 80px);
 	padding: 4px 12px 30px;
 	display: flex;
@@ -49,36 +44,30 @@
 	scrollbar-width: thin;
 	scrollbar-color: #adb3bd #fff;
 
-	&::-webkit-scrollbar
-	{
+	&::-webkit-scrollbar {
 		width: 5px;
 		background-color: #fff;
 	}
 
-	&::-webkit-scrollbar-thumb
-	{
+	&::-webkit-scrollbar-thumb {
 		background-color: #adb3bd;
 		border-radius: 6px;
 	}
 
-	&::-webkit-scrollbar-thumb
-	{
+	&::-webkit-scrollbar-thumb {
 		background-color: #adb3bd;
 		border-radius: 6px;
 	}
 
-	&.active
-	{
+	&.active {
 		padding: 0;
 
-		.menu
-		{
+		.menu {
 			padding: 0 4px;
 		}
 	}
 
-	&:hover
-	{
+	&:hover {
 		overflow-y: auto;
 		overflow-x: hidden;
 	}

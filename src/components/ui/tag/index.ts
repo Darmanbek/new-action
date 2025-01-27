@@ -1,1 +1,1 @@
-export * from "./UiTag/UiTag";
+export * from "./UiTag/UiTag"

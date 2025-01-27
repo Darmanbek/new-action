@@ -1,1 +1,1 @@
-export * from "./privacy/Privacy";
+export * from "./privacy/Privacy"

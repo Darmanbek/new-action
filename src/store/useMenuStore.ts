@@ -1,4 +1,4 @@
-import { create } from "zustand";
+import { create } from "zustand"
 
 interface IMenuStore {
 	open: boolean;
@@ -19,4 +19,4 @@ export const useMenuStore = create<IMenuStore>()((set) => ({
 	toggleProfileOpen: () =>
 		set((state) => ({ profileOpen: !state.profileOpen })),
 	setProfileOpen: (open) => set({ profileOpen: open }),
-}));
+}))

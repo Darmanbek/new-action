@@ -1,75 +1,80 @@
-import { useMessage } from "src/hooks";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { axiosCreateStory, axiosDeleteStory, axiosEditStory, axiosGetStory } from "./stories.services";
-import type { TResponseError } from "src/services/index.types";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
+import { useMessage } from "src/hooks"
+import type { TResponseError } from "src/services/shared"
+import { errorResponse } from "src/utils"
+import {
+	axiosCreateStories,
+	axiosDeleteStories,
+	axiosEditStories,
+	axiosGetStories
+} from "./stories.services"
 
-
-const useGetStoryQuery = () => {
-	const { message } = useMessage();
+const useGetStoriesQuery = () => {
+	const { message } = useMessage()
 	return useQuery({
-		queryFn: axiosGetStory,
-		queryKey: ["story"],
+		queryFn: axiosGetStories,
+		queryKey: ["stories"],
 		keepPreviousData: true,
-		onError: (error: TResponseError) => {
-			message.error(error?.response?.data?.message);
-		},
-	});
-};
+		onError: async (error: TResponseError) => {
+			message.error(errorResponse(error))
+		}
+	})
+}
 
-const useCreateStoryMutation = () => {
-	const { message } = useMessage();
-	const queryClient = useQueryClient();
+const useCreateStoriesMutation = () => {
+	const { message } = useMessage()
+	const queryClient = useQueryClient()
 	return useMutation({
-		mutationFn: axiosCreateStory,
+		mutationFn: axiosCreateStories,
 		onSuccess: () => {
 			queryClient.invalidateQueries({
-				queryKey: ["story"],
-			});
-			message.success("Успешно");
+				queryKey: ["stories"]
+			})
+			message.success("Успешно")
 		},
 		onError: (error: TResponseError) => {
-			message.error(error?.response?.data?.message);
-		},
-	});
-};
+			message.error(errorResponse(error))
+		}
+	})
+}
 
-const useEditStoryMutation = () => {
-	const { message } = useMessage();
-	const queryClient = useQueryClient();
+const useEditStoriesMutation = () => {
+	const { message } = useMessage()
+	const queryClient = useQueryClient()
 	return useMutation({
-		mutationFn: axiosEditStory,
+		mutationFn: axiosEditStories,
 		onSuccess: () => {
 			queryClient.invalidateQueries({
-				queryKey: ["story"],
-			});
-			message.success("Успешно");
+				queryKey: ["stories"]
+			})
+			message.success("Успешно")
 		},
 		onError: (error: TResponseError) => {
-			message.error(error?.response?.data?.message);
-		},
-	});
-};
+			message.error(errorResponse(error))
+		}
+	})
+}
 
-const useDeleteStoryMutation = () => {
-	const { message } = useMessage();
-	const queryClient = useQueryClient();
+const useDeleteStoriesMutation = () => {
+	const { message } = useMessage()
+	const queryClient = useQueryClient()
 	return useMutation({
-		mutationFn: axiosDeleteStory,
+		mutationFn: axiosDeleteStories,
 		onSuccess: () => {
 			queryClient.invalidateQueries({
-				queryKey: ["story"],
-			});
-			message.success("Успешно");
+				queryKey: ["stories"]
+			})
+			message.success("Успешно")
 		},
 		onError: (error: TResponseError) => {
-			message.error(error?.response?.data?.message);
-		},
-	});
-};
+			message.error(errorResponse(error))
+		}
+	})
+}
 
 export {
-	useGetStoryQuery,
-	useCreateStoryMutation,
-	useEditStoryMutation,
-	useDeleteStoryMutation
-};
+	useGetStoriesQuery,
+	useCreateStoriesMutation,
+	useEditStoriesMutation,
+	useDeleteStoriesMutation
+}

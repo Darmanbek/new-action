@@ -1,16 +1,6 @@
-import { ReactNode } from 'react';
-import styles from './main.module.scss';
-import { useMenuStore } from 'src/store';
-import clsx from 'clsx';
+import type { FC, PropsWithChildren } from "react"
+import styles from "./main.module.scss"
 
-export const Main = ({
-  children,
-}: React.PropsWithChildren<{ children?: ReactNode }>) => {
-  const collapsed = useMenuStore((state) => state.collapsed);
-
-  return (
-    <main className={clsx(styles.main, collapsed && styles.collapsed)}>
-      {children}
-    </main>
-  );
-};
+export const Main: FC<PropsWithChildren> = ({ children }) => {
+	return <main className={styles.main}>{children}</main>
+}

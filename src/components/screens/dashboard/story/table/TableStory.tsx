@@ -1,34 +1,28 @@
-import type { FC } from "react";
-import { UiTable } from "src/components/ui";
-import { useGetDashboardStoryQuery } from "src/services/index.api";
-import { HeadTable } from "src/components/shared";
-import type { TStory } from "src/services/index.types";
-import { useColumnsStory } from "src/components/screens/dashboard/story/table/useColumnsStory";
-import { useAuthPersistStore } from "src/store";
+import type { FC } from "react"
+import { HeadTable } from "src/components/shared"
+import { UiTable } from "src/components/ui"
+import { useGetDashboardStoryQuery } from "src/services/dashboard"
+import type { TStory } from "src/services/stories"
+import { useAuthPersistStore } from "src/store"
+import { useColumnsStory } from "./useColumnsStory"
 
 const TableStory: FC = () => {
-	const company = useAuthPersistStore(
-		state => state.company,
-	);
+	const company = useAuthPersistStore((state) => state.company)
 
-	const { data: stories, isLoading, isFetching } = useGetDashboardStoryQuery({}, company?.id);
+	const { data: stories, isLoading, isFetching } = useGetDashboardStoryQuery({}, company?.id)
 
-	const columns = useColumnsStory();
+	const columns = useColumnsStory()
 
 	return (
 		<>
 			<UiTable<TStory>
-				title={() => (
-					<HeadTable
-						title={"Новости"}
-					/>
-				)}
+				title={() => <HeadTable title={"Новости"} />}
 				loading={isLoading || isFetching}
 				columns={columns}
 				dataSource={stories?.data}
 			/>
 		</>
-	);
-};
+	)
+}
 
-export { TableStory };
+export { TableStory }

@@ -1,8 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
-import { rootRoute } from "src/routes/root";
+import { createBrowserRouter } from "react-router-dom"
+import { rootRoute } from "src/routes/root"
 
-export const routes = createBrowserRouter([rootRoute]);
-
-declare module "react-router-dom" {
-
-}
+export const routes = createBrowserRouter([rootRoute])

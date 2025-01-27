@@ -1,4 +1,4 @@
-import { create } from "zustand";
+import { create } from "zustand"
 
 interface ISearchListState {
 	searchValue: string;
@@ -12,4 +12,4 @@ export const useSearchListStore = create<ISearchListState>((set) => ({
 	debounceValue: "",
 	setSearchValue: ({ searchValue }) => set({ searchValue }),
 	setDebounceValue: ({ debounceValue }) => set({ debounceValue }),
-}));
+}))

@@ -1,7 +1,7 @@
-import { FC } from "react";
-import { UiTabs } from "src/components/ui";
-import { TableAssessments } from "./assessments/TableAssessments";
-import { TableStudents } from "./students/TableStudents";
+import { FC } from "react"
+import { UiTabs } from "src/components/ui"
+import { TableAssessments } from "./assessments/TableAssessments"
+import { TableStudents } from "./students/TableStudents"
 
 const TableGroup: FC = () => {
 	return (
@@ -21,7 +21,7 @@ const TableGroup: FC = () => {
 				]}
 			/>
 		</>
-	);
-};
+	)
+}
 
-export { TableGroup };
+export { TableGroup }

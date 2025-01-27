@@ -1,179 +1,188 @@
-import Icon from "@ant-design/icons";
-import { Rate, Space, Tooltip } from "antd";
-import { ColumnsType } from "antd/es/table";
-import { Dayjs } from "dayjs";
-import { useCallback, useEffect } from "react";
-import { IoSnow } from "react-icons/io5";
-import { Link, useParams } from "react-router-dom";
-import { AssessmentsTitle, AssessmentsValue } from "src/components/shared";
-import { UiTag } from "src/components/ui";
+import Icon from "@ant-design/icons"
+import { Rate, Space, Tooltip } from "antd"
+import type { ColumnsType } from "antd/es/table"
+import type { Dayjs } from "dayjs"
+import { useCallback, useEffect } from "react"
+import { IoSnow } from "react-icons/io5"
+import { Link, useParams } from "react-router-dom"
+import { AssessmentsTitle, AssessmentsValue } from "src/components/shared"
+import { UiTag } from "src/components/ui"
 import {
 	useGetDashboardCompaniesGroupsByIdCalendarQuery,
 	useGetDashboardCompaniesGroupsByIdLessonsQuery,
-	useGetDashboardHolidaysQuery,
-} from "src/services/index.api";
-import { TGroupAssessment } from "src/services/index.types";
-import { useAuthPersistStore } from "src/store";
-import { dateFormatter } from "src/utils";
+	useGetDashboardHolidaysQuery
+} from "src/services/dashboard"
+import type { TGroupAssessment } from "src/services/groups"
+import { useAuthPersistStore } from "src/store"
+import { dateFormatter } from "src/utils"
 
 export const useColumnsAssessments = (date: Dayjs) => {
-	const company = useAuthPersistStore(
-		state => state.company,
-	);
-	const { group_id } = useParams();
+	const company = useAuthPersistStore((state) => state.company)
+	const { group_id } = useParams()
 
-	const {
-		data: calendar,
-	} = useGetDashboardCompaniesGroupsByIdCalendarQuery({
-		date: [date.startOf("month").format("YYYY-MM-DD"), date.endOf("month").format("YYYY-MM-DD")],
-	}, group_id);
-	const {
-		data: lessons,
-	} = useGetDashboardCompaniesGroupsByIdLessonsQuery(group_id);
+	const { data: calendar } = useGetDashboardCompaniesGroupsByIdCalendarQuery(
+		{
+			date: [date.startOf("month").format("YYYY-MM-DD"), date.endOf("month").format("YYYY-MM-DD")]
+		},
+		group_id
+	)
+	const { data: lessons } = useGetDashboardCompaniesGroupsByIdLessonsQuery(group_id)
 
-	const { data: holiday } = useGetDashboardHolidaysQuery({
-		date: [date.startOf("month").format("YYYY-MM-DD"), date.endOf("month").format("YYYY-MM-DD")],
-	}, company?.id);
+	const { data: holiday } = useGetDashboardHolidaysQuery(
+		{
+			date: [date.startOf("month").format("YYYY-MM-DD"), date.endOf("month").format("YYYY-MM-DD")]
+		},
+		company?.id
+	)
 
 	const updateCursor = (ele: HTMLDivElement) => {
-		ele.style.cursor = "grabbing";
-		ele.style.userSelect = "none";
-	};
+		ele.style.cursor = "grabbing"
+		ele.style.userSelect = "none"
+	}
 
 	const resetCursor = (ele: HTMLDivElement) => {
-		ele.style.cursor = "grab";
-		ele.style.removeProperty("user-select");
-	};
+		ele.style.cursor = "grab"
+		ele.style.removeProperty("user-select")
+	}
 
-	const handleMouseDown = useCallback((e: any) => {
-		const ele = document.querySelector(".ant-table-content");
-		if (!calendar) return;
-		if (!ele) {
-			return;
-		}
-		const startPos = {
-			left: ele.scrollLeft,
-			top: ele.scrollTop,
-			x: e.clientX,
-			y: e.clientY,
-		};
+	const handleMouseDown = useCallback(
+		(e: any) => {
+			const ele = document.querySelector(".ant-table-content")
+			if (!calendar) return
+			if (!ele) {
+				return
+			}
+			const startPos = {
+				left: ele.scrollLeft,
+				top: ele.scrollTop,
+				x: e.clientX,
+				y: e.clientY
+			}
 
-		const handleMouseMove = (e: MouseEvent) => {
-			const dx = e.clientX - startPos.x;
-			const dy = e.clientY - startPos.y;
-			ele.scrollTop = startPos.top - dy;
-			ele.scrollLeft = startPos.left - dx;
-			updateCursor(ele as HTMLDivElement);
-		};
+			const handleMouseMove = (e: MouseEvent) => {
+				const dx = e.clientX - startPos.x
+				const dy = e.clientY - startPos.y
+				ele.scrollTop = startPos.top - dy
+				ele.scrollLeft = startPos.left - dx
+				updateCursor(ele as HTMLDivElement)
+			}
 
-		const handleMouseUp = () => {
-			document.removeEventListener("mousemove", handleMouseMove);
-			document.removeEventListener("mouseup", handleMouseUp);
-			resetCursor(ele as HTMLDivElement);
-		};
+			const handleMouseUp = () => {
+				document.removeEventListener("mousemove", handleMouseMove)
+				document.removeEventListener("mouseup", handleMouseUp)
+				resetCursor(ele as HTMLDivElement)
+			}
 
-		document.addEventListener("mousemove", handleMouseMove);
-		document.addEventListener("mouseup", handleMouseUp);
-	}, [calendar]);
+			document.addEventListener("mousemove", handleMouseMove)
+			document.addEventListener("mouseup", handleMouseUp)
+		},
+		[calendar]
+	)
 
 	useEffect(() => {
-		const content = document.querySelector(".ant-table-content");
-		if (!calendar) return;
-		if (!content) return;
+		const content = document.querySelector(".ant-table-content")
+		if (!calendar) return
+		if (!content) return
 		const onWheel = (e: any) => {
-			if (e.deltaY === 0) return;
-			e.preventDefault();
+			if (e.deltaY === 0) return
+			e.preventDefault()
 			content.scrollTo({
-				left: content.scrollLeft + e.deltaY,
+				left: content.scrollLeft + e.deltaY
 				// behavior: "smooth",
-			});
-		};
-		content.addEventListener("wheel", onWheel);
-		content.addEventListener("mousedown", handleMouseDown);
+			})
+		}
+		content.addEventListener("wheel", onWheel)
+		content.addEventListener("mousedown", handleMouseDown)
 		return () => {
-			content.removeEventListener("wheel", onWheel);
-			content.removeEventListener("mousedown", handleMouseDown);
-		};
-	}, [calendar, handleMouseDown]);
-	const columns: ColumnsType<TGroupAssessment> = calendar?.data.map(date => ({
-		align: "center",
-		ellipsis: true,
-		title: () => <AssessmentsTitle date={date} holiday={holiday?.data} lessons={lessons?.data} />,
-		key: date,
-		onHeaderCell: () => {
-			const lesson = lessons?.data.find(el => dateFormatter(el.date) === dateFormatter(date));
+			content.removeEventListener("wheel", onWheel)
+			content.removeEventListener("mousedown", handleMouseDown)
+		}
+	}, [calendar, handleMouseDown])
+	const columns: ColumnsType<TGroupAssessment> =
+		calendar?.data.map((date) => ({
+			align: "center",
+			ellipsis: true,
+			title: () => <AssessmentsTitle date={date} holiday={holiday?.data} lessons={lessons?.data} />,
+			key: date,
+			onHeaderCell: () => {
+				const lesson = lessons?.data.find((el) => dateFormatter(el.date) === dateFormatter(date))
 
-			const isHoliday = holiday?.data.some(el => dateFormatter(el.date) === dateFormatter(date)) ?? false;
+				const isHoliday =
+					holiday?.data.some((el) => dateFormatter(el.date) === dateFormatter(date)) ?? false
 
-			const getValue = () => {
-				if (lesson) {
-					if (lesson.is_exam) {
-						return {
-							backgroundColor: "#fff1f0",
-							color: "#cf1322",
-						};
+				const getValue = () => {
+					if (lesson) {
+						if (lesson.is_exam) {
+							return {
+								backgroundColor: "#fff1f0",
+								color: "#cf1322"
+							}
+						}
+						if (lesson.is_free) {
+							return {
+								backgroundColor: "#e6f4ff",
+								color: "#0958d9"
+							}
+						}
 					}
-					if (lesson.is_free) {
+					if (isHoliday) {
 						return {
-							backgroundColor: "#e6f4ff",
-							color: "#0958d9",
-						};
+							backgroundColor: "#f6ffed",
+							color: "#389e0d"
+						}
 					}
+					return {}
 				}
-				if (isHoliday) {
-					return {
-						backgroundColor: "#f6ffed",
-						color: "#389e0d",
-					};
+
+				const style = getValue()
+
+				return {
+					style,
+					id: date
 				}
-				return {};
-			};
+			},
+			onCell: () => {
+				const lesson = lessons?.data.find((el) => dateFormatter(el.date) === dateFormatter(date))
 
-			const style = getValue();
+				const isHoliday = !!holiday?.data.find(
+					(el) => dateFormatter(el.date) === dateFormatter(date)
+				)
 
-			return ({
-				style,
-				id: date,
-			});
-		},
-		onCell: () => {
-			const lesson = lessons?.data.find(el => dateFormatter(el.date) === dateFormatter(date));
-
-			const isHoliday = !!holiday?.data.find(el => dateFormatter(el.date) === dateFormatter(date));
-
-			const getValue = () => {
-				if (lesson) {
-					if (lesson.is_exam) {
+				const getValue = () => {
+					if (lesson) {
+						if (lesson.is_exam) {
+							return {
+								backgroundColor: "#fff1f0",
+								color: "#cf1322"
+							}
+						}
+						if (lesson.is_free) {
+							return {
+								backgroundColor: "#e6f4ff",
+								color: "#0958d9"
+							}
+						}
+					}
+					if (isHoliday) {
 						return {
-							backgroundColor: "#fff1f0",
-							color: "#cf1322",
-						};
+							backgroundColor: "#f6ffed",
+							color: "#389e0d"
+						}
 					}
-					if (lesson.is_free) {
-						return {
-							backgroundColor: "#e6f4ff",
-							color: "#0958d9",
-						};
-					}
+					return {}
 				}
-				if (isHoliday) {
-					return {
-						backgroundColor: "#f6ffed",
-						color: "#389e0d",
-					};
+
+				const style = getValue()
+
+				return {
+					style
 				}
-				return {};
-			};
+			},
 
-			const style = getValue();
-
-			return ({
-				style,
-			});
-		},
-
-		render: (_v, assessment) => <AssessmentsValue date={date} assessments={assessment.assessments} />,
-	})) || [];
+			render: (_v, assessment) => (
+				<AssessmentsValue date={date} assessments={assessment.assessments} />
+			)
+		})) || []
 
 	columns.unshift({
 		ellipsis: true,
@@ -183,17 +192,15 @@ export const useColumnsAssessments = (date: Dayjs) => {
 		key: "student",
 		render: (_v, student) => (
 			<Space>
-				<Link to={`students/${student.id}`}>
-					{`${student.first_name} ${student.last_name}`}
-				</Link>
+				<Link to={`students/${student.id}`}>{`${student.first_name} ${student.last_name}`}</Link>
 				{student?.frozen_status?.is_frozen && (
 					<Tooltip title={"Заморожен"}>
 						<UiTag icon={<Icon component={IoSnow} />} color={"cyan"} />
 					</Tooltip>
 				)}
 			</Space>
-		),
-	});
+		)
+	})
 
 	columns.push({
 		ellipsis: true,
@@ -206,8 +213,8 @@ export const useColumnsAssessments = (date: Dayjs) => {
 				<Rate count={1} value={1} disabled={true} />
 				{student?.rating}
 			</Space>
-		),
-	});
+		)
+	})
 
-	return columns;
-};
+	return columns
+}

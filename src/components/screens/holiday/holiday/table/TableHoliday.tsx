@@ -1,30 +1,31 @@
-import { CalendarOutlined, PlusOutlined } from "@ant-design/icons";
-import { Space, Tooltip } from "antd";
-import dayjs from "dayjs";
-import { FC, useState } from "react";
-import { HeadTable } from "src/components/shared";
-import { UiButton, UiDatePicker, UiTable, UiTooltipButton } from "src/components/ui";
-import { useGetHolidayQuery } from "src/services/holiday/holiday.api";
-import { THoliday } from "src/services/index.types";
-import { useFormStorageStore } from "src/store";
-import { useColumnsHoliday } from "./useColumnsHoliday";
+import { CalendarOutlined, PlusOutlined } from "@ant-design/icons"
+import { Space, Tooltip } from "antd"
+import dayjs from "dayjs"
+import { type FC, useState } from "react"
+import { HeadTable } from "src/components/shared"
+import { UiButton, UiDatePicker, UiTable, UiTooltipButton } from "src/components/ui"
+import type { THoliday } from "src/services/holiday"
+import { useGetHolidayQuery } from "src/services/holiday/holiday.api"
+import { useFormStorageStore } from "src/store"
+import { useColumnsHoliday } from "./useColumnsHoliday"
 
 const TableHoliday: FC = () => {
+	const toggleDrawer = useFormStorageStore((state) => state.toggleDrawer)
 
-	const toggleDrawer = useFormStorageStore(
-		state => state.toggleDrawer,
-	);
+	const [date, setDate] = useState(dayjs())
 
-	const [date, setDate] = useState(dayjs());
-
-	const { data: holiday, isLoading, isFetching } = useGetHolidayQuery({
+	const {
+		data: holiday,
+		isLoading,
+		isFetching
+	} = useGetHolidayQuery({
 		date: [
 			date ? date.startOf("month").format("YYYY-MM-DD") : "",
-			date ? date.endOf("month").format("YYYY-MM-DD") : "",
-		],
-	});
+			date ? date.endOf("month").format("YYYY-MM-DD") : ""
+		]
+	})
 
-	const columns = useColumnsHoliday();
+	const columns = useColumnsHoliday()
 
 	return (
 		<UiTable<THoliday>
@@ -37,7 +38,7 @@ const TableHoliday: FC = () => {
 								picker={"month"}
 								value={date}
 								onChange={(date) => {
-									setDate(date);
+									setDate(date)
 								}}
 								format={"YYYY MMMM"}
 								allowClear={false}
@@ -58,7 +59,7 @@ const TableHoliday: FC = () => {
 							onClick={() => toggleDrawer()}
 						>
 							Добавить
-						</UiTooltipButton>,
+						</UiTooltipButton>
 					]}
 				/>
 			)}
@@ -66,7 +67,7 @@ const TableHoliday: FC = () => {
 			dataSource={holiday?.data}
 			columns={columns}
 		/>
-	);
-};
+	)
+}
 
-export { TableHoliday };
+export { TableHoliday }

@@ -1,1 +1,1 @@
-export * from './UiSelect/UiSelect';
+export * from "./UiSelect/UiSelect"

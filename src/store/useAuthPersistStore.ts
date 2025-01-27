@@ -1,15 +1,15 @@
-import { create } from "zustand";
-import { persist } from "zustand/middleware";
-import { TTokenAuth } from "src/services/index.types";
+import { TTokenAuth } from "src/services/login"
+import { create } from "zustand"
+import { persist } from "zustand/middleware"
 
 interface IAuthPersistStore {
-	role: TTokenAuth["role"] | null;
-	role_id: TTokenAuth["role_id"] | null;
-	token: TTokenAuth["token"] | null;
-	company: Pick<TTokenAuth["company"], "id" | "name"> | null;
-	toCompany: (company: TTokenAuth["company"]) => void;
-	signIn: (tokens: TTokenAuth) => void;
-	signOut: () => void;
+	role: TTokenAuth["role"] | null
+	role_id: TTokenAuth["role_id"] | null
+	token: TTokenAuth["token"] | null
+	company: Pick<TTokenAuth["company"], "id" | "name"> | null
+	toCompany: (company: TTokenAuth["company"]) => void
+	signIn: (tokens: TTokenAuth) => void
+	signOut: () => void
 }
 
 export const useAuthPersistStore = create(
@@ -21,10 +21,10 @@ export const useAuthPersistStore = create(
 			company: null,
 			signIn: (tokens) => set(tokens),
 			toCompany: (company: TTokenAuth["company"]) => set((state) => ({ ...state, company })),
-			signOut: () => set({ role: null, role_id: null, token: null, company: null }),
+			signOut: () => set({ role: null, role_id: null, token: null, company: null })
 		}),
 		{
-			name: "token",
-		},
-	),
-);
+			name: "token"
+		}
+	)
+)

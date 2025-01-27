@@ -1,123 +1,123 @@
-import { CheckCircleOutlined, SyncOutlined } from "@ant-design/icons";
-import { PresetColorType } from "antd/es/_util/colors";
-import { createElement } from "react";
-import { TDayTypes, TResponseError, TRoleTypes } from "src/services/index.types";
+import { CheckCircleOutlined, SyncOutlined } from "@ant-design/icons"
+import { PresetColorType } from "antd/es/_util/colors"
+import { createElement } from "react"
+import { TResponseError, TRoleTypes } from "src/services/shared"
+import { TDayTypes } from "src/services/shared/day"
 
-export const paymentTranlation = (payment?: string) => {
-	if (!payment) return "";
+export const paymentTranslation = (payment?: string) => {
+	if (!payment) return ""
 	switch (payment.toLowerCase()) {
 		case "cash":
-			return "Наличные";
+			return "Наличные"
 		case "click":
-			return "Click";
+			return "Click"
 		case "payme":
-			return "Payme";
+			return "Payme"
 		case "paynet":
-			return "Paynet";
+			return "Paynet"
 		default:
-			return payment;
+			return payment
 	}
-};
+}
 
 export const dayTranslation = (day: TDayTypes) => {
 	switch (day.toLowerCase()) {
 		case "odd day":
-			return "Нечетные дни";
+			return "Нечетные дни"
 		case "even day":
-			return "Четные дни";
+			return "Четные дни"
 		case "every day":
-			return "Каждый день";
+			return "Каждый день"
 		default:
-			return day;
+			return day
 	}
-};
+}
 
 export const dayColor = (day: number): PresetColorType | "default" => {
 	switch (day) {
 		case 1:
-			return "blue";
+			return "blue"
 		case 2:
-			return "green";
+			return "green"
 		case 3:
-			return "red";
+			return "red"
 		default:
-			return "default";
+			return "default"
 	}
-};
+}
 
 export const completeColor = (is_completed?: boolean): "success" | "processing" => {
 	if (is_completed) {
-		return "success";
+		return "success"
 	}
-	return "processing";
-};
+	return "processing"
+}
 
 export const completeIcon = (is_completed?: boolean) => {
 	if (is_completed) {
-		return createElement(CheckCircleOutlined);
+		return createElement(CheckCircleOutlined)
 	}
-	return createElement(SyncOutlined, { spin: true });
-};
+	return createElement(SyncOutlined, { spin: true })
+}
 
 export const completeName = (is_completed?: boolean): string => {
 	if (is_completed) {
-		return "Завершено";
+		return "Завершено"
 	}
-	return "В процессе";
-};
+	return "В процессе"
+}
 
 export const roleColor = (role?: TRoleTypes) => {
 	switch (role) {
 		case "super_admin":
-			return "magenta";
+			return "magenta"
 		case "admin":
-			return "geekblue";
+			return "geekblue"
 		case "director":
-			return "cyan";
+			return "cyan"
 		default:
-			return "green";
+			return "green"
 	}
-};
+}
 
 export const monthGrammar = <T>(value: T) => {
-	if (typeof value !== "string") return "";
+	if (typeof value !== "string") return ""
 	switch (value) {
 		case "":
-			return "";
+			return ""
 		case "1":
-			return "месяц";
+			return "месяц"
 		case "2":
 		case "3":
 		case "4":
-			return "месяца";
+			return "месяца"
 
 		default:
-			return "месяцев";
+			return "месяцев"
 	}
-};
+}
 
 export const groupGrammar = (value: number) => {
 	switch (value) {
 		case 1:
-			return "группа";
+			return "группа"
 		case 2:
 		case 3:
 		case 4:
-			return "группы";
+			return "группы"
 
 		default:
-			return "групп";
+			return "групп"
 	}
-};
-
+}
 
 export const errorResponse = (error: TResponseError) => {
 	if (error?.response?.data?.message) {
-		return error.response.data.message;
+		return error.response.data.message
 	}
 	if (error?.response?.data?.error) {
-		return error.response.data.error;
+		return error.response.data.error
 	}
 
-	return error.message;
-};
+	return error.message
+}

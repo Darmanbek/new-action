@@ -1,11 +1,9 @@
-.loader
-{
+.loader {
 	flex-grow: 1;
 	display: grid;
 	place-items: center;
 
-	&.full
-	{
+	&.full {
 		height: 100vh;
 	}
 }

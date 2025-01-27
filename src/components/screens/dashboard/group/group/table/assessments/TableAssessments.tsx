@@ -1,54 +1,51 @@
-import { CalendarOutlined } from "@ant-design/icons";
-import { Space, Tooltip } from "antd";
-import dayjs from "dayjs";
-import isBetween from "dayjs/plugin/isBetween";
-import { FC, useEffect, useMemo, useState } from "react";
-import { useParams } from "react-router-dom";
-import { HeadTable } from "src/components/shared";
-import { UiButton, UiDatePicker, UiTable } from "src/components/ui";
-import { TGroupAssessment } from "src/services/index.types";
+import { CalendarOutlined } from "@ant-design/icons"
+import { Space, Tooltip } from "antd"
+import dayjs from "dayjs"
+import isBetween from "dayjs/plugin/isBetween"
+import { FC, useEffect, useMemo, useState } from "react"
+import { useParams } from "react-router-dom"
+import { HeadTable } from "src/components/shared"
+import { UiButton, UiDatePicker, UiTable } from "src/components/ui"
 import {
 	useGetDashboardCompaniesGroupsByIdAssessmentsQuery,
-	useGetDashboardCompaniesGroupsByIdQuery,
-} from "src/services/index.api";
+	useGetDashboardCompaniesGroupsByIdQuery
+} from "src/services/dashboard"
+import { TGroupAssessment } from "src/services/groups"
 
-import { useColumnsAssessments } from "./useColumnsAssessments";
+import { useColumnsAssessments } from "./useColumnsAssessments"
 
-dayjs.extend(isBetween);
+dayjs.extend(isBetween)
 
 const TableAssessments: FC = () => {
-	const { group_id } = useParams();
+	const { group_id } = useParams()
 	const {
 		data: assessment,
 		isLoading,
-		isFetching,
-	} = useGetDashboardCompaniesGroupsByIdAssessmentsQuery(group_id);
+		isFetching
+	} = useGetDashboardCompaniesGroupsByIdAssessmentsQuery(group_id)
 
-	const {
-		data: group,
-	} = useGetDashboardCompaniesGroupsByIdQuery(group_id);
+	const { data: group } = useGetDashboardCompaniesGroupsByIdQuery(group_id)
 
-
-	const [date, setDate] = useState(dayjs());
+	const [date, setDate] = useState(dayjs())
 	const [start, end] = useMemo(() => {
-		if (!group) return [dayjs(), dayjs()];
-		const startDate = dayjs(group?.data.start_date).startOf("month");
-		const endDate = dayjs(group?.data.start_date).endOf("month").add(group?.data?.duration, "month");
+		if (!group) return [dayjs(), dayjs()]
+		const startDate = dayjs(group?.data.start_date).startOf("month")
+		const endDate = dayjs(group?.data.start_date).endOf("month").add(group?.data?.duration, "month")
 
-		return [startDate, endDate];
-	}, [group]);
+		return [startDate, endDate]
+	}, [group])
 
-	const columns = useColumnsAssessments(date);
+	const columns = useColumnsAssessments(date)
 
 	useEffect(() => {
-		if (date.isBetween(start.startOf("month"), end.endOf("month"))) return;
+		if (date.isBetween(start.startOf("month"), end.endOf("month"))) return
 		if (date < start) {
-			setDate(start);
+			setDate(start)
 		}
 		if (end < date) {
-			setDate(end);
+			setDate(end)
 		}
-	}, [date, end, start]);
+	}, [date, end, start])
 
 	return (
 		<UiTable<TGroupAssessment>
@@ -61,11 +58,11 @@ const TableAssessments: FC = () => {
 								picker={"month"}
 								value={date}
 								onChange={(date) => {
-									setDate(date);
+									setDate(date)
 								}}
 								format={"YYYY MMMM"}
 								disabledDate={(date) => {
-									return !dayjs(date).isBetween(start, end);
+									return !dayjs(date).isBetween(start, end)
 								}}
 								allowClear={false}
 							/>
@@ -76,7 +73,7 @@ const TableAssessments: FC = () => {
 									onClick={() => setDate(dayjs())}
 								/>
 							</Tooltip>
-						</Space.Compact>,
+						</Space.Compact>
 					]}
 				/>
 			)}
@@ -85,7 +82,7 @@ const TableAssessments: FC = () => {
 			loading={isLoading || isFetching}
 			pagination={false}
 		/>
-	);
-};
+	)
+}
 
-export { TableAssessments };
+export { TableAssessments }

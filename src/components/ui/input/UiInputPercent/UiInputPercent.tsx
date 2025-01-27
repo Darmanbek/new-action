@@ -1,13 +1,13 @@
-import { FC } from "react";
-import { ConfigProvider, InputNumber, InputNumberProps } from "antd";
-import { formatPercent } from "src/utils";
+import { ConfigProvider, InputNumber, InputNumberProps } from "antd"
+import { forwardRef } from "react"
+import { formatPercent } from "src/utils"
 
-const UiInputPercent: FC<InputNumberProps> = (props) => {
+const UiInputPercent = forwardRef<HTMLInputElement, InputNumberProps>((props, ref) => {
 	return (
 		<ConfigProvider>
-			<InputNumber formatter={formatPercent} {...props} />
+			<InputNumber ref={ref} formatter={formatPercent} {...props} />
 		</ConfigProvider>
-	);
-};
+	)
+})
 
-export { UiInputPercent };
+export { UiInputPercent }

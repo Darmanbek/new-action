@@ -1,21 +1,18 @@
 @import "/src/assets/styles/variables.scss";
 @import "/src/assets/styles/mixin.scss";
 
-.left
-{
+.left {
 	display: flex;
 	align-items: stretch;
 	justify-content: space-between;
 	gap: 16px;
 	//flex-basis: 240px;
 
-	.burger
-	{
+	.burger {
 		color: $primary-color;
 		background-color: $primary-bg-color-components;
 
-		&:hover
-		{
+		&:hover {
 			background-color: $primary-color !important;
 			color: #fff !important;
 		}

@@ -1,59 +1,60 @@
-import { FC, useEffect } from "react";
-import { Flex, Space, DrawerProps } from "antd";
-import { FormInstance } from "antd/lib/form/hooks/useForm";
-import { useShallow } from "zustand/react/shallow";
-import { LockOutlined } from "@ant-design/icons";
-import { UiButton, UiDrawer } from "src/components/ui";
-import { useFormStorageStore } from "src/store";
+import { LockOutlined } from "@ant-design/icons"
+import { DrawerProps, Flex, Space } from "antd"
+import { FormInstance } from "antd/lib/form/hooks/useForm"
+import { FC, useEffect } from "react"
+import { UiButton, UiDrawer } from "src/components/ui"
+import { useFormStorageStore } from "src/store"
+import { useShallow } from "zustand/react/shallow"
 
 interface GlobalDrawerProps {
-	form: FormInstance;
-	width?: number;
-	isLoading: boolean;
-	isError: boolean;
+	form: FormInstance
+	width?: number
+	isLoading: boolean
+	isError: boolean
 }
 
 const GlobalDrawer: FC<GlobalDrawerProps & DrawerProps> = (props) => {
-	const { form, width, isLoading, isError, ...rest } = props;
-	const { paramsForm, isDrawer, toggleDrawer, setParamsItem } =
-		useFormStorageStore(useShallow((state) => state));
+	const { form, width, isLoading, isError, ...rest } = props
+	const { paramsForm, isDrawer, toggleDrawer, setParamsItem } = useFormStorageStore(
+		useShallow((state) => state)
+	)
 
 	const onCloseDrawer = () => {
 		if (isDrawer) {
-			toggleDrawer();
+			toggleDrawer()
 		}
-		form.resetFields();
-		setParamsItem(null);
-	};
+		form.resetFields()
+		setParamsItem(null)
+	}
 
 	useEffect(() => {
 		if (!isError && !isLoading) {
-			onCloseDrawer();
+			onCloseDrawer()
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [isLoading, isError]);
+	}, [isLoading, isError])
 
 	return (
 		<UiDrawer
-			forceRender
+			forceRender={true}
 			title={paramsForm ? "Изменить" : "Добавить"}
 			width={width || 350}
 			closeIcon={<LockOutlined />}
-			placement="right"
+			placement={"right"}
 			open={isDrawer}
 			onClose={onCloseDrawer}
 			footer={
-				<Flex justify="flex-end">
+				<Flex justify={"flex-end"}>
 					<Space>
-						<UiButton onClick={onCloseDrawer} aria-label="Cancel">
+						<UiButton onClick={onCloseDrawer} aria-label={"Cancel"}>
 							Отмена
 						</UiButton>
 						<UiButton
-							type="primary"
-							htmlType="submit"
+							type={"primary"}
+							htmlType={"submit"}
 							onClick={form.submit}
 							loading={isLoading}
-							aria-label="Save"
+							aria-label={"Save"}
 						>
 							Сохранить
 						</UiButton>
@@ -62,7 +63,7 @@ const GlobalDrawer: FC<GlobalDrawerProps & DrawerProps> = (props) => {
 			}
 			{...rest}
 		/>
-	);
-};
+	)
+}
 
-export { GlobalDrawer };
+export { GlobalDrawer }

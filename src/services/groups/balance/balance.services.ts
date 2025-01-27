@@ -1,12 +1,12 @@
-import { api } from "src/api";
-import { TResponseSingleData } from "src/services/index.types";
-import { TBalanceChange } from "src/services/groups/balance/balance.types";
+import { api } from "src/api"
+import type { TResponseSingleData } from "src/services/shared"
+import type { TBalance, TBalanceChange } from "./balance.types"
 
 const axiosCreateBalance = async (
-	value: TBalanceChange,
-): Promise<TResponseSingleData<void>> => {
-	const response = await api.post(`/admin/transaction/balance/student`, value);
-	return response.data;
-};
+	value: TBalanceChange
+): Promise<TResponseSingleData<TBalance>> => {
+	const response = await api.post(`/admin/transaction/balance/student`, value)
+	return response.data
+}
 
-export { axiosCreateBalance };
+export { axiosCreateBalance }

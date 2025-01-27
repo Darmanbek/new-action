@@ -1,37 +1,33 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useMessage } from "src/hooks";
-import { TResponseError } from "src/services/index.types";
-import { errorResponse } from "src/utils";
-import {
-	axiosCreateFrozenStatus,
-} from "./frozen-status.services";
+import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { useMessage } from "src/hooks"
+import { TResponseError } from "src/services/shared"
+import { errorResponse } from "src/utils"
+import { axiosCreateFrozenStatus } from "./frozen-status.services"
 
 const useCreateFrozenStatusMutation = () => {
-	const { message } = useMessage();
-	const queryClient = useQueryClient();
+	const { message } = useMessage()
+	const queryClient = useQueryClient()
 	return useMutation({
 		mutationFn: axiosCreateFrozenStatus,
 		onSuccess: () => {
 			queryClient.invalidateQueries({
-				queryKey: ["frozen-status"],
-			});
+				queryKey: ["frozen-status"]
+			})
 			queryClient.invalidateQueries({
-				queryKey: ["groups"],
-			});
+				queryKey: ["groups"]
+			})
 			queryClient.invalidateQueries({
-				queryKey: ["groups-students"],
-			});
+				queryKey: ["groups-students"]
+			})
 			queryClient.invalidateQueries({
-				queryKey: ["groups-assessments"],
-			});
-			message.success("Успешно");
+				queryKey: ["groups-assessments"]
+			})
+			message.success("Успешно")
 		},
 		onError: (error: TResponseError) => {
-			message.error(errorResponse(error));
-		},
-	});
-};
+			message.error(errorResponse(error))
+		}
+	})
+}
 
-export {
-	useCreateFrozenStatusMutation,
-};
+export { useCreateFrozenStatusMutation }

@@ -1,51 +1,47 @@
-import { useQuery } from "@tanstack/react-query";
-import { useMessage } from "src/hooks";
-import { TGetParams, TResponseError } from "src/services/index.types";
-import { errorResponse } from "src/utils";
+import { useQuery } from "@tanstack/react-query"
+import { useMessage } from "src/hooks"
+import { TGetParams, TResponseError } from "src/services/shared"
+import { errorResponse } from "src/utils"
 import {
-	axiosGetFinance,
-	axiosGetFinanceCompanies,
-	axiosGetFinanceCompaniesById
-} from "./finances.services";
+	axiosGetFinances,
+	axiosGetFinancesCompanies,
+	axiosGetFinancesCompaniesById
+} from "./finances.services"
 
-const useGetFinanceQuery = (params: TGetParams) => {
-	const { message } = useMessage();
+const useGetFinancesQuery = (params: TGetParams) => {
+	const { message } = useMessage()
 	return useQuery({
-		queryFn: () => axiosGetFinance(params),
+		queryFn: () => axiosGetFinances(params),
 		queryKey: ["finances", ...Object.values(params)],
 		keepPreviousData: true,
 		onError: (error: TResponseError) => {
-			message.error(errorResponse(error));
-		},
-	});
-};
+			message.error(errorResponse(error))
+		}
+	})
+}
 
-const useGetFinanceCompaniesQuery = (params: TGetParams) => {
-	const { message } = useMessage();
+const useGetFinancesCompaniesQuery = (params: TGetParams) => {
+	const { message } = useMessage()
 	return useQuery({
-		queryFn: () => axiosGetFinanceCompanies(params),
+		queryFn: () => axiosGetFinancesCompanies(params),
 		queryKey: ["finances-companies", ...Object.values(params)],
 		onError: (error: TResponseError) => {
-			message.error(errorResponse(error));
-		},
-	});
-};
+			message.error(errorResponse(error))
+		}
+	})
+}
 
-const useGetFinanceCompaniesByIdQuery = (params: TGetParams, id?: number | string) => {
-	const { message } = useMessage();
+const useGetFinancesCompaniesByIdQuery = (params: TGetParams, id?: number | string) => {
+	const { message } = useMessage()
 	return useQuery({
-		queryFn: () => axiosGetFinanceCompaniesById(params, id),
+		queryFn: () => axiosGetFinancesCompaniesById(params, id),
 		queryKey: ["finances-companies", ...Object.values(params), id],
 		enabled: !!id,
 		keepPreviousData: true,
 		onError: (error: TResponseError) => {
-			message.error(errorResponse(error));
-		},
-	});
-};
+			message.error(errorResponse(error))
+		}
+	})
+}
 
-export {
-	useGetFinanceQuery,
-	useGetFinanceCompaniesQuery,
-	useGetFinanceCompaniesByIdQuery
-};
+export { useGetFinancesQuery, useGetFinancesCompaniesQuery, useGetFinancesCompaniesByIdQuery }

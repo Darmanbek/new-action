@@ -1,1 +1,1 @@
-export * from "./UiStatistic/UiStatistic";
+export * from "./UiStatistic/UiStatistic"

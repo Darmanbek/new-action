@@ -1,5 +1,5 @@
-import { FormProfile } from './form/FormProfile';
-import { TableProfile } from './table/TableProfile';
+import { FormProfile } from "./form/FormProfile"
+import { TableProfile } from "./table/TableProfile"
 
 export const Profile = () => {
   return (
@@ -7,5 +7,5 @@ export const Profile = () => {
       <FormProfile />
       <TableProfile />
     </>
-  );
-};
+  )
+}

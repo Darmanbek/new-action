@@ -1,16 +1,13 @@
-import React from "react";
-import { ConfigProvider, Select, SelectProps } from "antd";
-import locale from "antd/locale/ru_RU";
-import { useResponsive } from "src/hooks";
+import { ConfigProvider, Select, SelectProps } from "antd"
+import locale from "antd/locale/ru_RU"
+import React from "react"
+import { useResponsive } from "src/hooks"
 
-interface UiSelectProps {
-}
+interface UiSelectProps {}
 
-export const UiSelect = (
-	props: React.PropsWithChildren<SelectProps & UiSelectProps>
-) => {
-	const { ...rest } = props;
-	const { isMobile } = useResponsive(768);
+export const UiSelect = (props: React.PropsWithChildren<SelectProps & UiSelectProps>) => {
+	const { ...rest } = props
+	const { isMobile } = useResponsive(768)
 
 	return (
 		<ConfigProvider
@@ -22,12 +19,12 @@ export const UiSelect = (
 						controlItemBgActive: "#ffe8e8",
 						optionFontSize: isMobile ? 14 : 16,
 						fontSize: isMobile ? 14 : 16,
-						fontSizeSM: isMobile ? 14 : 16,
-					},
-				},
+						fontSizeSM: isMobile ? 14 : 16
+					}
+				}
 			}}
 		>
 			<Select {...rest} />
 		</ConfigProvider>
-	);
-};
+	)
+}

@@ -1,51 +1,51 @@
-import { CalendarOutlined, CheckCircleOutlined, CloseOutlined, LoadingOutlined, PlusOutlined } from "@ant-design/icons";
-import { Calendar, Divider, Flex, Space, Spin, Tooltip, Typography } from "antd";
-import dayjs from "dayjs";
-import { FC, useEffect, useState } from "react";
-import dayLocaleData from "dayjs/plugin/localeData";
-import isBetween from "dayjs/plugin/isBetween";
-import "dayjs/locale/ru";
-import { GlobalPopconfirm } from "src/components/shared";
-import { UiButton, UiCard, UiDatePicker, UiTag, UiTooltipButton } from "src/components/ui";
-import { useResponsive } from "src/hooks";
+import { CalendarOutlined, CheckCircleOutlined, CloseOutlined, LoadingOutlined, PlusOutlined } from "@ant-design/icons"
+import { Calendar, Divider, Flex, Space, Spin, Tooltip, Typography } from "antd"
+import dayjs from "dayjs"
+import { FC, useEffect, useState } from "react"
+import dayLocaleData from "dayjs/plugin/localeData"
+import isBetween from "dayjs/plugin/isBetween"
+import "dayjs/locale/ru"
+import { GlobalPopconfirm } from "src/components/shared"
+import { UiButton, UiCard, UiDatePicker, UiTag, UiTooltipButton } from "src/components/ui"
+import { useResponsive } from "src/hooks"
 import {
 	useCreateHolidayMutation,
 	useDeleteHolidayMutation,
 	useGetHolidayQuery,
-} from "src/services/holiday/holiday.api";
+} from "src/services/holiday/holiday.api"
 
-dayjs.extend(dayLocaleData);
-dayjs.extend(isBetween);
-dayjs.locale("ru");
+dayjs.extend(dayLocaleData)
+dayjs.extend(isBetween)
+dayjs.locale("ru")
 
 const CalendarHoliday: FC = () => {
-	const { isMobile } = useResponsive(768);
-	const [date, setDate] = useState(dayjs());
-	const [currentDate, setCurrentDate] = useState(dayjs());
+	const { isMobile } = useResponsive(768)
+	const [date, setDate] = useState(dayjs())
+	const [currentDate, setCurrentDate] = useState(dayjs())
 	const { data: holiday, isLoading, isFetching } = useGetHolidayQuery({
 		date: [
 			date ? date.startOf("month").format("YYYY-MM-DD") : "",
 			date ? date.endOf("month").format("YYYY-MM-DD") : "",
 		],
-	});
+	})
 
-	const { mutate: createHoliday, isLoading: addLoading } = useCreateHolidayMutation();
-	const { mutate: deleteHoliday, isLoading: deleteLoading } = useDeleteHolidayMutation();
+	const { mutate: createHoliday, isLoading: addLoading } = useCreateHolidayMutation()
+	const { mutate: deleteHoliday, isLoading: deleteLoading } = useDeleteHolidayMutation()
 
 	const isHoliday = (date: string) => {
-		return !!holiday?.data.find(el => el.date === date);
-	};
+		return !!holiday?.data.find(el => el.date === date)
+	}
 
 	useEffect(() => {
-		const [start, end] = [date.startOf("month"), date.endOf("month")];
-		if (currentDate.isBetween(start, end)) return;
+		const [start, end] = [date.startOf("month"), date.endOf("month")]
+		if (currentDate.isBetween(start, end)) return
 		if (!currentDate.isBetween(start, end)) {
-			setCurrentDate(start);
+			setCurrentDate(start)
 		}
 		if (dayjs().isBetween(start, end)) {
-			setCurrentDate(dayjs());
+			setCurrentDate(dayjs())
 		}
-	}, [currentDate, date]);
+	}, [currentDate, date])
 	return (
 		<UiCard
 			style={{
@@ -73,7 +73,7 @@ const CalendarHoliday: FC = () => {
 							picker={"month"}
 							value={date}
 							onChange={(date) => {
-								setDate(date);
+								setDate(date)
 							}}
 							format={"YYYY MMMM"}
 							allowClear={false}
@@ -111,13 +111,13 @@ const CalendarHoliday: FC = () => {
 									</Space>
 								</Typography.Title>
 							</Flex>
-						);
+						)
 					}}
 
 					cellRender={(date) => {
-						if (!holiday) return null;
-						const currentHoliday = holiday.data.find(el => el.date === date.format("YYYY-MM-DD"));
-						const CustomCloseIcon = deleteLoading ? LoadingOutlined : CloseOutlined;
+						if (!holiday) return null
+						const currentHoliday = holiday.data.find(el => el.date === date.format("YYYY-MM-DD"))
+						const CustomCloseIcon = deleteLoading ? LoadingOutlined : CloseOutlined
 						if (currentHoliday) {
 							return (
 								<UiTag
@@ -153,7 +153,7 @@ const CalendarHoliday: FC = () => {
 										}}
 									/> : <h1>Выходной</h1>}
 								</UiTag>
-							);
+							)
 						}
 						if (date.format("YYYY-MM-DD") === currentDate.format("YYYY-MM-DD")) {
 							return (
@@ -178,13 +178,13 @@ const CalendarHoliday: FC = () => {
 										</UiTooltipButton>
 									</GlobalPopconfirm>
 								</Flex>
-							);
+							)
 						}
 					}}
 				/>
 			</Spin>
 		</UiCard>
-	);
-};
+	)
+}
 
-export { CalendarHoliday };
+export { CalendarHoliday }

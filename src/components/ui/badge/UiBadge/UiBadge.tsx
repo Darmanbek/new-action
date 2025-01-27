@@ -1,9 +1,9 @@
-import { Badge, BadgeProps, ConfigProvider } from "antd";
-import { FC } from "react";
-import { useResponsive } from "src/hooks";
+import { Badge, BadgeProps, ConfigProvider } from "antd"
+import { FC } from "react"
+import { useResponsive } from "src/hooks"
 
 const UiBadge: FC<BadgeProps> = (props) => {
-	const { isMobile } = useResponsive(768);
+	const { isMobile } = useResponsive(768)
 
 	return (
 		<ConfigProvider
@@ -12,13 +12,13 @@ const UiBadge: FC<BadgeProps> = (props) => {
 					Badge: {
 						statusSize: isMobile ? 6 : 12,
 						fontSize: isMobile ? 14 : 16
-					},
-				},
+					}
+				}
 			}}
 		>
 			<Badge {...props} />
 		</ConfigProvider>
-	);
-};
+	)
+}
 
-export { UiBadge };
+export { UiBadge }

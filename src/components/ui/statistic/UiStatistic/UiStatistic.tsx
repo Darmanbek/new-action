@@ -1,10 +1,10 @@
-import { ConfigProvider, Statistic } from "antd";
-import type { StatisticProps } from "antd";
-import { FC } from "react";
-import { useResponsive } from "src/hooks";
+import type { StatisticProps } from "antd"
+import { ConfigProvider, Statistic } from "antd"
+import { FC } from "react"
+import { useResponsive } from "src/hooks"
 
 const UiStatistic: FC<StatisticProps> = (props) => {
-	const { isMobile } = useResponsive(768);
+	const { isMobile } = useResponsive(768)
 
 	return (
 		<ConfigProvider
@@ -19,7 +19,7 @@ const UiStatistic: FC<StatisticProps> = (props) => {
 		>
 			<Statistic {...props} />
 		</ConfigProvider>
-	);
-};
+	)
+}
 
-export { UiStatistic };
+export { UiStatistic }

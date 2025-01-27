@@ -1,7 +1,9 @@
-import { createContext } from "react";
+import { createContext } from "react"
 
 interface AuthContext {
-	isAuth: boolean;
+	isAuth: boolean
+	isDirector: boolean
+	companyId?: string
 }
 
-export const AuthContext = createContext<AuthContext | null>(null);
+export const AuthContext = createContext<AuthContext | null>(null)

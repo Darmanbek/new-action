@@ -1,7 +1,6 @@
 @import "src/assets/styles/variables";
 
-.home
-{
+.home {
 	flex-grow: 1;
 	display: grid;
 	place-items: center;
@@ -10,8 +9,7 @@
 	border-radius: 8px;
 	overflow: hidden;
 
-	img
-	{
+	img {
 		width: 200px;
 		height: 200px;
 	}

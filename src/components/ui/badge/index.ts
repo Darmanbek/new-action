@@ -1,1 +1,1 @@
-export * from "./UiBadge/UiBadge";
+export * from "./UiBadge/UiBadge"

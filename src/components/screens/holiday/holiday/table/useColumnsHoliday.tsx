@@ -1,15 +1,15 @@
-import { DeleteOutlined } from "@ant-design/icons";
-import { ColumnsType } from "antd/es/table";
-import { GlobalPopconfirm } from "src/components/shared";
-import { UiTooltipButton } from "src/components/ui";
-import { useDeleteHolidayMutation } from "src/services/holiday/holiday.api";
-import { THoliday } from "src/services/holiday/holiday.types";
-import { formatDate } from "src/utils";
+import { DeleteOutlined } from "@ant-design/icons"
+import { ColumnsType } from "antd/es/table"
+import { GlobalPopconfirm } from "src/components/shared"
+import { UiTooltipButton } from "src/components/ui"
+import { useDeleteHolidayMutation } from "src/services/holiday/holiday.api"
+import { THoliday } from "src/services/holiday/holiday.types"
+import { formatDate } from "src/utils"
 
 
 export const useColumnsHoliday = () => {
 
-	const { mutate: deleteHoliday } = useDeleteHolidayMutation();
+	const { mutate: deleteHoliday } = useDeleteHolidayMutation()
 
 	const columns: ColumnsType<THoliday> = [
 		{
@@ -46,7 +46,7 @@ export const useColumnsHoliday = () => {
 				</GlobalPopconfirm>
 			),
 		},
-	];
+	]
 
-	return columns;
-};
+	return columns
+}

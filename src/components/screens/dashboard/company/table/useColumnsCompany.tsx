@@ -1,13 +1,12 @@
-import { CheckOutlined } from "@ant-design/icons";
-import { ColumnsType } from "antd/es/table";
-import { UiBadge, UiTooltipButton } from "src/components/ui";
-import { TDashboardCompany } from "src/services/index.types";
-import { useAuthPersistStore } from "src/store";
-import { formatEmpty } from "src/utils";
-
+import { CheckOutlined } from "@ant-design/icons"
+import type { ColumnsType } from "antd/es/table"
+import { UiBadge, UiTooltipButton } from "src/components/ui"
+import type { TDashboardCompany } from "src/services/dashboard"
+import { useAuthPersistStore } from "src/store"
+import { formatEmpty } from "src/utils"
 
 export const useColumnsCompany = () => {
-	const { company, toCompany } = useAuthPersistStore();
+	const { company, toCompany } = useAuthPersistStore()
 
 	const columns: ColumnsType<TDashboardCompany> = [
 		{
@@ -18,21 +17,21 @@ export const useColumnsCompany = () => {
 			key: "index",
 			render: (_v, r, index) => (
 				<UiBadge status={company?.id === r.id ? "processing" : "warning"} text={index + 1} />
-			),
+			)
 		},
 		{
 			ellipsis: true,
 			title: "Название",
 			dataIndex: "name",
 			key: "name",
-			render: formatEmpty,
+			render: formatEmpty
 		},
 		{
 			ellipsis: true,
 			title: "Админ",
 			dataIndex: "admin",
 			key: "admin",
-			render: (admin: TDashboardCompany["admin"]) => `${admin.first_name} ${admin.last_name}`,
+			render: (admin: TDashboardCompany["admin"]) => `${admin.first_name} ${admin.last_name}`
 		},
 		{
 			align: "center",
@@ -51,9 +50,9 @@ export const useColumnsCompany = () => {
 					icon={<CheckOutlined />}
 					onClick={() => toCompany(r)}
 				/>
-			),
-		},
-	];
+			)
+		}
+	]
 
-	return columns;
-};
+	return columns
+}

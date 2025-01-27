@@ -1,9 +1,9 @@
-import { ConfigProvider, Tag, TagProps } from "antd";
-import { FC } from "react";
-import { useResponsive } from "src/hooks";
+import { ConfigProvider, Tag, TagProps } from "antd"
+import { FC } from "react"
+import { useResponsive } from "src/hooks"
 
 const UiTag: FC<TagProps> = (props) => {
-	const { isMobile } = useResponsive(768);
+	const { isMobile } = useResponsive(768)
 
 	return (
 		<ConfigProvider
@@ -19,7 +19,7 @@ const UiTag: FC<TagProps> = (props) => {
 		>
 			<Tag bordered={false} {...props} />
 		</ConfigProvider>
-	);
-};
+	)
+}
 
-export { UiTag };
+export { UiTag }

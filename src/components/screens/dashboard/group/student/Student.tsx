@@ -1,6 +1,6 @@
-import { FC } from "react";
-import { DescriptionStudent } from "./description/DescriptionStudent";
-import { TableStudent } from "./table/TableStudent";
+import { FC } from "react"
+import { DescriptionStudent } from "./description/DescriptionStudent"
+import { TableStudent } from "./table/TableStudent"
 
 const Student: FC = () => {
 	return (
@@ -8,7 +8,7 @@ const Student: FC = () => {
 			<DescriptionStudent />
 			<TableStudent />
 		</>
-	);
-};
+	)
+}
 
-export default Student;
+export default Student

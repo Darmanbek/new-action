@@ -1,13 +1,13 @@
-import { TAdmin } from "src/services/index.types";
+import type { TAdmin } from "src/services/admins"
 
 export type TCompany = {
-	id: string;
-	name: string;
-	admin: TAdmin;
-};
+	id: string
+	name: string
+	admin: TAdmin
+}
 
 export type TCompanyChange = {
-	id?: string;
-	name: string;
-	admin_id: string;
-};
+	id?: string
+	name: string
+	admin_id: string
+}

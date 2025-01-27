@@ -1,4 +1,4 @@
-import { create } from "zustand";
+import { create } from "zustand"
 
 interface IThemeStore {
 	isDark: boolean;
@@ -10,6 +10,6 @@ const useThemeStore = create<IThemeStore>()(
 		isDark: false,
 		onToggleTheme: () => set((state) => ({isDark: !state.isDark}))
 	})
-);
+)
 
-export { useThemeStore };
+export { useThemeStore }

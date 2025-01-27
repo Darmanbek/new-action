@@ -1,9 +1,9 @@
-import { Outlet, RouteObject } from "react-router-dom";
-import { ROUTES } from "src/config";
-import { RootError } from "src/routes/error";
-import { layoutRoute } from "src/routes/layout/layout";
-import { loginRoute } from "src/routes/login";
-import { privacyRoute } from "src/routes/privacy";
+import { Outlet, RouteObject } from "react-router-dom"
+import { ROUTES } from "src/config"
+import { RootError } from "src/routes/error"
+import { layoutRoute } from "src/routes/layout/layout"
+import { loginRoute } from "src/routes/login"
+import { privacyRoute } from "src/routes/privacy"
 
 export const rootRoute: RouteObject = {
 	path: ROUTES.ROOT,
@@ -15,7 +15,7 @@ export const rootRoute: RouteObject = {
 		loginRoute,
 		privacyRoute
 	]
-};
+}
 
 // eslint-disable-next-line react-refresh/only-export-components
 function Root() {
@@ -23,5 +23,5 @@ function Root() {
 		<>
 			<Outlet />
 		</>
-	);
+	)
 }

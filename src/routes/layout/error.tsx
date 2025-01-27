@@ -1,11 +1,11 @@
-import { Flex, Result } from "antd";
-import { AxiosError } from "axios";
-import { type  FC } from "react";
-import { ErrorResponse, useRouteError } from "react-router-dom";
-import { UiCard } from "src/components/ui";
+import { Flex, Result } from "antd"
+import { AxiosError } from "axios"
+import { type  FC } from "react"
+import { ErrorResponse, useRouteError } from "react-router-dom"
+import { UiCard } from "src/components/ui"
 
 const LayoutError: FC = () => {
-	const error = useRouteError() as Error & ErrorResponse & AxiosError;
+	const error = useRouteError() as Error & ErrorResponse & AxiosError
 	return (
 		<UiCard
 			style={{ flex: 1, display: "flex", flexDirection: "column" }}
@@ -24,7 +24,7 @@ const LayoutError: FC = () => {
 				/>
 			</Flex>
 		</UiCard>
-	);
-};
+	)
+}
 
-export { LayoutError };
+export { LayoutError }

@@ -1,22 +1,18 @@
-import { Button, ButtonProps, ConfigProvider } from "antd";
-import { FC } from "react";
-
+import { Button, ButtonProps, ConfigProvider } from "antd"
+import { FC } from "react"
 
 const UiSettingsButton: FC<ButtonProps> = (props) => {
-
 	return (
 		<ConfigProvider
 			theme={{
 				token: {
-					controlHeight: 40,
+					controlHeight: 40
 				}
 			}}
 		>
-			<Button
-				{...props}
-			/>
+			<Button {...props} />
 		</ConfigProvider>
-	);
-};
+	)
+}
 
-export { UiSettingsButton };
+export { UiSettingsButton }

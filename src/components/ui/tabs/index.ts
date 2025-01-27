@@ -1,1 +1,1 @@
-export * from "./UiTabs/UiTabs";
+export * from "./UiTabs/UiTabs"

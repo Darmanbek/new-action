@@ -1,7 +1,6 @@
 @import "/src/assets/styles/mixin";
 
-.head
-{
+.head {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -9,13 +8,11 @@
 	gap: 20px;
 	min-height: 40px;
 
-	@include md
-	{
+	@include md {
 		min-height: 32px;
 	}
 
-	h3
-	{
+	h3 {
 		font-weight: 500;
 		font-size: 20px;
 	}

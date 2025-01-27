@@ -1,13 +1,13 @@
-import { EyeFilled } from "@ant-design/icons";
-import { Space, Tooltip } from "antd";
-import { ColumnsType } from "antd/es/table";
-import dayjs from "dayjs";
-import "dayjs/locale/ru";
-import { useNavigate } from "react-router-dom";
-import { UiBadge, UiButton, UiFilterIcon, UiTag } from "src/components/ui";
-import { completeData } from "src/data";
-import { useGetDayQuery } from "src/services/shared/day/day.api";
-import { TGroup } from "src/services/groups/groups.types";
+import { EyeFilled } from "@ant-design/icons"
+import { Space, Tooltip } from "antd"
+import { ColumnsType } from "antd/es/table"
+import dayjs from "dayjs"
+import "dayjs/locale/ru"
+import { useNavigate } from "react-router-dom"
+import { UiBadge, UiButton, UiFilterIcon, UiTag } from "src/components/ui"
+import { completeData } from "src/data"
+import { useGetDayQuery } from "src/services/shared/day/day.api"
+import { TGroup } from "src/services/groups/groups.types"
 import {
 	completeColor,
 	completeIcon,
@@ -16,14 +16,14 @@ import {
 	formatEmpty,
 	monthGrammar,
 	priceFormatter,
-} from "src/utils";
+} from "src/utils"
 
-dayjs.locale("ru");
+dayjs.locale("ru")
 
 export const useColumnsGroups = () => {
-	const navigate = useNavigate();
+	const navigate = useNavigate()
 
-	const { data: days } = useGetDayQuery();
+	const { data: days } = useGetDayQuery()
 
 	const columns: ColumnsType<TGroup> = [
 		{
@@ -51,8 +51,8 @@ export const useColumnsGroups = () => {
 			dataIndex: "teachers",
 			key: "teachers",
 			render: (teachers: TGroup["teachers"]) => {
-				const teacher = teachers?.find((t) => !t.assistant);
-				return teacher ? `${teacher?.first_name} ${teacher?.last_name}` : "-";
+				const teacher = teachers?.find((t) => !t.assistant)
+				return teacher ? `${teacher?.first_name} ${teacher?.last_name}` : "-"
 			},
 		},
 		{
@@ -61,10 +61,10 @@ export const useColumnsGroups = () => {
 			dataIndex: "teachers",
 			key: "assistant",
 			render: (teachers: TGroup["teachers"]) => {
-				const assistant = teachers?.find((t) => t.assistant);
+				const assistant = teachers?.find((t) => t.assistant)
 				return assistant
 					? `${assistant?.first_name} ${assistant?.last_name}`
-					: "-";
+					: "-"
 			},
 		},
 		{
@@ -143,18 +143,18 @@ export const useColumnsGroups = () => {
 			key: "action",
 			render: (_, group) => (
 				<Space onClick={(e) => e.stopPropagation()}>
-					<Tooltip title="Смотреть">
+					<Tooltip title={"Смотреть"}>
 						<UiButton
 							shape={"circle"}
 							icon={<EyeFilled />}
 							onClick={() => navigate(`/groups/${group.id}`)}
-							aria-label="View"
+							aria-label={"View"}
 						/>
 					</Tooltip>
 				</Space>
 			),
 		},
-	];
+	]
 
-	return columns;
-};
+	return columns
+}

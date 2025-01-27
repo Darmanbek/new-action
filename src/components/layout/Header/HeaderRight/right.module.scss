@@ -1,29 +1,25 @@
 @import "/src/assets/styles/variables.scss";
 @import "/src/assets/styles/mixin";
 
-.content
-{
+.content {
 	max-width: 100%;
 	width: 230px;
 	//padding: 4px 4px 0;
 
-	.title
-	{
+	.title {
 		display: flex;
 		flex-direction: column;
 		align-items: baseline;
 		//gap: 5px;
 
-		h4
-		{
+		h4 {
 			font-size: 16px;
 			color: $primary-text;
 			font-weight: 400;
 			text-transform: capitalize;
 		}
 
-		span
-		{
+		span {
 			font-size: 14px;
 			color: $primary-subtext;
 			font-weight: 400;
@@ -31,8 +27,7 @@
 		}
 	}
 
-	.logo
-	{
+	.logo {
 		display: flex;
 		align-items: center;
 		justify-content: center;

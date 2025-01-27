@@ -1,8 +1,8 @@
-import { FC } from "react";
-import { FormHoliday } from "./form/FormHoliday";
-import { UiTabs } from "src/components/ui";
-import { CalendarHoliday } from "./calendar/CalendarHoliday";
-import { TableHoliday } from "./table/TableHoliday";
+import { FC } from "react"
+import { FormHoliday } from "./form/FormHoliday"
+import { UiTabs } from "src/components/ui"
+import { CalendarHoliday } from "./calendar/CalendarHoliday"
+import { TableHoliday } from "./table/TableHoliday"
 
 const Holiday: FC = () => {
 	return (
@@ -26,7 +26,7 @@ const Holiday: FC = () => {
 				},
 			]}
 		/>
-	);
-};
+	)
+}
 
-export default Holiday;
+export default Holiday

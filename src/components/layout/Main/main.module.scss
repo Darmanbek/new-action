@@ -1,8 +1,7 @@
-@import '/src/assets/styles/variables.scss';
-@import '/src/assets/styles/mixin.scss';
+@import "/src/assets/styles/variables.scss";
+@import "/src/assets/styles/mixin.scss";
 
-.main
-{
+.main {
 	flex-grow: 1;
 	padding: 24px;
 	overflow-y: auto;

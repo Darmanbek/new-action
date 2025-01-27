@@ -1,22 +1,22 @@
-import { useNavigate, useParams } from "react-router-dom";
-import { HeadTable } from "src/components/shared";
-import { UiTable } from "src/components/ui";
-import { useGetDashboardCompaniesGroupsByIdQuery } from "src/services/dashboard/dashboard.api";
-import { TStudent } from "src/services/shared/shared.types";
-import { useColumnsStudents } from "./useColumnsStudents";
+import { useNavigate, useParams } from "react-router-dom"
+import { HeadTable } from "src/components/shared"
+import { UiTable } from "src/components/ui"
+import { useGetDashboardCompaniesGroupsByIdQuery } from "src/services/dashboard/dashboard.api"
+import { TStudent } from "src/services/shared/shared.types"
+import { useColumnsStudents } from "./useColumnsStudents"
 
 export const TableStudents = () => {
-	const { group_id } = useParams();
-	const navigate = useNavigate();
+	const { group_id } = useParams()
+	const navigate = useNavigate()
 
 	const {
 		data: group,
 		isLoading,
 		isFetching,
-	} = useGetDashboardCompaniesGroupsByIdQuery(group_id);
+	} = useGetDashboardCompaniesGroupsByIdQuery(group_id)
 
 
-	const columns = useColumnsStudents();
+	const columns = useColumnsStudents()
 
 	return (
 		<UiTable<TStudent>
@@ -33,5 +33,5 @@ export const TableStudents = () => {
 			loading={isLoading || isFetching}
 			pagination={false}
 		/>
-	);
-};
+	)
+}

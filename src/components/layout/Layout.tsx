@@ -1,29 +1,40 @@
-import { FC } from "react";
-import { Outlet } from "react-router-dom";
-import { Header } from "./Header/Header";
-import { Menu } from "./Menu/Menu";
-import { Main } from "./Main/Main";
-import { RequireAuth } from "src/hooks";
-import styles from "./layout.module.scss";
+import { FC, useEffect } from "react"
+import { Outlet, useNavigate } from "react-router-dom"
+import { InnerLayout } from "src/components/layout/InnerLayout/InnerLayout"
+import { MainLayout } from "src/components/layout/MainLayout/MainLayout"
+import { ROUTES } from "src/config"
+import { RequireAuth } from "src/hooks"
+import { useGetMeQuery } from "src/services/login/login.api"
+import { useAuthPersistStore } from "src/store"
+import { Header } from "./Header/Header"
+import { Main } from "./Main/Main"
+import { Menu } from "./Menu/Menu"
 
-// eslint-disable-next-line react-refresh/only-export-components
 const Layout: FC = () => {
-	return (
-		<section className={styles.layout}>
-			<Menu />
-			<div className={styles["layout-has-menu"]}>
-				<Header />
-				<Main>
-					<Outlet />
-				</Main>
-			</div>
-		</section>
-	);
-};
+	const { error } = useGetMeQuery()
+	const token = useAuthPersistStore((state) => state.token)
+	const navigate = useNavigate()
 
-// eslint-disable-next-line react-refresh/only-export-components
-export default () => (
-	<RequireAuth>
-		<Layout />
-	</RequireAuth>
-);
+	useEffect(() => {
+		if (error || !token) {
+			navigate(ROUTES.LOGIN, {
+				replace: true
+			})
+		}
+	}, [error, navigate, token])
+	return (
+		<RequireAuth>
+			<MainLayout>
+				<Menu />
+				<InnerLayout>
+					<Header />
+					<Main>
+						<Outlet />
+					</Main>
+				</InnerLayout>
+			</MainLayout>
+		</RequireAuth>
+	)
+}
+
+export { Layout }

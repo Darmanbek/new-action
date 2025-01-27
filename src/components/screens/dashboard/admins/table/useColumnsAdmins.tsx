@@ -1,7 +1,7 @@
-import { ColumnsType } from "antd/es/table";
-import { UiTag } from "src/components/ui";
+import { ColumnsType } from "antd/es/table"
+import { UiTag } from "src/components/ui"
 // import { TDashboardAdmin } from "src/services/index.types";
-import { formatEmpty, phoneFormatter } from "src/utils";
+import { formatEmpty, phoneFormatter } from "src/utils"
 
 
 export const useColumnsAdmins = () => {
@@ -39,7 +39,7 @@ export const useColumnsAdmins = () => {
 				</UiTag>
 			) : "-",
 		},
-	];
+	]
 
-	return columns;
-};
+	return columns
+}

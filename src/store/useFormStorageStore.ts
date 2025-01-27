@@ -1,5 +1,5 @@
-import { create } from "zustand";
-import { devtools } from "zustand/middleware";
+import { create } from "zustand"
+import { devtools } from "zustand/middleware"
 
 interface IFormStorageStore {
 	paramsForm: any;
@@ -17,4 +17,4 @@ export const useFormStorageStore = create(
 		setParamsForm: (params) => set({ paramsForm: params, isDrawer: true }),
 		setParamsItem: (params) => set({ paramsForm: params }),
 	}))
-);
+)

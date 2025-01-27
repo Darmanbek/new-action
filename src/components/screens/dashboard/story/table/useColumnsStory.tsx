@@ -1,13 +1,11 @@
-import type { ColumnsType } from "antd/es/table";
-import type { TStory } from "src/services/index.types";
-import { Space, Typography } from "antd";
-import { formatEmpty } from "src/utils";
-import Text from "antd/es/typography/Text";
-import { EyeFilled } from "@ant-design/icons";
-
+import { EyeFilled } from "@ant-design/icons"
+import { Space, Typography } from "antd"
+import type { ColumnsType } from "antd/es/table"
+import Text from "antd/es/typography/Text"
+import type { TStory } from "src/services/stories"
+import { formatEmpty } from "src/utils"
 
 export const useColumnsStory = () => {
-
 	const columns: ColumnsType<TStory> = [
 		{
 			ellipsis: false,
@@ -19,12 +17,12 @@ export const useColumnsStory = () => {
 					style={{ fontSize: "inherit" }}
 					ellipsis={{
 						expandable: "collapsible",
-						symbol: (expanded) => expanded ? "Закрыть" : "Раскрыть"
+						symbol: (expanded) => (expanded ? "Закрыть" : "Раскрыть")
 					}}
 				>
 					{value}
 				</Typography.Paragraph>
-			),
+			)
 		},
 		{
 			ellipsis: true,
@@ -38,7 +36,7 @@ export const useColumnsStory = () => {
 						{value}
 					</Space>
 				</Text>
-			),
+			)
 		},
 		{
 			ellipsis: false,
@@ -46,9 +44,9 @@ export const useColumnsStory = () => {
 			title: "Дата",
 			dataIndex: "date",
 			key: "date",
-			render: formatEmpty,
-		},
-	];
+			render: formatEmpty
+		}
+	]
 
-	return columns;
-};
+	return columns
+}

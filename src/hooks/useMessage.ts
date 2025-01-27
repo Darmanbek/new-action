@@ -1,8 +1,7 @@
-import { App } from "antd";
-
+import { App } from "antd"
 
 export const useMessage = () => {
-	const { message } = App.useApp();
+	const { message } = App.useApp()
 
-	return { message };
-};
+	return { message }
+}

@@ -1,13 +1,13 @@
-import React from "react";
-import { ConfigProvider, Menu, MenuProps, theme } from "antd";
-import { useResponsive } from "src/hooks";
+import { ConfigProvider, Menu, MenuProps, theme } from "antd"
+import React from "react"
+import { useResponsive } from "src/hooks"
 
 export const UiMenu = (props: React.PropsWithChildren<MenuProps>) => {
-	const { isMobile } = useResponsive(768);
+	const { isMobile } = useResponsive(768)
 
 	const {
-		token: { colorPrimary, colorPrimaryBg },
-	} = theme.useToken();
+		token: { colorPrimary, colorPrimaryBg }
+	} = theme.useToken()
 	return (
 		<ConfigProvider
 			theme={{
@@ -23,12 +23,12 @@ export const UiMenu = (props: React.PropsWithChildren<MenuProps>) => {
 						itemHeight: isMobile ? 40 : 44,
 						fontSize: isMobile ? 14 : 16,
 						iconSize: isMobile ? 14 : 18,
-						collapsedIconSize: 18,
-					},
-				},
+						collapsedIconSize: 18
+					}
+				}
 			}}
 		>
 			<Menu {...props} />
 		</ConfigProvider>
-	);
-};
+	)
+}

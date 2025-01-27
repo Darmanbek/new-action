@@ -1,16 +1,16 @@
-import { FC } from "react";
-import { TAssessment } from "src/services/index.types";
+import type { FC } from "react"
+import type { TAssessment } from "src/services/shared"
 
 interface AssessmentsValueProps {
-	date: string;
-	assessments: TAssessment[];
+	date: string
+	assessments: TAssessment[]
 }
 
 const AssessmentsValue: FC<AssessmentsValueProps> = ({ date, assessments }) => {
-	const currentAssessments = assessments.find(el => el.date === date);
-	if (!currentAssessments) return "";
+	const currentAssessments = assessments.find((el) => el.date === date)
+	if (!currentAssessments) return ""
 
-	return currentAssessments.value;
-};
+	return currentAssessments.value
+}
 
-export { AssessmentsValue };
+export { AssessmentsValue }
