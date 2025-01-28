@@ -7,7 +7,7 @@ export const loginRoute: RouteObject = {
 	path: ROUTES.LOGIN,
 	loader: () => {
 		const token = getToken()
-		if (!token) {
+		if (token) {
 			return redirect(ROUTES.HOME)
 		}
 		return null
