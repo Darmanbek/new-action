@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { GlobalPopconfirm } from "src/components/shared"
 import { UiBadge, UiButton, UiFilterIcon, UiTag } from "src/components/ui"
 import { completeData } from "src/data"
+import { useAuth } from "src/hooks"
 import { type TGroup, useDeleteGroupsMutation } from "src/services/groups"
 import { useGetDayQuery } from "src/services/shared/day"
 import { useFormStorageStore } from "src/store"
@@ -21,6 +22,7 @@ import {
 } from "src/utils"
 
 export const useColumnsGroups = () => {
+	const { isDirector } = useAuth()
 	const navigate = useNavigate()
 	const { mutate: deleteGroups } = useDeleteGroupsMutation()
 	const { data: days } = useGetDayQuery()
@@ -55,9 +57,13 @@ export const useColumnsGroups = () => {
 			render: (teachers: TGroup["teachers"]) => {
 				const teacher = teachers.find((t) => !t.assistant)
 				return teacher ? (
-					<Link onClick={(e) => e.stopPropagation()} to={`/teachers/${teacher.id}`}>
-						{`${teacher.first_name} ${teacher.last_name}`}
-					</Link>
+					isDirector ? (
+						`${teacher.first_name} ${teacher.last_name}`
+					) : (
+						<Link onClick={(e) => e.stopPropagation()} to={`/teachers/${teacher.id}`}>
+							{`${teacher.first_name} ${teacher.last_name}`}
+						</Link>
+					)
 				) : (
 					"-"
 				)
@@ -71,9 +77,13 @@ export const useColumnsGroups = () => {
 			render: (teachers: TGroup["teachers"]) => {
 				const assistant = teachers.find((t) => t.assistant)
 				return assistant ? (
-					<Link onClick={(e) => e.stopPropagation()} to={`/teachers/${assistant.id}`}>
-						{`${assistant.first_name} ${assistant.last_name}`}
-					</Link>
+					isDirector ? (
+						`${assistant.first_name} ${assistant.last_name}`
+					) : (
+						<Link onClick={(e) => e.stopPropagation()} to={`/teachers/${assistant.id}`}>
+							{`${assistant.first_name} ${assistant.last_name}`}
+						</Link>
+					)
 				) : (
 					"-"
 				)
@@ -159,27 +169,31 @@ export const useColumnsGroups = () => {
 							aria-label={"View"}
 						/>
 					</Tooltip>
-					<Tooltip title={"Изменить"}>
-						<UiButton
-							type={"primary"}
-							shape={"circle"}
-							color={"orange"}
-							icon={<EditOutlined />}
-							onClick={() => onEditGroups(group)}
-							aria-label={"Edit"}
-						/>
-					</Tooltip>
-					<GlobalPopconfirm onConfirm={() => deleteGroups(group.id)} title={group.name}>
-						<Tooltip title={"Удалить"}>
-							<UiButton
-								type={"primary"}
-								shape={"circle"}
-								danger={true}
-								icon={<DeleteOutlined />}
-								aria-label={"Delete"}
-							/>
-						</Tooltip>
-					</GlobalPopconfirm>
+					{isDirector ? null : (
+						<>
+							<Tooltip title={"Изменить"}>
+								<UiButton
+									type={"primary"}
+									shape={"circle"}
+									color={"orange"}
+									icon={<EditOutlined />}
+									onClick={() => onEditGroups(group)}
+									aria-label={"Edit"}
+								/>
+							</Tooltip>
+							<GlobalPopconfirm onConfirm={() => deleteGroups(group.id)} title={group.name}>
+								<Tooltip title={"Удалить"}>
+									<UiButton
+										type={"primary"}
+										shape={"circle"}
+										danger={true}
+										icon={<DeleteOutlined />}
+										aria-label={"Delete"}
+									/>
+								</Tooltip>
+							</GlobalPopconfirm>
+						</>
+					)}
 				</Space>
 			)
 		}

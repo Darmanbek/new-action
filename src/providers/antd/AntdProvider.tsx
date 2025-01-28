@@ -9,7 +9,7 @@ import "dayjs/locale/ru"
 dayjs.locale("ru")
 
 export const AntdProvider: FC<PropsWithChildren> = ({ children }) => {
-	const { isMobile } = useResponsive(768)
+	const { isMobile } = useResponsive(1400)
 	const { isDark } = useThemeStore()
 
 	// const {

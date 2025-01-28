@@ -1,7 +1,7 @@
 import { RouteObject } from "react-router-dom"
-import Finances from "src/components/screens/finances/finances/Finances"
+import { CustomFinances } from "./CustomFinances"
 
 export const layoutFinancesLayoutIndexRoute: RouteObject = {
 	index: true,
-	element: <Finances />
+	element: <CustomFinances />
 }

@@ -1,17 +1,19 @@
 import { Badge, BadgeProps, ConfigProvider } from "antd"
+import useSize from "antd/es/config-provider/hooks/useSize"
+import { SizeType } from "antd/es/config-provider/SizeContext"
 import { FC } from "react"
-import { useResponsive } from "src/hooks"
 
 const UiBadge: FC<BadgeProps> = (props) => {
-	const { isMobile } = useResponsive(768)
+	const size = useSize<SizeType>()
+	const isLarge = size === "large"
 
 	return (
 		<ConfigProvider
 			theme={{
 				components: {
 					Badge: {
-						statusSize: isMobile ? 6 : 12,
-						fontSize: isMobile ? 14 : 16
+						statusSize: isLarge ? 12 : 10,
+						fontSize: isLarge ? 16 : 14
 					}
 				}
 			}}

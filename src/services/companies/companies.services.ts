@@ -2,8 +2,8 @@ import { api } from "src/api"
 import { TResponseData, TResponseSingleData } from "src/services/shared"
 import { TCompany, TCompanyChange } from "./companies.types"
 
-const axiosGetCompanies = async (): Promise<TResponseData<TCompany>> => {
-	const response = await api.get(`/admin/companies`)
+const axiosGetCompanies = async (type: "admin" | "dashboard"): Promise<TResponseData<TCompany>> => {
+	const response = await api.get(`/${type}/companies`)
 	return response.data
 }
 

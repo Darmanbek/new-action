@@ -1,12 +1,14 @@
 import { FC } from "react"
-import { FormStudent } from "./form/FormStudent"
+import { useAuth } from "src/hooks"
 import { DescriptionStudent } from "./description/DescriptionStudent"
+import { FormStudent } from "./form/FormStudent"
 import { TableStudent } from "./table/TableStudent"
 
 const Student: FC = () => {
+	const { isDirector } = useAuth()
 	return (
 		<>
-			<FormStudent />
+			{!isDirector && <FormStudent />}
 			<DescriptionStudent />
 			<TableStudent />
 		</>

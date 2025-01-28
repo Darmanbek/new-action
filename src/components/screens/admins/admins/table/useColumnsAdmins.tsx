@@ -3,11 +3,14 @@ import { Space } from "antd"
 import type { ColumnsType } from "antd/es/table"
 import { GlobalPopconfirm } from "src/components/shared"
 import { UiTag, UiTooltipButton } from "src/components/ui"
+import { useAuth } from "src/hooks"
 import { type TAdmin, useDeleteAdminsMutation } from "src/services/admins"
 import { useFormStorageStore } from "src/store"
-import { phoneFormatter } from "src/utils"
+import { formatEmpty, phoneFormatter } from "src/utils"
 
 export const useColumnsAdmins = () => {
+	const { isDirector } = useAuth()
+	
 	const { mutate: deleteAdmin } = useDeleteAdminsMutation()
 	const setParamsForm = useFormStorageStore((state) => state.setParamsForm)
 	const onEditAdmin = (item: TAdmin) => setParamsForm(item)
@@ -33,11 +36,12 @@ export const useColumnsAdmins = () => {
 			dataIndex: "company",
 			key: "company",
 			render: (company: TAdmin["company"]) =>
-				company ? <UiTag color={"red"}>{/*{formatEmpty(company?.name)}*/}</UiTag> : "-"
+				company ? <UiTag color={"red"}>{formatEmpty(typeof company === "object" ? company?.name : company)}</UiTag> : "-"
 		},
 		{
 			fixed: "right",
 			width: 100,
+			hidden: isDirector,
 			title: "Действия",
 			key: "action",
 			render: (_, admin) => (

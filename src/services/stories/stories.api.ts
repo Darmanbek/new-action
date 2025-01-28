@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { useMessage } from "src/hooks"
+import { useAuth, useMessage } from "src/hooks"
 import type { TResponseError } from "src/services/shared"
 import { errorResponse } from "src/utils"
 import {
@@ -11,9 +11,10 @@ import {
 
 const useGetStoriesQuery = () => {
 	const { message } = useMessage()
+	const { isDirector, companyId } = useAuth()
 	return useQuery({
-		queryFn: axiosGetStories,
-		queryKey: ["stories"],
+		queryFn: () => axiosGetStories(isDirector ? companyId : undefined),
+		queryKey: ["stories", companyId],
 		keepPreviousData: true,
 		onError: async (error: TResponseError) => {
 			message.error(errorResponse(error))
@@ -26,13 +27,13 @@ const useCreateStoriesMutation = () => {
 	const queryClient = useQueryClient()
 	return useMutation({
 		mutationFn: axiosCreateStories,
-		onSuccess: () => {
-			queryClient.invalidateQueries({
+		onSuccess: async () => {
+			await queryClient.invalidateQueries({
 				queryKey: ["stories"]
 			})
 			message.success("Успешно")
 		},
-		onError: (error: TResponseError) => {
+		onError: async (error: TResponseError) => {
 			message.error(errorResponse(error))
 		}
 	})
@@ -43,8 +44,8 @@ const useEditStoriesMutation = () => {
 	const queryClient = useQueryClient()
 	return useMutation({
 		mutationFn: axiosEditStories,
-		onSuccess: () => {
-			queryClient.invalidateQueries({
+		onSuccess: async () => {
+			await queryClient.invalidateQueries({
 				queryKey: ["stories"]
 			})
 			message.success("Успешно")

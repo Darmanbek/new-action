@@ -1,9 +1,11 @@
 import { ConfigProvider, Descriptions, DescriptionsProps } from "antd"
+import useSize from "antd/es/config-provider/hooks/useSize"
+import { SizeType } from "antd/es/config-provider/SizeContext"
 import React from "react"
-import { useResponsive } from "src/hooks"
 
 export const UiDescriptions = (props: React.PropsWithChildren<DescriptionsProps>) => {
-	const { isMobile } = useResponsive(768)
+	const size = useSize<SizeType>()
+	const isLarge = size === "large"
 
 	return (
 		<ConfigProvider
@@ -17,11 +19,11 @@ export const UiDescriptions = (props: React.PropsWithChildren<DescriptionsProps>
 		>
 			<Descriptions
 				labelStyle={{
-					fontSize: isMobile ? 14 : 16
+					fontSize: isLarge ? 16 : 14
 					// color: "rgba(0, 0, 0, .88)",
 				}}
 				contentStyle={{
-					fontSize: isMobile ? 14 : 16
+					fontSize: isLarge ? 16 : 14
 					// color: "rgba(0, 0, 0, .88)",
 				}}
 				{...props}

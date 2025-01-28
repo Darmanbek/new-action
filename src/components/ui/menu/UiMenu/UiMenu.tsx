@@ -1,9 +1,10 @@
 import { ConfigProvider, Menu, MenuProps, theme } from "antd"
-import React from "react"
-import { useResponsive } from "src/hooks"
+import useSize from "antd/es/config-provider/hooks/useSize"
+import { SizeType } from "antd/es/config-provider/SizeContext"
 
-export const UiMenu = (props: React.PropsWithChildren<MenuProps>) => {
-	const { isMobile } = useResponsive(768)
+export const UiMenu = (props: MenuProps) => {
+	const size = useSize<SizeType>()
+	const isLarge = size === "large"
 
 	const {
 		token: { colorPrimary, colorPrimaryBg }
@@ -19,11 +20,11 @@ export const UiMenu = (props: React.PropsWithChildren<MenuProps>) => {
 						subMenuItemBg: "#fff",
 						itemColor: "rgba(22, 52, 88, 0.6)",
 						controlItemBgActive: colorPrimaryBg,
-						groupTitleFontSize: isMobile ? 14 : 16,
-						itemHeight: isMobile ? 40 : 44,
-						fontSize: isMobile ? 14 : 16,
-						iconSize: isMobile ? 14 : 18,
-						collapsedIconSize: 18
+						groupTitleFontSize: isLarge ? 16 : 14,
+						itemHeight: isLarge ? 44 : 40,
+						fontSize: isLarge ? 16 : 14,
+						iconSize: 18,
+						collapsedIconSize: 21
 					}
 				}
 			}}

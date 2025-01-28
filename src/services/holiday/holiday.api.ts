@@ -1,14 +1,15 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { useMessage } from "src/hooks"
+import { useAuth, useMessage } from "src/hooks"
 import { TGetParams, TResponseError } from "src/services/shared"
 import { errorResponse } from "src/utils"
 import { axiosCreateHoliday, axiosDeleteHoliday, axiosGetHoliday } from "./holiday.services"
 
 const useGetHolidayQuery = (params: TGetParams) => {
+	const { companyId, isDirector } = useAuth()
 	const { message } = useMessage()
 	return useQuery({
-		queryFn: () => axiosGetHoliday(params),
-		queryKey: ["holiday", ...Object.values(params)],
+		queryFn: () => axiosGetHoliday(params, isDirector ? companyId : undefined),
+		queryKey: ["holiday", companyId, ...Object.values(params)],
 		onError: (error: TResponseError) => {
 			message.error(error?.response?.data?.message)
 		}

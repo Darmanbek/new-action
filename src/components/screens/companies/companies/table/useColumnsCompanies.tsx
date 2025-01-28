@@ -1,18 +1,31 @@
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons"
+import { CheckOutlined, DeleteOutlined, EditOutlined } from "@ant-design/icons"
 import { Space, Tooltip } from "antd"
 import type { ColumnsType } from "antd/es/table"
 import { GlobalPopconfirm } from "src/components/shared"
-import { UiButton } from "src/components/ui"
+import { UiBadge, UiButton, UiTooltipButton } from "src/components/ui"
 import { type TCompany, useDeleteCompaniesMutation } from "src/services/companies"
-import { useFormStorageStore } from "src/store"
+import { useAuthPersistStore, useFormStorageStore } from "src/store"
 import { phoneFormatter } from "src/utils"
 
 export const useColumnsCompanies = () => {
+	const { company, toCompany, role } = useAuthPersistStore()
+	
 	const { mutate: deleteCompany } = useDeleteCompaniesMutation()
 	const setParamsForm = useFormStorageStore((state) => state.setParamsForm)
 	const onEditCompany = (item: TCompany) => setParamsForm(item)
-
+	
 	const columns: ColumnsType<TCompany> = [
+		{
+			width: 50,
+			ellipsis: true,
+			title: "№",
+			hidden: role !== "director",
+			dataIndex: "index",
+			key: "index",
+			render: (_v, r, index) => (
+				<UiBadge status={company?.id === r.id ? "processing" : "warning"} text={index + 1} />
+			)
+		},
 		{
 			ellipsis: true,
 			title: "Название",
@@ -35,12 +48,22 @@ export const useColumnsCompanies = () => {
 			render: (_phone, p) => phoneFormatter(p?.admin?.phone)
 		},
 		{
+			align: "center",
 			fixed: "right",
-			width: 100,
+			width: 50,
 			title: "Действия",
 			key: "action",
 			render: (_, companies) => (
-				<Space>
+				role === "director" ? <UiTooltipButton
+					color={"green"}
+					disabled={companies.id === company?.id}
+					shape={"circle"}
+					type={"primary"}
+					title={companies.id === company?.id ? "" : "Выбрать"}
+					showTitle={true}
+					icon={<CheckOutlined />}
+					onClick={() => toCompany(companies)}
+				/> : <Space>
 					<Tooltip title={"Изменить"}>
 						<UiButton
 							shape={"circle"}
@@ -69,6 +92,6 @@ export const useColumnsCompanies = () => {
 			)
 		}
 	]
-
+	
 	return columns
 }

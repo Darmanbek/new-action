@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { useMessage } from "src/hooks"
+import { useAuth, useMessage } from "src/hooks"
 import {
 	axiosCreateCompanies,
 	axiosDeleteCompanies,
@@ -11,8 +11,9 @@ import { errorResponse } from "src/utils"
 
 const useGetCompaniesQuery = () => {
 	const { message } = useMessage()
+	const {isDirector} = useAuth()
 	return useQuery({
-		queryFn: axiosGetCompanies,
+		queryFn: () => axiosGetCompanies(isDirector ? "dashboard": "admin"),
 		queryKey: ["companies"],
 		onError: (error: TResponseError) => {
 			message.error(errorResponse(error))

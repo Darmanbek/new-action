@@ -1,18 +1,20 @@
 import type { StatisticProps } from "antd"
 import { ConfigProvider, Statistic } from "antd"
+import useSize from "antd/es/config-provider/hooks/useSize"
+import { SizeType } from "antd/es/config-provider/SizeContext"
 import { FC } from "react"
-import { useResponsive } from "src/hooks"
 
 const UiStatistic: FC<StatisticProps> = (props) => {
-	const { isMobile } = useResponsive(768)
+	const size = useSize<SizeType>()
+	const isLarge = size === "large"
 
 	return (
 		<ConfigProvider
 			theme={{
 				components: {
 					Statistic: {
-						titleFontSize: isMobile ? 14 : 16,
-						contentFontSize: isMobile ? 24 : 26
+						titleFontSize: isLarge ? 16 : 14,
+						contentFontSize: isLarge ? 26 : 24
 					}
 				}
 			}}

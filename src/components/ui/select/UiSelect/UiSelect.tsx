@@ -1,13 +1,15 @@
 import { ConfigProvider, Select, SelectProps } from "antd"
+import useSize from "antd/es/config-provider/hooks/useSize"
+import { SizeType } from "antd/es/config-provider/SizeContext"
 import locale from "antd/locale/ru_RU"
 import React from "react"
-import { useResponsive } from "src/hooks"
 
 interface UiSelectProps {}
 
 export const UiSelect = (props: React.PropsWithChildren<SelectProps & UiSelectProps>) => {
 	const { ...rest } = props
-	const { isMobile } = useResponsive(768)
+	const size = useSize<SizeType>(props.size)
+	const isLarge = size === "large"
 
 	return (
 		<ConfigProvider
@@ -17,9 +19,9 @@ export const UiSelect = (props: React.PropsWithChildren<SelectProps & UiSelectPr
 					Select: {
 						optionSelectedColor: "#DE070F",
 						controlItemBgActive: "#ffe8e8",
-						optionFontSize: isMobile ? 14 : 16,
-						fontSize: isMobile ? 14 : 16,
-						fontSizeSM: isMobile ? 14 : 16
+						optionFontSize: isLarge ? 16 : 14,
+						fontSize: isLarge ? 16 : 14,
+						fontSizeSM: isLarge ? 16 : 14
 					}
 				}
 			}}

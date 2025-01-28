@@ -6,11 +6,13 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { HeadTable, SearchListInput } from "src/components/shared"
 import { UiRangePicker, UiTable, UiTooltipButton } from "src/components/ui"
+import { useAuth } from "src/hooks"
 import { type TGroup, useGetGroupsQuery } from "src/services/groups"
 import { useFormStorageStore, useSearchListStore } from "src/store"
 import { useColumnsGroups } from "./useColumnsGroups"
 
 export const TableGroups = () => {
+	const { isDirector } = useAuth()
 	const navigate = useNavigate()
 	// const [price, setPrice] = useState<string>();
 	const [completed, setCompleted] = useState<number>()
@@ -87,15 +89,17 @@ export const TableGroups = () => {
 								onClick={() => setDate([dayjs().startOf("month"), dayjs().endOf("month")])}
 							/>
 						</Space.Compact>,
-						<UiTooltipButton
-							title={"Добавить"}
-							key={"Add_Button"}
-							type={"primary"}
-							icon={<PlusOutlined />}
-							onClick={toggleDrawer}
-						>
-							Добавить
-						</UiTooltipButton>
+						isDirector ? null : (
+							<UiTooltipButton
+								title={"Добавить"}
+								key={"Add_Button"}
+								type={"primary"}
+								icon={<PlusOutlined />}
+								onClick={toggleDrawer}
+							>
+								Добавить
+							</UiTooltipButton>
+						)
 					]}
 				/>
 			)}

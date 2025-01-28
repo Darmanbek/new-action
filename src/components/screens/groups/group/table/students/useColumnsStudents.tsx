@@ -5,12 +5,14 @@ import { IoSnow, IoSunny } from "react-icons/io5"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { GlobalPopconfirm } from "src/components/shared"
 import { UiButton, UiTag, UiTooltipButton } from "src/components/ui"
+import { useAuth } from "src/hooks"
 import { useDeleteGroupsStudentsMutation } from "src/services/groups"
 import { useCreateFrozenStatusMutation } from "src/services/groups/frozen-status"
 import { TStudent } from "src/services/shared"
 import { formatEmpty, phoneFormatter, priceFormatter } from "src/utils"
 
 export const useColumnsStudents = () => {
+	const { isDirector } = useAuth()
 	const navigate = useNavigate()
 	const { group_id } = useParams()
 
@@ -104,34 +106,38 @@ export const useColumnsStudents = () => {
 							aria-label={"View"}
 						/>
 					</Tooltip>
-					<GlobalPopconfirm
-						title={`${student.first_name} ${student.last_name}`}
-						onConfirm={() => frozenStudent(student)}
-					>
-						<UiTooltipButton
-							title={student?.frozen_status?.is_frozen ? "Разморозить" : "Заморозить"}
-							type={"primary"}
-							shape={"circle"}
-							showTitle={true}
-							color={student?.frozen_status?.is_frozen ? "orange" : "darkcyan"}
-							icon={<Icon component={student?.frozen_status?.is_frozen ? IoSunny : IoSnow} />}
-							aria-label={"Snow"}
-						/>
-					</GlobalPopconfirm>
-					<GlobalPopconfirm
-						title={`${student.first_name} ${student.last_name}`}
-						onConfirm={() => deleteStudent({ student_id: [student.id] })}
-					>
-						<UiTooltipButton
-							title={"Удалить"}
-							type={"primary"}
-							shape={"circle"}
-							showTitle={true}
-							danger={true}
-							icon={<DeleteOutlined />}
-							aria-label={"Delete"}
-						/>
-					</GlobalPopconfirm>
+					{isDirector ? null : (
+						<>
+							<GlobalPopconfirm
+								title={`${student.first_name} ${student.last_name}`}
+								onConfirm={() => frozenStudent(student)}
+							>
+								<UiTooltipButton
+									title={student?.frozen_status?.is_frozen ? "Разморозить" : "Заморозить"}
+									type={"primary"}
+									shape={"circle"}
+									showTitle={true}
+									color={student?.frozen_status?.is_frozen ? "orange" : "darkcyan"}
+									icon={<Icon component={student?.frozen_status?.is_frozen ? IoSunny : IoSnow} />}
+									aria-label={"Snow"}
+								/>
+							</GlobalPopconfirm>
+							<GlobalPopconfirm
+								title={`${student.first_name} ${student.last_name}`}
+								onConfirm={() => deleteStudent({ student_id: [student.id] })}
+							>
+								<UiTooltipButton
+									title={"Удалить"}
+									type={"primary"}
+									shape={"circle"}
+									showTitle={true}
+									danger={true}
+									icon={<DeleteOutlined />}
+									aria-label={"Delete"}
+								/>
+							</GlobalPopconfirm>
+						</>
+					)}
 				</Space>
 			)
 		}

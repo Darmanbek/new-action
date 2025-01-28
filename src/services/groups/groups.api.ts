@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { useMessage } from "src/hooks"
-import { TGetParams, TResponseError } from "src/services/shared"
+import { useAuth, useMessage } from "src/hooks"
+import { TGetParams, TParamId, TResponseError } from "src/services/shared"
 import { errorResponse } from "src/utils"
 import {
 	axiosCreateGroups,
@@ -17,10 +17,11 @@ import {
 import { TGroupStudentChange } from "./groups.types"
 
 const useGetGroupsQuery = (params: TGetParams) => {
+	const { companyId, isDirector } = useAuth()
 	const { message } = useMessage()
 	return useQuery({
-		queryFn: () => axiosGetGroups(params),
-		queryKey: ["groups", ...Object.values(params)],
+		queryFn: () => axiosGetGroups(params, isDirector ? companyId : undefined),
+		queryKey: ["groups", companyId, ...Object.values(params)],
 		keepPreviousData: true,
 		onError: (error: TResponseError) => {
 			message.error(errorResponse(error))
@@ -29,10 +30,11 @@ const useGetGroupsQuery = (params: TGetParams) => {
 }
 
 const useGetGroupsByIdQuery = (id?: string | number) => {
+	const { companyId, isDirector } = useAuth()
 	const { message } = useMessage()
 	return useQuery({
-		queryFn: () => axiosGetGroupsById(id),
-		queryKey: ["groups", id],
+		queryFn: () => axiosGetGroupsById(id, isDirector ? "dashboard/companies" : "admin"),
+		queryKey: ["groups", companyId, id],
 		enabled: !!id,
 		onError: (error: TResponseError) => {
 			message.error(errorResponse(error))
@@ -42,9 +44,10 @@ const useGetGroupsByIdQuery = (id?: string | number) => {
 
 const useGetGroupsByIdStudentsQuery = (id?: string | number) => {
 	const { message } = useMessage()
+	const { isDirector } = useAuth()
 	return useQuery({
-		queryFn: () => axiosGetGroupsByIdStudents(id),
-		queryKey: ["groups-students", id],
+		queryFn: () => axiosGetGroupsByIdStudents(id, isDirector),
+		queryKey: ["groups", "students", id],
 		enabled: !!id,
 		onError: (error: TResponseError) => {
 			message.error(errorResponse(error))
@@ -53,10 +56,11 @@ const useGetGroupsByIdStudentsQuery = (id?: string | number) => {
 }
 
 const useGetGroupsByIdAssessmentsQuery = (id?: string | number) => {
+	const { companyId, isDirector } = useAuth()
 	const { message } = useMessage()
 	return useQuery({
-		queryFn: () => axiosGetGroupsByIdAssessments(id),
-		queryKey: ["groups-assessments", id],
+		queryFn: () => axiosGetGroupsByIdAssessments(id, isDirector ? "dashboard/companies" : "admin"),
+		queryKey: ["groups", "assessments", companyId, id],
 		enabled: !!id,
 		onError: (error: TResponseError) => {
 			message.error(errorResponse(error))
@@ -64,11 +68,13 @@ const useGetGroupsByIdAssessmentsQuery = (id?: string | number) => {
 	})
 }
 
-const useGetGroupsByIdCalendarQuery = (params: TGetParams, id?: string | number) => {
+const useGetGroupsByIdCalendarQuery = (params: TGetParams, id: TParamId) => {
+	const { companyId, isDirector } = useAuth()
 	const { message } = useMessage()
 	return useQuery({
-		queryFn: () => axiosGetGroupsByIdCalendar(params, id),
-		queryKey: ["groups-calendar", id, ...Object.values(params)],
+		queryFn: () =>
+			axiosGetGroupsByIdCalendar(params, id, isDirector ? "dashboard/companies" : "admin"),
+		queryKey: ["groups", "calendar", companyId, id, ...Object.values(params)],
 		enabled: !!id,
 		onError: (error: TResponseError) => {
 			message.error(errorResponse(error))
@@ -77,10 +83,11 @@ const useGetGroupsByIdCalendarQuery = (params: TGetParams, id?: string | number)
 }
 
 const useGetGroupsByIdLessonsQuery = (id?: string | number) => {
+	const { companyId, isDirector } = useAuth()
 	const { message } = useMessage()
 	return useQuery({
-		queryFn: () => axiosGetGroupsByIdLessons(id),
-		queryKey: ["groups-lessons", id],
+		queryFn: () => axiosGetGroupsByIdLessons(id, isDirector ? "dashboard/companies" : "admin"),
+		queryKey: ["groups", "lessons", companyId, id],
 		enabled: !!id,
 		onError: (error: TResponseError) => {
 			message.error(errorResponse(error))
@@ -149,10 +156,10 @@ const useDeleteGroupsStudentsMutation = (id?: number | string) => {
 				queryKey: ["groups"]
 			})
 			queryClient.invalidateQueries({
-				queryKey: ["groups-students"]
+				queryKey: ["groups", "students"]
 			})
 			queryClient.invalidateQueries({
-				queryKey: ["groups-assessments"]
+				queryKey: ["groups", "assessments"]
 			})
 			message.success("Успешно")
 		},

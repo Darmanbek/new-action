@@ -15,3 +15,6 @@ export type TDate = {
 	start?: string | null
 	end?: string | null
 }
+
+
+export type TParamId = number | string | undefined

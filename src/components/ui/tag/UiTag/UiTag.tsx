@@ -1,18 +1,20 @@
 import { ConfigProvider, Tag, TagProps } from "antd"
+import useSize from "antd/es/config-provider/hooks/useSize"
+import { SizeType } from "antd/es/config-provider/SizeContext"
 import { FC } from "react"
-import { useResponsive } from "src/hooks"
 
 const UiTag: FC<TagProps> = (props) => {
-	const { isMobile } = useResponsive(768)
+	const size = useSize<SizeType>()
+	const isLarge = size === "large"
 
 	return (
 		<ConfigProvider
 			theme={{
 				components: {
 					Tag: {
-						fontSize: isMobile ? 12 : 14,
-						fontSizeLG: isMobile ? 12 : 14,
-						fontSizeSM: isMobile ? 12 : 14
+						fontSize: isLarge ? 14 : 12,
+						fontSizeLG: isLarge ? 14 : 12,
+						fontSizeSM: isLarge ? 14 : 12
 					}
 				}
 			}}

@@ -4,11 +4,14 @@ import type { ColumnsType } from "antd/es/table"
 import Text from "antd/es/typography/Text"
 import { GlobalPopconfirm } from "src/components/shared"
 import { UiButton } from "src/components/ui"
+import { useAuth } from "src/hooks"
 import { type TStory, useDeleteStoriesMutation } from "src/services/stories"
 import { useFormStorageStore } from "src/store"
 import { formatEmpty } from "src/utils"
 
 export const useColumnsStories = () => {
+	const { isDirector } = useAuth()
+
 	const { mutate: deleteStory } = useDeleteStoriesMutation()
 
 	const setParamsForm = useFormStorageStore((state) => state.setParamsForm)
@@ -60,6 +63,7 @@ export const useColumnsStories = () => {
 			fixed: "right",
 			align: "center",
 			width: 150,
+			hidden: isDirector,
 			dataIndex: "actions",
 			title: "Действия",
 			key: "action",

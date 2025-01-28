@@ -1,10 +1,12 @@
 import { ConfigProvider, Table, TableProps, theme } from "antd"
-import { useResponsive } from "src/hooks"
+import useSize from "antd/es/config-provider/hooks/useSize"
 import { useThemeStore } from "src/store"
-import uniqid from "uniqid"
+import uniqId from "uniqid"
 
 export const UiTable = <T extends object>(props: TableProps<T>) => {
-	const { isMobile } = useResponsive(768)
+	const size = useSize(props.size)
+	const isLarge = size === "large"
+
 	const { isDark } = useThemeStore()
 	const { style, scroll, pagination, ...rest } = props
 
@@ -18,18 +20,18 @@ export const UiTable = <T extends object>(props: TableProps<T>) => {
 						headerBg: token.colorBgContainer,
 						footerBg: token.colorBgContainer,
 						rowExpandedBg: token.colorBgContainer,
-						fontSize: isMobile ? 14 : 16
+						fontSize: isLarge ? 16 : token.fontSize
 						// rowHoverBg: "#f7f5f5",
 					},
 					Dropdown: {
-						fontSize: isMobile ? 14 : 16
+						fontSize: isLarge ? 16 : token.fontSize
 					}
 				}
 			}}
 		>
 			<Table
 				className={isDark ? "dark" : "light"}
-				rowKey={() => uniqid()}
+				rowKey={() => uniqId()}
 				style={{
 					boxShadow: token.boxShadow,
 					borderRadius: token.borderRadiusLG,
@@ -37,7 +39,7 @@ export const UiTable = <T extends object>(props: TableProps<T>) => {
 				}}
 				scroll={{ x: "auto", ...scroll }}
 				pagination={
-					pagination !== false ? { position: ["bottomCenter"], ...pagination } : pagination
+					pagination ? { position: ["bottomCenter"], size: "default", ...pagination } : false
 				}
 				{...rest}
 			/>

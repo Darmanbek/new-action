@@ -1,4 +1,6 @@
 import { CaretDownOutlined } from "@ant-design/icons"
+import useSize from "antd/es/config-provider/hooks/useSize"
+import { SizeType } from "antd/es/config-provider/SizeContext"
 import { FC, useEffect } from "react"
 import { UiSelect } from "src/components/ui"
 import { primaryColorText } from "src/data"
@@ -6,6 +8,8 @@ import { useGetDashboardCompaniesQuery } from "src/services/dashboard/dashboard.
 import { useAuthPersistStore } from "src/store"
 
 const HeadCompanies: FC = () => {
+	const size = useSize<SizeType>()
+	const isLarge = size === "large"
 	const { company, toCompany } = useAuthPersistStore()
 	const { data: companies } = useGetDashboardCompaniesQuery()
 
@@ -33,7 +37,13 @@ const HeadCompanies: FC = () => {
 			}))}
 			suffixIcon={<CaretDownOutlined style={{ color: primaryColorText, fontSize: 14 }} />}
 			labelRender={(value) => (
-				<h3 style={{ color: primaryColorText, fontSize: 16, textTransform: "uppercase" }}>
+				<h3
+					style={{
+						color: primaryColorText,
+						fontSize: isLarge ? 16 : 14,
+						textTransform: "uppercase"
+					}}
+				>
 					{value.label}
 				</h3>
 			)}

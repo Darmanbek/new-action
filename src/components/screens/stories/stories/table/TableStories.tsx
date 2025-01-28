@@ -2,11 +2,14 @@ import { PlusOutlined } from "@ant-design/icons"
 import type { FC } from "react"
 import { HeadTable } from "src/components/shared"
 import { UiTable, UiTooltipButton } from "src/components/ui"
+import { useAuth } from "src/hooks"
 import { type TStory, useGetStoriesQuery } from "src/services/stories"
 import { useFormStorageStore } from "src/store"
 import { useColumnsStories } from "./useColumnsStories"
 
 const TableStories: FC = () => {
+	const { isDirector } = useAuth()
+
 	const { data: stories, isLoading, isFetching } = useGetStoriesQuery()
 
 	const toggleDrawer = useFormStorageStore((state) => state.toggleDrawer)
@@ -19,17 +22,21 @@ const TableStories: FC = () => {
 				title={() => (
 					<HeadTable
 						title={"Новости"}
-						children={[
-							<UiTooltipButton
-								key={"Add"}
-								title={"Добавить"}
-								type={"primary"}
-								icon={<PlusOutlined />}
-								onClick={toggleDrawer}
-							>
-								Добавить
-							</UiTooltipButton>
-						]}
+						children={
+							isDirector
+								? []
+								: [
+										<UiTooltipButton
+											key={"Add"}
+											title={"Добавить"}
+											type={"primary"}
+											icon={<PlusOutlined />}
+											onClick={toggleDrawer}
+										>
+											Добавить
+										</UiTooltipButton>
+									]
+						}
 					/>
 				)}
 				loading={isLoading || isFetching}

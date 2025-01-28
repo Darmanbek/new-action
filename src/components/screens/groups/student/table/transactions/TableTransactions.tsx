@@ -7,6 +7,7 @@ import { FC, useState } from "react"
 import { useParams } from "react-router-dom"
 import { HeadTable } from "src/components/shared"
 import { UiRangePicker, UiTable, UiTooltipButton } from "src/components/ui"
+import { useAuth } from "src/hooks"
 import { useGetGroupsByIdStudentsQuery } from "src/services/groups"
 import type { TTransaction } from "src/services/shared"
 import { useFormStorageStore } from "src/store"
@@ -15,6 +16,7 @@ import { useColumnsTransactions } from "./useColumnsTransactions"
 dayjs.extend(isBetween)
 
 const TableTransactions: FC = () => {
+	const { isDirector } = useAuth()
 	const { group_id, student_id } = useParams()
 
 	const [date, setDate] = useState<RangePickerProps["value"]>()
@@ -40,15 +42,17 @@ const TableTransactions: FC = () => {
 								onClick={() => setDate([dayjs().startOf("month"), dayjs().endOf("month")])}
 							/>
 						</Space.Compact>,
-						<UiTooltipButton
-							title={"Добавить"}
-							key={"Add_Button"}
-							type={"primary"}
-							icon={<PlusOutlined />}
-							onClick={toggleDrawer}
-						>
-							Добавить
-						</UiTooltipButton>
+						isDirector ? null : (
+							<UiTooltipButton
+								title={"Добавить"}
+								key={"Add_Button"}
+								type={"primary"}
+								icon={<PlusOutlined />}
+								onClick={toggleDrawer}
+							>
+								Добавить
+							</UiTooltipButton>
+						)
 					]}
 				/>
 			)}

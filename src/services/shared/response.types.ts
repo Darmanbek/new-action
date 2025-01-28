@@ -17,7 +17,7 @@ export type TResponse<T> = {
 	message?: string
 	data: T[]
 	links?: TLinks
-	meta: TMeta
+	meta?: TMeta
 }
 
 export type TLinks = {

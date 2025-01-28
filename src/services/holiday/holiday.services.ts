@@ -1,9 +1,21 @@
 import { api } from "src/api"
-import { TGetParams, TResponse, TResponseData, TResponseSingleData } from "src/services/shared"
+import {
+	TGetParams,
+	TParamId,
+	TResponse,
+	TResponseData,
+	TResponseSingleData
+} from "src/services/shared"
 import { THoliday, THolidayChange } from "./holiday.types"
 
-const axiosGetHoliday = async (params: TGetParams): Promise<TResponseData<THoliday>> => {
-	const response = await api.get(`/admin/holidays`, { params })
+const axiosGetHoliday = async (
+	params: TGetParams,
+	companyId: TParamId
+): Promise<TResponseData<THoliday>> => {
+	const response = await api.get(
+		companyId ? `dashboard/holidays/${companyId}` : `/admin/holidays`,
+		{ params }
+	)
 	return response.data
 }
 

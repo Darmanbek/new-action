@@ -1,9 +1,9 @@
 import { api } from "src/api"
-import { TResponseData, TResponseSingleData } from "src/services/shared"
-import { TStory, TStoryChange } from "./stories.types"
+import type { TParamId, TResponseData, TResponseSingleData } from "src/services/shared"
+import type { TStory, TStoryChange } from "./stories.types"
 
-const axiosGetStories = async (): Promise<TResponseData<TStory>> => {
-	const response = await api.get(`/admin/stories`)
+const axiosGetStories = async (companyId?: TParamId): Promise<TResponseData<TStory>> => {
+	const response = await api.get(companyId ? `/dashboard/stories/${companyId}` : `/admin/stories`)
 	return response.data
 }
 
@@ -17,7 +17,7 @@ const axiosEditStories = async (form: TStoryChange): Promise<TResponseSingleData
 	return response.data
 }
 
-const axiosDeleteStories = async (id?: number | string): Promise<TResponseSingleData<void>> => {
+const axiosDeleteStories = async (id?: TParamId): Promise<TResponseSingleData<void>> => {
 	const response = await api.delete(`/admin/stories/${id}`)
 	return response.data
 }

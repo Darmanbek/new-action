@@ -2,6 +2,7 @@ import { api } from "src/api"
 import {
 	TGetParams,
 	TLesson,
+	TParamId,
 	TResponse,
 	TResponseData,
 	TResponseSingleData,
@@ -9,40 +10,67 @@ import {
 } from "src/services/shared"
 import { TGroup, TGroupAssessment, TGroupChange, TGroupStudentChange } from "./groups.types"
 
-const axiosGetGroups = async (params: TGetParams): Promise<TResponse<TGroup>> => {
-	const response = await api.get(`/admin/groups`, { params })
+const axiosGetGroups = async (
+	params: TGetParams,
+	companyId?: TParamId
+): Promise<TResponse<TGroup>> => {
+	const response = await api.get(
+		companyId ? `/dashboard/companies/${companyId}` : `/admin/groups`,
+		{ params }
+	)
+	if (companyId) {
+		return {
+			data: response.data?.data?.groups
+		}
+	}
 	return response.data
 }
 
-const axiosGetGroupsById = async (id?: string | number): Promise<TResponseSingleData<TGroup>> => {
-	const response = await api.get(`/admin/groups/${id}`)
+const axiosGetGroupsById = async (
+	id: TParamId,
+	type: "admin" | "dashboard/companies"
+): Promise<TResponseSingleData<TGroup>> => {
+	const response = await api.get(`/${type}/groups/${id}`)
 	return response.data
 }
 
 const axiosGetGroupsByIdStudents = async (
-	id?: string | number
+	id: TParamId,
+	isDirector?: boolean
 ): Promise<TResponseData<TStudent>> => {
-	const response = await api.get(`/admin/groups/${id}/students`)
+	const response = await api.get(
+		isDirector ? `/dashboard/companies/groups/${id}` : `/admin/groups/${id}/students`
+	)
+	if (isDirector) {
+		return {
+			data: response.data?.data?.students
+		}
+	}
 	return response.data
 }
 
 const axiosGetGroupsByIdAssessments = async (
-	id?: string | number
+	id: TParamId,
+	type: "admin" | "dashboard/companies"
 ): Promise<TResponseData<TGroupAssessment>> => {
-	const response = await api.get(`/admin/groups/${id}/assessments`)
+	const response = await api.get(`/${type}/groups/${id}/assessments`)
 	return response.data
 }
 
 const axiosGetGroupsByIdCalendar = async (
 	params: TGetParams,
-	id?: string | number
+	id: TParamId,
+	type: "admin" | "dashboard/companies"
 ): Promise<TResponseData<string>> => {
-	const response = await api.get(`/admin/groups/${id}/calendar`, { params })
+	const response = await api.get(`/${type}/groups/${id}/calendar`, { params })
 	return response.data
 }
 
-const axiosGetGroupsByIdLessons = async (id?: string | number): Promise<TResponseData<TLesson>> => {
-	const response = await api.get(`/admin/groups/${id}/lessons`)
+const axiosGetGroupsByIdLessons = async (
+	id: TParamId,
+	type: "admin" | "dashboard/companies"
+): Promise<TResponseData<TLesson>> => {
+	const response = await api.get(`/${type}/groups/${id}/lessons`)
 	return response.data
 }
 
