@@ -47,7 +47,8 @@ export const useOptionsTeachersRating = ({ data }: useOptionsStudentsRatingProps
 				label: {
 					show: true,
 					position: "right",
-					valueAnimation: true
+					valueAnimation: true,
+					formatter: (params) => `${params.value}`
 				}
 			}
 		],

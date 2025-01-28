@@ -39,7 +39,9 @@ export const UiTable = <T extends object>(props: TableProps<T>) => {
 				}}
 				scroll={{ x: "auto", ...scroll }}
 				pagination={
-					pagination ? { position: ["bottomCenter"], size: "default", ...pagination } : false
+					pagination !== false
+						? { position: ["bottomCenter"], size: "default", ...pagination }
+						: false
 				}
 				{...rest}
 			/>

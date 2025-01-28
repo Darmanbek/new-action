@@ -9,13 +9,13 @@ export type TDashboardCompany = {
 	admin: TAdmin
 }
 
-export type TDashboardCompanyItem = {
-	id: string
-	name: string
-	first_name: string
-	last_name: string
-	groups: TGroup[]
-}
+// export type TDashboardCompanyItem = {
+// 	id: string
+// 	name: string
+// 	first_name: string
+// 	last_name: string
+// 	groups: TGroup[]
+// }
 
 export type TDashboardStudentsRating = {
 	rating: string

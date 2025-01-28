@@ -1,4 +1,4 @@
-import type { FC } from "react"
+import { FC, useState } from "react"
 import { HeadTable } from "src/components/shared"
 import { UiTable } from "src/components/ui"
 import {
@@ -11,8 +11,21 @@ import { useColumnsStudentsRating } from "./useColumnsStudentsRating"
 
 const TableStudentsRating: FC = () => {
 	const company = useAuthPersistStore((state) => state.company)
+	const [params, setParams] = useState({
+		page: 1,
+		limit: 10
+	})
 
-	const { data: students, isLoading, isFetching } = useGetDashboardStudentsRatingQuery(company?.id)
+	const {
+		data: students,
+		isLoading,
+		isFetching
+	} = useGetDashboardStudentsRatingQuery(
+		{
+			...params
+		},
+		company?.id
+	)
 
 	const columns = useColumnsStudentsRating()
 
@@ -22,7 +35,12 @@ const TableStudentsRating: FC = () => {
 			loading={isLoading || isFetching}
 			dataSource={students?.data.sort((a, b) => Number(b.rating) - Number(a.rating))}
 			columns={columns}
-			pagination={false}
+			pagination={{
+				total: students?.meta?.total,
+				current: params.page,
+				pageSize: params.limit,
+				onChange: (page, limit) => setParams({ page, limit })
+			}}
 		/>
 	)
 }

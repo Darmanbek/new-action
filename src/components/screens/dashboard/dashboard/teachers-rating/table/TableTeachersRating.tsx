@@ -22,7 +22,7 @@ const TableTeachersRating: FC = () => {
 			loading={isLoading || isFetching}
 			dataSource={teachers?.data.sort((a, b) => Number(b.rating) - Number(a.rating))}
 			columns={columns}
-			pagination={false}
+			// pagination={false}
 		/>
 	)
 }
