@@ -1,4 +1,5 @@
 import type { Key } from "react"
+import type { TGroup } from "src/services/groups"
 import type { TBalance } from "src/services/groups/balance"
 import type { TFrozenStatus } from "src/services/groups/frozen-status"
 import type { TPaymentHistory, TPaymentType } from "src/services/shared/payment-types"
@@ -23,6 +24,7 @@ export type TStudent = {
 	payment_history: TPaymentHistory[]
 	transactions: TTransaction[]
 	assessments: TAssessment[]
+	group: TGroup[]
 }
 
 export type TAssessment = {

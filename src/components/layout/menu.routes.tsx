@@ -10,7 +10,7 @@ import { BsBuildings } from "react-icons/bs"
 import { IoLayersOutline, IoNewspaperOutline } from "react-icons/io5"
 import { LuCalendarCheck, LuPieChart } from "react-icons/lu"
 import { MdOutlineMailOutline } from "react-icons/md"
-import { PiChatsLight } from "react-icons/pi"
+import { PiChatsLight, PiStudent } from "react-icons/pi"
 import { ROUTES } from "src/config"
 import { rolesMenuMap } from "src/data"
 import { TRoleTypes } from "src/services/shared"
@@ -26,6 +26,7 @@ export const useMenuRoutes = () => {
 		{ key: ROUTES.GROUPS, icon: <IoLayersOutline />, label: "Группы" },
 		{ key: ROUTES.COMPANIES, icon: <BsBuildings />, label: "Филиалы" },
 		{ key: ROUTES.ACCEPTANCES, icon: <MdOutlineMailOutline />, label: "Заявки" },
+		{ key: ROUTES.STUDENTS, icon: <PiStudent />, label: "Студенты" },
 		{ key: ROUTES.HOLIDAY, icon: <LuCalendarCheck />, label: "Праздничные дни" },
 		{ key: ROUTES.STORIES, icon: <IoNewspaperOutline />, label: "Новости" },
 		role !== "director"

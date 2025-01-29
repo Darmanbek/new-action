@@ -12,6 +12,7 @@ class Routes {
 	GROUPS = "/groups"
 	COMPANIES = "/companies"
 	ACCEPTANCES = "/acceptances"
+	STUDENTS = "/students"
 	HOLIDAY = "/holiday"
 	STORIES = "/stories"
 	FINANCES = {

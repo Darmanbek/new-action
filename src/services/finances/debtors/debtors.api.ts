@@ -9,6 +9,7 @@ const useGetDebtorsQuery = (params: TGetParams) => {
 	return useQuery({
 		queryFn: () => axiosGetDebtors(params),
 		queryKey: ["debtors", ...Object.values(params)],
+		keepPreviousData: true,
 		onError: (error: TResponseError) => {
 			message.error(errorResponse(error))
 		}

@@ -5,6 +5,7 @@ import { MdOutlinePrivacyTip } from "react-icons/md"
 import { useLocation, useNavigate } from "react-router-dom"
 import { useMenuRoutes } from "src/components/layout/menu.routes"
 import { UiMenu } from "src/components/ui"
+import { ROUTES } from "src/config"
 import { useResponsive } from "src/hooks"
 import { useMenuStore } from "src/store"
 import styles from "./menu.module.scss"
@@ -38,7 +39,7 @@ const MenuList: FC = () => {
 				selectedKeys={[pathname]}
 				items={[
 					{
-						key: "/privacy",
+						key: ROUTES.PRIVACY,
 						icon: <MdOutlinePrivacyTip />,
 						label: (
 							<Typography.Link style={{ fontSize: 12 }}>

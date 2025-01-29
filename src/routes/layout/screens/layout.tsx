@@ -12,6 +12,7 @@ import { layoutGroupsRoute } from "src/routes/layout/screens/groups"
 import { layoutHolidayRoute } from "src/routes/layout/screens/holiday"
 import { layoutProfileRoute } from "src/routes/layout/screens/profile"
 import { layoutStoriesRoute } from "src/routes/layout/screens/stories"
+import { layoutStudentsRoute } from "src/routes/layout/screens/students"
 import { layoutTeachersRoute } from "src/routes/layout/screens/teachers"
 
 export const layoutScreensRoute: RouteObject = {
@@ -27,6 +28,7 @@ export const layoutScreensRoute: RouteObject = {
 		layoutGroupsRoute,
 		layoutCompaniesRoute,
 		layoutAcceptancesRoute,
+		layoutStudentsRoute,
 		layoutHolidayRoute,
 		layoutStoriesRoute,
 		layoutFinancesLayoutRoute,
