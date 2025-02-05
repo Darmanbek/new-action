@@ -42,5 +42,6 @@ export type TGroupChange = {
 }
 
 export type TGroupStudentChange = {
-	student_id: string[]
+	student_id: string[] | string
+	group_id?: string
 }

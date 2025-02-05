@@ -24,7 +24,7 @@ const useEditStudentsMutation = () => {
 			await queryClient.invalidateQueries({
 				queryKey: ["students"]
 			})
-			message.success("Success")
+			message.success("Студент успешно изменен")
 		},
 		onError: (error: TResponseError) => {
 			message.error(error?.response?.data?.message)

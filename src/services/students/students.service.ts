@@ -8,7 +8,7 @@ const axiosGetStudents = async (params: TGetParams): Promise<TResponse<TStudent>
 }
 
 const axiosEditStudents = async (form: TStudentChange): Promise<TResponseSingleData<void>> => {
-	const response = await api.post(`/admin/students/${form.id}`, {
+	const response = await api.put(`/admin/students/${form.id}`, {
 		role_id: 4,
 		...form
 	})

@@ -89,6 +89,11 @@ const axiosDeleteGroups = async (id?: number | string): Promise<void> => {
 	return response.data
 }
 
+const axiosCreateGroupsStudent = async (value: TGroupStudentChange) => {
+	const response = await api.post(`/admin/groups/add-student`, value)
+	return response.data
+}
+
 const axiosDeleteGroupsStudents = async (
 	form: TGroupStudentChange,
 	id?: number | string
@@ -109,5 +114,6 @@ export {
 	axiosCreateGroups,
 	axiosEditGroups,
 	axiosDeleteGroups,
+	axiosCreateGroupsStudent,
 	axiosDeleteGroupsStudents
 }

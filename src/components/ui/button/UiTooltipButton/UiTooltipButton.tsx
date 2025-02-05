@@ -25,7 +25,7 @@ export const UiTooltipButton = (props: React.PropsWithChildren<UiButtonProps & B
 				}
 			}}
 		>
-			<Tooltip title={isMobile || showTitle ? title : ""}>
+			<Tooltip destroyTooltipOnHide={true} title={isMobile || showTitle ? title : ""}>
 				<Button {...rest} children={(!isMobile || showContent) && children} />
 			</Tooltip>
 		</ConfigProvider>

@@ -12,9 +12,7 @@ export const AntdProvider: FC<PropsWithChildren> = ({ children }) => {
 	const { isMobile } = useResponsive(1400)
 	const { isDark } = useThemeStore()
 
-	// const {
-	// 	token: { borderRadius },
-	// } = theme.useToken();
+	const { token } = theme.useToken()
 
 	return (
 		<ConfigProvider
@@ -24,7 +22,7 @@ export const AntdProvider: FC<PropsWithChildren> = ({ children }) => {
 				algorithm: isDark ? theme.darkAlgorithm : theme.defaultAlgorithm,
 				token: {
 					colorPrimary: "#DE070F",
-					fontFamily: "Roboto, sans-serif",
+					fontFamily: `Roboto, ${token.fontFamily}`,
 					colorText: "rgba(22, 52, 88, 0.88)",
 					boxShadowSecondary: `0 1px 7px -2px rgba(22, 52, 88, 0.06),
 0 3px 7px 1px rgba(22, 52, 88, 0.04),

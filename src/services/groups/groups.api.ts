@@ -4,6 +4,7 @@ import { TGetParams, TParamId, TResponseError } from "src/services/shared"
 import { errorResponse } from "src/utils"
 import {
 	axiosCreateGroups,
+	axiosCreateGroupsStudent,
 	axiosDeleteGroups,
 	axiosDeleteGroupsStudents,
 	axiosEditGroups,
@@ -146,6 +147,29 @@ const useDeleteGroupsMutation = () => {
 	})
 }
 
+const useCreateGroupsStudentsMutation = () => {
+	const { message } = useMessage()
+	const queryClient = useQueryClient()
+	return useMutation({
+		mutationFn: axiosCreateGroupsStudent,
+		onSuccess: () => {
+			queryClient.invalidateQueries({
+				queryKey: ["groups"]
+			})
+			queryClient.invalidateQueries({
+				queryKey: ["groups", "students"]
+			})
+			queryClient.invalidateQueries({
+				queryKey: ["groups", "assessments"]
+			})
+			message.success("Успешно")
+		},
+		onError: (error: TResponseError) => {
+			message.error(errorResponse(error))
+		}
+	})
+}
+
 const useDeleteGroupsStudentsMutation = (id?: number | string) => {
 	const { message } = useMessage()
 	const queryClient = useQueryClient()
@@ -179,5 +203,6 @@ export {
 	useCreateGroupsMutation,
 	useEditGroupsMutation,
 	useDeleteGroupsMutation,
+	useCreateGroupsStudentsMutation,
 	useDeleteGroupsStudentsMutation
 }

@@ -3,9 +3,12 @@ import { Divider, Space } from "antd"
 import type { ColumnsType } from "antd/es/table"
 import { UiTooltipButton } from "src/components/ui"
 import { TStudent } from "src/services/shared"
+import { useFormStorageStore } from "src/store"
 import { phoneFormatter } from "src/utils"
 
 export const useColumnsStudents = () => {
+	const editStudent = useFormStorageStore((state) => state.setParamsForm)
+
 	const columns: ColumnsType<TStudent> = [
 		{
 			ellipsis: true,
@@ -35,11 +38,12 @@ export const useColumnsStudents = () => {
 			width: 50,
 			title: "Действия",
 			key: "action",
-			render: () => (
+			render: (_v, student) => (
 				<UiTooltipButton
 					type={"primary"}
 					shape={"circle"}
 					color={"orange"}
+					onClick={() => editStudent(student)}
 					icon={<EditOutlined />}
 					aria-label={"Edit"}
 					showTitle={true}
