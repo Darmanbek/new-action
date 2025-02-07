@@ -90,7 +90,7 @@ const FormStudents: FC = () => {
 							message: formMessage("Пароль")
 						},
 						{
-							min: 5
+							min: 4
 						}
 					]}
 				>
