@@ -4,7 +4,7 @@ import { GlobalDrawer } from "src/components/shared"
 import { UiInputMask } from "src/components/ui"
 import { TStudentChange, useEditStudentsMutation } from "src/services/students"
 import { useFormStorageStore } from "src/store"
-import { formMessage, inputPlaceholder } from "src/utils"
+import { formMessage, inputPlaceholder, phoneReverseFormatter } from "src/utils"
 
 const FormStudents: FC = () => {
 	const [form] = Form.useForm<TStudentChange>()
@@ -18,6 +18,9 @@ const FormStudents: FC = () => {
 	} = useEditStudentsMutation()
 
 	const onFinish: FormProps<TStudentChange>["onFinish"] = (values) => {
+		if (values.phone) {
+			values.phone = phoneReverseFormatter(values.phone)
+		}
 		if (paramsForm) {
 			editStudent({
 				...values,
